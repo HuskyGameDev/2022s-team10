@@ -4,51 +4,131 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int speed;   //speed of player horizontally
-    private Rigidbody2D rb;
-    private Collider2D thisCollider;
-    private SpriteRenderer sr;
+    Rigidbody2D rb; //unity physics engine
+    public float speed; // m/s
+    public float jumpForce;
+
+    // for ground
+    bool isGrounded = false; 
+    public Transform isGroundedChecker; // Transform of an empty object that is going to be placed bellow player
+    public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
+    public LayerMask groundLayer;
+
+    public float rememberGroundedFor; // help to keep us grounded for a little longer, smooth out jumps just after leaving ground
+    float lastTimeGrounded; // when was the last time we were standing on the ground
+
+    //for walls
+    bool nearAWall = false; 
+    public Transform isNearAWallChecker; 
+    public float checkWallRadius; 
+    public LayerMask wallLayer;
+
+    public float rememberwalledFor; 
+    float lastTimewalled; 
+
+
+    // for better jump
+    public float fallMultiplier = 2.5f;  
+    public float lowJumpMultiplier = 2f;
+
+    // movement 
+    bool facingLeft; 
+    bool facingRight;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        thisCollider = GetComponent<Collider2D>();
-        sr = GetComponent<SpriteRenderer>();
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-        int horiz = 0;
-        //int vert = 0;
-        if (Input.GetKey(KeyCode.D))
-            horiz += 1;
-        if (Input.GetKey(KeyCode.A))
-            horiz -= 1;
-        
-        /*Vector3 input = new Vector3(horiz, vert * 30, 0f);
-        transform.Translate(input * speed * Time.deltaTime);*/
-        rb.AddForce(Time.deltaTime * speed * new Vector2(horiz, 0).normalized);
+        Move();
+        Jump();
+        CheckIfGrounded();
+        CheckIfNearAWall();
+        BetterJump();
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space))
-            rb.velocity = rb.velocity - new Vector2(0, rb.velocity.y * Time.deltaTime * .1f);
-
-        List<Collider2D> results = new List<Collider2D>();
-        thisCollider.OverlapCollider(new ContactFilter2D(), results);
-
-        foreach(Collider2D collision in results)
-            if (collision.tag == "Ground")
-            {
-                rb.velocity = rb.velocity - new Vector2(0, rb.velocity.y * Time.deltaTime);
-                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space) && rb.velocity.y < 400)
-                    rb.AddForce(new Vector2(rb.velocity.y < 0 ? 1000 * Mathf.Sign(transform.position.x - collision.gameObject.transform.position.x) : 0, 1000));
-            }
-
-        // Change sprite X flip status based on whether the player is moving left or right
-        if (Input.GetKey(KeyCode.A))
-            sr.flipX = true;
-        if (Input.GetKey(KeyCode.D))
-            sr.flipX = false;
     }
+
+    void Move() { 
+
+        float x = Input.GetAxisRaw("Horizontal"); // if player pressed D or right arrow x will have the value of 1
+        float moveBy = x * speed; 
+        rb.velocity = new Vector2(moveBy, rb.velocity.y); // will move at a certain m/s
+
+        if (x > 0) { // moved right, flip 
+            gameObject.transform.localScale = new Vector2(1, 1);
+            facingRight = true;
+            facingLeft = false;
+        }
+
+        if (x < 0) { // moved left, flip 
+            gameObject.transform.localScale = new Vector2(-1, 1);
+            facingLeft = true;
+            facingRight = false;
+        }
+
+    } 
+
+    void Jump() {
+
+        if ( (Input.GetKeyDown(KeyCode.Space)) && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor || nearAWall || Time.time - lastTimewalled <= rememberwalledFor)) { // checks if player is grounded or they just moved past a groud object
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+    }
+
+    void CheckIfNearAWall(){
+        Collider2D collider2 = Physics2D.OverlapCircle(isNearAWallChecker.position, checkWallRadius, wallLayer);
+
+        if (collider2 != null) { 
+            nearAWall = true; 
+        } 
+
+        else {
+            if(nearAWall) { // just left the wall, grab time
+                lastTimewalled = Time.time;
+            }
+            nearAWall = false;}
+
+         
+    }
+
+    void CheckIfGrounded() { 
+        Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer); 
+
+        if (collider != null) { 
+            isGrounded = true; 
+        } 
+            else { 
+                if (isGrounded) {
+                    lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
+                }
+                isGrounded = false; 
+            } 
+        }
+
+    void BetterJump() {
+    if (nearAWall) { // when near a wall dont screw with the jump
+        return;
+    }
+
+    if (rb.velocity.y < 0) {
+            rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
+        } else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) {
+            rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }   
+    }
+
+    
+
+    
+
+
+    
+
+
 }
