@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class HUDController : MonoBehaviour
 {
-    public int health = 100;
+    private AttackController playerScript;
     public SpriteRenderer sr;
     public Sprite[] spriteArray;
 
     // Start is called before the first frame update
     void Start()
     {
-        sr = gameObject.GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
+        playerScript = GameObject.Find("Player").GetComponent<AttackController>();
     }
 
     // Update is called once per frame
@@ -21,6 +22,6 @@ public class HUDController : MonoBehaviour
     }
 
     void ChangeSprite(){
-        sr.sprite = spriteArray[health/7];
+        sr.sprite = spriteArray[Mathf.Clamp(0, spriteArray.Length - 1, playerScript.health / 7)];
     }
 }
