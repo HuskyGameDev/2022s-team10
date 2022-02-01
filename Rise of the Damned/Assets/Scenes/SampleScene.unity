@@ -2892,6 +2892,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1649866589}
   - component: {fileID: 1649866588}
+  - component: {fileID: 1649866590}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -2965,6 +2966,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1649866590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649866587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b501afa5cf4eeb4e9b623e971bcf18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  sr: {fileID: 0}
+  spriteArray:
+  - {fileID: 21300000, guid: 26a6b3c9aac78d24985d1312d5b8375e, type: 3}
+  - {fileID: 21300000, guid: 5c49fc7d6c55c5f43ac57364294e36ae, type: 3}
+  - {fileID: 21300000, guid: d2820205258150843ad7d252bdb81a4a, type: 3}
+  - {fileID: 21300000, guid: c18c267021794ce45a5e3e855bd0c604, type: 3}
+  - {fileID: 21300000, guid: b64cf04ba4fce0a48ad83c6c9cdf40b7, type: 3}
+  - {fileID: 21300000, guid: d0e411cf9aa51e449b4b77a143466e97, type: 3}
+  - {fileID: 21300000, guid: 2b7904278dea6b0438e566c4b2ae5fe9, type: 3}
+  - {fileID: 21300000, guid: 867203177ab98e34190cfb79b469641d, type: 3}
+  - {fileID: 21300000, guid: ac24161c7bd36cb408890de5a0baa854, type: 3}
+  - {fileID: 21300000, guid: 0cb198f31aadbbc49a82fc014ff70f8b, type: 3}
+  - {fileID: 21300000, guid: eb7ae7032fc7afc4abb0037ba4657027, type: 3}
+  - {fileID: 21300000, guid: 899aeff7536d23d4dabddceeb5c6f5d1, type: 3}
+  - {fileID: 21300000, guid: 8f02d9569a6764e499eaa2d2a020f3f6, type: 3}
+  - {fileID: 21300000, guid: da4e22d154fa6674a8fb82941ce94c56, type: 3}
 --- !u!1 &1682491855
 GameObject:
   m_ObjectHideFlags: 0
