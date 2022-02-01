@@ -5,31 +5,39 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb; //unity physics engine
+
+    [Header("Basic Player Movement")]
     public float speed; // m/s
     public float jumpForce;
 
     // for ground
+    [Header("For Ground")]
+    public float rememberGroundedFor; // help to keep us grounded for a little longer, smooth out jumps just after leaving ground
+    public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
     bool isGrounded = false; 
     public Transform isGroundedChecker; // Transform of an empty object that is going to be placed bellow player
-    public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
     public LayerMask groundLayer;
 
-    public float rememberGroundedFor; // help to keep us grounded for a little longer, smooth out jumps just after leaving ground
     float lastTimeGrounded; // when was the last time we were standing on the ground
 
-    //for walls
-    bool nearAWall = false; 
+
+    [Header("For Walls")]
     public Transform isNearAWallChecker; 
     public float checkWallRadius; 
-    public LayerMask wallLayer;
-
     public float rememberwalledFor; 
     float lastTimewalled; 
 
 
+     //for walls
+    bool nearAWall = false; 
+    public LayerMask wallLayer;
+
+
+    [Header("Better Jump")]
     // for better jump
     public float fallMultiplier = 2.5f;  
     public float lowJumpMultiplier = 2f;
+
 
     // movement 
     bool facingLeft; 
