@@ -29,7 +29,7 @@ public class HUDController : MonoBehaviour
 
     void TakeDamage()
     {
-        if (Input.GetKeyDown(KeyCode.G) || ){
+        if (Input.GetKeyDown(KeyCode.G)){
             playerScript.health -= 5;
         }
     }
