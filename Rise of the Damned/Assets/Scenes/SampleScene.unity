@@ -278,7 +278,7 @@ MonoBehaviour:
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   facingLeft: 0
-  facingRight: 0
+  facingRight: 1
 --- !u!114 &4547493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +292,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  maxHealth: 100
+  bowStrength: 10
   weaponAttack: {fileID: 4915093518464885104, guid: 2f025ca2548a9ef46a2cd2d582a4951b, type: 3}
+  arrow: {fileID: 188537100976444489, guid: e57bd4a1058ae384ca73f9581a23047f, type: 3}
 --- !u!1 &131018859
 GameObject:
   m_ObjectHideFlags: 0
@@ -3370,7 +3373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649866587}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.12, y: 1.63, z: 0}
+  m_LocalPosition: {x: -5.5, y: -3.19, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children:
   - {fileID: 1810205779}
@@ -3389,7 +3392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b501afa5cf4eeb4e9b623e971bcf18f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 0}
   spriteArray:
   - {fileID: 21300000, guid: 26a6b3c9aac78d24985d1312d5b8375e, type: 3}
   - {fileID: 21300000, guid: 5c49fc7d6c55c5f43ac57364294e36ae, type: 3}

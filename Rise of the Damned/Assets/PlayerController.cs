@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void Move() { 
 
-        float x = Input.GetAxisRaw("Horizontal"); // if player pressed D or right arrow x will have the value of 1
+        float x = (Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0); // if player pressed D or right arrow x will have the value of 1
         float moveBy = x * speed; 
         rb.velocity = new Vector2(moveBy, rb.velocity.y); // will move at a certain m/s
 
@@ -140,13 +140,4 @@ public class PlayerController : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }   
     }
-
-    
-
-    
-
-
-    
-
-
 }
