@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb; //unity physics engine
 
+    Collider2D thisCollider;
+
     [Header("Basic Player Movement")]
     public float speed; // m/s
     public float jumpForce;
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        thisCollider = GetComponent<Collider2D>();
         gravityStore = rb.gravityScale;
      
     }
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
         CheckIfGrounded();
         CheckIfNearAWall();
         BetterJump();
+        PickupItem();
 
     }
 
@@ -139,5 +142,15 @@ public class PlayerController : MonoBehaviour
         } else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) {
             rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }   
+    }
+
+    void PickupItem(){
+        List<Collider2D> results = new List<Collider2D>();
+        thisCollider.OverlapCollider(new ContactFilter2D(), results);
+        foreach(Collider2D collision in results){
+            if ((collision.gameObject.tag == "ItemDrop") && (Input.GetKey(KeyCode.R))){
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }
