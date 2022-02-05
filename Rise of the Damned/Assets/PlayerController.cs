@@ -26,11 +26,15 @@ public class PlayerController : MonoBehaviour
     public float checkWallRadius; 
     public float rememberwalledFor; 
     float lastTimewalled; 
+    public float gravityChangeNearWall = 0.5f;
+    private float gravityStore; // set gravity scale in rigid body 2D
 
 
      //for walls
     bool nearAWall = false; 
     public LayerMask wallLayer;
+
+    bool hasJump = false;
 
 
     [Header("Better Jump")]
@@ -40,14 +44,16 @@ public class PlayerController : MonoBehaviour
 
 
     // movement 
-    bool facingLeft; 
-    bool facingRight;
+    public bool facingLeft; 
+    public bool facingRight;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        gravityStore = rb.gravityScale;
      
     }
 
@@ -89,19 +95,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void CheckIfNearAWall(){
+    void CheckIfNearAWall(){ // can change gravity scale when near a wall here
         Collider2D collider2 = Physics2D.OverlapCircle(isNearAWallChecker.position, checkWallRadius, wallLayer);
 
         if (collider2 != null) { 
             nearAWall = true; 
+            rb.gravityScale = gravityChangeNearWall;
         } 
 
         else {
             if(nearAWall) { // just left the wall, grab time
                 lastTimewalled = Time.time;
             }
-            nearAWall = false;}
-
+            nearAWall = false;
+            rb.gravityScale = gravityStore;
+           
+            }
          
     }
 
@@ -111,9 +120,10 @@ public class PlayerController : MonoBehaviour
         if (collider != null) { 
             isGrounded = true; 
         } 
-            else { 
-                if (isGrounded) {
-                    lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
+
+        else { 
+             if (isGrounded) {
+                lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
                 }
                 isGrounded = false; 
             } 
