@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
         }   
     }
 
-    void PickupItem(){
+    void PickupItem(){ //tylers shit
         List<Collider2D> results = new List<Collider2D>();
         thisCollider.OverlapCollider(new ContactFilter2D(), results);
         foreach(Collider2D collision in results){
@@ -153,4 +153,9 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void OnTriggerEnter2D(Collider2D collider){
+        Debug.Log("Triggered");
+    }
+
 }
