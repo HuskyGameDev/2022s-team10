@@ -36,8 +36,6 @@ public class PlayerController : MonoBehaviour
     bool nearAWall = false; 
     public LayerMask wallLayer;
 
-    bool hasJump = false;
-
 
     [Header("Better Jump")]
     // for better jump
@@ -96,6 +94,13 @@ public class PlayerController : MonoBehaviour
         if ( (Input.GetKeyDown(KeyCode.Space)) && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor || nearAWall || Time.time - lastTimewalled <= rememberwalledFor)) { // checks if player is grounded or they just moved past a groud object
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+
+        if (rb.velocity.y <= -6.0) { // fall like a sack of potatoes if your already falling for a while
+            rb.drag = 2;
+        }
+
+        else {rb.drag = 3;}
+        
     }
 
     void CheckIfNearAWall(){ // can change gravity scale when near a wall here
@@ -103,10 +108,8 @@ public class PlayerController : MonoBehaviour
 
         if (collider2 != null) { 
             nearAWall = true; 
-            if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)){
-                rb.gravityScale = gravityChangeNearWall;
-            }
-            
+                if( Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) ){
+                    rb.gravityScale = gravityChangeNearWall; }
         } 
 
         else {
@@ -136,7 +139,7 @@ public class PlayerController : MonoBehaviour
         }
 
     void BetterJump() {
-    if (nearAWall && Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) { // when near a wall dont screw with the jump
+    if ( nearAWall && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) ) { // when near a wall dont screw with the jump
         return;
     }
 
