@@ -103,7 +103,10 @@ public class PlayerController : MonoBehaviour
 
         if (collider2 != null) { 
             nearAWall = true; 
-            rb.gravityScale = gravityChangeNearWall;
+            if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)){
+                rb.gravityScale = gravityChangeNearWall;
+            }
+            
         } 
 
         else {
@@ -133,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
 
     void BetterJump() {
-    if (nearAWall) { // when near a wall dont screw with the jump
+    if (nearAWall && Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) { // when near a wall dont screw with the jump
         return;
     }
 
