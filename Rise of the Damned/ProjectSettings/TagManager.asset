@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Background
   - Walls
+  - ItemDrop
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - ground
   - wall
   - background
-  - 
+  - ItemDrop
   - 
   - 
   - 
