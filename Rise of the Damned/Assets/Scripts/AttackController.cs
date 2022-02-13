@@ -24,7 +24,7 @@ public class AttackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F) && GameObject.Find("SwordSwipe(Clone)") == null)
         {
             Instantiate(weaponAttack, transform.position, Quaternion.identity);
         }
