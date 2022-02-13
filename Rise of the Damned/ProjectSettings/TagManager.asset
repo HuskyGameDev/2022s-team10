@@ -54,3 +54,9 @@ TagManager:
   - name: Sub-HUD
     uniqueID: 3920038249
     locked: 0
+  - name: ItemDropBG
+    uniqueID: 1076792559
+    locked: 0
+  - name: ItemDrop
+    uniqueID: 523853917
+    locked: 0
