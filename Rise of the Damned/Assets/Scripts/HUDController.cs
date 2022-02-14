@@ -7,6 +7,7 @@ public class HUDController : MonoBehaviour
     private AttackController playerScript;
     private SpriteRenderer sr;
     public Sprite[] spriteArray;
+    public float overlapOpacity = 0.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,22 @@ public class HUDController : MonoBehaviour
     void ChangeSprite(){
         //sr.sprite = spriteArray[Mathf.Clamp(0, spriteArray.Length - 1, playerScript.health / 7)];
         sr.sprite = spriteArray[Mathf.RoundToInt((float)(playerScript.health) / (float)(playerScript.maxHealth) * 13f)];
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
+        if (other.gameObject.tag.Equals("Player")){
+            Color color = sr.color;
+            color.a = overlapOpacity;
+            sr.color = color;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other){
+        if (other.gameObject.tag.Equals("Player")){
+            Color color = sr.color;
+            color.a = 1.0f;
+            sr.color = color;
+        }
     }
 
     void TakeDamage()

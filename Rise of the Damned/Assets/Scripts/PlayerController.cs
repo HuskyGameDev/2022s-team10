@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb; //unity physics engine
 
+    SpriteRenderer sr;
     Collider2D thisCollider;
 
     [Header("Basic Player Movement")]
@@ -156,6 +157,10 @@ public class PlayerController : MonoBehaviour
         foreach(Collider2D collision in results){
             if ((collision.gameObject.tag == "ItemDrop") && (Input.GetKey(KeyCode.R))){
                 Destroy(collision.gameObject);
+            }
+            if ((collision.gameObject.tag == "HUD"))
+            {
+
             }
         }
     }

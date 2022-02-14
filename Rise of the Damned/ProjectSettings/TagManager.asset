@@ -8,6 +8,7 @@ TagManager:
   - Background
   - Walls
   - ItemDrop
+  - HUD
   layers:
   - Default
   - TransparentFX
