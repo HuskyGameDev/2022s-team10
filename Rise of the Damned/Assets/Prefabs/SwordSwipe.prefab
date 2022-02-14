@@ -136,3 +136,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotSpeed: 540
   displacement: 1
+  knockback: 6

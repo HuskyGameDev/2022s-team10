@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour
 {
     public int rotSpeed;
     public float displacement;
+    public float knockback;
 
     private Rigidbody2D rb;
     private GameObject player;
@@ -32,5 +33,15 @@ public class WeaponController : MonoBehaviour
                                   player.transform.position.y + Mathf.Sin(Mathf.Deg2Rad * (rot - 90)) * displacement * -1) ;
         if (rot > 180)
             Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Enemy")
+        {
+            collision.GetComponent<EnemyController>().health -= player.GetComponent<AttackController>().damage;
+            collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - player.transform.position.x) * knockback, knockback / 2);
+        }
+        
     }
 }

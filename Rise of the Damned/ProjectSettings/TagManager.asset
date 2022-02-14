@@ -9,6 +9,7 @@ TagManager:
   - Walls
   - ItemDrop
   - HUD
+  - Enemy
   layers:
   - Default
   - TransparentFX

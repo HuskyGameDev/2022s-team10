@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
         CheckIfGrounded();
         CheckIfNearAWall();
         BetterJump();
-        PickupItem();
 
     }
 
@@ -139,34 +138,25 @@ public class PlayerController : MonoBehaviour
             } 
         }
 
-    void BetterJump() {
-    if ( nearAWall && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) ) { // when near a wall dont screw with the jump
-        return;
-    }
+    void BetterJump()
+    {
+        if (nearAWall && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)))
+        { // when near a wall dont screw with the jump
+            return;
+        }
 
-    if (rb.velocity.y < 0) {
+        if (rb.velocity.y < 0)
+        {
             rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
-        } else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) {
+        }
+        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
             rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }   
-    }
-
-    void PickupItem(){ //tylers shit
-        List<Collider2D> results = new List<Collider2D>();
-        thisCollider.OverlapCollider(new ContactFilter2D(), results);
-        foreach(Collider2D collision in results){
-            if ((collision.gameObject.tag == "ItemDrop") && (Input.GetKey(KeyCode.R))){
-                Destroy(collision.gameObject);
-            }
-            if ((collision.gameObject.tag == "HUD"))
-            {
-
-            }
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D collider){
+    /*public void OnTriggerEnter2D(Collider2D collider){
         Debug.Log("Triggered");
-    }
+    }*/
 
 }
