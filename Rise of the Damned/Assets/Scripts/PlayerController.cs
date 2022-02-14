@@ -13,40 +13,44 @@ public class PlayerController : MonoBehaviour
     public float speed; // m/s
     public float jumpForce;
 
-    // for ground
+    
     [Header("For Ground")]
     public float rememberGroundedFor; // help to keep us grounded for a little longer, smooth out jumps just after leaving ground
     public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
-    bool isGrounded = false; 
     public Transform isGroundedChecker; // Transform of an empty object that is going to be placed bellow player
     public LayerMask groundLayer;
-
     float lastTimeGrounded; // when was the last time we were standing on the ground
 
 
     [Header("For Walls")]
     public Transform isNearAWallChecker; 
+    public LayerMask wallLayer;
     public float checkWallRadius; 
     public float rememberwalledFor; 
     float lastTimewalled; 
     public float gravityChangeNearWall = 0.5f;
     private float gravityStore; // set gravity scale in rigid body 2D
+    public float timeItTakesToWallJump = 0.5f; // how long until a wall jump is finished jumping, you set it
+    public float wallJumpCoolDown = 0.5f; // how often you can wall jump, prevents spamming
+   
 
-
-     //for walls
-    bool nearAWall = false; 
-    public LayerMask wallLayer;
+    [Header("Bools")]
+    public bool facingLeft; 
+    public bool facingRight;
+    public bool isGrounded = false; 
+    public bool nearAWall = false; 
+    public bool hasWallJump = true; // must start true
+    public bool wallJumping;
 
 
     [Header("Better Jump")]
-    // for better jump
     public float fallMultiplier = 2.5f;  
     public float lowJumpMultiplier = 2f;
 
 
-    // movement 
-    public bool facingLeft; 
-    public bool facingRight;
+    [Header("Particle Effects")]
+    public ParticleSystem dust;
+
 
 
     // Start is called before the first frame update
@@ -87,13 +91,29 @@ public class PlayerController : MonoBehaviour
             facingRight = false;
         }
 
+        if( x == 0 && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)) && isGrounded ){ // hard turn create dust
+            CreateDust();
+        }
+
     } 
 
     void Jump() {
 
-        if ( (Input.GetKeyDown(KeyCode.Space)) && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor || nearAWall || Time.time - lastTimewalled <= rememberwalledFor)) { // checks if player is grounded or they just moved past a groud object
+        if ( (Input.GetKeyDown(KeyCode.Space)) && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor) ) { // Ground Jumps. checks if player is grounded or they just moved past a groud object
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
+
+        if ( (Input.GetKeyDown(KeyCode.Space)) && ( (nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump ) ) { // Wall Jumps
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+        hasWallJump = false;
+        Invoke ("SetHasWallJumpToTrue", wallJumpCoolDown); // delay that you set
+
+        wallJumping = true;
+        Invoke ("SetWallJumpingToFalse", timeItTakesToWallJump); // could vary
+        CreateDust();
+        }
+
 
         if (rb.velocity.y <= -6.0) { // fall like a sack of potatoes if your already falling for a while
             rb.drag = 2;
@@ -108,17 +128,21 @@ public class PlayerController : MonoBehaviour
 
         if (collider2 != null) { 
             nearAWall = true; 
+
                 if( Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) ){
-                    rb.gravityScale = gravityChangeNearWall; }
+                    rb.gravityScale = gravityChangeNearWall; 
+                    }
+
+                if ( Input.GetKeyDown(KeyCode.Space) ) {
+                }
         } 
 
         else {
-            if(nearAWall) { // just left the wall, grab time
+                if(nearAWall) { // just left the wall, grab time
                 lastTimewalled = Time.time;
-            }
-            nearAWall = false;
-            rb.gravityScale = gravityStore;
-           
+                }
+                nearAWall = false;
+                rb.gravityScale = gravityStore;
             }
          
     }
@@ -126,12 +150,12 @@ public class PlayerController : MonoBehaviour
     void CheckIfGrounded() { 
         Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer); 
 
-        if (collider != null) { 
+        if ( collider != null ) { 
             isGrounded = true; 
         } 
 
         else { 
-             if (isGrounded) {
+                if (isGrounded) {
                 lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
                 }
                 isGrounded = false; 
@@ -158,5 +182,18 @@ public class PlayerController : MonoBehaviour
     /*public void OnTriggerEnter2D(Collider2D collider){
         Debug.Log("Triggered");
     }*/
+
+    void SetWallJumpingToFalse() {
+        wallJumping = false; 
+    }
+
+    void SetHasWallJumpToTrue() {
+        hasWallJump = true;
+    }
+
+    void CreateDust(){
+        dust.Play();
+    }
+
 
 }
