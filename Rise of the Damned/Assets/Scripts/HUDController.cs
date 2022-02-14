@@ -33,6 +33,13 @@ public class HUDController : MonoBehaviour
             Color color = sr.color;
             color.a = overlapOpacity;
             sr.color = color;
+            SpriteRenderer[] children = GetComponentsInChildren<SpriteRenderer>();
+            Color childColor;
+            foreach(SpriteRenderer child in children){
+                childColor = child.color;
+                childColor.a = overlapOpacity;
+                child.color = color;
+            }
         }
     }
 
@@ -41,6 +48,13 @@ public class HUDController : MonoBehaviour
             Color color = sr.color;
             color.a = 1.0f;
             sr.color = color;
+            SpriteRenderer[] children = GetComponentsInChildren<SpriteRenderer>();
+            Color childColor;
+            foreach(SpriteRenderer child in children){
+                childColor = child.color;
+                childColor.a = 1.0f;
+                child.color = color;
+            }
         }
     }
 
