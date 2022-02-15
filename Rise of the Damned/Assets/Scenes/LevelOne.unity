@@ -542,6 +542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a019f06ab16b7564bbd512c42c1fca49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diff: 80
+  shootAngle: 270
+  FireBall: {fileID: 1139631694076231106, guid: f6c623d68b00c834fb9dba19dda85fc8, type: 3}
+  damage: 10
   health: 100
   speed: 4
   positions:
@@ -1794,6 +1798,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a019f06ab16b7564bbd512c42c1fca49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diff: 80
+  shootAngle: 270
+  FireBall: {fileID: 0}
+  damage: 10
   health: 100
   speed: 5
   positions:
@@ -3409,6 +3417,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a019f06ab16b7564bbd512c42c1fca49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diff: 80
+  shootAngle: 270
+  FireBall: {fileID: 0}
+  damage: 10
   health: 100
   speed: 1
   positions:

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public int diff = 80;
+    public int shootAngle = 270;
+    public GameObject FireBall;
+    public int damage = 10;
     public float health = 100;
     
     [SerializeField]
@@ -24,6 +28,7 @@ public class EnemyController : MonoBehaviour
         {
             if(index == positions.Length-1)
             {
+    
                 index = 0;
             }
             else
@@ -32,9 +37,21 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        if (health < 0)
+        if (health < 0) 
             Destroy(gameObject);
+        if (gameObject.name == "demon skull")    
+    {
+            GameObject shoot = Instantiate(FireBall, transform.position, Quaternion.identity);
+            int shootAngle = 90;
+            int diff = 80;
+            shootAngle = 270;
+            diff = -45;
+
+            shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
+            shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * 10, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * 10);
     }
 }
+}
+
 
 
