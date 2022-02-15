@@ -24,6 +24,7 @@ public class HUDController : MonoBehaviour
     }
 
     void ChangeSprite(){
+        sr = this.transform.Find("Health").GetComponent<SpriteRenderer>();
         //sr.sprite = spriteArray[Mathf.Clamp(0, spriteArray.Length - 1, playerScript.health / 7)];
         sr.sprite = spriteArray[Mathf.RoundToInt((float)(playerScript.health) / (float)(playerScript.maxHealth) * 13f)];
     }
