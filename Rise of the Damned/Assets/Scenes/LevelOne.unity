@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 4547489}
   - component: {fileID: 4547488}
   - component: {fileID: 4547493}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 70603670}
   - component: {fileID: 70603669}
   - component: {fileID: 70603671}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Room1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,9 +476,9 @@ GameObject:
   - component: {fileID: 81331663}
   - component: {fileID: 81331662}
   - component: {fileID: 81331661}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: demon skull
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 120766687}
   - component: {fileID: 120766686}
   - component: {fileID: 120766685}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Room3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 137883650}
   - component: {fileID: 137883652}
   - component: {fileID: 137883651}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1026,7 +1026,7 @@ GameObject:
   - component: {fileID: 201640707}
   - component: {fileID: 201640709}
   - component: {fileID: 201640708}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1222,7 +1222,7 @@ GameObject:
   - component: {fileID: 263479875}
   - component: {fileID: 263479874}
   - component: {fileID: 263479876}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: CM vcam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1416,7 +1416,7 @@ GameObject:
   - component: {fileID: 366802983}
   - component: {fileID: 366802982}
   - component: {fileID: 366802981}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: CM vcam2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1501,7 +1501,7 @@ GameObject:
   - component: {fileID: 382874771}
   - component: {fileID: 382874773}
   - component: {fileID: 382874772}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1588,7 @@ GameObject:
   - component: {fileID: 406432041}
   - component: {fileID: 406432040}
   - component: {fileID: 406432039}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: CM vcam3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3206,7 +3206,7 @@ GameObject:
   - component: {fileID: 839295948}
   m_Layer: 10
   m_Name: small-imp (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3349,7 +3349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 845589535}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4842,7 +4842,7 @@ GameObject:
   - component: {fileID: 1220726991}
   - component: {fileID: 1220726989}
   - component: {fileID: 1220726990}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DustPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10951,7 +10951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1823208708}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WallChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11174,7 +11174,7 @@ GameObject:
   - component: {fileID: 1891146006}
   - component: {fileID: 1891146005}
   - component: {fileID: 1891146004}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Room2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

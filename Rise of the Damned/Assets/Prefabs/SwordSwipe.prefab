@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5368633065527683595}
   - component: {fileID: 3140516459669677047}
   - component: {fileID: 2999139032269101738}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SwordSwipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - ground
@@ -22,8 +22,8 @@ TagManager:
   - background
   - ItemDrop
   - Enemy
-  - 
-  - 
+  - Pprojectiles
+  - Eprojectiles
   - 
   - 
   - 
