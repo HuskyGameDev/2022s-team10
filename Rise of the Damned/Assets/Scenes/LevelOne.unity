@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 4547491}
   - component: {fileID: 4547490}
   - component: {fileID: 4547492}
+  - component: {fileID: 4547493}
   - component: {fileID: 4547489}
   - component: {fileID: 4547488}
-  - component: {fileID: 4547493}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -304,6 +304,7 @@ MonoBehaviour:
   damage: 10
   armor: 0
   bowStrength: 10
+  knockback: 6
   weaponAttack: {fileID: 4915093518464885104, guid: 2f025ca2548a9ef46a2cd2d582a4951b, type: 3}
   arrow: {fileID: 188537100976444489, guid: e57bd4a1058ae384ca73f9581a23047f, type: 3}
 --- !u!1 &70603668

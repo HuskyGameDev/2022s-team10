@@ -7,6 +7,7 @@ public class AttackController : MonoBehaviour
     public float health, maxHealth, damage, armor;
 
     public float bowStrength;
+    public float knockback;
 
     public GameObject weaponAttack, arrow;
 
