@@ -25,7 +25,13 @@ public class HUDController : MonoBehaviour
 
     void ChangeSprite(){
         sr = this.transform.Find("Health").GetComponent<SpriteRenderer>();
+        if (playerScript.health >= 0){
+
         sr.sprite = spriteArray[Mathf.RoundToInt((float)(playerScript.health) / (float)(playerScript.maxHealth) * 26f)];
+        }
+        else {
+            sr.sprite = spriteArray[0];
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other){
