@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb; //unity physics engine
 
+    public Sprite wallSlide;
+    public Sprite regular; // prob change
+
     SpriteRenderer sr;
     Collider2D thisCollider;
 
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public bool nearAWall = false; 
     public bool hasWallJump = true; // must start true
     public bool wallJumping;
+    public bool wallSliding;
 
 
     [Header("Better Jump")]
@@ -95,6 +99,12 @@ public class PlayerController : MonoBehaviour
             CreateDust();
         }
 
+        if(wallSliding) {
+            wallSlideSprite();
+        }
+        else {this.gameObject.GetComponent<SpriteRenderer>().sprite = regular;}
+
+
     } 
 
     void Jump() {
@@ -111,9 +121,9 @@ public class PlayerController : MonoBehaviour
 
         wallJumping = true;
         Invoke ("SetWallJumpingToFalse", timeItTakesToWallJump); // could vary
+
         CreateDust();
         }
-
 
         if (rb.velocity.y <= -6.0) { // fall like a sack of potatoes if your already falling for a while
             rb.drag = 2;
@@ -131,10 +141,9 @@ public class PlayerController : MonoBehaviour
 
                 if( Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) ){
                     rb.gravityScale = gravityChangeNearWall; 
+                    wallSliding = true;
                     }
 
-                if ( Input.GetKeyDown(KeyCode.Space) ) {
-                }
         } 
 
         else {
@@ -142,6 +151,7 @@ public class PlayerController : MonoBehaviour
                 lastTimewalled = Time.time;
                 }
                 nearAWall = false;
+                wallSliding = false;
                 rb.gravityScale = gravityStore;
             }
          
@@ -182,6 +192,10 @@ public class PlayerController : MonoBehaviour
     /*public void OnTriggerEnter2D(Collider2D collider){
         Debug.Log("Triggered");
     }*/
+
+    void wallSlideSprite(){
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = wallSlide;
+    }
 
     void SetWallJumpingToFalse() {
         wallJumping = false; 
