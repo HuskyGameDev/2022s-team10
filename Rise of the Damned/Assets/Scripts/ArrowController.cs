@@ -11,15 +11,13 @@ public class ArrowController : MonoBehaviour
 
     private float life = 0;
 
-    private GameObject player;
     private AttackController aController;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player");
-        aController = player.GetComponent<AttackController>();
+        aController = PlayerController.player.GetComponent<AttackController>();
     }
 
     // Update is called once per frame
@@ -36,8 +34,8 @@ public class ArrowController : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            collision.GetComponent<EnemyController>().health -= player.GetComponent<AttackController>().damage;
-            collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - player.transform.position.x) * aController.knockback, aController.knockback / 2);
+            collision.GetComponent<EnemyController>().health -= PlayerController.bowDamage;
+            collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.knockback, aController.knockback / 2);
             Destroy(gameObject);
         }
 

@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rb; //unity physics engine
+    public static GameObject player;    //static variables to be easily referenced elsewhere
+    public static float health, maxHealth, damage, bowDamage, armor;
 
+    private Rigidbody2D rb; //unity physics engine
+    private SpriteRenderer sr;
+    private Collider2D thisCollider;
+
+    [Header("Sprites")]
     public Sprite wallSlide;
     public Sprite regular; // prob change
-
-    SpriteRenderer sr;
-    Collider2D thisCollider;
 
     [Header("Basic Player Movement")]
     public float speed; // m/s
@@ -60,7 +64,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = gameObject;
+        //default player stats
+        health = 100;
+        maxHealth = 100;
+        damage = 0;
+        bowDamage = 0;
+        armor = 0;
+        
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         thisCollider = GetComponent<Collider2D>();
         gravityStore = rb.gravityScale;
      
@@ -100,9 +113,11 @@ public class PlayerController : MonoBehaviour
         }
 
         if(wallSliding) {
-            wallSlideSprite();
+            sr.sprite = wallSlide;
         }
-        else {this.gameObject.GetComponent<SpriteRenderer>().sprite = regular;}
+        else {
+            sr.sprite = regular;
+        }
 
 
     } 
@@ -110,26 +125,27 @@ public class PlayerController : MonoBehaviour
     void Jump() {
 
         if ( (Input.GetKeyDown(KeyCode.Space)) && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor) ) { // Ground Jumps. checks if player is grounded or they just moved past a groud object
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
         if ( (Input.GetKeyDown(KeyCode.Space)) && ( (nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump ) ) { // Wall Jumps
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
-        hasWallJump = false;
-        Invoke ("SetHasWallJumpToTrue", wallJumpCoolDown); // delay that you set
+            hasWallJump = false;
+            Invoke ("SetHasWallJumpToTrue", wallJumpCoolDown); // delay that you set
 
-        wallJumping = true;
-        Invoke ("SetWallJumpingToFalse", timeItTakesToWallJump); // could vary
+            wallJumping = true;
+            Invoke ("SetWallJumpingToFalse", timeItTakesToWallJump); // could vary
 
-        CreateDust();
+            CreateDust();
         }
 
         if (rb.velocity.y <= -6.0) { // fall like a sack of potatoes if your already falling for a while
-            rb.drag = 2;
+            rb.drag = 1.5f;
         }
-
-        else {rb.drag = 3;}
+        else {
+            rb.drag = 3;
+        }
         
     }
 
@@ -139,21 +155,21 @@ public class PlayerController : MonoBehaviour
         if (collider2 != null) { 
             nearAWall = true; 
 
-                if( Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) ){
-                    rb.gravityScale = gravityChangeNearWall; 
-                    wallSliding = true;
-                    }
+            if( Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) ){
+                rb.gravityScale = gravityChangeNearWall; 
+                wallSliding = true;
+            }
 
         } 
 
         else {
-                if(nearAWall) { // just left the wall, grab time
+            if(nearAWall) { // just left the wall, grab time
                 lastTimewalled = Time.time;
-                }
-                nearAWall = false;
-                wallSliding = false;
-                rb.gravityScale = gravityStore;
             }
+            nearAWall = false;
+            wallSliding = false;
+            rb.gravityScale = gravityStore;
+        }
          
     }
 
@@ -165,12 +181,12 @@ public class PlayerController : MonoBehaviour
         } 
 
         else { 
-                if (isGrounded) {
+            if (isGrounded) {
                 lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
-                }
-                isGrounded = false; 
-            } 
-        }
+            }
+            isGrounded = false; 
+        } 
+    }
 
     void BetterJump()
     {
@@ -193,10 +209,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Triggered");
     }*/
 
-    void wallSlideSprite(){
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = wallSlide;
-    }
-
     void SetWallJumpingToFalse() {
         wallJumping = false; 
     }
@@ -208,6 +220,5 @@ public class PlayerController : MonoBehaviour
     void CreateDust(){
         dust.Play();
     }
-
 
 }

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class HUDController : MonoBehaviour
 {
-    private AttackController playerScript;
     private SpriteRenderer sr;
+    private SpriteRenderer srHealth;
+
     public Sprite[] spriteArray;
     public float overlapOpacity = 0.2f;
+
+    private SpriteRenderer[] children;
 
     // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        playerScript = GameObject.Find("Player").GetComponent<AttackController>();
+        srHealth = transform.Find("Health").GetComponent<SpriteRenderer>();
+        children = GetComponentsInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -24,13 +28,11 @@ public class HUDController : MonoBehaviour
     }
 
     void ChangeSprite(){
-        sr = this.transform.Find("Health").GetComponent<SpriteRenderer>();
-        if (playerScript.health >= 0){
-
-        sr.sprite = spriteArray[Mathf.RoundToInt((float)(playerScript.health) / (float)(playerScript.maxHealth) * 26f)];
+        if (PlayerController.health >= 0){
+            srHealth.sprite = spriteArray[Mathf.RoundToInt((float)(PlayerController.health) / (float)(PlayerController.maxHealth) * 26f)];
         }
         else {
-            sr.sprite = spriteArray[0];
+            srHealth.sprite = spriteArray[0];
         }
     }
 
@@ -67,7 +69,7 @@ public class HUDController : MonoBehaviour
     void TakeDamage()
     {
         if (Input.GetKeyDown(KeyCode.G)){
-            playerScript.health -= 5;
+            PlayerController.health -= 5;
         }
     }
 }
