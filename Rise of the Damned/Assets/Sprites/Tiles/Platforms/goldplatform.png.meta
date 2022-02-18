@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 74d85945f3dd35f4caa666ccc1fd3fda
+guid: 97c3204a6d0af264d83f841bc58e4241
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4677969335458150179
-    second: RiseOfTheDamnedGround01_0
+      213: 8240801559890965090
+    second: goldplatform_0
   - first:
-      213: 2313783820241576076
-    second: RiseOfTheDamnedGround01_1
+      213: -7012434240494646762
+    second: goldplatform_1
   - first:
-      213: -3112062133650788043
-    second: RiseOfTheDamnedGround01_2
+      213: -8682703674658845388
+    second: goldplatform_2
   - first:
-      213: 5654027233747624824
-    second: RiseOfTheDamnedGround01_3
+      213: -6013584562952384886
+    second: goldplatform_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -80,7 +80,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -92,7 +92,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,7 +104,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,49 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RiseOfTheDamnedGround01_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 8
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd8c8d1aca3841fb0800000000000000
-      internalID: -4677969335458150179
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RiseOfTheDamnedGround01_1
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 8
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c80ab8420263c1020800000000000000
-      internalID: 2313783820241576076
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RiseOfTheDamnedGround01_2
+      name: goldplatform_0
       rect:
         serializedVersion: 2
         x: 0
@@ -165,20 +123,34 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 1}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 0, y: 0}
+        - {x: -2, y: 1}
+        - {x: -2, y: 3}
+        - {x: 4, y: 3}
+        - {x: 4, y: -1}
+        - {x: 3, y: -1}
+      - - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+      - - {x: 4, y: 1}
+        - {x: 4, y: 3}
+        - {x: 4, y: 3}
+        - {x: 4, y: 1}
       tessellationDetail: 0
       bones: []
-      spriteID: 531fcc45afbbfc4d0800000000000000
-      internalID: -3112062133650788043
+      spriteID: 26239c96b553d5270800000000000000
+      internalID: 8240801559890965090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RiseOfTheDamnedGround01_3
+      name: goldplatform_1
       rect:
         serializedVersion: 2
         x: 8
@@ -186,14 +158,70 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 1}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -4, y: 3}
+        - {x: -4, y: -1}
+        - {x: 4, y: -1}
+        - {x: 4, y: 3}
       tessellationDetail: 0
       bones: []
-      spriteID: 87369e110d3277e40800000000000000
-      internalID: 5654027233747624824
+      spriteID: 61ac7843634deae90800000000000000
+      internalID: -7012434240494646762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goldplatform_2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 1}
+      outline: []
+      physicsShape:
+      - - {x: -4, y: 3}
+        - {x: -4, y: -1}
+        - {x: 4, y: -1}
+        - {x: 4, y: 3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43d0bf5c207d08780800000000000000
+      internalID: -8682703674658845388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goldplatform_3
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 1}
+      outline: []
+      physicsShape:
+      - - {x: -4, y: 3}
+        - {x: -4, y: -1}
+        - {x: -3, y: -1}
+        - {x: 0, y: 0}
+        - {x: 2, y: 1}
+        - {x: 2, y: 3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8e437a83b47b8ca0800000000000000
+      internalID: -6013584562952384886
       vertices: []
       indices: 
       edges: []

@@ -160,10 +160,12 @@ public class PlayerController : MonoBehaviour
                 wallSliding = true;
             }
 
+            else{ wallSliding = false;}
+
         } 
 
         else {
-            if(nearAWall) { // just left the wall, grab time
+            if(nearAWall) { // just left the wall and hit it, grab time
                 lastTimewalled = Time.time;
             }
             nearAWall = false;
