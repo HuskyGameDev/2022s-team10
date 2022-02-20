@@ -18,6 +18,14 @@ public class EnemyController : MonoBehaviour
 
     private int index = 0;
 
+    [Header("Item Drops")]
+    public int itemOnePercentChance;
+    public GameObject itemOne;
+    public int itemTwoPercentChance;
+    public GameObject itemTwo;
+    public int itemThreePercentChance;
+    public GameObject itemThree;
+
     // Update is called once per frame
 
     void Update()
@@ -37,8 +45,18 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        if (health < 0) 
+        if (health < 0) {
             Destroy(gameObject);
+
+            int diceRoll = Random.Range(1,101);
+            if (diceRoll <= itemOnePercentChance){
+                Instantiate(itemOne, new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
+            } else if (diceRoll <= itemTwoPercentChance+itemTwoPercentChance){
+                Instantiate(itemTwo, new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
+            } else {
+                Instantiate(itemThree, new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
+            }
+        }
 
         if (gameObject.name == "demon skull")    
         {
