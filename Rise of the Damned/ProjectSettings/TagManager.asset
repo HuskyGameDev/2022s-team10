@@ -10,6 +10,7 @@ TagManager:
   - ItemDrop
   - HUD
   - Enemy
+  - ItemInfo
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Pprojectiles
   - Eprojectiles
   - Barrier
-  - 
+  - ItemDropCollision
   - 
   - 
   - 
