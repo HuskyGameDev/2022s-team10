@@ -11,6 +11,7 @@ TagManager:
   - HUD
   - Enemy
   - ItemInfo
+  - Spike
   layers:
   - Default
   - TransparentFX

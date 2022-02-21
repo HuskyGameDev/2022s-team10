@@ -222,5 +222,4 @@ public class PlayerController : MonoBehaviour
     void CreateDust(){
         dust.Play();
     }
-
-}
+    }
