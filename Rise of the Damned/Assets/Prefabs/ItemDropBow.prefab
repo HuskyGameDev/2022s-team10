@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2129700273664996347}
   - component: {fileID: 8637381586714123076}
-  - component: {fileID: 9030186809826896585}
   - component: {fileID: 3493868236436624521}
   m_Layer: 14
   m_Name: ItemDropCollider
@@ -86,23 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9030186809826896585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2931264132374122051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f4bf903fe87664886b8b4b76286b87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 
-  damage: 0
-  bowDamage: 0
-  armor: 0
-  spriteArray: []
 --- !u!61 &3493868236436624521
 BoxCollider2D:
   m_ObjectHideFlags: 0

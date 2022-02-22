@@ -16,7 +16,7 @@ public class ItemController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        if (other.gameObject.name.Equals("Player")){
+        if (other.gameObject.name.Equals("Player") && gameObject.tag == "ItemDrop"){
             Color color = sr.color;
             color.a = 1.0f;
             Color childColor;
@@ -29,15 +29,15 @@ public class ItemController : MonoBehaviour
                 if (child.name.Equals("ItemInfoNumberArmor")){
                     child.sprite = spriteArray[(int)(armor)-1];
                 } else if (child.name.Equals("ItemInfoNumberSword")){
-                    child.sprite = spriteArray[(int)(damage)-1];
+                    child.sprite = spriteArray[(int)(damage) - 1];
                 } else if (child.name.Equals("ItemInfoNumberBow")){
-                    child.sprite = spriteArray[(int)(bowDamage)-1];
+                    child.sprite = spriteArray[(int)(bowDamage) - 1];
                 }
             }
         }
     }
     void OnTriggerExit2D(Collider2D other){
-        if (other.gameObject.tag.Equals("Player")){
+        if (other.gameObject.tag.Equals("Player") && gameObject.tag == "ItemDrop"){
             Color color = sr.color;
             color.a = 0.0f;
             Color childColor;
