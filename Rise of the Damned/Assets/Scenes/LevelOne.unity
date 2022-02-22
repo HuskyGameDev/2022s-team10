@@ -291,6 +291,8 @@ MonoBehaviour:
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   dust: {fileID: 1220726989}
+  dragPower: 3
+  dragCoefficient: 2.5
 --- !u!114 &4547493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,7 +1664,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.101322174, y: -3.1850314, z: -10}
+  m_LocalPosition: {x: -0.09788799, y: -3.1850314, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1649866589}
@@ -5874,7 +5876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b11f5389b7ab740addadb7e6d20a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockback: 0
+  knockback: 18
 --- !u!1 &839295945
 GameObject:
   m_ObjectHideFlags: 0

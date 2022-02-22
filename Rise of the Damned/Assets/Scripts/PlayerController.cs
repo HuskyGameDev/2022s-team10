@@ -59,7 +59,9 @@ public class PlayerController : MonoBehaviour
     [Header("Particle Effects")]
     public ParticleSystem dust;
 
-
+    [Header("Drag")]
+    public float dragPower;
+    public float dragCoefficient;
 
     // Start is called before the first frame update
     void Start()
@@ -140,8 +142,9 @@ public class PlayerController : MonoBehaviour
             CreateDust();
         }
 
-        if (rb.velocity.y <= -6.0) { // fall like a sack of potatoes if your already falling for a while
-            rb.drag = 1.5f;
+        if (rb.velocity.y <= dragPower * -1)
+        { // fall like a sack of potatoes if you're already falling for a while
+            rb.drag = (float)(Mathf.Pow(dragPower, dragCoefficient) / (double)(rb.velocity.y * -1 + Mathf.Pow(dragPower, dragCoefficient - 1) + dragPower));
         }
         else {
             rb.drag = 3;
