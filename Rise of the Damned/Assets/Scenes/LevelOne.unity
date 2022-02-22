@@ -1328,6 +1328,7 @@ MonoBehaviour:
   damage: 0
   bowDamage: 0
   armor: 5
+  spriteArray: []
 --- !u!212 &406145103
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1664,7 +1665,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09788799, y: -3.1850314, z: -10}
+  m_LocalPosition: {x: -0.109054565, y: -3.1850314, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1649866589}
@@ -13745,11 +13746,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7988138512254653242, guid: 82fdce7ea7547914cbbee5a2b37d8dbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.92
+      value: -13.46
       objectReference: {fileID: 0}
     - target: {fileID: 7988138512254653242, guid: 82fdce7ea7547914cbbee5a2b37d8dbc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.79
+      value: -5.68
       objectReference: {fileID: 0}
     - target: {fileID: 7988138512254653242, guid: 82fdce7ea7547914cbbee5a2b37d8dbc, type: 3}
       propertyPath: m_LocalPosition.z

@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1878168716805247111}
   - component: {fileID: 1878168716805247112}
   m_Layer: 9
-  m_Name: ItemInfoNumber
+  m_Name: ItemInfoNumberSword
   m_TagString: ItemInfo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,6 +349,27 @@ MonoBehaviour:
   damage: 5
   bowDamage: 0
   armor: 0
+  spriteArray:
+  - {fileID: 21300000, guid: bcb4228c9a03d704bb40b9316ad1f3a5, type: 3}
+  - {fileID: 21300000, guid: 7205b904784a5c246988c0cc340962f2, type: 3}
+  - {fileID: 21300000, guid: 3581f5aefdda1cf44accb5ec3d7cc008, type: 3}
+  - {fileID: 21300000, guid: 3bb3409d9474ec54d94a11de1e1d38c1, type: 3}
+  - {fileID: 21300000, guid: e2ecd558ff226f0468bbbac8eff65e0f, type: 3}
+  - {fileID: 21300000, guid: 3bcb50f7845cfca4c979e6de477406be, type: 3}
+  - {fileID: 21300000, guid: 2b5a4ab11232db74a94de6dd826316d3, type: 3}
+  - {fileID: 21300000, guid: 8afd499fa3f016747a61ab82efb80da6, type: 3}
+  - {fileID: 21300000, guid: 7389afce90286df4e9d63836288f0dc1, type: 3}
+  - {fileID: 21300000, guid: 9ef26b725257c0a45a30713250995ddd, type: 3}
+  - {fileID: 21300000, guid: d93a85387fb78b4488af4a3618d7f85d, type: 3}
+  - {fileID: 21300000, guid: a278594103478334b9d2cecaf33d1c8c, type: 3}
+  - {fileID: 21300000, guid: a1722d19715f5a6468d937498dba4333, type: 3}
+  - {fileID: 21300000, guid: 0283378bf83632846b0f42c77d0ef259, type: 3}
+  - {fileID: 21300000, guid: 6a2d64f95e162714c8d42f000b069718, type: 3}
+  - {fileID: 21300000, guid: ddd214f4faca3454b9f5716687563f90, type: 3}
+  - {fileID: 21300000, guid: d3836a37ff7857a4eb60edb1f8726cd1, type: 3}
+  - {fileID: 21300000, guid: 566d4635d1b2e1e4d9bb5c4b4b1c33ed, type: 3}
+  - {fileID: 21300000, guid: 88964792e6ce3ab4aa67a260336628f9, type: 3}
+  - {fileID: 21300000, guid: 0b4fc05e7fc360c4389c7842b297e9f9, type: 3}
 --- !u!61 &1965053870485534491
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -498,6 +519,7 @@ MonoBehaviour:
   damage: 0
   bowDamage: 0
   armor: 0
+  spriteArray: []
 --- !u!61 &189740406184790317
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class ItemController : MonoBehaviour
 {
     public string type;
     public float damage, bowDamage, armor;
+    public Sprite[] spriteArray;
     private SpriteRenderer sr;
     private SpriteRenderer[] children;
     void Start(){
@@ -24,6 +25,13 @@ public class ItemController : MonoBehaviour
                 childColor = child.color;
                 childColor.a = 1.0f;
                 child.color = color;
+                }
+                if (child.name.Equals("ItemInfoNumberArmor")){
+                    child.sprite = spriteArray[(int)(armor)-1];
+                } else if (child.name.Equals("ItemInfoNumberSword")){
+                    child.sprite = spriteArray[(int)(damage)-1];
+                } else if (child.name.Equals("ItemInfoNumberBow")){
+                    child.sprite = spriteArray[(int)(bowDamage)-1];
                 }
             }
         }
