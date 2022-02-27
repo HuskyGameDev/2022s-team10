@@ -12,6 +12,7 @@ public class Lava : MonoBehaviour
             PlayerController.health = PlayerController.health - 10;
             //knockback
             collision.rigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback, knockback / 2);
+            PlayerController.controller.CreateDust();
         }
     }
 

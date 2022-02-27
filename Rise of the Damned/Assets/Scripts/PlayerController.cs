@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public static GameObject player;    //static variables to be easily referenced elsewhere
     public static float health, maxHealth, damage, bowDamage, armor;
+    public static PlayerController controller;
 
     private Rigidbody2D rb; //unity physics engine
     private SpriteRenderer sr;
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = gameObject;
+        controller = this;
         //default player stats
         health = 100;
         maxHealth = 100;
@@ -222,7 +224,7 @@ public class PlayerController : MonoBehaviour
         hasWallJump = true;
     }
 
-    void CreateDust(){
+    public void CreateDust() {
         dust.Play();
     }
-    }
+}
