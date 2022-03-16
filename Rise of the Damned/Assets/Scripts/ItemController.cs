@@ -10,12 +10,22 @@ public class ItemController : MonoBehaviour
     public Sprite[] spriteArray;
     private SpriteRenderer sr;
     private SpriteRenderer[] children;
+
     void Start(){
         sr = GetComponent<SpriteRenderer>();
         children = GetComponentsInChildren<SpriteRenderer>();
+
     }
 
-    void OnTriggerEnter2D(Collider2D other){
+    void Update()
+    {
+        transform.Rotate(new Vector3(0, Time.deltaTime * 100, 0), Space.Self);
+        foreach(Transform t in GetComponentsInChildren<Transform>())
+            if(t.tag == "ItemInfo" || t.tag == "Untagged")
+                t.Rotate(new Vector3(0, Time.deltaTime * -100, 0), Space.Self);
+    }
+
+        void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.name.Equals("Player") && gameObject.tag == "ItemDrop"){
             Color color = sr.color;
             color.a = 1.0f;

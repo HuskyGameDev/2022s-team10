@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1878168716288789931}
   m_Layer: 9
   m_Name: ItemDropTestBG
-  m_TagString: Untagged
+  m_TagString: ItemDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +28,8 @@ Transform:
   m_LocalPosition: {x: 0.059999943, y: -0.03999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3409390253543730783}
-  m_RootOrder: 1
+  m_Father: {fileID: 1878168717089405186}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1878168716288789931
 SpriteRenderer:
@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878168716999248148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.1999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1878168716805247111}
@@ -197,8 +197,8 @@ Transform:
   - {fileID: 10049850427590069}
   - {fileID: 6904970212881079557}
   - {fileID: 8481549640844278966}
-  m_Father: {fileID: 3409390253543730783}
-  m_RootOrder: 0
+  m_Father: {fileID: 1878168717089405186}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1878168716999248150
 SpriteRenderer:
@@ -282,7 +282,9 @@ Transform:
   m_LocalPosition: {x: -5.254775, y: -9.04793, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1878168716288789930}
   - {fileID: 3409390253543730783}
+  - {fileID: 1878168716999248149}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -439,11 +441,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1878168716999248149}
-  - {fileID: 1878168716288789930}
+  m_Children: []
   m_Father: {fileID: 1878168717089405186}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4972120811594172128
 SpriteRenderer:

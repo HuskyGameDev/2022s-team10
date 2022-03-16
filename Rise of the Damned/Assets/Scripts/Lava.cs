@@ -11,7 +11,7 @@ public class Lava : MonoBehaviour
         if(collision.gameObject.tag.Equals("Player")) { //if player collides with lava
             PlayerController.health = PlayerController.health - 10;
             //knockback
-            collision.rigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback, knockback / 2);
+            collision.rigidbody.velocity += new Vector2(0, knockback);
             PlayerController.controller.CreateDust();
         }
     }

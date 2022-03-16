@@ -10,5 +10,14 @@ public class temp_wall_Spike_Fix : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        { //if player collides with spikes
+            PlayerController.health = PlayerController.health - 10;
+            //knockback
+            //collision.attachedRigidbody.velocity += new Vector2(0, Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback);
 
+        }
+    }
 }
