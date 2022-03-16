@@ -27,7 +27,7 @@ TagManager:
   - Pprojectiles
   - Eprojectiles
   - Barrier
-  - ItemDropCollision
+  - PlayerCollision
   - 
   - 
   - 

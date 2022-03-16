@@ -9,7 +9,12 @@ public class PlayerController : MonoBehaviour
     public static float health, maxHealth, damage, bowDamage, armor;
     public static PlayerController controller;
 
-    private Rigidbody2D rb; //unity physics engine
+    [System.NonSerialized]
+    public float invuln = 0;
+    public float invulnTime;
+
+    [System.NonSerialized]
+    public Rigidbody2D rb; //unity physics engine
     private SpriteRenderer sr;
     private Collider2D thisCollider;
 
@@ -38,7 +43,7 @@ public class PlayerController : MonoBehaviour
     float lastTimewalled; 
     public float gravityChangeNearWall = 0.5f;
     private float gravityStore; // set gravity scale in rigid body 2D
-    public float timeItTakesToWallJump = 0.5f; // how long until a wall jump is finished jumping, you set it
+    public float timeItTakesToWallJump; // how long until a wall jump is finished jumping, you set it
     public float wallJumpCoolDown = 0.5f; // how often you can wall jump, prevents spamming
    
 
@@ -92,6 +97,10 @@ public class PlayerController : MonoBehaviour
         CheckIfNearAWall();
         BetterJump();
 
+        if (invuln > 0)
+        {
+            invuln -= Time.deltaTime;
+        }
     }
 
     void Move() { 
@@ -226,5 +235,14 @@ public class PlayerController : MonoBehaviour
 
     public void CreateDust() {
         dust.Play();
+    }
+
+    public static bool takeDamage(float damage)
+    {
+        if (PlayerController.controller.invuln > 0)
+            return false;
+        PlayerController.health -= damage - PlayerController.armor;
+        PlayerController.controller.invuln = PlayerController.controller.invulnTime;
+        return true;
     }
 }
