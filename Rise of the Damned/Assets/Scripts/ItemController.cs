@@ -26,12 +26,95 @@ public class ItemController : MonoBehaviour
                 childColor.a = 1.0f;
                 child.color = color;
                 }
-                if (child.name.Equals("ItemInfoNumberArmor")){
-                    child.sprite = spriteArray[(int)(armor)-1];
-                } else if (child.name.Equals("ItemInfoNumberSword")){
-                    child.sprite = spriteArray[(int)(damage) - 1];
-                } else if (child.name.Equals("ItemInfoNumberBow")){
-                    child.sprite = spriteArray[(int)(bowDamage) - 1];
+
+                // Sword damage numbers. Yes this could probably be more efficient. No I won't fix it right now Kolby.
+
+                // One digit damage
+                if (damage < 10 && damage > 0){
+                    if (child.name.Equals("ItemInfoNumberSword3")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        child.sprite = spriteArray[(int)(damage)];
+                    }
+                } 
+                
+                // Two digit damage
+                else if (damage >= 10 && damage < 100){
+                    if (child.name.Equals("ItemInfoNumberSword2") || child.name.Equals("ItemInfoNumberSword4")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        if (child.name.Equals("ItemInfoNumberSword2")){
+                            child.sprite = spriteArray[(int)(damage) / 10 % 10];
+                        }
+                        else {
+                            child.sprite = spriteArray[(int)(damage) % 10];
+                        }
+                    }
+                } 
+                
+                // Three digit damage
+                else {
+                    if (child.name.Equals("ItemInfoNumberSword1") || child.name.Equals("ItemInfoNumberSword3") || child.name.Equals("ItemInfoNumberSword5")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        if (child.name.Equals("ItemInfoNumberSword1")){
+                            child.sprite = spriteArray[(int)(damage) / 100 % 10];
+                        }
+                        else if (child.name.Equals("ItemInfoNumberSword3")){
+                            child.sprite = spriteArray[(int)(damage) / 10 % 10];
+                        }
+                        else {
+                            child.sprite = spriteArray[(int)(damage) % 10];
+                        }
+                    }
+                }
+
+                // Bow Damage Numbers
+
+                // One digit bow damage
+                if (bowDamage < 10 && bowDamage > 0){
+                    if (child.name.Equals("ItemInfoNumberBow3")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        child.sprite = spriteArray[(int)(bowDamage)];
+                    }
+                } 
+                
+                // Two digit bow damage
+                else if (bowDamage >= 10 && bowDamage < 100){
+                    if (child.name.Equals("ItemInfoNumberBow2") || child.name.Equals("ItemInfoNumberBow4")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        if (child.name.Equals("ItemInfoNumberBow2")){
+                            child.sprite = spriteArray[(int)(bowDamage) / 10 % 10];
+                        }
+                        else {
+                            child.sprite = spriteArray[(int)(bowDamage) % 10];
+                        }
+                    }
+                } 
+                
+                // Three digit bow damage
+                else {
+                    if (child.name.Equals("ItemInfoNumberBow1") || child.name.Equals("ItemInfoNumberBow3") || child.name.Equals("ItemInfoNumberBow5")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        if (child.name.Equals("ItemInfoNumberBow1")){
+                            child.sprite = spriteArray[(int)(bowDamage) / 100 % 10];
+                        }
+                        else if (child.name.Equals("ItemInfoNumberBow3")){
+                            child.sprite = spriteArray[(int)(bowDamage) / 10 % 10];
+                        }
+                        else {
+                            child.sprite = spriteArray[(int)(bowDamage) % 10];
+                        }
+                    }
                 }
             }
         }
@@ -42,7 +125,7 @@ public class ItemController : MonoBehaviour
             color.a = 0.0f;
             Color childColor;
             foreach(SpriteRenderer child in children){
-                if (child.tag.Equals("ItemInfo")){
+                if (child.tag.Equals("ItemInfo") || child.tag.Equals("ItemInfoNum")){
                     childColor = child.color;
                     childColor.a = 0.0f;
                     child.color = color;

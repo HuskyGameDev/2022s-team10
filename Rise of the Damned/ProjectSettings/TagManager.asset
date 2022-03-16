@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - ItemInfo
   - Spike
+  - ItemInfoNum
   layers:
   - Default
   - TransparentFX
