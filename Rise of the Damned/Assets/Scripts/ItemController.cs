@@ -126,6 +126,51 @@ public class ItemController : MonoBehaviour
                         }
                     }
                 }
+
+                // Armor Numbers
+
+                // One digit armor
+                if (armor < 10 && armor > 0){
+                    if (child.name.Equals("ItemInfoNumberArmor3")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        child.sprite = spriteArray[(int)(armor)];
+                    }
+                } 
+                
+                // Two digit armor
+                else if (armor >= 10 && armor < 100){
+                    if (child.name.Equals("ItemInfoNumberArmor2") || child.name.Equals("ItemInfoNumberArmor4")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        if (child.name.Equals("ItemInfoNumberArmor2")){
+                            child.sprite = spriteArray[(int)(armor) / 10 % 10];
+                        }
+                        else {
+                            child.sprite = spriteArray[(int)(armor) % 10];
+                        }
+                    }
+                } 
+                
+                // Three digit armor
+                else {
+                    if (child.name.Equals("ItemInfoNumberArmor1") || child.name.Equals("ItemInfoNumberArmor3") || child.name.Equals("ItemInfoNumberArmor5")){
+                        childColor = child.color;
+                        childColor.a = 1.0f;
+                        child.color = color;
+                        if (child.name.Equals("ItemInfoNumberArmor1")){
+                            child.sprite = spriteArray[(int)(armor) / 100 % 10];
+                        }
+                        else if (child.name.Equals("ItemInfoNumberArmor3")){
+                            child.sprite = spriteArray[(int)(armor) / 10 % 10];
+                        }
+                        else {
+                            child.sprite = spriteArray[(int)(armor) % 10];
+                        }
+                    }
+                }
             }
         }
     }
