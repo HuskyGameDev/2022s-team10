@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] 
     private float aggroDist;
     private string state;
+    public bool flying;
 
     [SerializeField]
     private Vector2[] positions;
@@ -64,7 +65,7 @@ public class EnemyController : MonoBehaviour
                 }
                 break;
             case "attack":
-                transform.position = Vector2.MoveTowards(transform.position, PlayerController.player.transform.position, Time.deltaTime * speed);
+                transform.position = Vector2.MoveTowards(transform.position, !flying ? new Vector2(PlayerController.player.transform.position.x, transform.position.y) : positions[index], Time.deltaTime * speed);
 
                 if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5)
                 {
@@ -132,7 +133,7 @@ public class EnemyController : MonoBehaviour
     }
     private void wander()   //just threw the previous code in here for now
     {
-        transform.position = Vector2.MoveTowards(transform.position, positions[index], Time.deltaTime * speed);
+        transform.position = Vector2.MoveTowards(transform.position, !flying ? new Vector2(positions[index].x, transform.position.y) : positions[index], Time.deltaTime * speed);
 
         if (Mathf.Abs(transform.position.x - positions[index].x) < .1)
         {
@@ -146,6 +147,7 @@ public class EnemyController : MonoBehaviour
                 index++;
             }
         }
+        
     }
 
 }

@@ -9,8 +9,6 @@ public class ArrowController : MonoBehaviour
     public int rotSpeed;
     public float lifespan;
 
-    private float life = 0;
-
     private AttackController aController;
 
     // Start is called before the first frame update
@@ -23,21 +21,26 @@ public class ArrowController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.rotation += rotSpeed * Time.deltaTime * Mathf.Sign(rb.velocity.x) * -1;
+        if(rb != null && rb.rotation != 90)
+            rb.rotation += rotSpeed * Time.deltaTime * Mathf.Sign(rb.velocity.x) * -1;
         //rb.rotation = Vector2.Angle(Vector2.zero, rb.velocity) - 90;
-        life += Time.deltaTime;
-        if (life > lifespan || rb.position.y < -15)
+        lifespan -= Time.deltaTime;
+        if (lifespan <= 0 || (rb != null && rb.position.y < -15))
             Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy" && rb != null)
         {
             collision.GetComponent<EnemyController>().health -= PlayerController.bowDamage;
             collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.knockback, aController.knockback / 2);
             Destroy(gameObject);
         }
-
+        else if(collision.tag == "Ground" || collision.tag == "Walls")
+        {
+            Destroy(rb);
+            lifespan = 5f;
+        }
     }
 }
