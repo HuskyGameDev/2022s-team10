@@ -11,7 +11,7 @@ public class Spikes : MonoBehaviour
         if(collision.gameObject.tag.Equals("Player")) { //if player collides with spikes
             PlayerController.health = PlayerController.health - 10;
             //knockback
-            collision.attachedRigidbody.velocity += new Vector2(0, Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback);
+            collision.attachedRigidbody.velocity = new Vector2(0, Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback);
 
             /*Vector2 knockDir = new Vector2(collision.transform.position.x - transform.position.x - offsetX, collision.transform.position.y - transform.position.y - offsetY);
             collision.attachedRigidbody.velocity += knockDir.normalized * knockback;

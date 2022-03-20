@@ -21,8 +21,12 @@ public class ArrowController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rb != null && rb.rotation != 90)
-            rb.rotation += rotSpeed * Time.deltaTime * Mathf.Sign(rb.velocity.x) * -1;
+        if (rb != null)
+            if (rb.rotation != 90 && rb.rotation != 270)
+                rb.rotation += rotSpeed * Time.deltaTime * Mathf.Sign(rb.velocity.x) * -1;
+            else if (rb.velocity.y < 1 && !(transform.rotation.eulerAngles.z == 270 && transform.rotation.eulerAngles.x < 180)) //if(Mathf.Abs(rb.velocity.y) < 0.01) 
+                transform.Rotate(new Vector3(0, Time.deltaTime * 180, 0), Space.Self);
+        //Debug.Log(transform.rotation.eulerAngles);
         //rb.rotation = Vector2.Angle(Vector2.zero, rb.velocity) - 90;
         lifespan -= Time.deltaTime;
         if (lifespan <= 0 || (rb != null && rb.position.y < -15))
