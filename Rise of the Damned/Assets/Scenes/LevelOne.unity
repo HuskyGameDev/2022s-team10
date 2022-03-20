@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 4547488}
   - component: {fileID: 4547489}
   - component: {fileID: 4547494}
+  - component: {fileID: 4547495}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -285,6 +286,7 @@ MonoBehaviour:
   facingLeft: 0
   facingRight: 1
   isGrounded: 0
+  isJumping: 0
   nearAWall: 0
   hasWallJump: 1
   wallJumping: 0
@@ -294,6 +296,7 @@ MonoBehaviour:
   dust: {fileID: 1220726989}
   dragPower: 2
   dragCoefficient: 2.5
+  animator: {fileID: 4547495}
 --- !u!114 &4547493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +339,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5069963, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &4547495
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4547487}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2610994796356045afd60d10d0b05da, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &70603668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2967,7 +2989,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.106304646, y: -3.2000074, z: -10}
+  m_LocalPosition: {x: -0.11067438, y: -3.2000074, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1649866589}

@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour
     [Header("Bools")]
     public bool facingLeft; 
     public bool facingRight;
-    public bool isGrounded = false; 
+    public bool isGrounded = false;
+    public bool isJumping = false;
     public bool nearAWall = false; 
     public bool hasWallJump = true; // must start true
     public bool wallJumping;
@@ -69,6 +70,9 @@ public class PlayerController : MonoBehaviour
     [Header("Drag")]
     public float dragPower;
     public float dragCoefficient;
+
+    [Header("Animations")]
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -97,6 +101,7 @@ public class PlayerController : MonoBehaviour
         CheckIfGrounded();
         CheckIfNearAWall();
         BetterJump();
+        Animations();
 
         if (invuln > 0)
         {
@@ -137,7 +142,7 @@ public class PlayerController : MonoBehaviour
             sr.sprite = regular;
         }
 
-
+        animator.SetFloat("Speed", Mathf.Abs(x)); //tells animator if player is moving
     } 
 
     void Jump() {
@@ -198,14 +203,16 @@ public class PlayerController : MonoBehaviour
         Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer); 
 
         if ( collider != null ) { 
-            isGrounded = true; 
+            isGrounded = true;
+            isJumping = false;
         } 
 
         else { 
             if (isGrounded) {
                 lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
             }
-            isGrounded = false; 
+            isGrounded = false;
+            isJumping = true;
         } 
     }
 
@@ -249,5 +256,19 @@ public class PlayerController : MonoBehaviour
         PlayerController.health -= damage - PlayerController.armor;
         PlayerController.controller.invuln = PlayerController.controller.invulnTime;
         return true;
+    }
+
+    void Animations() {
+        if (isJumping) {
+            animator.SetBool("IsJumping", true);
+        } else {
+            animator.SetBool("IsJumping", false);
+        }
+
+        if (wallSliding) {
+            animator.SetBool("IsWallsliding", true);
+        } else {
+            animator.SetBool("IsWallsliding", false);
+        }
     }
 }
