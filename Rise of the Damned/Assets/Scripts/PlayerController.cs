@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -100,6 +101,10 @@ public class PlayerController : MonoBehaviour
         if (invuln > 0)
         {
             invuln -= Time.deltaTime;
+        }
+
+        if (health <= 0){
+            SceneManager.LoadScene("GameOver");
         }
     }
 
