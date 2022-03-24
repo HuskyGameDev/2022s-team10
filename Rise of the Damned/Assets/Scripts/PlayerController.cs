@@ -163,9 +163,10 @@ public class PlayerController : MonoBehaviour
             CreateDust();
         }
 
-        if (rb.velocity.y <= dragPower * -1)
+        if ( rb.velocity.y <= -7 || (wallSliding && rb.velocity.y < -1.5) ) // -7 is after a normal ground level jump, adds realistic wall slide speeding up
         { // fall like a sack of potatoes if you're already falling for a while
             rb.drag = (float)(Mathf.Pow(dragPower, dragCoefficient) / (double)(rb.velocity.y * -1 + Mathf.Pow(dragPower, dragCoefficient - 1) + dragPower));
+            //Debug.Log("potatoes activated " + rb.velocity.y );
         }
         else {
             rb.drag = 3;
