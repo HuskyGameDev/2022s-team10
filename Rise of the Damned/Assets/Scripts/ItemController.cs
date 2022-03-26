@@ -22,7 +22,8 @@ public class ItemController : MonoBehaviour
         transform.Rotate(new Vector3(0, Time.deltaTime * 100, 0), Space.Self);
         foreach(Transform t in GetComponentsInChildren<Transform>())
             if(t.tag == "ItemInfo" || t.tag == "Untagged")
-                t.Rotate(new Vector3(0, Time.deltaTime * -100, 0), Space.Self);
+                t.eulerAngles = new Vector3(t.eulerAngles.x, 0, t.eulerAngles.z);
+                //t.Rotate(new Vector3(0, Time.deltaTime * -100, 0), Space.World);
     }
 
         void OnTriggerEnter2D(Collider2D other){
