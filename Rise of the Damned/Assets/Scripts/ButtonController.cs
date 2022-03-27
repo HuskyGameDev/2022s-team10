@@ -36,7 +36,7 @@ public class ButtonController : MonoBehaviour
             if (gameObject.name.Equals("SelectRetry") && isSelected){
                 SceneManager.LoadScene("LevelOne");
             } else {
-                Debug.Log("Main menu here");
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }
