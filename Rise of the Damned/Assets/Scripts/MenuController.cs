@@ -33,6 +33,8 @@ public class MenuController : MonoBehaviour
                     isSelected = false;
                 }
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
+                    Time.timeScale = 1;
+                    PlayerController.isPaused = false;
                     SceneManager.LoadScene("LevelOne");
                 }
 

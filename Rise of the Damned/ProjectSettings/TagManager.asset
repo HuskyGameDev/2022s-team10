@@ -13,6 +13,7 @@ TagManager:
   - ItemInfo
   - Spike
   - ItemInfoNum
+  - PauseItem
   layers:
   - Default
   - TransparentFX
