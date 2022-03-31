@@ -51,7 +51,6 @@ public class SlimeMovement : MonoBehaviour
     public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
     public Transform isGroundedChecker; // Transform of an empty object that is going to be placed bellow player
     public LayerMask groundLayer;
-    float lastTimeGrounded; // when was the last time we were standing on the ground
 
     void Start()
     {
@@ -146,6 +145,8 @@ public class SlimeMovement : MonoBehaviour
             shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
             shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * 10, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * 10);
         }
+
+        CheckIfGrounded();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -222,14 +223,18 @@ public class SlimeMovement : MonoBehaviour
         Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer);
 
         if (collider != null) {
-            isGrounded = true;
-            isJumping = false;
-        } else {
-            if (isGrounded) {
-                lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
+            if (isJumping)
+            {
+                isGrounded = true;
+                isJumping = false;
+                rb.velocity = (new Vector2(-rb.velocity.x, -rb.velocity.y));
             }
-            isGrounded = false;
-            isJumping = true;
+        } else {
+            if (!isJumping)
+            {
+                isGrounded = false;
+                isJumping = true;
+            }
         }
     }
 
