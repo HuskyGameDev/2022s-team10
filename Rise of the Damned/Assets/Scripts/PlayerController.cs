@@ -74,6 +74,9 @@ public class PlayerController : MonoBehaviour
     [Header("Animations")]
     public Animator animator;
 
+    [Header("Game Pause")]
+    public static bool isPaused = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,12 +99,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Jump();
-        CheckIfGrounded();
-        CheckIfNearAWall();
-        BetterJump();
-        Animations();
+        if (!isPaused){
+            Move();
+            Jump();
+            CheckIfGrounded();
+            CheckIfNearAWall();
+            BetterJump();
+            Animations();
+        }
+        Pause();
 
         if (invuln > 0)
         {
@@ -270,6 +276,16 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsWallsliding", true);
         } else {
             animator.SetBool("IsWallsliding", false);
+        }
+    }
+
+    void Pause(){
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused){
+            isPaused = true;
+            Time.timeScale = 0;
+        } else if (Input.GetKeyDown(KeyCode.Escape) && isPaused){
+            isPaused = false;
+            Time.timeScale = 1;
         }
     }
 }

@@ -29,39 +29,41 @@ public class AttackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F) && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null)
-        {
-            GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
-            swipe.GetComponent<SpriteRenderer>().sprite = equippedWeapon.GetComponent<SpriteRenderer>().sprite;
-        }
-        if(Input.GetKeyDown(KeyCode.E) && equippedBow != null)
-        {
-            GameObject shoot = Instantiate(arrow, transform.position, Quaternion.identity);
-            int shootAngle = 90;
-            int diff = 80;
-            if (Input.GetKey(KeyCode.UpArrow))
-                diff = 45;
-            else if (Input.GetKey(KeyCode.DownArrow))
+        if (!PlayerController.isPaused){
+            if(Input.GetKeyDown(KeyCode.F) && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null)
             {
-                shootAngle = 270;
-                diff = -45;
+                GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
+                swipe.GetComponent<SpriteRenderer>().sprite = equippedWeapon.GetComponent<SpriteRenderer>().sprite;
             }
+            if(Input.GetKeyDown(KeyCode.E) && equippedBow != null)
+            {
+                GameObject shoot = Instantiate(arrow, transform.position, Quaternion.identity);
+                int shootAngle = 90;
+                int diff = 80;
+                if (Input.GetKey(KeyCode.UpArrow))
+                    diff = 45;
+                else if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    shootAngle = 270;
+                    diff = -45;
+                }
 
-            if (Input.GetKey(KeyCode.RightArrow))
-                shootAngle -= diff;
-            if (Input.GetKey(KeyCode.LeftArrow))
-                shootAngle += diff;
+                if (Input.GetKey(KeyCode.RightArrow))
+                    shootAngle -= diff;
+                if (Input.GetKey(KeyCode.LeftArrow))
+                    shootAngle += diff;
 
-            if (shootAngle == 90 && diff == 80)
-                shootAngle = pcontroller.facingRight ? 10 : 170;
-            
+                if (shootAngle == 90 && diff == 80)
+                    shootAngle = pcontroller.facingRight ? 10 : 170;
+                
 
-            shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
-            shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * bowStrength, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * bowStrength);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            PickupItem();
+                shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
+                shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * bowStrength, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * bowStrength);
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                PickupItem();
+            }
         }
     }
 
