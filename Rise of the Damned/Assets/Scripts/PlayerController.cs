@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
     public bool hasWallJump = true; // must start true
     public bool wallJumping;
     public bool wallSliding;
+    public bool fastFalling;
+    
 
 
     [Header("Better Jump")]
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Game Pause")]
     public static bool isPaused = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -176,6 +179,18 @@ public class PlayerController : MonoBehaviour
         }
         else {
             rb.drag = 3;
+        }
+
+        //camera shake 
+        cameraShake init = FindObjectOfType<cameraShake>();
+        
+        if(!isGrounded && rb.velocity.y <= -9){
+            fastFalling = true;
+        }
+
+        if(fastFalling && isGrounded){
+                init.shakeCamera(2f, .2f);
+                fastFalling = false;
         }
         
     }
