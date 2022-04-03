@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class MenuController : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     public static GameObject buttonClick;
 
@@ -57,7 +57,9 @@ public class MenuController : MonoBehaviour
                     isSelected = false;
                 }
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
-                    Debug.Log("Quit here");
+
+                    Debug.Log("Quit executed");
+                    Application.Quit();
                 }
 
                 break;

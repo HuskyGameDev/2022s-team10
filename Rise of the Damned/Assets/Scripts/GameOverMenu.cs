@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class ButtonController : MonoBehaviour
+public class GameOverMenu : MonoBehaviour
 {
     public static GameObject buttonClick;
 

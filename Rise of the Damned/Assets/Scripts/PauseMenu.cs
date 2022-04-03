@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class PauseController : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     public static GameObject buttonClick;
 
@@ -36,8 +36,7 @@ public class PauseController : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
                     if (gameObject.name.Equals("OptionsArrow") && isSelected){
-                        //SceneManager.LoadScene("LevelOne");
-                        Debug.Log("Options menu prefab here");
+                        Debug.Log("Options Menu Here");
                     } else if (gameObject.name.Equals("MenuArrow") && isSelected){
                         SceneManager.LoadScene("MainMenu");
                         PlayerController.isPaused = false;
@@ -53,11 +52,9 @@ public class PauseController : MonoBehaviour
                 }
             }
         } else {
-            //if (gameObject.tag.Equals("PauseItem")){
-                Color color = sr.color;
-                color.a = 0.0f;
-                sr.color = color;
-            //}
+            Color color = sr.color;
+            color.a = 0.0f;
+            sr.color = color;
         }
     }
 }
