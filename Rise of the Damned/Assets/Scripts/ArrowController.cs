@@ -38,7 +38,7 @@ public class ArrowController : MonoBehaviour
         if (collision.tag == "Enemy" && rb != null)
         {
             collision.GetComponent<EnemyController>().health -= PlayerController.bowDamage;
-            collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.knockback, aController.knockback / 2);
+            collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.bowKnockback, aController.bowKnockback / 2);
             Destroy(gameObject);
         }
         else if(collision.tag == "Ground" || collision.tag == "Walls")

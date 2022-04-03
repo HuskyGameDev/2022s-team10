@@ -22,10 +22,7 @@ public class EnemyController : MonoBehaviour
     private float aggroDist;
     private string state;
     public bool flying;
-
-    [SerializeField]
-    private Vector2[] positions;
-    private int index = 0;
+    private int wanderDir = 1;  //1 for right, -1 for left
 
     [Header("Item Drops")]
     [SerializeField]
@@ -36,6 +33,12 @@ public class EnemyController : MonoBehaviour
     [Header("Projectiles")]
     [SerializeField]
     private GameObject FireBall;
+
+
+    [Header("For Ground")]
+    public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
+    public Transform groundChecker1, groundChecker2, wallChecker1, wallChecker2; // Transform of an empty object that is going to be placed bellow player
+    public LayerMask groundLayer, wallLayer;
 
     void Start()
     {
@@ -59,13 +62,16 @@ public class EnemyController : MonoBehaviour
         {
             case "wander":
                 wander();
+                CheckTurnAround();
                 if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
                 {
                     state = "attack";
                 }
                 break;
             case "attack":
-                transform.position = Vector2.MoveTowards(transform.position, !flying ? new Vector2(PlayerController.player.transform.position.x, transform.position.y) : positions[index], Time.deltaTime * speed);
+                transform.position = Vector2.MoveTowards(transform.position, 
+                    new Vector2(PlayerController.player.transform.position.x, flying ? PlayerController.player.transform.position.y : transform.position.y), 
+                    Time.deltaTime * speed);
 
                 if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5)
                 {
@@ -80,7 +86,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
 
@@ -133,21 +139,18 @@ public class EnemyController : MonoBehaviour
     }
     private void wander()   //just threw the previous code in here for now
     {
-        transform.position = Vector2.MoveTowards(transform.position, !flying ? new Vector2(positions[index].x, transform.position.y) : positions[index], Time.deltaTime * speed);
-
-        if (Mathf.Abs(transform.position.x - positions[index].x) < .1)
-        {
-            if (index == positions.Length - 1)
-            {
-
-                index = 0;
-            }
-            else
-            {
-                index++;
-            }
-        }
-        
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + wanderDir, transform.position.y), Time.deltaTime * speed);
+               
     }
 
+    void CheckTurnAround()
+    {
+        Collider2D groundCollider = Physics2D.OverlapCircle(wanderDir == -1? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer);
+        Collider2D wallCollider = Physics2D.OverlapCircle(wanderDir == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer);
+
+        if (groundCollider == null || wallCollider != null)
+        {
+            wanderDir *= -1;
+        }
+    }
 }

@@ -7,7 +7,6 @@ public class EnemySpawner : MonoBehaviour
     [Header("Enemies")]
     public GameObject[] enemies;
 
-
     // Start is called before the first frame update
     void Start()
     {

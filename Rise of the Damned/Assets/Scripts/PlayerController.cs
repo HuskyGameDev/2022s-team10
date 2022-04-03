@@ -62,8 +62,10 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Better Jump")]
-    public float fallMultiplier = 2.5f;  
-    public float lowJumpMultiplier = 2f;
+    public float fallMultiplier;  
+    public float lowJumpMultiplier;
+    public float cameraShakeBarrier;
+    public float cameraShakeMagnitude;
 
 
     [Header("Particle Effects")]
@@ -188,12 +190,12 @@ public class PlayerController : MonoBehaviour
         //camera shake 
         cameraShake init = FindObjectOfType<cameraShake>();
         
-        if(!isGrounded && rb.velocity.y <= -9){
+        if(!isGrounded && rb.velocity.y <= cameraShakeBarrier){
             fastFalling = true;
         }
 
         if(fastFalling && isGrounded){
-                init.shakeCamera(2f, .2f);
+                init.shakeCamera(rb.velocity.y * -.1f, rb.velocity.y * -.01f);
                 fastFalling = false;
         }
         

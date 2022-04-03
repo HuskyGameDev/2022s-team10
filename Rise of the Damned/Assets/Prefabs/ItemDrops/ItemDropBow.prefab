@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: bow
   damage: 0
-  bowDamage: 720
+  bowDamage: 2
   armor: 0
   spriteArray:
   - {fileID: 21300000, guid: 381f2955099dd6c46bc6aa3128ea28ce, type: 3}

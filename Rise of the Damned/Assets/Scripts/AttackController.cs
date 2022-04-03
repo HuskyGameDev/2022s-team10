@@ -6,7 +6,7 @@ public class AttackController : MonoBehaviour
 {
 
     public float bowStrength;
-    public float knockback;
+    public float knockback, bowKnockback;
 
     public GameObject weaponAttack, arrow;
 
