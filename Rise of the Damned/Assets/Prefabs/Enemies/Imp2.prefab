@@ -167,8 +167,8 @@ MonoBehaviour:
   - {x: 10, y: -5.65}
   drops:
   - {fileID: 1878168717089405247, guid: d6e0a5c8ce71beb4da646aac4aea620b, type: 3}
-  - {fileID: 2940350545046594715, guid: f389cc96ad02c2943a61694048c0b0dc, type: 3}
-  - {fileID: 7988138512254653191, guid: 82fdce7ea7547914cbbee5a2b37d8dbc, type: 3}
+  - {fileID: 1693072485760554001, guid: 169c74be9e51ed64c97ac5603858f0e7, type: 3}
+  - {fileID: 5471605987740711241, guid: 72296b986ce3d5040a8dc89d3251bb08, type: 3}
   dropChance:
   - 75
   - 12.5

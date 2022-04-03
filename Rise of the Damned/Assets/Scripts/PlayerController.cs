@@ -79,6 +79,8 @@ public class PlayerController : MonoBehaviour
     [Header("Game Pause")]
     public static bool isPaused = false;
 
+    public static int roomNum;
+
 
     // Start is called before the first frame update
     void Start()
@@ -102,6 +104,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        roomNum = (int)((transform.position.y + 12)/18);
+        Debug.Log(roomNum);
         if (!isPaused){
             Move();
             Jump();

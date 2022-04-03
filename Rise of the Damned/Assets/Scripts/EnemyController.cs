@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("Enemy Stats")]
-    public int damage;
+    public float damage;
     public float health;
     public float knockback;
 

@@ -73,7 +73,7 @@ public class AttackController : MonoBehaviour
         thisCollider.OverlapCollider(new ContactFilter2D(), results);
         foreach (Collider2D collision in results)
         {
-            if ((collision.gameObject.tag == "ItemDrop"))
+            if (collision.gameObject.tag == "ItemDrop")
             {
                 ItemController item = collision.GetComponent<ItemController>();
                 switch (item.type)
