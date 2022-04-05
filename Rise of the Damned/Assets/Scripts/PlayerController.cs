@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         roomNum = (int)((transform.position.y + 12)/18);
-        Debug.Log(roomNum);
+        //Debug.Log(roomNum); it spamming it bruh 
         if (!isPaused){
             Move();
             Jump();
