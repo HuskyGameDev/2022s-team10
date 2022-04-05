@@ -12,7 +12,7 @@ public class RandomRoom : MonoBehaviour
 
     private Vector3 shift;
 
-    private int nextRoomShift;
+    private int nextRoomShift; //based off of the previous rooms x shift value
 
     private int getTotShift;
 
@@ -26,12 +26,12 @@ public class RandomRoom : MonoBehaviour
         nextRoom = objects[rand];
 
         // move x ?
-        getTotShift = MainRoomGovernor.tot;
+        getTotShift = MainRoomGovernor.tot; // all shifts combined
         previousRoom = controller.GetComponent<MainRoomGovernor>().getPreviousRoom();
 
-        nextRoomShift = previousRoom.GetComponent<RoomXShift>().shift + getTotShift;
-        shift = new Vector3(nextRoomShift, 0, 0);
-        this.transform.Translate(shift);
+        nextRoomShift = previousRoom.GetComponent<RoomXShift>().shift; // the spawn point this script is attached too will spawn a room, the shift is based off of the previous room
+        shift = new Vector3(nextRoomShift + getTotShift, 0, 0); // must add total 
+        this.transform.Translate(shift); // shift the spawn point
 
         Debug.Log("Spawning: " + nextRoom.ToString() + " shifting: " + shift.ToString() );
 
