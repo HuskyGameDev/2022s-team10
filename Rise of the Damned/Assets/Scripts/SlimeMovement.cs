@@ -53,6 +53,9 @@ public class SlimeMovement : MonoBehaviour
     public LayerMask groundLayer;
     float lastTimeGrounded; // when was the last time we were standing on the ground
 
+    [Header("Animations")]
+    public Animator animator;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -71,6 +74,9 @@ public class SlimeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        CheckIfGrounded();
+
         switch (state)  //do different things based on the current state
         {
             case "wander":
@@ -220,17 +226,22 @@ public class SlimeMovement : MonoBehaviour
 
     void CheckIfGrounded() {
         Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer);
-
-        if (collider != null) {
-            isGrounded = true;
-            isJumping = false;
+        if(collider != null) {
+            if(isJumping) {
+                rb.velocity = (new Vector2(0, 0));
+            }
+                isGrounded = true;
+                isJumping = false;
+            animator.SetBool("isJumping", false);
         } else {
             if (isGrounded) {
                 lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
             }
-            isGrounded = false;
-            isJumping = true;
+                isGrounded = false;
+                isJumping = true;
+            animator.SetBool("isJumping", true);
         }
     }
+
 
 }
