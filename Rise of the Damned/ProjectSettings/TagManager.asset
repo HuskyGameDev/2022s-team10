@@ -14,6 +14,7 @@ TagManager:
   - Spike
   - ItemInfoNum
   - PauseItem
+  - HealthDrop
   layers:
   - Default
   - TransparentFX
