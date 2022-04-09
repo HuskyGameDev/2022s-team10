@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RandomRoom : MonoBehaviour
 {
-    public GameObject[] objects;
+    public GameObject roomGovernor;
+    private List<GameObject> allRooms;
 
     public GameObject previousRoom; // room spawned before this room
 
@@ -19,13 +20,16 @@ public class RandomRoom : MonoBehaviour
     private int getTotShift; // all shifts that previously happened combined
 
     public GameObject controller;
+
     
     // Start is called before the first frame update
     void Start() // call mainroomgov
     {
-        int rand = Random.Range(0, objects.Length);
+        allRooms = controller.GetComponent<MainRoomGovernor>().allRooms;
 
-        thisRoom = objects[rand]; // get random rooms about to be spawned at this spawn point
+        int rand = Random.Range(0, allRooms.Count);
+
+        thisRoom = allRooms[rand]; // get random rooms about to be spawned at this spawn point
 
         // move in the x axis ?
         getTotShift = MainRoomGovernor.tot; // all shifts combined
@@ -43,6 +47,8 @@ public class RandomRoom : MonoBehaviour
 
         // spawn room
         Instantiate(thisRoom, transform.position, Quaternion.identity);
+        Debug.Log("objects has a size of " + allRooms.Capacity);
+        allRooms.Remove(thisRoom);
 
         // add spawned room to list of spawned rooms
         controller.GetComponent<MainRoomGovernor>().addRoom(thisRoom, thisRoomShift); //add room to main list

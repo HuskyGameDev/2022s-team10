@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainRoomGovernor : MonoBehaviour
 {
+    public List<GameObject> allRooms = new List<GameObject>();
+
     private List<GameObject> allRoomsSpawned = new List<GameObject>(); // list of all rooms spaned so far
 
     public GameObject spawnRoom;
