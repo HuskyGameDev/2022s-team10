@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class MainRoomGovernor : MonoBehaviour
 {
-    private List<GameObject> allRoomsSpawned = new List<GameObject>();
-
-    private GameObject roomSpawned;
+    private List<GameObject> allRoomsSpawned = new List<GameObject>(); // list of all rooms spaned so far
 
     public GameObject spawnRoom;
 
-    public static int tot;
-
-    private int shift;
+    public static int tot; // same across all rooms
 
     void Start(){ //add spawn room
         allRoomsSpawned.Add(spawnRoom);
@@ -22,9 +18,9 @@ public class MainRoomGovernor : MonoBehaviour
 
         allRoomsSpawned.Add(room);
 
-        Debug.Log("MainRoomGov added " + room.ToString() );
-
         tot = tot + shift;
+
+        Debug.Log("MainRoomGov added " + room.ToString() );
 
         Debug.Log("Total shift is " + tot);
 

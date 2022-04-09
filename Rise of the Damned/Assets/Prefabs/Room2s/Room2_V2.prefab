@@ -694,7 +694,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -1943,6 +1943,7 @@ GameObject:
   - component: {fileID: 2724565224039736121}
   - component: {fileID: 2724565224039736070}
   - component: {fileID: 6011362550277061499}
+  - component: {fileID: 858471260270144029}
   m_Layer: 0
   m_Name: Room2_V2
   m_TagString: Untagged
@@ -2000,6 +2001,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shift: 0
+--- !u!114 &858471260270144029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2724565224039736071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27858f2316ff9a1478940249c2e9fab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  negShift: 0
 --- !u!1 &2724565224084595530
 GameObject:
   m_ObjectHideFlags: 0

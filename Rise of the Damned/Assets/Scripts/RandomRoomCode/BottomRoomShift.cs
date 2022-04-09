@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomXShift : MonoBehaviour
+public class BottomRoomShift : MonoBehaviour
 {
-    public int shift;
-
+    public int negShift;
 }

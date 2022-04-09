@@ -543,7 +543,7 @@ MonoBehaviour:
   - {x: -3.4692206, y: -2.5780838, z: 0}
   m_ShapePathHash: 1097985177
   m_Mesh: {fileID: 0}
-  m_InstanceId: 143726
+  m_InstanceId: 74992
 --- !u!1 &7253773045278998030
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +932,7 @@ GameObject:
   - component: {fileID: 7253773046412279077}
   - component: {fileID: 7253773046412279066}
   - component: {fileID: 2313470908394149402}
+  - component: {fileID: 2641791740998802011}
   m_Layer: 0
   m_Name: Room3_V1
   m_TagString: Untagged
@@ -989,6 +990,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shift: 17
+--- !u!114 &2641791740998802011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253773046412279067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27858f2316ff9a1478940249c2e9fab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  negShift: 0
 --- !u!1 &7253773046424992888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,7 +1742,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 1, y: -8, z: 0}
@@ -1768,7 +1782,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 7, y: -8, z: 0}
