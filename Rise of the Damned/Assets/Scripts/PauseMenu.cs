@@ -12,13 +12,15 @@ public class PauseMenu : MonoBehaviour
 
     private SpriteRenderer sr;
 
+    int selectNum = 0;
+
     void Start(){
         sr = GetComponent<SpriteRenderer>();
     }
 
     void Update(){
         if (PlayerController.isPaused){
-            if (gameObject.name.Equals("OptionsArrow") || gameObject.name.Equals("MenuArrow")){
+            if (gameObject.name.Equals("OptionsArrow") || gameObject.name.Equals("MenuArrow") || gameObject.name.Equals("ResumeArrow")){
                 if (isSelected){
                     Color color = sr.color;
                     color.a = 1.0f;
@@ -30,18 +32,48 @@ public class PauseMenu : MonoBehaviour
                     sr.color = color;
                 }
 
-                if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
-                    isSelected = !isSelected;
-                }
+                if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                    selectNum = (selectNum + 4) % 3;
+                
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                    selectNum = (selectNum + 2)%3;
 
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
-                    if (gameObject.name.Equals("OptionsArrow") && isSelected){
-                        Debug.Log("Options Menu Here");
-                    } else if (gameObject.name.Equals("MenuArrow") && isSelected){
-                        SceneManager.LoadScene("MainMenu");
-                        PlayerController.isPaused = false;
-                        Time.timeScale = 1;
-                    }
+                switch (selectNum){
+                    case 0:
+                        if (gameObject.name.Equals("ResumeArrow")){
+                            isSelected = true;
+                        } else {
+                            isSelected = false;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
+                            Time.timeScale = 1;
+                            PlayerController.isPaused = false;
+
+                        }
+
+                        break;
+                    case 1:
+                        if (gameObject.name.Equals("OptionsArrow")){
+                            isSelected = true;
+                        } else {
+                            isSelected = false;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
+                            Debug.Log("Options menu here");
+                        }
+
+                        break;
+                    case 2:
+                        if (gameObject.name.Equals("MenuArrow")){
+                            isSelected = true;
+                        } else {
+                            isSelected = false;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
+                            SceneManager.LoadScene("MainMenu");
+                        }
+
+                        break;
                 }
             }
             else {
