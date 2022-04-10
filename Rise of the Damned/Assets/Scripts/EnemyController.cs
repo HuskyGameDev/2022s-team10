@@ -15,12 +15,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    public enum State { Wander, Attack, Stay };
     [Header("Enemy AI")]
     [SerializeField]
-    private string defaultState;
+    private State defaultState;
     [SerializeField] 
     private float aggroDist;
-    private string state;
+    private State state;
     public bool flying;
     private int wanderDir = 1;  //1 for right, -1 for left
 
@@ -29,6 +30,10 @@ public class EnemyController : MonoBehaviour
     private GameObject[] drops;
     [SerializeField]
     private float[] dropChance;
+    [SerializeField]
+    private float heartDropChance;
+    [SerializeField]
+    private GameObject heartDrop;
 
     [Header("Projectiles")]
     [SerializeField]
@@ -60,27 +65,31 @@ public class EnemyController : MonoBehaviour
     {
         switch (state)  //do different things based on the current state
         {
-            case "wander":
+            case State.Wander:
                 wander();
                 CheckTurnAround();
                 if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
                 {
-                    state = "attack";
+                    state = State.Attack;
                 }
                 break;
-            case "attack":
+            case State.Attack:
                 transform.position = Vector2.MoveTowards(transform.position, 
                     new Vector2(PlayerController.player.transform.position.x, flying ? PlayerController.player.transform.position.y : transform.position.y), 
                     Time.deltaTime * speed);
+                if (name.Contains("Large Imp") || name.Contains("Reaper"))
+                    GetComponent<SpriteRenderer>().flipX = PlayerController.player.transform.position.x < transform.position.x;
 
                 if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5)
                 {
                     state = defaultState;
                 }
                 break;
-            case "stay":
-                break;
-            default:
+            case State.Stay:
+                if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
+                {
+                    state = State.Attack;
+                }
                 break;
         }
 
@@ -102,6 +111,10 @@ public class EnemyController : MonoBehaviour
                 }
                 chanceTotal += dropChance[i];
             }
+
+            diceRoll = (float)Random.Range(1, 10001) / 100f;
+            if (diceRoll < heartDropChance)
+                Instantiate(heartDrop, transform.position, Quaternion.identity);
 
             /*if (diceRoll <= itemOnePercentChance)
             {
@@ -137,7 +150,7 @@ public class EnemyController : MonoBehaviour
         }
 
     }
-    private void wander()   //just threw the previous code in here for now
+    private void wander()   
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + wanderDir, transform.position.y), Time.deltaTime * speed);
                
@@ -148,9 +161,13 @@ public class EnemyController : MonoBehaviour
         Collider2D groundCollider = Physics2D.OverlapCircle(wanderDir == -1? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer);
         Collider2D wallCollider = Physics2D.OverlapCircle(wanderDir == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer);
 
-        if (groundCollider == null || wallCollider != null)
+        if ((!flying && groundCollider == null) || wallCollider != null)
         {
             wanderDir *= -1;
+            /*if(name.Contains("Large Imp"))
+            {
+                GetComponent<SpriteRenderer>().flipX = wanderDir == -1;
+            }*/
         }
     }
 }

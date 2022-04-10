@@ -283,7 +283,7 @@ MonoBehaviour:
   health: 25
   knockback: 12
   speed: 2
-  defaultState: wander
+  defaultState: 0
   aggroDist: 2.5
   flying: 0
   drops:
@@ -322,7 +322,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4e8ce70ceea99254e85cef70e3f4e1e9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
