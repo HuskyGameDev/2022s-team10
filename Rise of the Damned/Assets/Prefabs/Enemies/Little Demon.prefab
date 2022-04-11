@@ -234,6 +234,8 @@ MonoBehaviour:
   - 10
   - 10
   - 10
+  heartDropChance: 10
+  heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   FireBall: {fileID: 0}
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 6132463206688334823}
@@ -284,7 +286,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.75, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

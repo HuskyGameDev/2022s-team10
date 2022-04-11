@@ -229,8 +229,8 @@ MonoBehaviour:
   - {fileID: 8414979577380145389, guid: 467afe7dfabf5564d82f7fbe8ae0b57f, type: 3}
   dropChance:
   - 50
-  heartDropChance: 0
-  heartDrop: {fileID: 0}
+  heartDropChance: 15
+  heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   FireBall: {fileID: 0}
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 2720140398648336981}

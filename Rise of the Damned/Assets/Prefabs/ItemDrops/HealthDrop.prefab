@@ -98,10 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f4bf903fe87664886b8b4b76286b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 
+  type: 3
   damage: 0
   bowDamage: 0
   armor: 0
+  arrow: {fileID: 0}
   spriteArray: []
 --- !u!61 &5502677280005163926
 BoxCollider2D:
@@ -112,7 +113,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 5550881974039905714}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f160763eb67bd1c4bb9ce3c01a185a5e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -127,7 +128,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.8}
+  m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
 --- !u!50 &5550881974039905678
 Rigidbody2D:
