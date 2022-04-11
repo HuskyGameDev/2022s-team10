@@ -22,8 +22,6 @@ public class MainRoomGovernor : MonoBehaviour
 
         tot = tot + shift;
 
-        Debug.Log("MainRoomGov added " + room.ToString() );
-
         Debug.Log("Total shift is " + tot);
 
         Debug.Log("total rooms size is " + allRoomsSpawned.Count );

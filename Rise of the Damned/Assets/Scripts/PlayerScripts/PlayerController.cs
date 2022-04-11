@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if(fastFalling && isGrounded){
-                init.shakeCamera(rb.velocity.y * -.1f, rb.velocity.y * -.01f);
+                init.shakeCamera(cameraShakeMagnitude, .3f);
                 fastFalling = false;
         }
         

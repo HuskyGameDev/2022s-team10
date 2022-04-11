@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RandomRoom : MonoBehaviour
 {
-    public GameObject roomGovernor;
     private List<GameObject> allRooms;
 
     public GameObject previousRoom; // room spawned before this room
@@ -47,8 +46,8 @@ public class RandomRoom : MonoBehaviour
 
         // spawn room
         Instantiate(thisRoom, transform.position, Quaternion.identity);
-        Debug.Log("objects has a size of " + allRooms.Capacity);
         allRooms.Remove(thisRoom);
+        //Debug.Log("allRooms has a size of " + allRooms.Capacity);
 
         // add spawned room to list of spawned rooms
         controller.GetComponent<MainRoomGovernor>().addRoom(thisRoom, thisRoomShift); //add room to main list
