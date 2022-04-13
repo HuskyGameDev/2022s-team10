@@ -77,6 +77,13 @@ public class SlimeMovement : MonoBehaviour
 
         CheckIfGrounded();
 
+        //switches the way the slime is facing
+        if(this.transform.position.x < PlayerController.controller.rb.transform.position.x) {
+            this.transform.localScale = new Vector2(1, 1);
+        } else {
+            this.transform.localScale = new Vector2(-1, 1);
+        }
+
         switch (state)  //do different things based on the current state
         {
             case "wander":
@@ -129,28 +136,6 @@ public class SlimeMovement : MonoBehaviour
                 chanceTotal += dropChance[i];
             }
 
-            /*if (diceRoll <= itemOnePercentChance)
-            {
-                Instantiate(itemOne, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            }
-            else if (diceRoll <= itemTwoPercentChance + itemTwoPercentChance)
-            {
-                Instantiate(itemTwo, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(itemThree, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            }*/
-
-        }
-
-        if (gameObject.name == "demon skull")
-        {
-            GameObject shoot = Instantiate(FireBall, transform.position, Quaternion.identity);
-            float shootAngle = Vector2.Angle(transform.position, PlayerController.player.transform.position);
-
-            shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
-            shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * 10, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * 10);
         }
     }
 
@@ -163,31 +148,16 @@ public class SlimeMovement : MonoBehaviour
         }
 
     }
-    private void wander()   //just threw the previous code in here for now
-    {
-        transform.position = Vector2.MoveTowards(transform.position, !flying ? new Vector2(positions[index].x, transform.position.y) : positions[index], Time.deltaTime * speed);
 
-        if (Mathf.Abs(transform.position.x - positions[index].x) < .1)
-        {
-            if (index == positions.Length - 1)
-            {
-
-                index = 0;
-            }
-            else
-            {
-                index++;
-            }
-        }
-
-    }
 
     IEnumerator Agro(Transform player)
     {
         while (true)
         {
             //start animation
-            yield return new WaitForSeconds(2);
+            animator.SetBool("isPrejumping", true);
+
+            yield return new WaitForSeconds(1);
 
             //start jumping part of animation
 
@@ -239,6 +209,7 @@ public class SlimeMovement : MonoBehaviour
             }
                 isGrounded = false;
                 isJumping = true;
+            animator.SetBool("isPrejumping", false);
             animator.SetBool("isJumping", true);
         }
     }
