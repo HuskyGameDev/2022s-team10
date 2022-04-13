@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 [SelectionBase]
 public class PlayerController : MonoBehaviour
 {
+    public GameObject roomController;
     public static GameObject player;    //static variables to be easily referenced elsewhere
     public static float health, maxHealth, damage, bowDamage, armor;
     public static PlayerController controller;
@@ -124,7 +125,9 @@ public class PlayerController : MonoBehaviour
         }
 
         if (health <= 0){
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("GameOver"); 
+            // redo rooms on death
+            roomController.GetComponent<MainRoomGovernor>().redoRooms();
         }
     }
 

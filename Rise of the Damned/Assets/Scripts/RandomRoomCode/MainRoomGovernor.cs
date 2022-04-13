@@ -32,7 +32,10 @@ public class MainRoomGovernor : MonoBehaviour
         GameObject previousRoom = allRoomsSpawned[allRoomsSpawned.Count-1];
 
         return previousRoom;
+    }
 
+    public void redoRooms(){
+        tot = 0; // reset total shift
     }
 
 
