@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
 
     void Start(){
         sr = GetComponent<SpriteRenderer>();
+        Time.timeScale = 1;
     }
 
     void Update(){
