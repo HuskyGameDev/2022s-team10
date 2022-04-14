@@ -5,39 +5,30 @@ using UnityEngine;
 [SelectionBase]
 public class EnemyController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    [System.NonSerialized]
+    public Rigidbody2D rb;
 
     [Header("Enemy Stats")]
-    public float damage;
-    public float health;
-    public float knockback;
-
-    [SerializeField]
-    private float speed;
+    public float damage, health, knockback, speed;
 
     public enum State { Wander, Attack, Stay };
     [Header("Enemy AI")]
-    [SerializeField]
-    private State defaultState;
-    [SerializeField] 
-    private float aggroDist;
-    private State state;
+    public State defaultState;
+    public float aggroDist;
+    [System.NonSerialized]
+    public State state;
     public bool flying;
     private int wanderDir = 1;  //1 for right, -1 for left
 
     [Header("Item Drops")]
-    [SerializeField]
-    private GameObject[] drops;
-    [SerializeField]
-    private float[] dropChance;
-    [SerializeField]
-    private float heartDropChance;
-    [SerializeField]
-    private GameObject heartDrop;
+    public GameObject[] drops;
+    public float[] dropChance;
+    public float heartDropChance;
+    public GameObject heartDrop;
 
     [Header("Projectiles")]
     [SerializeField]
-    private GameObject FireBall;
+    public GameObject FireBall;
     [SerializeField]
     private float cooldown;
     private float cooldownTime;

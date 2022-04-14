@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeMovement : MonoBehaviour
+public class SlimeMovement : EnemyController
 {
-    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
 
     [Header("Enemy Stats")]
-    public int damage;
-    public float health;
-    public float knockback;
+    //public int damage;
+    //public float health;
+    //public float knockback;
     public float jumpSpeed;
     public float agroSpeed;
 
@@ -21,36 +21,36 @@ public class SlimeMovement : MonoBehaviour
     [SerializeField]
     bool isGrounded = false;
 
-    [SerializeField]
-    private float speed;
+    //[SerializeField]
+    //private float speed;
 
-    [Header("Enemy AI")]
-    [SerializeField]
-    private string defaultState;
-    [SerializeField]
-    private float aggroDist;
-    private string state;
-    public bool flying;
+    //[Header("Enemy AI")]
+    //[SerializeField]
+    //private State defaultState;
+    //[SerializeField]
+    //private float aggroDist;
+    //private string state;
+    //public bool flying;
 
-    [SerializeField]
-    private Vector2[] positions;
-    private int index = 0;
+    //[SerializeField]
+    //private Vector2[] positions;
+    //private int index = 0;
 
-    [Header("Item Drops")]
-    [SerializeField]
-    private GameObject[] drops;
-    [SerializeField]
-    private float[] dropChance;
+    //[Header("Item Drops")]
+    //[SerializeField]
+    //private GameObject[] drops;
+    //[SerializeField]
+    //private float[] dropChance;
 
-    [Header("Projectiles")]
-    [SerializeField]
-    private GameObject FireBall;
+    //[Header("Projectiles")]
+    //[SerializeField]
+    //private GameObject FireBall;
 
     [Header("For Ground")]
     public float rememberGroundedFor; // help to keep us grounded for a little longer, smooth out jumps just after leaving ground
-    public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
+    //public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
     public Transform isGroundedChecker; // Transform of an empty object that is going to be placed bellow player
-    public LayerMask groundLayer;
+    //public LayerMask groundLayer;
     float lastTimeGrounded; // when was the last time we were standing on the ground
 
     [Header("Animations")]
@@ -86,7 +86,7 @@ public class SlimeMovement : MonoBehaviour
 
         switch (state)  //do different things based on the current state
         {
-            case "wander":
+            case State.Wander:
                 if (isAttacking)
                 {
                     isAttacking = false;
@@ -95,10 +95,10 @@ public class SlimeMovement : MonoBehaviour
                 }
                 if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist && !isAttacking)
                 {
-                    state = "attack";
+                    state = State.Attack;
                 }
                 break;
-            case "attack":
+            case State.Attack:
                 if (!isAttacking)
                 {
                     isAttacking = true;
@@ -111,7 +111,7 @@ public class SlimeMovement : MonoBehaviour
                     state = defaultState;
                 }
                 break;
-            case "stay":
+            case State.Stay:
                 break;
             default:
                 break;

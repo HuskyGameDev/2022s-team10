@@ -34,7 +34,7 @@ public class EnemyProjController : MonoBehaviour
                 rb.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * (speed / 3);
             else
                 transform.position = Vector2.MoveTowards(transform.position, movePos, speed * Time.deltaTime);
-            Debug.Log(":zany_face:");
+            //Debug.Log(":zany_face:");
         }
 
         if (transform.position.Equals(movePos))

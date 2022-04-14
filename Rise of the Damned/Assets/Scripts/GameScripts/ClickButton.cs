@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ClickButton : MonoBehaviour
 {
     private Collider2D thisCollider;
+    public string toScene;
 
     // Start is called before the first frame update
     void Start()
@@ -20,14 +21,20 @@ public class ClickButton : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0) && thisCollider.OverlapPoint(mousePos))
         {
-            if (gameObject.name.Equals("RetryButton"))
-            {
-                SceneManager.LoadScene("LevelOne");
-            }
+            if (toScene == "Quit")
+                Application.Quit();
+            else if (toScene == "No")
+                Invis();
             else
-            {
-                SceneManager.LoadScene("MainMenu");
-            }
+                SceneManager.LoadScene(toScene);
         }
+    }
+
+    public void Invis()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color color = sr.color;
+        color.a = 0;
+        sr.color = color;
     }
 }

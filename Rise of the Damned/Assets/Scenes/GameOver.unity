@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f823c872075aa204ab7a29370fa945be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toScene: MainMenu
 --- !u!1 &1500087414
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,6 +982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f823c872075aa204ab7a29370fa945be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toScene: LevelOne
 --- !u!1 &2125197999
 GameObject:
   m_ObjectHideFlags: 0
