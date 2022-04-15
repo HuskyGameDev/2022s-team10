@@ -22,11 +22,14 @@ public class ItemController : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(new Vector3(0, Time.deltaTime * 100, 0), Space.Self);
-        foreach(Transform t in GetComponentsInChildren<Transform>())
-            if(t.CompareTag("ItemInfo") || t.CompareTag("Untagged"))
-                t.eulerAngles = new Vector3(t.eulerAngles.x, 0, t.eulerAngles.z);
-                //t.Rotate(new Vector3(0, Time.deltaTime * -100, 0), Space.World);
+        if (!CompareTag("HealthDrop"))
+        {
+            transform.Rotate(new Vector3(0, Time.deltaTime * 100, 0), Space.Self);
+            foreach (Transform t in GetComponentsInChildren<Transform>())
+                if (t.CompareTag("ItemInfo") || t.CompareTag("Untagged"))
+                    t.eulerAngles = new Vector3(t.eulerAngles.x, 0, t.eulerAngles.z);
+            //t.Rotate(new Vector3(0, Time.deltaTime * -100, 0), Space.World);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other){

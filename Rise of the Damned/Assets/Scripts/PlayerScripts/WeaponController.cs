@@ -43,9 +43,9 @@ public class WeaponController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy" && !hit.Contains(collision))
+        if(collision.CompareTag("Enemy") && !hit.Contains(collision))
         {
-            collision.GetComponent<EnemyController>().health -= PlayerController.damage;
+            collision.GetComponent<EnemyController>().TakeDamage(PlayerController.damage);
             collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - player.transform.position.x) * acontroller.knockback, acontroller.knockback / 2);
             hit.Add(collision);
         }

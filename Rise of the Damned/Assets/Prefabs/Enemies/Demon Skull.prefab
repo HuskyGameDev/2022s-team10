@@ -260,7 +260,7 @@ MonoBehaviour:
   - {fileID: 7115192639973222801, guid: b307dcf489f3e9a46a35603e6d411af6, type: 3}
   dropChance:
   - 50
-  heartDropChance: 35
+  heartDropChance: 50
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   FireBall: {fileID: 1139631694076231106, guid: f6c623d68b00c834fb9dba19dda85fc8, type: 3}
   cooldown: 3

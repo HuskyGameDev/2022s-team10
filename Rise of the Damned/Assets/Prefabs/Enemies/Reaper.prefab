@@ -232,6 +232,7 @@ MonoBehaviour:
   heartDropChance: 15
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   FireBall: {fileID: 0}
+  cooldown: 0
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 2720140398648336981}
   groundChecker2: {fileID: 8054914899067379311}
@@ -256,7 +257,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.8
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 4e8ce70ceea99254e85cef70e3f4e1e9, type: 2}

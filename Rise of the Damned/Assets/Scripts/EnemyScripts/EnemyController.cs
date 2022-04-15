@@ -9,7 +9,11 @@ public class EnemyController : MonoBehaviour
     public Rigidbody2D rb;
 
     [Header("Enemy Stats")]
-    public float damage, health, knockback, speed;
+
+    public float damage;
+    public float health;
+    public float knockback;
+    public float speed;
 
     public enum State { Wander, Attack, Stay };
     [Header("Enemy AI")]
@@ -38,9 +42,13 @@ public class EnemyController : MonoBehaviour
     public Transform groundChecker1, groundChecker2, wallChecker1, wallChecker2; // Transform of an empty object that is going to be placed bellow player
     public LayerMask groundLayer, wallLayer;
 
+    private SpriteRenderer sr;
+    private float redTime = 0;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
 
         state = defaultState;
         cooldownTime = cooldown / 2;
@@ -60,7 +68,7 @@ public class EnemyController : MonoBehaviour
         switch (state)  //do different things based on the current state
         {
             case State.Wander:
-                wander();
+                Wander();
                 CheckTurnAround();
                 if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
                 {
@@ -148,18 +156,25 @@ public class EnemyController : MonoBehaviour
             }
             cooldownTime += Time.deltaTime;
         }
+
+        if(redTime > 0)
+        {
+            redTime -= Time.deltaTime;
+            if (redTime <= 0)
+                sr.color = Color.white;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             if(PlayerController.TakeDamage(damage))
                 collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback * -2, knockback / 2);
         }
-
     }
-    private void wander()   
+
+    private void Wander()   
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + wanderDir, transform.position.y), Time.deltaTime * speed);
                
@@ -184,5 +199,12 @@ public class EnemyController : MonoBehaviour
     private bool CheckWall()
     {
         return Physics2D.OverlapCircle(wanderDir == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer + groundLayer) != null;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        redTime = .2f;
+        sr.color = Color.red;
     }
 }

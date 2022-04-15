@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6305970461486966230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.3, y: -5.31, z: 0}
+  m_LocalPosition: {x: -5.256, y: -5.147, z: 0}
   m_LocalScale: {x: 0.5, y: 0.4, z: 1}
   m_Children:
   - {fileID: 6305970460117660384}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
-  health: 5
+  health: 4
   knockback: 25
   speed: 5
   defaultState: 0
@@ -237,6 +237,7 @@ MonoBehaviour:
   heartDropChance: 10
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   FireBall: {fileID: 0}
+  cooldown: 0
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 6132463206688334823}
   groundChecker2: {fileID: 5043232788246284986}

@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  health: 25
+  health: 16
   knockback: 12
   speed: 2
   defaultState: 0
@@ -291,12 +291,13 @@ MonoBehaviour:
   - {fileID: 1693072485760554001, guid: 169c74be9e51ed64c97ac5603858f0e7, type: 3}
   - {fileID: 5471605987740711241, guid: 72296b986ce3d5040a8dc89d3251bb08, type: 3}
   dropChance:
-  - 75
+  - 50
   - 12.5
   - 12.5
-  heartDropChance: 15
+  heartDropChance: 45
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   FireBall: {fileID: 0}
+  cooldown: 0
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 6365893433026471960}
   groundChecker2: {fileID: 3399071214085675159}

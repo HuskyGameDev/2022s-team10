@@ -171,11 +171,12 @@ MonoBehaviour:
   - {fileID: 5471605987740711241, guid: 72296b986ce3d5040a8dc89d3251bb08, type: 3}
   dropChance:
   - 10
-  - 50
-  - 5
-  heartDropChance: 15
+  - 25
+  - 25
+  heartDropChance: 25
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   FireBall: {fileID: 0}
+  cooldown: 0
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 3295509887399183779}
   groundChecker2: {fileID: 4421351226855992574}
