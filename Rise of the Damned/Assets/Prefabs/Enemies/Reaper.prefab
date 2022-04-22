@@ -221,7 +221,7 @@ MonoBehaviour:
   damage: 15
   health: 20
   knockback: 6
-  speed: 2
+  speed: 2.2
   defaultState: 2
   aggroDist: 4
   flying: 1
@@ -257,7 +257,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.8
+  m_LinearDrag: 0.825
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 4e8ce70ceea99254e85cef70e3f4e1e9, type: 2}

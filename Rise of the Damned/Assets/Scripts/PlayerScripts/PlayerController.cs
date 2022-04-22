@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [System.NonSerialized]
     public float invuln = 0;
     public float invulnTime;
+    private float redTime = 0;
 
     [System.NonSerialized]
     public Rigidbody2D rb; //unity physics engine
@@ -128,6 +129,13 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("GameOver"); 
             // redo rooms on death
             roomController.GetComponent<MainRoomGovernor>().redoRooms();
+        }
+
+        if (redTime > 0)
+        {
+            redTime -= Time.deltaTime;
+            if (redTime <= 0)
+                sr.color = Color.white;
         }
     }
 
@@ -286,6 +294,8 @@ public class PlayerController : MonoBehaviour
             return false;
         PlayerController.health -= damage - PlayerController.armor;
         PlayerController.controller.invuln = PlayerController.controller.invulnTime;
+        PlayerController.controller.redTime = .2f;
+        PlayerController.controller.sr.color = Color.red;
         return true;
     }
 
