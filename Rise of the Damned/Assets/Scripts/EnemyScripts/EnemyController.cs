@@ -146,7 +146,7 @@ public class EnemyController : MonoBehaviour
                 if (!Physics2D.Raycast(transform.position, rayDir, Vector2.Distance(PlayerController.player.transform.position, transform.position), groundLayer))
                 { 
                      GameObject shoot = Instantiate(FireBall, transform.position, Quaternion.identity);
-                     shoot.GetComponent<EnemyProjController>().enemy = gameObject;
+                     shoot.GetComponent<EnemyProjController>().damage = damage;
                 }
                 //float shootAngle = Vector2.Angle(transform.position, PlayerController.player.transform.position);
 

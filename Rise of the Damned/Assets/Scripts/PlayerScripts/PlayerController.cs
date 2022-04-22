@@ -172,12 +172,13 @@ public class PlayerController : MonoBehaviour
     } 
 
     void Jump() {
+        bool jumpButton = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W);
 
-        if ( (Input.GetKeyDown(KeyCode.Space)) && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor) ) { // Ground Jumps. checks if player is grounded or they just moved past a groud object
+        if ( jumpButton && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor) ) { // Ground Jumps. checks if player is grounded or they just moved past a groud object
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
-        if ( (Input.GetKeyDown(KeyCode.Space)) && ( (nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump ) ) { // Wall Jumps
+        if ( jumpButton && ( (nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump ) ) { // Wall Jumps
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
             hasWallJump = false;
@@ -257,6 +258,8 @@ public class PlayerController : MonoBehaviour
 
     void BetterJump()
     {
+        bool jumpButton = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W);
+
         if (nearAWall && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)))
         { // when near a wall dont screw with the jump
             return;
@@ -266,7 +269,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        else if (rb.velocity.y > 0 && !jumpButton)
         {
             rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }

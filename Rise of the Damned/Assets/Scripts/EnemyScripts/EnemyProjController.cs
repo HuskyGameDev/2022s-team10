@@ -9,7 +9,7 @@ public class EnemyProjController : MonoBehaviour
     [SerializeField]
     private float lifespan, knockback;
     [System.NonSerialized]
-    public GameObject enemy;
+    public float damage;
     private bool moveTowardsPoint = true;
 
     private Rigidbody2D rb;
@@ -50,7 +50,7 @@ public class EnemyProjController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerController.TakeDamage(enemy.GetComponent<EnemyController>().damage);
+            PlayerController.TakeDamage(damage);
             collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * knockback, knockback / 2);
             Destroy(gameObject);
         }
