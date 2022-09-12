@@ -59,6 +59,7 @@ public class SlimeMovement : EnemyController
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
 
         state = defaultState;
 

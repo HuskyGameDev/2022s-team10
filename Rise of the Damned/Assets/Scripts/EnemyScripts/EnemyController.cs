@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     [System.NonSerialized]
     public Rigidbody2D rb;
+    public SpriteRenderer sr;
 
     [Header("Enemy Stats")]
 
@@ -41,9 +42,8 @@ public class EnemyController : MonoBehaviour
     public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
     public Transform groundChecker1, groundChecker2, wallChecker1, wallChecker2; // Transform of an empty object that is going to be placed bellow player
     public LayerMask groundLayer, wallLayer;
-
-    private SpriteRenderer sr;
-    private float redTime = 0;
+    
+    private float redTime = 0;  //the time that the enemy is red
 
     void Start()
     {
@@ -192,7 +192,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private bool CheckGround()
+    public bool CheckGround()
     {
         return Physics2D.OverlapCircle(wanderDir == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
