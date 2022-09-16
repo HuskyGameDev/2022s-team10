@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
     [System.NonSerialized]
     public Rigidbody2D rb;
+    [System.NonSerialized]
     public SpriteRenderer sr;
 
     [Header("Enemy Stats")]
@@ -23,7 +24,7 @@ public class EnemyController : MonoBehaviour
     [System.NonSerialized]
     public State state;
     public bool flying;
-    private int wanderDir = 1;  //1 for right, -1 for left
+    public int direction = 1;  //1 for right, -1 for left
 
     [Header("Item Drops")]
     public GameObject[] drops;
@@ -31,18 +32,13 @@ public class EnemyController : MonoBehaviour
     public float heartDropChance;
     public GameObject heartDrop;
 
-    [Header("Projectiles")]
-    [SerializeField]
-    public GameObject FireBall;
-    [SerializeField]
-    private float cooldown;
-    private float cooldownTime;
+    
 
     [Header("For Ground")]
     public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
     public Transform groundChecker1, groundChecker2, wallChecker1, wallChecker2; // Transform of an empty object that is going to be placed bellow player
     public LayerMask groundLayer, wallLayer;
-    
+
     private float redTime = 0;  //the time that the enemy is red
 
     void Start()
@@ -51,7 +47,6 @@ public class EnemyController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         state = defaultState;
-        cooldownTime = cooldown / 2;
 
         float sum = 0;
         foreach (float i in dropChance)
@@ -69,34 +64,15 @@ public class EnemyController : MonoBehaviour
         {
             case State.Wander:
                 Wander();
-                CheckTurnAround();
-                if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
-                {
-                    state = State.Attack;
-                }
                 break;
             case State.Attack:
-                if (name.Contains("Large Imp") || name.Contains("Reaper"))
-                {
-                    GetComponent<SpriteRenderer>().flipX = PlayerController.player.transform.position.x < transform.position.x;
-                    wanderDir = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
-                }
-
-                if (!CheckWall())
-                    transform.position = Vector2.MoveTowards(transform.position, 
-                        new Vector2(PlayerController.player.transform.position.x, flying ? PlayerController.player.transform.position.y : transform.position.y), 
-                        Time.deltaTime * speed);
-                
-                if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5)
-                {
-                    state = defaultState;
-                }
+                Attack();
                 break;
             case State.Stay:
-                if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
-                {
-                    state = State.Attack;
-                }
+                Stay();
+                break;
+            default:
+                Substate();
                 break;
         }
 
@@ -104,64 +80,83 @@ public class EnemyController : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-
-            float diceRoll = (float)Random.Range(1, 10001) / 100f;   //1-100 dice roll with 2 point precision
-            float chanceTotal = 0;  //sum of drop chances prior to the current drop
-
-            for (int i = 0; i < drops.Length; i++)
-            {
-                if (chanceTotal + dropChance[i] >= diceRoll)    //if the dice roll is in the current range 
-                {
-                    Instantiate(drops[i], transform.position, Quaternion.identity);
-                    break;
-                }
-                chanceTotal += dropChance[i];
-            }
-
-            diceRoll = (float)Random.Range(1, 10001) / 100f;
-            if (diceRoll < heartDropChance)
-                Instantiate(heartDrop, transform.position, Quaternion.identity);
-
-            /*if (diceRoll <= itemOnePercentChance)
-            {
-                Instantiate(itemOne, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            }
-            else if (diceRoll <= itemTwoPercentChance + itemTwoPercentChance)
-            {
-                Instantiate(itemTwo, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(itemThree, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            }*/
-
+            Die();
         }
 
-        if (name.Contains("Demon Skull"))
-        {   
-            if (cooldownTime >= cooldown)
-            {
-                Vector3 rayDir = PlayerController.player.transform.position - transform.position;
-                if (!Physics2D.Raycast(transform.position, rayDir, Vector2.Distance(PlayerController.player.transform.position, transform.position), groundLayer))
-                { 
-                     GameObject shoot = Instantiate(FireBall, transform.position, Quaternion.identity);
-                     shoot.GetComponent<EnemyProjController>().damage = damage;
-                }
-                //float shootAngle = Vector2.Angle(transform.position, PlayerController.player.transform.position);
-
-                //shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
-                //shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * 10, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * 10);
-                cooldownTime = 0;
-            }
-            cooldownTime += Time.deltaTime;
-        }
-
-        if(redTime > 0)
+        if (redTime > 0)
         {
             redTime -= Time.deltaTime;
             if (redTime <= 0)
                 sr.color = Color.white;
+        }
+
+        this.Update2();
+    }
+
+    public abstract void Update2();
+    public void Substate() { }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+
+        float diceRoll = (float)Random.Range(1, 10001) / 100f;   //1-100 dice roll with 2 point precision
+        float chanceTotal = 0;  //sum of drop chances prior to the current drop
+
+        for (int i = 0; i < drops.Length; i++)
+        {
+            if (chanceTotal + dropChance[i] >= diceRoll)    //if the dice roll is in the current range 
+            {
+                Instantiate(drops[i], transform.position, Quaternion.identity);
+                break;
+            }
+            chanceTotal += dropChance[i];
+        }
+
+        diceRoll = (float)Random.Range(1, 10001) / 100f;
+        if (diceRoll < heartDropChance)
+            Instantiate(heartDrop, transform.position, Quaternion.identity);
+
+        /*if (diceRoll <= itemOnePercentChance)
+        {
+            Instantiate(itemOne, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        }
+        else if (diceRoll <= itemTwoPercentChance + itemTwoPercentChance)
+        {
+            Instantiate(itemTwo, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(itemThree, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        }*/
+
+    }
+
+
+    public void Attack()
+    {
+        //if (name.Contains("Large Imp") || name.Contains("Reaper"))
+        //{
+        FacePlayer();
+        
+        //}
+
+        if (!CheckWall())
+            transform.position = Vector2.MoveTowards(transform.position,
+                new Vector2(PlayerController.player.transform.position.x, flying ? PlayerController.player.transform.position.y : transform.position.y),
+                Time.deltaTime * speed);
+
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5)
+        {
+            state = defaultState;
+        }
+    }
+
+    public void Stay()
+    {
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
+        {
+            state = State.Attack;
         }
     }
 
@@ -169,42 +164,50 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if(PlayerController.TakeDamage(damage))
+            if (PlayerController.TakeDamage(damage))
                 collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback * -2, knockback / 2);
         }
     }
 
-    private void Wander()   
+    public void Wander()
     {
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + wanderDir, transform.position.y), Time.deltaTime * speed);
-               
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + direction, transform.position.y), Time.deltaTime * speed);
+        if ((!flying && !CheckGround()) || CheckWall())
+            TurnAround();
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
+        {
+            state = State.Attack;
+        }
     }
 
-    private void CheckTurnAround()
+    public void TurnAround()
     {
-        if ((!flying && !CheckGround()) || CheckWall())
-        {
-            wanderDir *= -1;
-            /*if(name.Contains("Large Imp"))
-            {
-                GetComponent<SpriteRenderer>().flipX = wanderDir == -1;
-            }*/
-        }
+            direction *= -1;
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+    }
+
+    public void FacePlayer()
+    {
+        GetComponent<SpriteRenderer>().flipX = PlayerController.player.transform.position.x < transform.position.x;
+        direction = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
     }
 
     public bool CheckGround()
     {
-        return Physics2D.OverlapCircle(wanderDir == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
+        return Physics2D.OverlapCircle(direction == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
-    private bool CheckWall()
+    public bool CheckWall()
     {
-        return Physics2D.OverlapCircle(wanderDir == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer + groundLayer) != null;
+        return Physics2D.OverlapCircle(direction == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer + groundLayer) != null;
     }
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        redTime = .2f;
-        sr.color = Color.red;
+        if (damage > 0)
+        {
+            health -= damage;
+            redTime = .2f;
+            sr.color = Color.red;
+        }
     }
 }

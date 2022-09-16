@@ -85,7 +85,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572191861146986363}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.4374, y: -0.375, z: 0}
+  m_LocalPosition: {x: -0.4374, y: -0.18759, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2669117280958890877}
@@ -297,7 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8c8acebe470554fa58e2600e915a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 0}
   damage: 10
   health: 10
   knockback: 10
@@ -305,17 +304,16 @@ MonoBehaviour:
   defaultState: 0
   aggroDist: 6
   flying: 0
+  direction: 1
   drops: []
   dropChance: []
   heartDropChance: 75
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
-  FireBall: {fileID: 0}
-  cooldown: 0
-  checkGroundRadius: 0.2
-  groundChecker1: {fileID: 0}
-  groundChecker2: {fileID: 0}
-  wallChecker1: {fileID: 0}
-  wallChecker2: {fileID: 0}
+  checkGroundRadius: 0.05
+  groundChecker1: {fileID: 4024210757587770771}
+  groundChecker2: {fileID: 367176322471707230}
+  wallChecker1: {fileID: 4356326631701658783}
+  wallChecker2: {fileID: 3466394315541748635}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -324,11 +322,9 @@ MonoBehaviour:
     m_Bits: 128
   jumpSpeed: 5
   agroSpeed: 3
-  isAttacking: 1
+  isAttacking: 0
   isJumping: 1
   isGrounded: 0
-  rememberGroundedFor: 0.08
-  isGroundedChecker: {fileID: 3557862429206673616}
   animator: {fileID: 3557862428327048257}
 --- !u!50 &3557862428327048262
 Rigidbody2D:
@@ -466,7 +462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4111720960108423880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4392, y: -0.3745, z: 0}
+  m_LocalPosition: {x: 0.4376, y: -0.18752, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2669117280958890877}

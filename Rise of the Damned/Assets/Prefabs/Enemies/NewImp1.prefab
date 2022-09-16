@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8252564883687448110}
   - component: {fileID: 8252564883687448109}
   m_Layer: 10
-  m_Name: RiseOfTheDamnedImp1
+  m_Name: NewImp1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

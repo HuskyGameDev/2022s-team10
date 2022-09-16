@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
 
     public static bool TakeDamage(float damage)
     {
-        if (PlayerController.controller.invuln > 0)
+        if (PlayerController.controller.invuln > 0 || damage <= 0)
             return false;
         PlayerController.health -= damage - PlayerController.armor;
         PlayerController.controller.invuln = PlayerController.controller.invulnTime;
