@@ -22,9 +22,9 @@ public class Slime : EnemyController
     // Update2 is called once per frame
     public override void Update2()
     {
-        if (CheckGround())
+        if (CheckGround()) //if slime is on the ground
         {
-            if (isJumping)
+            if (isJumping) //if slime is ready to land
             {
                 rb.velocity = (new Vector2(0, 0));
             }
@@ -32,7 +32,7 @@ public class Slime : EnemyController
             isJumping = false;
             animator.SetBool("isJumping", false);
         }
-        else
+        else //if slime is in the air
         {
             isGrounded = false;
             isJumping = true;
@@ -41,25 +41,27 @@ public class Slime : EnemyController
         }
     }
 
-    new public void Wander()
+    public override void Wander()
     {
-        if (isAttacking)
+        if (isAttacking) //if slime was attacking before
         {
             isAttacking = false;
             if (slimeUpdate != null) { StopCoroutine(slimeUpdate); }
             slimeUpdate = StartCoroutine(Idle());
         }
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist && !isAttacking)
-        {
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist && !isAttacking) 
+        { //if slime is close enough to player then attack
             state = State.Attack;
         }
     }
 
-    new public void Attack()
+    public override void Attack()
     {
-        FacePlayer();
+        if (CheckGround()) { //slime can only turn to face the player when it is on the ground
+            FacePlayer();
+        }
 
-        if (!isAttacking)
+        if (!isAttacking) //if slime was idle before
         {
             isAttacking = true;
             if (slimeUpdate != null) { StopCoroutine(slimeUpdate); }
@@ -67,7 +69,7 @@ public class Slime : EnemyController
         }
 
         if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking)
-        {
+        { //if slime is too far from the player then idle
             state = defaultState;
         }
     }
@@ -82,6 +84,7 @@ public class Slime : EnemyController
             yield return new WaitForSeconds(1);
 
             //start jumping part of animation
+
 
             //1 if player is to the right, -1 if player is to the left
             FacePlayer();

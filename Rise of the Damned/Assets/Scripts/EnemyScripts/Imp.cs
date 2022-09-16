@@ -30,7 +30,7 @@ public class Imp : EnemyController
 
     }
 
-    new public void Wander()
+    public override void Wander()
     {
         if (!CheckGround() || CheckWall())
             TurnAround();
@@ -41,13 +41,14 @@ public class Imp : EnemyController
             if (stateUpdate != null) { StopCoroutine(stateUpdate); }
             stateUpdate = StartCoroutine(Idle());
         }
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist && !isAttacking)
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist && !isAttacking //far enough away from player
+            && Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) > .5) //and not under or over the player
         {
             state = State.Attack;
         }
     }
 
-    new public void Attack()
+    public override void Attack()
     {
         if (!isAttacking)
         {
@@ -81,8 +82,12 @@ public class Imp : EnemyController
             //direction = (this.transform.position.x < player.position.x) ? 1 : -1;
             FacePlayer();
 
-            //moves toward the player
-            rb.velocity = (new Vector2(speed * direction, 0));
+            if (Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) < .5) 
+                    { //sets imp to idle if it is under or over the player
+                state = State.Wander;
+            } else { //moves toward the player
+                rb.velocity = (new Vector2(speed * direction, rb.velocity.y));
+            }
 
             yield return new WaitForSeconds(0);
         }
@@ -94,26 +99,23 @@ public class Imp : EnemyController
 
         while (true) {
             //beginning animation
-            animator.SetBool("isRunning", false);
-
+            animator.SetBool("isRunning", false); //idle for 6 seconds
+            rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
             yield return new WaitForSeconds(6);
 
             //move
-            animator.SetBool("isRunning", true);
-            rb.velocity = (new Vector2(speed * direction, 0));
-            //change direction
-            direction *= -1;
-            //wait
-            animator.SetBool("isRunning", false);
-
-
-                yield return new WaitForSeconds(2);
-
-            animator.SetBool("isRunning", true);
-            rb.velocity = (new Vector2(-rb.velocity.x, -rb.velocity.y));
+            animator.SetBool("isRunning", true); //running for 1 second
+            rb.velocity = (new Vector2(speed * direction, rb.velocity.y)); //starts moving
+            //if ((!flying && !CheckGround()) || CheckWall()) {
+            //    TurnAround();
+            //    rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
+            //}
             yield return new WaitForSeconds(1);
+            //change direction
+            TurnAround();
         }
     }
+
 
     private void CheckTurnAround(int direction) {
         if ((!CheckGround()) || CheckWall()) {

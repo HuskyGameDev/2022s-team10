@@ -133,7 +133,7 @@ public abstract class EnemyController : MonoBehaviour
     }
 
 
-    public void Attack()
+    public virtual void Attack()
     {
         //if (name.Contains("Large Imp") || name.Contains("Reaper"))
         //{
@@ -169,7 +169,7 @@ public abstract class EnemyController : MonoBehaviour
         }
     }
 
-    public void Wander()
+    public virtual void Wander()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + direction, transform.position.y), Time.deltaTime * speed);
         if ((!flying && !CheckGround()) || CheckWall())
