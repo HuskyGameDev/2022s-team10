@@ -79,14 +79,16 @@ public class Imp : EnemyController
             //start jumping part of animation
 
             //1 if player is to the right, -1 if player is to the left
-            //direction = (this.transform.position.x < player.position.x) ? 1 : -1;
             FacePlayer();
 
             if (Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) < .5) 
                     { //sets imp to idle if it is under or over the player
                 state = State.Wander;
             } else { //moves toward the player
-                rb.velocity = (new Vector2(speed * direction, rb.velocity.y));
+                //rb.velocity = (new Vector2(speed * direction, rb.velocity.y)); //old movement, knockback doesn't work with this
+                transform.position = Vector2.MoveTowards(transform.position,
+                new Vector2(PlayerController.player.transform.position.x, transform.position.y),
+                Time.deltaTime * speed);
             }
 
             yield return new WaitForSeconds(0);
@@ -106,7 +108,7 @@ public class Imp : EnemyController
             //move
             animator.SetBool("isRunning", true); //running for 1 second
             rb.velocity = (new Vector2(speed * direction, rb.velocity.y)); //starts moving
-            //if ((!flying && !CheckGround()) || CheckWall()) {
+            //if ((!CheckGround()) || CheckWall()) {
             //    TurnAround();
             //    rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
             //}
@@ -117,11 +119,6 @@ public class Imp : EnemyController
     }
 
 
-    private void CheckTurnAround(int direction) {
-        if ((!CheckGround()) || CheckWall()) {
-            direction *= -1;
-        }
-    }
 
 
 }
