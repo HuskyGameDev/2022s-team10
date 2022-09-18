@@ -37,7 +37,7 @@ public class ProjController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") && rb != null)
         {
-            collision.GetComponent<EnemyController>().TakeDamage(PlayerController.bowDamage);
+            collision.GetComponent<EnemyController>().TakeDamage(PlayerController.rangedDamage);
             collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.bowKnockback, aController.bowKnockback / 2);
             Destroy(gameObject);
         }

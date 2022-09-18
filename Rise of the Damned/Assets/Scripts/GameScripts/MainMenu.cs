@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     private SpriteRenderer sr;
 
     int selectNum = 0;
+    public GameObject roomController;
 
     void Start(){
         sr = GetComponent<SpriteRenderer>();
@@ -34,6 +35,7 @@ public class MainMenu : MonoBehaviour
                     isSelected = false;
                 }
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
+                    MainRoomGovernor.tot = 0;
                     Time.timeScale = 1;
                     PlayerController.isPaused = false;
                     SceneManager.LoadScene("LevelOne");

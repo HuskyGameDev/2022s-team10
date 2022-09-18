@@ -10,7 +10,7 @@ public class RandomRoom : MonoBehaviour
 
     public GameObject thisRoom; // room about to be spawned on this spawn point
 
-    private Vector3 shift;
+    public static Vector3 shift;
 
     private int thisRoomShift; //based off of the previous rooms x shift value
 

@@ -34,6 +34,7 @@ public class AttackController : MonoBehaviour
             {
                 GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
                 swipe.GetComponent<SpriteRenderer>().sprite = equippedWeapon.GetComponent<SpriteRenderer>().sprite;
+                swipe.GetComponent<WeaponController>().rotSpeed = equippedWeapon.GetComponent<ItemController>().meleeSpeed;
             }
             if(Input.GetKeyDown(KeyCode.E) && equippedBow != null)
             {
@@ -86,7 +87,7 @@ public class AttackController : MonoBehaviour
                         }
 
                         equippedWeapon = collision.gameObject;  //equip new weapon
-                        PlayerController.damage = item.damage;
+                        PlayerController.meleeDamage = item.meleeDamage;
                         equippedWeapon.SetActive(false);
                         GameObject.Find("HUD Weapon").GetComponent<SpriteRenderer>().sprite = equippedWeapon.GetComponent<SpriteRenderer>().sprite;
                         break;
@@ -98,7 +99,7 @@ public class AttackController : MonoBehaviour
                         }
 
                         equippedBow = collision.gameObject;  //equip new weapon
-                        PlayerController.bowDamage = item.bowDamage;
+                        PlayerController.rangedDamage = item.rangedDamage;
                         equippedBow.SetActive(false);
                         GameObject.Find("HUD Bow").GetComponent<SpriteRenderer>().sprite = equippedBow.GetComponent<SpriteRenderer>().sprite;
                         break;

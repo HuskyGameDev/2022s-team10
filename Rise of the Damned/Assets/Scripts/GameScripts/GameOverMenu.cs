@@ -34,6 +34,8 @@ public class GameOverMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
             if (gameObject.name.Equals("SelectRetry") && isSelected){
+                Time.timeScale = 1;
+                PlayerController.isPaused = false;
                 SceneManager.LoadScene("LevelOne");
             } else {
                 SceneManager.LoadScene("MainMenu");

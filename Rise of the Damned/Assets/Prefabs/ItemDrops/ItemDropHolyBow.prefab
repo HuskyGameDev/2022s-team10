@@ -538,9 +538,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  damage: 0
-  bowDamage: 5
+  meleeDamage: 0
+  rangedDamage: 20
   armor: 0
+  meleeSpeed: 0
   arrow: {fileID: 7503913213277783726, guid: b11ade30770000d488a8eeacd815c621, type: 3}
   spriteArray:
   - {fileID: 21300000, guid: 381f2955099dd6c46bc6aa3128ea28ce, type: 3}

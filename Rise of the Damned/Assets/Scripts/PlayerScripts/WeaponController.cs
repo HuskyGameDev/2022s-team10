@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField]
-    private int rotSpeed;
+    public int rotSpeed;
     [SerializeField]
     private int rotOffset;
     [SerializeField]
@@ -45,7 +45,7 @@ public class WeaponController : MonoBehaviour
     {
         if(collision.CompareTag("Enemy") && !hit.Contains(collision))
         {
-            collision.GetComponent<EnemyController>().TakeDamage(PlayerController.damage);
+            collision.GetComponent<EnemyController>().TakeDamage(PlayerController.meleeDamage);
             collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - player.transform.position.x) * acontroller.knockback, acontroller.knockback / 2);
             hit.Add(collision);
         }

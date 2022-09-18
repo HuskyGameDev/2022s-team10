@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject roomController;
     public static GameObject player;    //static variables to be easily referenced elsewhere
-    public static float health, maxHealth, damage, bowDamage, armor;
+    public static float health, maxHealth, meleeDamage, rangedDamage, armor;
     public static PlayerController controller;
 
     [System.NonSerialized]
@@ -94,8 +94,8 @@ public class PlayerController : MonoBehaviour
         //default player stats
         health = 100;
         maxHealth = 100;
-        damage = 0;
-        bowDamage = 0;
+        meleeDamage = 0;
+        rangedDamage = 0;
         armor = 0;
         
         rb = GetComponent<Rigidbody2D>();
