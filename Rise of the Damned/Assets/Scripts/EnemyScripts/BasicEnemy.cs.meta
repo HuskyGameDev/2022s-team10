@@ -3,7 +3,14 @@ guid: a019f06ab16b7564bbd512c42c1fca49
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rb: {instanceID: 0}
+  - sr: {instanceID: 0}
+  - heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
+  - groundChecker1: {instanceID: 0}
+  - groundChecker2: {instanceID: 0}
+  - wallChecker1: {instanceID: 0}
+  - wallChecker2: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

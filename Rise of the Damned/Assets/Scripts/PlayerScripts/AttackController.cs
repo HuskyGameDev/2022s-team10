@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
 
-    public float bowStrength;
+    //public float bowStrength;
     public float knockback, bowKnockback;
 
     public GameObject weaponAttack;
@@ -57,9 +57,10 @@ public class AttackController : MonoBehaviour
                 if (shootAngle == 90 && diff == 80)
                     shootAngle = pcontroller.facingRight ? 10 : 170;
                 
+                float projSpeed = shoot.GetComponent<ProjController>().projSpeed;
 
                 shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
-                shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * bowStrength, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * bowStrength);
+                shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
             }
             if (Input.GetKeyDown(KeyCode.R))
             {

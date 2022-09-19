@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("Basic Player Movement")]
     public float speed; // m/s
     public float jumpForce;
+    public float jumpTime;
 
     
     [Header("For Ground")]
@@ -174,20 +175,33 @@ public class PlayerController : MonoBehaviour
     void Jump() {
         bool jumpButton = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W);
 
-        if ( jumpButton && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor) ) { // Ground Jumps. checks if player is grounded or they just moved past a groud object
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
+        if(jumpButton)
+        {
+            if ((nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump)
+            { // Wall Jumps
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
-        if ( jumpButton && ( (nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump ) ) { // Wall Jumps
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                hasWallJump = false;
+                Invoke("SetHasWallJumpToTrue", wallJumpCoolDown); // delay that you set
 
-            hasWallJump = false;
-            Invoke ("SetHasWallJumpToTrue", wallJumpCoolDown); // delay that you set
+                wallJumping = true;
+                Invoke("SetWallJumpingToFalse", timeItTakesToWallJump); // could vary
 
-            wallJumping = true;
-            Invoke ("SetWallJumpingToFalse", timeItTakesToWallJump); // could vary
+                CreateDust();
+            }
+            else if (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor)
+            { // Ground Jumps. checks if player is grounded or they just moved past a groud object
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                isGrounded = false;
+                isJumping = true;
+            }
+            else
+            {
+                //float timeFactor = Mathf.Max(0, (lastTimeGrounded - Time.time + jumpTime) / jumpTime);
+                //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpForce * timeFactor);
+            }
 
-            CreateDust();
+
         }
 
         if ( rb.velocity.y <= -7 || (wallSliding && rb.velocity.y < -1.5) ) // -7 is after a normal ground level jump, adds realistic wall slide getting faster too
@@ -246,14 +260,19 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             isJumping = false;
         } 
-
-        else { 
-            if (isGrounded) {
-                lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
-            }
-            isGrounded = false;
-            isJumping = true;
+        else {
+            unGround();
         } 
+    }
+
+    void unGround()
+    {
+        if (isGrounded)
+        {
+            lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
+        }
+        isGrounded = false;
+        isJumping = true;
     }
 
     void BetterJump()
@@ -271,7 +290,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (rb.velocity.y > 0 && !jumpButton)
         {
-            rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
+            rb.velocity += (lowJumpMultiplier - 1) * Time.deltaTime * Physics2D.gravity * Vector2.up;
         }
     }
 

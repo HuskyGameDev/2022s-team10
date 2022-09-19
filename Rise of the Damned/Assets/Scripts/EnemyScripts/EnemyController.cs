@@ -194,7 +194,10 @@ public abstract class EnemyController : MonoBehaviour
 
     public bool CheckGround()
     {
-        return Physics2D.OverlapCircle(direction == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
+        if (Physics2D.OverlapCircle(groundChecker1.position, checkGroundRadius, groundLayer) != null)
+            return true;
+        else
+            return Physics2D.OverlapCircle(groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
     public bool CheckWall()
     {

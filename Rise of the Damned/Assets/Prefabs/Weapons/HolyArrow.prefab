@@ -97,8 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92cba7e4359681d4e8f67589b07559ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 30
-  lifespan: 5
+  rotSpeed: 25
+  projSpeed: 12
+  lifespan: 6
 --- !u!60 &3141641542563920099
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -150,4 +151,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4

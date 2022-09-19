@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    [Header("Default: 10dmg, 10kb")]
+    [Header("Default: 10dmg, 3kb")]
     //public float offsetX, offsetY;
     public float damage;
     public float knockback;

@@ -5322,7 +5322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b11f5389b7ab740addadb7e6d20a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 10
   knockback: 0
 --- !u!1 &6121269768194988761
 GameObject:
@@ -5970,7 +5970,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 4, y: -8, z: 0}
@@ -5980,7 +5980,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 5, y: -8, z: 0}
