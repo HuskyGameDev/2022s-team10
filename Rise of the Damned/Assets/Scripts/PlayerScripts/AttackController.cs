@@ -33,7 +33,12 @@ public class AttackController : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.F) && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null)
             {
                 GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
-                swipe.GetComponent<SpriteRenderer>().sprite = equippedWeapon.GetComponent<SpriteRenderer>().sprite;
+                SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer child in children){
+                    if (child.name.Equals("ItemTexture")){
+                        swipe.GetComponent<SpriteRenderer>().sprite = child.sprite;
+                    }
+                }
                 swipe.GetComponent<WeaponController>().rotSpeed = equippedWeapon.GetComponent<ItemController>().meleeSpeed;
             }
             if(Input.GetKeyDown(KeyCode.E) && equippedBow != null)
@@ -70,7 +75,7 @@ public class AttackController : MonoBehaviour
     }
 
     void PickupItem()
-    { //tylers shit
+    {
         List<Collider2D> results = new List<Collider2D>();
         thisCollider.OverlapCollider(new ContactFilter2D(), results);
         foreach (Collider2D collision in results)
@@ -90,7 +95,12 @@ public class AttackController : MonoBehaviour
                         equippedWeapon = collision.gameObject;  //equip new weapon
                         PlayerController.meleeDamage = item.meleeDamage;
                         equippedWeapon.SetActive(false);
-                        GameObject.Find("HUD Weapon").GetComponent<SpriteRenderer>().sprite = equippedWeapon.GetComponent<SpriteRenderer>().sprite;
+                        SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
+                        foreach (SpriteRenderer child in children){
+                            if (child.name.Equals("ItemTexture")){
+                                GameObject.Find("HUD Weapon").GetComponent<SpriteRenderer>().sprite = child.sprite;
+                            }
+                        }
                         break;
                     case ItemController.ItemType.Bow:
                         if (equippedBow != null) //reactivate old weapon

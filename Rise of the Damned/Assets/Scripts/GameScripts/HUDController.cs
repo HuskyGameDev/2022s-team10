@@ -12,7 +12,6 @@ public class HUDController : MonoBehaviour
 
     private SpriteRenderer[] children;
 
-    // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -20,7 +19,6 @@ public class HUDController : MonoBehaviour
         children = GetComponentsInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ChangeSprite();

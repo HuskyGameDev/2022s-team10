@@ -5,7 +5,6 @@ using UnityEngine;
 [SelectionBase]
 public class ItemController : MonoBehaviour
 {
-    public static GameObject item;
     public enum ItemType {Sword, Bow, Armor, Health}
     public ItemType type;
     public float meleeDamage, rangedDamage, armor;
@@ -14,25 +13,36 @@ public class ItemController : MonoBehaviour
     public Sprite[] spriteArray;
     private SpriteRenderer sr;
     private SpriteRenderer[] children;
-    //Vector3 posOffset = new Vector3 ();
+    private Transform[] transformChildren;
+
+    // Floating item variables
+    private static float amplitude = 0.1f;
+    private static float frequency = 1f;
+    Vector3 posOffset = new Vector3 ();
+    Vector3 tempPos = new Vector3 ();
 
 
     void Start(){
-        item = gameObject;
         sr = GetComponent<SpriteRenderer>();
         children = GetComponentsInChildren<SpriteRenderer>();
+        transformChildren = GetComponentsInChildren<Transform>();
     }
 
     void Update()
     {
-        if (!CompareTag("HealthDrop"))
-        {
+        if (!CompareTag("HealthDrop")){
             transform.Rotate(new Vector3(0, Time.deltaTime * 100, 0), Space.Self);
-
-            foreach (Transform t in GetComponentsInChildren<Transform>())
-                if (t.CompareTag("ItemInfo") || t.CompareTag("Untagged"))
+            posOffset = transform.position;
+            foreach (Transform t in GetComponentsInChildren<Transform>()){
+                if (t.CompareTag("ItemInfo") || t.CompareTag("Untagged")){
                     t.eulerAngles = new Vector3(t.eulerAngles.x, 0, t.eulerAngles.z);
-            //t.Rotate(new Vector3(0, Time.deltaTime * -100, 0), Space.World);
+                }
+                else if (t.name.Equals("ItemTexture")){
+                    tempPos = posOffset;
+                    tempPos.y += Mathf.Sin (Time.fixedTime * Mathf.PI * frequency) * amplitude;
+                    t.position = tempPos;
+                }
+            }
         }
     }
 
