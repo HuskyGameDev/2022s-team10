@@ -213,4 +213,9 @@ public abstract class EnemyController : MonoBehaviour
             sr.color = Color.red;
         }
     }
+
+    public bool CheckEdge()
+    {
+        return Physics2D.OverlapCircle(direction == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
+    }
 }

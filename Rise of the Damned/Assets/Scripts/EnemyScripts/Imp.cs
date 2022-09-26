@@ -32,8 +32,8 @@ public class Imp : EnemyController
 
     public override void Wander()
     {
-        if (!CheckGround() || CheckWall())
-            TurnAround();
+        //if (!CheckGround() || CheckWall())
+        //    TurnAround();
 
         if (isAttacking)
         {
@@ -103,16 +103,17 @@ public class Imp : EnemyController
             //beginning animation
             animator.SetBool("isRunning", false); //idle for 6 seconds
             rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
-            yield return new WaitForSeconds(6);
+            yield return new WaitForSeconds(4);
 
             //move
             animator.SetBool("isRunning", true); //running for 1 second
             rb.velocity = (new Vector2(speed * direction, rb.velocity.y)); //starts moving
-            //if ((!CheckGround()) || CheckWall()) {
+            /* if ((!CheckGround()) || CheckWall()) {
             //    TurnAround();
             //    rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
-            //}
-            yield return new WaitForSeconds(1);
+            //} */
+            //yield return new WaitForSeconds(1);
+            yield return new WaitUntil(() => !CheckEdge() || CheckWall());
             //change direction
             TurnAround();
         }
