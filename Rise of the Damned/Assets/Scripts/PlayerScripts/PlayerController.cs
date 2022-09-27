@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject roomController;
     public static GameObject player;    //static variables to be easily referenced elsewhere
-    public static float health, maxHealth, meleeDamage, rangedDamage, armor;
+    public static float health, maxHealth, meleeDamage, rangedDamage, armor, x;
     public static PlayerController controller;
 
     [System.NonSerialized]
@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
 
     void Move() { 
 
-        float x = (Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0); // if player pressed D or right arrow x will have the value of 1
+        x = (Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0); // if player pressed D or right arrow x will have the value of 1
         float moveBy = x * speed; 
         rb.velocity = new Vector2(moveBy, rb.velocity.y); // will move at a certain m/s
 
