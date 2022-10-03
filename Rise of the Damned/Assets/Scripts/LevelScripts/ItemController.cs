@@ -31,7 +31,6 @@ public class ItemController : MonoBehaviour
     void Update()
     {
         if (!CompareTag("HealthDrop")){
-            transform.Rotate(new Vector3(0, Time.deltaTime * 100, 0), Space.Self);
             posOffset = transform.position;
             foreach (Transform t in GetComponentsInChildren<Transform>()){
                 if (t.CompareTag("ItemInfo") || t.CompareTag("Untagged")){
@@ -41,6 +40,7 @@ public class ItemController : MonoBehaviour
                     tempPos = posOffset;
                     tempPos.y += Mathf.Sin (Time.fixedTime * Mathf.PI * frequency) * amplitude;
                     t.position = tempPos;
+                    t.Rotate(new Vector3(0, Time.deltaTime * 100, 0), Space.Self);
                 }
             }
         }

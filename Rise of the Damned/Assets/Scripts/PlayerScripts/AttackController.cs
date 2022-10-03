@@ -112,7 +112,12 @@ public class AttackController : MonoBehaviour
                         equippedBow = collision.gameObject;  //equip new weapon
                         PlayerController.rangedDamage = item.rangedDamage;
                         equippedBow.SetActive(false);
-                        GameObject.Find("HUD Bow").GetComponent<SpriteRenderer>().sprite = equippedBow.GetComponent<SpriteRenderer>().sprite;
+                        SpriteRenderer[] children2 = equippedBow.GetComponentsInChildren<SpriteRenderer>();
+                        foreach (SpriteRenderer child in children2){
+                            if (child.name.Equals("ItemTexture")){
+                                GameObject.Find("HUD Bow").GetComponent<SpriteRenderer>().sprite = child.sprite;        
+                            }
+                        }
                         break;
                     case ItemController.ItemType.Armor:
                         if (equippedArmor != null) //reactivate old weapon
@@ -124,7 +129,12 @@ public class AttackController : MonoBehaviour
                         equippedArmor = collision.gameObject;  //equip new weapon
                         PlayerController.armor = item.armor;
                         equippedArmor.SetActive(false);
-                        GameObject.Find("HUD Armor").GetComponent<SpriteRenderer>().sprite = equippedArmor.GetComponent<SpriteRenderer>().sprite;
+                        SpriteRenderer[] children3 = equippedArmor.GetComponentsInChildren<SpriteRenderer>();
+                        foreach (SpriteRenderer child in children3){
+                            if (child.name.Equals("ItemTexture")){
+                                GameObject.Find("HUD Armor").GetComponent<SpriteRenderer>().sprite = child.sprite;        
+                            }
+                        }
                         break;
                 }
             }
