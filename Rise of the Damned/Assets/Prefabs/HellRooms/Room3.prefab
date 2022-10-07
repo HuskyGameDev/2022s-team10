@@ -2852,7 +2852,7 @@ MonoBehaviour:
   - {x: 2.084344, y: -1.8148543, z: 0}
   m_ShapePathHash: -1387445758
   m_Mesh: {fileID: 0}
-  m_InstanceId: 91742
+  m_InstanceId: 50786
 --- !u!1 &689134270459634301
 GameObject:
   m_ObjectHideFlags: 0
@@ -4160,7 +4160,7 @@ SpriteRenderer:
   m_SortingLayerID: 1797132319
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2c20a5981bf4e0b4f8387c3619701272, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0be29b5e3d906044a105f4379d404a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4181,8 +4181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4682253090242819183}
   - component: {fileID: 3198760180475786039}
-  - component: {fileID: 2531172793874761401}
-  - component: {fileID: 4816810257411475919}
+  - component: {fileID: -2582581149319203477}
   m_Layer: 0
   m_Name: Room3
   m_TagString: Untagged
@@ -4226,7 +4225,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &2531172793874761401
+--- !u!114 &-2582581149319203477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4235,23 +4234,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3520573329503783783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d04a4cefdd0e3774e936e07914f9ab41, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b6d2d6b88b8c684da728b4f9daa793e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shift: 17
---- !u!114 &4816810257411475919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3520573329503783783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27858f2316ff9a1478940249c2e9fab9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  negShift: 0
+  floorShift: 0
+  roofShift: 17
 --- !u!1 &3734656829464495626
 GameObject:
   m_ObjectHideFlags: 0
@@ -4965,7 +4952,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7603637307513484245}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.7299995, y: -7.5, z: 0}
+  m_LocalPosition: {x: 6.5, y: -7.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8109346663989576062}
@@ -5008,10 +4995,10 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 1
   m_ShapeLightFalloffOffset: {x: 0, y: 0.5}
   m_ShapePath:
-  - {x: -2.7230682, y: -0.46386862, z: 0}
-  - {x: 3.2778854, y: -0.46196604, z: 0}
-  - {x: 3.2825623, y: 0.48439455, z: 0}
-  - {x: -2.7241707, y: 0.43295193, z: 0}
+  - {x: -2.5, y: -0.5, z: 0}
+  - {x: 3.5, y: -0.5, z: 0}
+  - {x: 3.5, y: 0.5, z: 0}
+  - {x: -2.5, y: 0.5, z: 0}
 --- !u!1 &7935688136015776796
 GameObject:
   m_ObjectHideFlags: 0
@@ -5746,10 +5733,10 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 1
   m_ShapeLightFalloffOffset: {x: 0, y: 0.5}
   m_ShapePath:
-  - {x: -2.7230682, y: -0.46386862, z: 0}
-  - {x: 3.2778854, y: -0.46196604, z: 0}
-  - {x: 3.2825623, y: 0.48439455, z: 0}
-  - {x: -2.7241707, y: 0.43295193, z: 0}
+  - {x: -2.7200012, y: -0.5, z: 0}
+  - {x: 3.2799988, y: -0.5, z: 0}
+  - {x: 3.2799988, y: 0.5, z: 0}
+  - {x: -2.7200012, y: 0.5, z: 0}
 --- !u!1 &9086725846805646584
 GameObject:
   m_ObjectHideFlags: 0
@@ -5818,7 +5805,7 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 1.3
   m_ShapeLightFalloffOffset: {x: 0, y: 0.5}
   m_ShapePath:
-  - {x: -2.7230682, y: -0.46386862, z: 0}
-  - {x: 0.26784134, y: -0.45382023, z: 0}
-  - {x: 0.25998306, y: 0.4374113, z: 0}
-  - {x: -2.7241707, y: 0.43295193, z: 0}
+  - {x: -2.7399979, y: -0.5999999, z: 0}
+  - {x: 0.26000214, y: -0.5999999, z: 0}
+  - {x: 0.26000214, y: 0.4000001, z: 0}
+  - {x: -2.7399979, y: 0.4000001, z: 0}

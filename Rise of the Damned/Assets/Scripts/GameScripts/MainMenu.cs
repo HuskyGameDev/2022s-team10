@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
                     isSelected = false;
                 }
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
-                    MainRoomGovernor.tot = 0;
+                    //MainRoomGovernor.tot = 0;
                     Time.timeScale = 1;
                     PlayerController.isPaused = false;
                     SceneManager.LoadScene("LevelOne");

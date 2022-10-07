@@ -30,8 +30,8 @@ public class EnemyProjController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, movePos, speed * Time.deltaTime);
         else
         {
-            if(Vector2.Distance(transform.position, movePos) <= .25)
-                rb.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * (speed / 3);
+            if(Vector2.Distance(transform.position, movePos) <= .3)
+                rb.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * (speed / 2);
             else
                 transform.position = Vector2.MoveTowards(transform.position, movePos, speed * Time.deltaTime);
             //Debug.Log(":zany_face:");

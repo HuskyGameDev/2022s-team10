@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
         if (health <= 0){
             SceneManager.LoadScene("GameOver"); 
             // redo rooms on death
-            roomController.GetComponent<MainRoomGovernor>().redoRooms();
+            //roomController.GetComponent<MainRoomGovernor>().redoRooms();
         }
 
         if (redTime > 0)

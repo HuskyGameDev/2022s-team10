@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3cd1301ecae774396fe2cdbcba7c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 0}
   damage: 5
   health: 10
   knockback: 10
@@ -126,12 +125,11 @@ MonoBehaviour:
   defaultState: 0
   aggroDist: 6
   flying: 0
+  direction: 1
   drops: []
   dropChance: []
   heartDropChance: 75
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
-  FireBall: {fileID: 0}
-  cooldown: 0
   checkGroundRadius: 0.2
   groundChecker1: {fileID: 8252564883838531954}
   groundChecker2: {fileID: 8252564884843355077}
@@ -276,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8252564883838531953}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26999998, y: -0.43599987, z: 0}
+  m_LocalPosition: {x: -0.192, y: -0.499, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8252564884098146794}
@@ -367,7 +365,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8252564884843355076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39999998, y: -0.43599987, z: 0}
+  m_LocalPosition: {x: 0.372, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8252564884098146794}

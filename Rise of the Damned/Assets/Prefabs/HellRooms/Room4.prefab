@@ -807,7 +807,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 9, y: -8, z: 0}
@@ -5702,8 +5702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6982690716026201463}
   - component: {fileID: 6982690716026201460}
-  - component: {fileID: 6982690716026201461}
-  - component: {fileID: 6982690716026201450}
+  - component: {fileID: -4282874865355620357}
   m_Layer: 0
   m_Name: Room4
   m_TagString: Untagged
@@ -5748,7 +5747,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &6982690716026201461
+--- !u!114 &-4282874865355620357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5757,23 +5756,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6982690716026201451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d04a4cefdd0e3774e936e07914f9ab41, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b6d2d6b88b8c684da728b4f9daa793e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shift: 11
---- !u!114 &6982690716026201450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6982690716026201451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27858f2316ff9a1478940249c2e9fab9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  negShift: -11
+  floorShift: 11
+  roofShift: 11
 --- !u!1 &6982690716041614955
 GameObject:
   m_ObjectHideFlags: 0

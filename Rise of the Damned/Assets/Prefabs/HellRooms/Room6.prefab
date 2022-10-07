@@ -4234,8 +4234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2070452001787805519}
   - component: {fileID: 6626668435967234071}
-  - component: {fileID: 8875782108343525472}
-  - component: {fileID: 6427658426303732753}
+  - component: {fileID: -5332221007645851913}
   m_Layer: 0
   m_Name: Room6
   m_TagString: Untagged
@@ -4278,7 +4277,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &8875782108343525472
+--- !u!114 &-5332221007645851913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4287,23 +4286,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5559033744652217817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d04a4cefdd0e3774e936e07914f9ab41, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b6d2d6b88b8c684da728b4f9daa793e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shift: 14
---- !u!114 &6427658426303732753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5559033744652217817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27858f2316ff9a1478940249c2e9fab9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  negShift: -23
+  floorShift: 23
+  roofShift: 14
 --- !u!1 &7719238820673976574
 GameObject:
   m_ObjectHideFlags: 0

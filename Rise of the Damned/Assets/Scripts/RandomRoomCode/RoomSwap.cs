@@ -13,7 +13,8 @@ private void OnTriggerEnter2D(Collider2D other)
     if(other.CompareTag("Player") && !other.isTrigger)
     {
         virtualCam.SetActive(true);
-        PlayerController.controller.rb.velocity += new Vector2(0, 4);
+        if(other.attachedRigidbody.velocity.y > 0)
+            PlayerController.controller.rb.velocity += new Vector2(0, 5);
     }
 }
 
