@@ -4236,7 +4236,7 @@ GameObject:
   - component: {fileID: 6626668435967234071}
   - component: {fileID: -5332221007645851913}
   m_Layer: 0
-  m_Name: Room6
+  m_Name: 2-3
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
