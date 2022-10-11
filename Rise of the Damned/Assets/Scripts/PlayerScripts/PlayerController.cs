@@ -30,7 +30,20 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float jumpTime;
 
-    
+    [Header("Movement")]
+    [SerializeField]
+    private float max_speed = 6f;
+    [SerializeField]
+    private float max_acceleration = 80f;
+    private Vector2 direction, desired_velocity, velocity;
+    private float acceleration;
+    [SerializeField]
+    private float max_speed_change;
+    [SerializeField]
+    private float max_air_acceleration = 80f;
+    [SerializeField]
+    private float max_wall_acceleration = 80f;
+
     [Header("For Ground")]
     public float rememberGroundedFor; // help to keep us grounded for a little longer, smooth out jumps just after leaving ground
     public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
@@ -55,12 +68,12 @@ public class PlayerController : MonoBehaviour
     public bool facingLeft; 
     public bool facingRight;
     public bool isGrounded = false;
-    public bool isJumping = false;
     public bool nearAWall = false; 
     public bool hasWallJump = true; // must start true
     public bool wallJumping;
     public bool wallSliding;
     public bool fastFalling;
+    private bool isJumping = false; // is true when player is trying to jump
     
 
 
@@ -112,71 +125,78 @@ public class PlayerController : MonoBehaviour
         roomNum = (int)((transform.position.y + 12)/18);
         //Debug.Log(roomNum); it spamming it bruh 
         if (!isPaused){
+            InputController();
             Move();
             Jump();
             CheckIfGrounded();
             CheckIfNearAWall();
             BetterJump();
             Animations();
+            iFrames();
+            GameOver();
         }
         Pause();
 
-        if (invuln > 0)
-        {
-            invuln -= Time.deltaTime;
-        }
+        
 
-        if (health <= 0){
-            SceneManager.LoadScene("GameOver"); 
-            // redo rooms on death
-            //roomController.GetComponent<MainRoomGovernor>().redoRooms();
-        }
-
-        if (redTime > 0)
-        {
-            redTime -= Time.deltaTime;
-            if (redTime <= 0)
-                sr.color = Color.white;
-        }
     }
 
-    void Move() { 
-
-        x = (Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0); // if player pressed D or right arrow x will have the value of 1
-        float moveBy = x * speed; 
-        rb.velocity = new Vector2(moveBy, rb.velocity.y); // will move at a certain m/s
-
-        if (x > 0) { // moved right, flip 
-            gameObject.transform.localScale = new Vector2(1, 1);
-            facingRight = true;
-            facingLeft = false;
-        }
-
-        if (x < 0) { // moved left, flip 
-            gameObject.transform.localScale = new Vector2(-1, 1);
+    private void InputController() {
+        if (Input.GetKey(KeyCode.A)) {
+            direction.x = -1;
             facingLeft = true;
             facingRight = false;
+            gameObject.transform.localScale = new Vector2(-1, 1);
+            //GetComponent<SpriteRenderer>().flipX = true;
+        } else if (Input.GetKey(KeyCode.D)) {
+            direction.x = 1;
+            facingLeft = false;
+            facingRight = true;
+            gameObject.transform.localScale = new Vector2(1, 1);
+            //GetComponent<SpriteRenderer>().flipX = true;
+        } else if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.D)) {
+            direction.x = 0;
+            if (isGrounded) {    //creates dust on hard turn
+                CreateDust();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) {
+            isJumping = true;
+            //Debug.Log("Jump");
         }
 
-        if( x == 0 && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)) && isGrounded ){ // hard turn create dust
-            CreateDust();
+
+    }
+
+    private void Move() {
+
+        desired_velocity = new Vector2(direction.x, 0f) * Mathf.Max(max_speed, 0f);
+
+
+        velocity = rb.velocity;
+
+        if (wallSliding) {
+            acceleration = max_wall_acceleration; //if on wall change to wall acceleration
+        } else if (!isGrounded) {
+            acceleration = max_air_acceleration; //if in air change to air acceleration
+        } else {
+            acceleration = max_acceleration;
         }
 
-        if(wallSliding) {
-            sr.sprite = wallSlide;
-        }
-        else {
-            sr.sprite = regular;
-        }
+        max_speed_change = acceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
 
-        animator.SetFloat("Speed", Mathf.Abs(x)); //tells animator if player is moving
-    } 
+        rb.velocity = velocity;
+
+        animator.SetFloat("Speed", Mathf.Abs(desired_velocity.x)); //tells animator if player is moving
+    }
 
     void Jump() {
-        bool jumpButton = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W);
+        //bool jumpButton = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W);
 
-        if(jumpButton)
+        if(isJumping)
         {
+            isJumping = false;
             if ((nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump)
             { // Wall Jumps
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -193,7 +213,6 @@ public class PlayerController : MonoBehaviour
             { // Ground Jumps. checks if player is grounded or they just moved past a groud object
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 isGrounded = false;
-                isJumping = true;
             }
             else
             {
@@ -258,21 +277,14 @@ public class PlayerController : MonoBehaviour
 
         if ( collider != null ) { 
             isGrounded = true;
-            isJumping = false;
         } 
         else {
-            unGround();
+            if (isGrounded)
+            {
+                lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
+            }
+            isGrounded = false;
         } 
-    }
-
-    void unGround()
-    {
-        if (isGrounded)
-        {
-            lastTimeGrounded = Time.time; // Time.time holds how much time has passed since we are running our game
-        }
-        isGrounded = false;
-        isJumping = true;
     }
 
     void BetterJump()
@@ -306,10 +318,23 @@ public class PlayerController : MonoBehaviour
         hasWallJump = true;
     }
 
-    public void CreateDust() {
+    public void CreateDust() 
+    {
         dust.Play();
     }
 
+    void iFrames() 
+    {
+        if (redTime > 0) {
+            redTime -= Time.deltaTime;
+            if (redTime <= 0)
+                sr.color = Color.white;
+        }
+
+        if (invuln > 0) {
+            invuln -= Time.deltaTime;
+        }
+    }
     public static bool TakeDamage(float damage)
     {
         if (PlayerController.controller.invuln > 0 || damage <= 0)
@@ -321,8 +346,9 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    void Animations() {
-        if (isJumping) {
+    void Animations() 
+    {
+        if (!isGrounded) {
             animator.SetBool("IsJumping", true);
         } else {
             animator.SetBool("IsJumping", false);
@@ -335,13 +361,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Pause(){
+    void Pause()
+    {
         if (Input.GetKeyDown(KeyCode.Escape) && !isPaused){
             isPaused = true;
             Time.timeScale = 0;
         } else if (Input.GetKeyDown(KeyCode.Escape) && isPaused){
             isPaused = false;
             Time.timeScale = 1;
+        }
+    }
+
+    void GameOver()
+    {
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+            // redo rooms on death
+            //roomController.GetComponent<MainRoomGovernor>().redoRooms();
         }
     }
 }
