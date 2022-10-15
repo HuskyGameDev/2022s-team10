@@ -44,13 +44,14 @@ public class BigImp : EnemyController
             isSwinging = true;
             stateUpdate = StartCoroutine(Swing());
         }
-        else if (!isAttacking)
+        if (!isAttacking)
         {
             isAttacking = true;
             if (stateUpdate != null) { StopCoroutine(stateUpdate); }
             stateUpdate = StartCoroutine(Agro());
         }
-        else if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking)
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking 
+            || Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) < .5)
         {
             state = defaultState;
         }
@@ -135,7 +136,6 @@ public class BigImp : EnemyController
                 if (!receivingKnockback && !isSwinging)
                 {
                     velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
-
                     if (!CheckEdge() || CheckWall())
                     {
                         hitEdge = true;

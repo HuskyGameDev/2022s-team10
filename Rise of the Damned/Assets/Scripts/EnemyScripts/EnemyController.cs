@@ -246,9 +246,9 @@ public abstract class EnemyController : MonoBehaviour
         else
             return Physics2D.OverlapCircle(groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
-    public bool CheckWall()
+    public bool CheckWall() // returns true if there is a wall, false if there is no wall
     {
-        return Physics2D.OverlapCircle(direction.x == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer + groundLayer) != null;
+        return Physics2D.OverlapCircle(direction.x == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer) != null;
     }
 
     public void TakeDamage(float damage)
@@ -261,7 +261,7 @@ public abstract class EnemyController : MonoBehaviour
         }
     }
 
-    public bool CheckEdge()
+    public bool CheckEdge() // returns false if on an edge true if not near an edge
     {
         return Physics2D.OverlapCircle(direction.x == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
