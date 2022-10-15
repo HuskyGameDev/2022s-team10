@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4711668741117532633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5968656258712832417}
+  m_Layer: 10
+  m_Name: CollisionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5968656258712832417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711668741117532633}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6518784835923623837}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6518784835888802068
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +92,7 @@ Transform:
   - {fileID: 6518784835888802069}
   - {fileID: 6518784837170435232}
   - {fileID: 6518784836341686671}
+  - {fileID: 5968656258712832417}
   m_Father: {fileID: 6518784837021178629}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -289,11 +320,10 @@ MonoBehaviour:
   damage: 4
   health: 10
   knockback: 8
-  speed: 1
+  max_speed: 2
   defaultState: 0
   aggroDist: 5
   flying: 0
-  max_speed: 2
   max_acceleration: 80
   max_speed_change: 0
   knockback_time: 1
@@ -312,6 +342,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  collisionPoint: {fileID: 5968656258712832417}
   isAttacking: 1
   animator: {fileID: 6518784837021178631}
 --- !u!1 &6518784837139274901

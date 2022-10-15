@@ -15,6 +15,7 @@ public abstract class EnemyController : MonoBehaviour
     public float damage;
     public float health;
     public float knockback;
+    public float knockback_resistance = 1f; // divides knockback by resistance
     [SerializeField]
     protected float max_speed = 3f;
     public enum State { Wander, Attack, Stay };
@@ -48,6 +49,8 @@ public abstract class EnemyController : MonoBehaviour
     public float checkGroundRadius; // is going to tell us whats the radius of our GroundChecker
     public Transform groundChecker1, groundChecker2, wallChecker1, wallChecker2; // Transform of an empty object that is going to be placed bellow player
     public LayerMask groundLayer, wallLayer;
+
+    public Transform collisionPoint; // point at the center bottom of the sprite to send to knockback function
 
 
     private float redTime = 0;  //the time that the enemy is red
@@ -194,7 +197,7 @@ public abstract class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             if (PlayerController.TakeDamage(damage))
-                PlayerController.controller.Knockback(knockback, gameObject.transform);
+                PlayerController.controller.Knockback(knockback, collisionPoint);
         }
     }
 
@@ -262,19 +265,20 @@ public abstract class EnemyController : MonoBehaviour
     {
         return Physics2D.OverlapCircle(direction.x == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
-
+    private Coroutine knocked; //knockback coroutine
     public void Knockback(float knockback, Transform knockback_location)
     {
         receivingKnockback = true;
         float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
         float vertical_enemy_direction = (knockback_location.position.y - rb.position.y) / Mathf.Abs(knockback_location.position.y - rb.position.y);
 
-        rb.AddForce(new Vector2(knockback * -horizontal_enemy_direction, knockback * 1 * (float).55), ForceMode2D.Impulse);
-        Invoke("SetReceivingKnockback", knockback_time);
+        rb.AddForce(new Vector2((knockback) * -horizontal_enemy_direction, (knockback) * 1 * (float).55), ForceMode2D.Impulse);
+        knocked = StartCoroutine(KnockbackSequence());
     }
-    private void SetReceivingKnockback()
+    IEnumerator KnockbackSequence()
     {
+        yield return new WaitForSeconds(knockback_time);
         receivingKnockback = false;
-        
+        yield return new WaitForSeconds(0);
     }
 }

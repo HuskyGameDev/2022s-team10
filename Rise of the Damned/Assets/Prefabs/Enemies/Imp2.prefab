@@ -90,6 +90,36 @@ Transform:
   m_Father: {fileID: 5863235839103974476}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3402894559520222333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7523195812812642755}
+  m_Layer: 14
+  m_Name: CollisionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7523195812812642755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3402894559520222333}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5863235839103974476}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3426151146584591166
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +182,7 @@ Transform:
   - {fileID: 3399071214085675159}
   - {fileID: 1534600448750948797}
   - {fileID: 5092230795923109116}
+  - {fileID: 7523195812812642755}
   m_Father: {fileID: 5863235839875175697}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -282,11 +313,10 @@ MonoBehaviour:
   damage: 10
   health: 16
   knockback: 10
-  speed: 2
+  max_speed: 3
   defaultState: 0
   aggroDist: 2.5
   flying: 0
-  max_speed: 3
   max_acceleration: 80
   max_speed_change: 0
   knockback_time: 1
@@ -311,6 +341,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  collisionPoint: {fileID: 7523195812812642755}
 --- !u!50 &5863235839875175698
 Rigidbody2D:
   serializedVersion: 4
