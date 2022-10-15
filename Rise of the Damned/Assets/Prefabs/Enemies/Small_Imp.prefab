@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 4
   health: 10
-  knockback: 6
+  knockback: 8
   speed: 1
   defaultState: 0
   aggroDist: 5

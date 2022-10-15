@@ -39,6 +39,10 @@ public abstract class EnemyController : MonoBehaviour
     public Transform groundChecker1, groundChecker2, wallChecker1, wallChecker2; // Transform of an empty object that is going to be placed bellow player
     public LayerMask groundLayer, wallLayer;
 
+    [SerializeField]
+    private float knockback_time = 1; //time in seconds knockback is in effect 
+    private bool receivingKnockback = false;
+
     private float redTime = 0;  //the time that the enemy is red
 
     void Start()
@@ -165,7 +169,7 @@ public abstract class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             if (PlayerController.TakeDamage(damage))
-                collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback * -2, knockback / 2);
+                PlayerController.controller.Knockback(knockback, gameObject.transform);
         }
     }
 
@@ -217,5 +221,19 @@ public abstract class EnemyController : MonoBehaviour
     public bool CheckEdge()
     {
         return Physics2D.OverlapCircle(direction == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
+    }
+
+    public void Knockback(float knockback, Transform knockback_location)
+    {
+        receivingKnockback = true;
+        float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
+        float vertical_enemy_direction = (knockback_location.position.y - rb.position.y) / Mathf.Abs(knockback_location.position.y - rb.position.y);
+
+        rb.AddForce(new Vector2(knockback * -horizontal_enemy_direction, knockback * -vertical_enemy_direction * (float).75), ForceMode2D.Impulse);
+        Invoke("SetReceivingKnockback", knockback_time);
+    }
+    private void SetReceivingKnockback()
+    {
+        receivingKnockback = false;
     }
 }

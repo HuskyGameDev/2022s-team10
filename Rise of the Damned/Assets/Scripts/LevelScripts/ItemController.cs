@@ -9,6 +9,7 @@ public class ItemController : MonoBehaviour
     public ItemType type;
     public float meleeDamage, rangedDamage, armor;
     public int meleeSpeed;
+    public float knockback;
     public GameObject arrow;
     public Sprite[] spriteArray;
     private SpriteRenderer sr;

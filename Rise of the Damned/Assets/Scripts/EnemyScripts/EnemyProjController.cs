@@ -51,7 +51,7 @@ public class EnemyProjController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerController.TakeDamage(damage);
-            collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * knockback, knockback / 2);
+            PlayerController.controller.Knockback(knockback, gameObject.transform);
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Ground") || collision.CompareTag("Walls") || collision.name.Contains("SwordSwipe"))

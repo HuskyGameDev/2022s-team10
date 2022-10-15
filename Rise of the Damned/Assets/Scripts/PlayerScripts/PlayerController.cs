@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
     private float max_air_acceleration = 80f;
     [SerializeField]
     private float max_wall_acceleration = 80f;
+    [SerializeField]
+    private float knockback_time = 1; //time in seconds knockback is in effect 
+
 
     [Header("For Ground")]
     public float rememberGroundedFor; // help to keep us grounded for a little longer, smooth out jumps just after leaving ground
@@ -74,6 +77,7 @@ public class PlayerController : MonoBehaviour
     public bool wallSliding;
     public bool fastFalling;
     private bool isJumping = false; // is true when player is trying to jump
+    private bool receivingKnockback = false;
     
 
 
@@ -98,6 +102,8 @@ public class PlayerController : MonoBehaviour
     public static bool isPaused = false;
 
     public static int roomNum;
+
+    private Coroutine knockback_r;
 
 
     // Start is called before the first frame update
@@ -184,7 +190,12 @@ public class PlayerController : MonoBehaviour
         }
 
         max_speed_change = acceleration * Time.deltaTime;
-        velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
+
+        if(desired_velocity.x != 0 || !receivingKnockback)
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
+        }
+        
 
         rb.velocity = velocity;
 
@@ -381,4 +392,20 @@ public class PlayerController : MonoBehaviour
             //roomController.GetComponent<MainRoomGovernor>().redoRooms();
         }
     }
+
+
+    public void Knockback(float knockback, Transform knockback_location)
+    {
+        receivingKnockback = true;
+        float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
+        float vertical_enemy_direction = (knockback_location.position.y - (rb.position.y + (float).45)) / Mathf.Abs(knockback_location.position.y - (rb.position.y + (float).45)); 
+
+        rb.AddForce(new Vector2(knockback * -horizontal_enemy_direction, knockback * -vertical_enemy_direction * (float).75), ForceMode2D.Impulse);
+        Invoke("SetReceivingKnockback", knockback_time);
+    }
+    private void SetReceivingKnockback()
+    {
+        receivingKnockback = false;
+    }
+
 }

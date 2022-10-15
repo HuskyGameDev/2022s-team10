@@ -66,9 +66,10 @@ public class Imp : EnemyController
     private void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
             if (PlayerController.TakeDamage(damage))
-                collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - transform.position.x) * knockback * -2, knockback / 2);
+            {
+                PlayerController.controller.Knockback(knockback, gameObject.transform);
+            }
         }
-
     }
 
     IEnumerator Agro() {
@@ -99,7 +100,7 @@ public class Imp : EnemyController
     IEnumerator Idle() {
         direction = 1;
 
-        while (true) {
+        while (true){
             //beginning animation
             animator.SetBool("isRunning", false); //idle for 6 seconds
             rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
@@ -118,8 +119,6 @@ public class Imp : EnemyController
             TurnAround();
         }
     }
-
-
 
 
 }

@@ -14,6 +14,8 @@ public class Spikes : MonoBehaviour
             PlayerController.TakeDamage(damage);
 
 
+
+
             //knockback
             //if (!name.ToLower().Contains("wall"))
                 collision.attachedRigidbody.velocity = new Vector2(
