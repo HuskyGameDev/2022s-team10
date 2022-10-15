@@ -15,8 +15,8 @@ public abstract class EnemyController : MonoBehaviour
     public float damage;
     public float health;
     public float knockback;
-    public float speed;
-
+    [SerializeField]
+    protected float max_speed = 3f;
     public enum State { Wander, Attack, Stay };
     [Header("Enemy AI")]
     public State defaultState;
@@ -24,7 +24,17 @@ public abstract class EnemyController : MonoBehaviour
     [System.NonSerialized]
     public State state;
     public bool flying;
-    public int direction = 1;  //1 for right, -1 for left
+
+    [Header("Movement")]
+    [SerializeField]
+    protected float max_acceleration = 30f;
+    protected Vector2 direction, desired_velocity, velocity;
+    protected float acceleration;
+    [SerializeField]
+    protected float max_speed_change;
+    [SerializeField]
+    protected float knockback_time = 1; //time in seconds knockback is in effect 
+    protected bool receivingKnockback = false;
 
     [Header("Item Drops")]
     public GameObject[] drops;
@@ -39,9 +49,6 @@ public abstract class EnemyController : MonoBehaviour
     public Transform groundChecker1, groundChecker2, wallChecker1, wallChecker2; // Transform of an empty object that is going to be placed bellow player
     public LayerMask groundLayer, wallLayer;
 
-    [SerializeField]
-    private float knockback_time = 1; //time in seconds knockback is in effect 
-    private bool receivingKnockback = false;
 
     private float redTime = 0;  //the time that the enemy is red
 
@@ -51,6 +58,8 @@ public abstract class EnemyController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         state = defaultState;
+
+        direction.x = 1;
 
         float sum = 0;
         foreach (float i in dropChance)
@@ -146,9 +155,25 @@ public abstract class EnemyController : MonoBehaviour
         //}
 
         if (!CheckWall())
+        {
+            /*
             transform.position = Vector2.MoveTowards(transform.position,
                 new Vector2(PlayerController.player.transform.position.x, flying ? PlayerController.player.transform.position.y : transform.position.y),
                 Time.deltaTime * speed);
+            */
+            desired_velocity = new Vector2(direction.x, 0f) * Mathf.Max(max_speed, 0f);
+            velocity = rb.velocity;
+            acceleration = max_acceleration;
+            max_speed_change = acceleration * Time.deltaTime;
+
+            if (!receivingKnockback)
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
+            }
+
+            rb.velocity = velocity;
+        }
+            
 
         if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5)
         {
@@ -175,8 +200,21 @@ public abstract class EnemyController : MonoBehaviour
 
     public virtual void Wander()
     {
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + direction, transform.position.y), Time.deltaTime * speed);
-        if ((!flying && !CheckGround()) || CheckWall())
+        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + direction.x, transform.position.y), Time.deltaTime * speed);
+
+        desired_velocity = new Vector2(direction.x, 0f) * Mathf.Max(max_speed, 0f);
+        velocity = rb.velocity;
+        acceleration = max_acceleration;
+        max_speed_change = acceleration * Time.deltaTime;
+
+        if (!receivingKnockback)
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
+        }
+
+        rb.velocity = velocity;
+
+        if (!CheckEdge() || CheckWall())
             TurnAround();
         if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
         {
@@ -186,14 +224,16 @@ public abstract class EnemyController : MonoBehaviour
 
     public void TurnAround()
     {
-            direction *= -1;
-            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+        direction.x *= -1;
+        GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+        velocity.x = 0;
     }
 
     public void FacePlayer()
     {
         GetComponent<SpriteRenderer>().flipX = PlayerController.player.transform.position.x < transform.position.x;
-        direction = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
+        direction.x = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
+        velocity.x = 0;
     }
 
     public bool CheckGround()
@@ -205,7 +245,7 @@ public abstract class EnemyController : MonoBehaviour
     }
     public bool CheckWall()
     {
-        return Physics2D.OverlapCircle(direction == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer + groundLayer) != null;
+        return Physics2D.OverlapCircle(direction.x == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer + groundLayer) != null;
     }
 
     public void TakeDamage(float damage)
@@ -220,7 +260,7 @@ public abstract class EnemyController : MonoBehaviour
 
     public bool CheckEdge()
     {
-        return Physics2D.OverlapCircle(direction == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
+        return Physics2D.OverlapCircle(direction.x == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
 
     public void Knockback(float knockback, Transform knockback_location)
@@ -229,11 +269,12 @@ public abstract class EnemyController : MonoBehaviour
         float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
         float vertical_enemy_direction = (knockback_location.position.y - rb.position.y) / Mathf.Abs(knockback_location.position.y - rb.position.y);
 
-        rb.AddForce(new Vector2(knockback * -horizontal_enemy_direction, knockback * -vertical_enemy_direction * (float).75), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(knockback * -horizontal_enemy_direction, knockback * 1 * (float).55), ForceMode2D.Impulse);
         Invoke("SetReceivingKnockback", knockback_time);
     }
     private void SetReceivingKnockback()
     {
         receivingKnockback = false;
+        
     }
 }

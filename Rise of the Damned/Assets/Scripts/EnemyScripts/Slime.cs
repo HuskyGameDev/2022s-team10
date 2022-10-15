@@ -89,7 +89,7 @@ public class Slime : EnemyController
             //1 if player is to the right, -1 if player is to the left
             FacePlayer();
             //Jump towards player
-            rb.velocity = (new Vector2(agroSpeed * direction, jumpSpeed));
+            rb.velocity = (new Vector2(agroSpeed * direction.x, jumpSpeed));
 
             yield return new WaitForSeconds(2);
         }
@@ -107,7 +107,7 @@ public class Slime : EnemyController
             yield return new WaitForSeconds(2);
 
             //move
-            rb.velocity = (new Vector2(speed * direction, 0));
+            rb.velocity = (new Vector2(max_speed * direction.x, 0));
             //change direction
             //direction *= -1;
             //wait

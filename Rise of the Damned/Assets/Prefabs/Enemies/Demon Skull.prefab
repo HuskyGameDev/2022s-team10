@@ -257,7 +257,10 @@ MonoBehaviour:
   defaultState: 0
   aggroDist: 0.4
   flying: 1
-  direction: 1
+  max_speed: 3
+  max_acceleration: 80
+  max_speed_change: 0
+  knockback_time: 1
   drops:
   - {fileID: 7115192639973222801, guid: b307dcf489f3e9a46a35603e6d411af6, type: 3}
   dropChance:

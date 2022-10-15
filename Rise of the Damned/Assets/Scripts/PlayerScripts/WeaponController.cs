@@ -46,7 +46,7 @@ public class WeaponController : MonoBehaviour
         if(collision.CompareTag("Enemy") && !hit.Contains(collision))
         {
             collision.GetComponent<EnemyController>().TakeDamage(PlayerController.meleeDamage);
-            collision.GetComponent<EnemyController>().Knockback(5, gameObject.transform); 
+            collision.GetComponent<EnemyController>().Knockback(6, gameObject.transform);
             // ^ currently cant figure out how to access the itemcontroller script so can't set a weapon specific knockback
             hit.Add(collision);
         }

@@ -86,10 +86,17 @@ public class Imp : EnemyController
                     { //sets imp to idle if it is under or over the player
                 state = State.Wander;
             } else { //moves toward the player
-                //rb.velocity = (new Vector2(speed * direction, rb.velocity.y)); //old movement, knockback doesn't work with this
-                transform.position = Vector2.MoveTowards(transform.position,
-                new Vector2(PlayerController.player.transform.position.x, transform.position.y),
-                Time.deltaTime * speed);
+                desired_velocity = new Vector2(direction.x, 0f) * Mathf.Max(max_speed, 0f);
+                velocity = rb.velocity;
+                acceleration = max_acceleration;
+                max_speed_change = acceleration * Time.deltaTime;
+
+                if (!receivingKnockback)
+                {
+                    velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
+                }
+
+                rb.velocity = velocity;
             }
 
             yield return new WaitForSeconds(0);
@@ -98,26 +105,48 @@ public class Imp : EnemyController
     }
 
     IEnumerator Idle() {
-        direction = 1;
-
-        while (true){
+        direction.x = 1;
+        while (true)
+        {
+            bool hitEdge = false;
             //beginning animation
             animator.SetBool("isRunning", false); //idle for 6 seconds
             rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(Random.Range(2, 5));
 
             //move
             animator.SetBool("isRunning", true); //running for 1 second
-            rb.velocity = (new Vector2(speed * direction, rb.velocity.y)); //starts moving
-            /* if ((!CheckGround()) || CheckWall()) {
-            //    TurnAround();
-            //    rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
-            //} */
-            //yield return new WaitForSeconds(1);
-            yield return new WaitUntil(() => !CheckEdge() || CheckWall());
-            //change direction
-            TurnAround();
+
+            while (!hitEdge) // loop until hit a wall or edge
+            {
+                desired_velocity = new Vector2(direction.x, 0f) * Mathf.Max(max_speed, 0f);
+                velocity = rb.velocity;
+                acceleration = max_acceleration;
+                max_speed_change = acceleration * Time.deltaTime;
+
+                if (!receivingKnockback)
+                {
+                    velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
+                }
+
+                rb.velocity = velocity;
+
+                if (!CheckEdge() || CheckWall())
+                {
+                    TurnAround();
+                    hitEdge = true;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
         }
+    }
+
+    public new void TurnAround()
+    {
+        direction.x *= -1;
+        GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+        velocity.x = 0;
     }
 
 
