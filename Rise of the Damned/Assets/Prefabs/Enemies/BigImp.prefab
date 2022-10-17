@@ -193,7 +193,7 @@ MonoBehaviour:
     m_Bits: 64
   collisionPoint: {fileID: 4510071440078131297}
   isAttacking: 1
-  swingDistance: 1
+  swingDistance: 1.5
   animator: {fileID: 4510071438848990329}
 --- !u!1 &4510071438931577989
 GameObject:
@@ -341,7 +341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4510071440078131296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1, y: -0.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4510071439791984738}

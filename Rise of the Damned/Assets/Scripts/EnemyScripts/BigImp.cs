@@ -169,7 +169,33 @@ public class BigImp : EnemyController
     public new void TurnAround()
     {
         direction.x *= -1;
-        GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+        //GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX; only flips the sprite and not hit boxes of animations
+        Vector3 rotation = transform.eulerAngles;
+        if(direction.x == -1)
+        {
+            rotation.y = 180f;
+        }
+        else if (direction.x == 1)
+        {
+            rotation.y = 0f;
+        }
+        transform.eulerAngles = rotation;
+        velocity.x = 0;
+    }
+
+    public new void FacePlayer()
+    {
+        Vector3 rotation = transform.eulerAngles;
+        direction.x = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
+        if (direction.x == -1)
+        {
+            rotation.y = 180f;
+        }
+        else if (direction.x == 1)
+        {
+            rotation.y = 0f;
+        }
+        transform.eulerAngles = rotation;
         velocity.x = 0;
     }
 
