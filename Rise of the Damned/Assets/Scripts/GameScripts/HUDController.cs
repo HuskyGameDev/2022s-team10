@@ -22,12 +22,12 @@ public class HUDController : MonoBehaviour
     void Update()
     {
         ChangeSprite();
-        TakeDamage();
+        //TakeDamage();
     }
 
     void ChangeSprite(){
         if (PlayerController.health >= 0){
-            srHealth.sprite = spriteArray[Mathf.RoundToInt((float)(PlayerController.health) / (float)(PlayerController.maxHealth) * 26f)];
+            srHealth.sprite = spriteArray[Mathf.Clamp(Mathf.RoundToInt((float)(PlayerController.health) / (float)(PlayerController.maxHealth) * 26f), 0, 100)];
         }
         else {
             srHealth.sprite = spriteArray[0];
@@ -64,10 +64,12 @@ public class HUDController : MonoBehaviour
         }
     }
 
+    /*
     void TakeDamage()
     {
         if (Input.GetKeyDown(KeyCode.G)){
             PlayerController.health -= 5;
         }
     }
+    */
 }

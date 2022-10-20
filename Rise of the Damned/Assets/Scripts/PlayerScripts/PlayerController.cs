@@ -350,7 +350,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerController.controller.invuln > 0 || damage <= 0)
             return false;
-        PlayerController.health -= damage - PlayerController.armor;
+        PlayerController.health -= Mathf.Max(damage - PlayerController.armor, 0);
         PlayerController.controller.invuln = PlayerController.controller.invulnTime;
         PlayerController.controller.redTime = .2f;
         PlayerController.controller.sr.color = Color.red;

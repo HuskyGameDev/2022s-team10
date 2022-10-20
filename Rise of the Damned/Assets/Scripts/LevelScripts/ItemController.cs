@@ -51,7 +51,7 @@ public class ItemController : MonoBehaviour
         if (other.gameObject.name.Equals("Player"))
         { 
             if (CompareTag("HealthDrop")) {
-                if (PlayerController.health < PlayerController.maxHealth - 4) {
+                if (PlayerController.health < PlayerController.maxHealth - 9) {
                     PlayerController.health += 10;
                 } else {
                     PlayerController.health = PlayerController.maxHealth;
