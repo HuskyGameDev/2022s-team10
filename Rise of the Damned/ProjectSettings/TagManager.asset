@@ -70,3 +70,6 @@ TagManager:
   - name: ItemDrop
     uniqueID: 523853917
     locked: 0
+  - name: OptionsMenu
+    uniqueID: 1738332971
+    locked: 0

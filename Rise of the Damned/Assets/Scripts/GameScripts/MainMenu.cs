@@ -15,9 +15,12 @@ public class MainMenu : MonoBehaviour
     int selectNum = 0;
     public GameObject roomController;
 
+    public bool optionsOpen;
+
     void Start(){
         sr = GetComponent<SpriteRenderer>();
         Time.timeScale = 1;
+        optionsOpen = false;
     }
 
     void Update(){
@@ -49,6 +52,8 @@ public class MainMenu : MonoBehaviour
                     isSelected = false;
                 }
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
+                    optionsOpen = !optionsOpen;
+
                     Debug.Log("Options menu here");
                 }
 
