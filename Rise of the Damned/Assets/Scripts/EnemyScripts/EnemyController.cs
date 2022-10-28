@@ -224,7 +224,7 @@ public abstract class EnemyController : MonoBehaviour
             state = State.Attack;
         }
     }
-
+    /*
     public void TurnAround()
     {
         direction.x *= -1;
@@ -238,6 +238,38 @@ public abstract class EnemyController : MonoBehaviour
         direction.x = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
         velocity.x = 0;
     }
+    */
+
+    public void TurnAround()
+    {
+        direction.x *= -1;
+        //GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX; only flips the sprite and not hit boxes of animations
+        Vector3 rotation = transform.eulerAngles;
+        if (direction.x == -1)
+        {
+            rotation.y = 180f;
+        } else if (direction.x == 1)
+        {
+            rotation.y = 0f;
+        }
+        transform.eulerAngles = rotation;
+        velocity.x = 0;
+    }
+
+    public void FacePlayer()
+    {
+        Vector3 rotation = transform.eulerAngles;
+        direction.x = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
+        if (direction.x == -1)
+        {
+            rotation.y = 180f;
+        } else if (direction.x == 1)
+        {
+            rotation.y = 0f;
+        }
+        transform.eulerAngles = rotation;
+        velocity.x = 0;
+    }
 
     public bool CheckGround()
     {
@@ -248,7 +280,13 @@ public abstract class EnemyController : MonoBehaviour
     }
     public bool CheckWall() // returns true if there is a wall, false if there is no wall
     {
-        return Physics2D.OverlapCircle(direction.x == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer) != null;
+        //return Physics2D.OverlapCircle(direction.x == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer) != null;
+        return Physics2D.OverlapCircle(wallChecker2.position, checkGroundRadius, wallLayer) != null;
+    }
+    public bool CheckEdge() // returns false if on an edge true if not near an edge
+    {
+        //return Physics2D.OverlapCircle(direction.x == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
+        return Physics2D.OverlapCircle(groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
 
     public void TakeDamage(float damage)
@@ -261,10 +299,6 @@ public abstract class EnemyController : MonoBehaviour
         }
     }
 
-    public bool CheckEdge() // returns false if on an edge true if not near an edge
-    {
-        return Physics2D.OverlapCircle(direction.x == -1 ? groundChecker1.position : groundChecker2.position, checkGroundRadius, groundLayer) != null;
-    }
     private Coroutine knocked; //knockback coroutine
     public void Knockback(float knockback, Transform knockback_location)
     {

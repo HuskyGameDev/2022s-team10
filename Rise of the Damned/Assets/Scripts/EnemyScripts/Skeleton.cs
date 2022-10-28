@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigImp : EnemyController
+public class Skeleton : EnemyController
 {
+
     private Coroutine stateUpdate; //calls the coroutine for the state of the enemy
     [SerializeField]
     bool isAttacking = true;
@@ -14,7 +15,6 @@ public class BigImp : EnemyController
 
     [Header("Animations")]
     public Animator animator;
-
 
     // Update is called once per frame
     public override void Update2()
@@ -50,7 +50,7 @@ public class BigImp : EnemyController
             if (stateUpdate != null) { StopCoroutine(stateUpdate); }
             stateUpdate = StartCoroutine(Agro());
         }
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking 
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking
             || Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) < .5)
         {
             state = defaultState;
@@ -81,7 +81,7 @@ public class BigImp : EnemyController
             {
                 hitEdge = false;
             }
-            yield return new WaitForSeconds(1/4);
+            yield return new WaitForSeconds(1 / 4);
 
             while (!hitEdge) // loop until hit a wall or edge
             {
@@ -147,7 +147,7 @@ public class BigImp : EnemyController
 
                 rb.velocity = velocity;
 
-                
+
 
                 yield return new WaitForEndOfFrame();
             }
@@ -161,7 +161,7 @@ public class BigImp : EnemyController
 
         animator.SetBool("isAttacking", true); // starts swinging animation
 
-        yield return new WaitForSeconds(1/2);
+        yield return new WaitForSeconds(1 / 2);
 
         animator.SetBool("isAttacking", false); // starts swinging animation
         isSwinging = false;
