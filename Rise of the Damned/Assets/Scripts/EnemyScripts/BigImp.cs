@@ -19,6 +19,16 @@ public class BigImp : EnemyController
     // Update is called once per frame
     public override void Update2()
     {
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking
+            || Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) < .5)
+        {
+            state = defaultState;
+        }
+        else if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist && !isAttacking //far enough away from player
+            && Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) > .5) //and not under or over the player
+        {
+            state = State.Attack;
+        }
 
     }
 
@@ -30,11 +40,7 @@ public class BigImp : EnemyController
             if (stateUpdate != null) { StopCoroutine(stateUpdate); }
             stateUpdate = StartCoroutine(Idle());
         }
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist && !isAttacking //far enough away from player
-            && Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) > .5) //and not under or over the player
-        {
-            state = State.Attack;
-        }
+
     }
 
     public override void Attack()
@@ -50,11 +56,14 @@ public class BigImp : EnemyController
             if (stateUpdate != null) { StopCoroutine(stateUpdate); }
             stateUpdate = StartCoroutine(Agro());
         }
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking 
-            || Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) < .5)
-        {
-            state = defaultState;
-        }
+        
+    }
+
+    public override void Swinging()
+    {
+        base.Swinging();
+
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -18,7 +18,7 @@ public abstract class EnemyController : MonoBehaviour
     public float knockback_resistance = 1f; // divides knockback by resistance
     [SerializeField]
     protected float max_speed = 3f;
-    public enum State { Wander, Attack, Stay };
+    public enum State { Wander, Attack, Stay, Swing };
     [Header("Enemy AI")]
     public State defaultState;
     public float aggroDist;
@@ -76,6 +76,7 @@ public abstract class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         switch (state)  //do different things based on the current state
         {
             case State.Wander:
@@ -83,6 +84,9 @@ public abstract class EnemyController : MonoBehaviour
                 break;
             case State.Attack:
                 Attack();
+                break;
+            case State.Swing: //for attack animation
+                Swinging();
                 break;
             case State.Stay:
                 Stay();
@@ -93,7 +97,27 @@ public abstract class EnemyController : MonoBehaviour
         }
 
 
+        IFrames();
 
+        this.Update2();
+    }
+
+    public virtual void Update2()
+    {
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5)
+        {
+            state = defaultState;
+        } 
+        else if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
+        {
+            state = State.Attack;
+        }
+    }
+
+    public void Substate() { }
+
+    public void IFrames()
+    {
         if (health <= 0)
         {
             Die();
@@ -105,12 +129,7 @@ public abstract class EnemyController : MonoBehaviour
             if (redTime <= 0)
                 sr.color = Color.white;
         }
-
-        this.Update2();
     }
-
-    public abstract void Update2();
-    public void Substate() { }
 
     public void Die()
     {
@@ -178,18 +197,19 @@ public abstract class EnemyController : MonoBehaviour
         }
             
 
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5)
-        {
-            state = defaultState;
-        }
+        
     }
 
     public void Stay()
     {
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
+        desired_velocity = new Vector2(0f, 0f);
+        if (!receivingKnockback)
         {
-            state = State.Attack;
+            velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
         }
+
+        rb.velocity = velocity;
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -219,26 +239,13 @@ public abstract class EnemyController : MonoBehaviour
 
         if (!CheckEdge() || CheckWall())
             TurnAround();
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist)
-        {
-            state = State.Attack;
-        }
+        
     }
-    /*
-    public void TurnAround()
+    
+    public virtual void Swinging()
     {
-        direction.x *= -1;
-        GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
-        velocity.x = 0;
-    }
 
-    public void FacePlayer()
-    {
-        GetComponent<SpriteRenderer>().flipX = PlayerController.player.transform.position.x < transform.position.x;
-        direction.x = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
-        velocity.x = 0;
     }
-    */
 
     public void TurnAround()
     {

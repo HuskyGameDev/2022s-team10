@@ -16,7 +16,15 @@ public class Imp : EnemyController
        // Update is called once per frame
     public override void Update2()
     {
-
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking)
+        {
+            state = defaultState;
+        }
+        else if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < aggroDist && !isAttacking //far enough away from player
+            && Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) > .5) //and not under or over the player
+        {
+            state = State.Attack;
+        }
     }
 
     public override void Wander()
@@ -44,10 +52,6 @@ public class Imp : EnemyController
             stateUpdate = StartCoroutine(Agro());
         }
 
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking)
-        {
-            state = defaultState;
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
@@ -129,12 +133,7 @@ public class Imp : EnemyController
         }
     }
 
-    public new void TurnAround()
-    {
-        direction.x *= -1;
-        GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
-        velocity.x = 0;
-    }
+
 
 
 }
