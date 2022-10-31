@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class FireGuppy : EnemyController
 {
-
     private Coroutine stateUpdate; //calls the coroutine for the state of the enemy
     bool isIdle = true;
     bool isAttacking = false;
 
     [SerializeField]
     float attackCooldown = 1f;
+
+    [SerializeField]
+    private GameObject fireball;
+    [SerializeField]
+    private Transform FireballSpawnPos;
+
+    [SerializeField]
+    private float projDmg;
+    [SerializeField]
+    private int bounceLimit = 3;
 
     [Header("Animations")]
     public Animator animator;
@@ -53,30 +62,40 @@ public class FireGuppy : EnemyController
     IEnumerator Idle()
     {
         FacePlayer();
-        animator.SetBool("isAttacking", false); // ends swinging animation
 
-        animator.SetBool("PopIn", true); // goes back into the ground
-        animator.SetBool("PopIn", false);
+        animator.SetTrigger("PopIn"); // goes back into the ground
 
         yield return new WaitForSeconds(0);
     }
 
     IEnumerator Agro()
     {
-        animator.SetBool("PopOut", true); // comes out of the ground
-        animator.SetBool("PopOut", false);
+        FacePlayer();
+        animator.SetTrigger("PopOut"); // comes out of the ground
 
-        yield return new WaitForSeconds(2);
-
-        animator.SetBool("isAttacking", true);
-        animator.SetBool("isAttacking", false);
+        yield return new WaitForSeconds(1);
 
         while (true)
         {
             FacePlayer();
-            //shoot at player
+
+            animator.SetTrigger("Attack"); // start attack animation
+
+            yield return new WaitForSeconds(8f / 15); // waits till the animation from where the guppy spits the fireball
+            //spit the fireball
+
+            GameObject spit = Instantiate(fireball, FireballSpawnPos.position, Quaternion.identity);
+            spit.GetComponent<EnemyProjController>().damage = projDmg;
+            spit.GetComponent<BouncyFireBall>().direction = (int) direction.x;
+            spit.GetComponent<BouncyFireBall>().bounceLimit = bounceLimit;
+
+            yield return new WaitForSeconds(attackCooldown); // wait for attack cooldown
         }
-        yield return new WaitForSeconds(0);
     }
 
+
+    public override void Knockback(float knockback, Transform knockback_location)
+    {
+        // does not receive knockback
+    }
 }

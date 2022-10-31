@@ -60,6 +60,63 @@ Transform:
   m_Father: {fileID: 9101377097481578126}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1453800878379172513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 263205429129265565}
+  - component: {fileID: 395979231224719186}
+  m_Layer: 14
+  m_Name: EnemyCollider2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &263205429129265565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453800878379172513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9101377098143819985}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &395979231224719186
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453800878379172513}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.069396704, y: -0.9001739}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.591551, y: 0.18310213}
+  m_EdgeRadius: 0
 --- !u!1 &2809712497679154488
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +177,36 @@ Transform:
   m_Father: {fileID: 9101377097481578126}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3780948042055299434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1621497619063144200}
+  m_Layer: 14
+  m_Name: FireballSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1621497619063144200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3780948042055299434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.612, y: 0.128, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9101377097481578126}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9101377097481578121
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9101377097481578126}
+  - component: {fileID: 7051654523490946255}
   m_Layer: 14
   m_Name: EnemyCollider
   m_TagString: Untagged
@@ -152,9 +240,36 @@ Transform:
   - {fileID: 1493438555585402844}
   - {fileID: 5846657376050391756}
   - {fileID: 9101377098560758816}
+  - {fileID: 1621497619063144200}
   m_Father: {fileID: 9101377098143819985}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7051654523490946255
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101377097481578121}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.057500124, y: -0.8089669}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3529315, y: 0.35758543}
+  m_EdgeRadius: 0
 --- !u!1 &9101377098143819999
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +303,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9101377097481578126}
+  - {fileID: 263205429129265565}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -307,7 +423,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &9101377098143819996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +442,7 @@ MonoBehaviour:
   knockback_resistance: 1
   max_speed: 3
   defaultState: 0
-  aggroDist: 6
+  aggroDist: 8
   flying: 0
   max_acceleration: 30
   max_speed_change: 0
@@ -347,7 +463,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   collisionPoint: {fileID: 9101377098560758816}
-  attackCooldown: 1
+  attackCooldown: 2
+  fireball: {fileID: 6131175400171677632, guid: 9baa314cab3fb2942b3d0b38f52b1a7c, type: 3}
+  FireballSpawnPos: {fileID: 1621497619063144200}
+  projDmg: 10
+  bounceLimit: 3
   animator: {fileID: 9101377098143819987}
 --- !u!1 &9101377098560758819
 GameObject:

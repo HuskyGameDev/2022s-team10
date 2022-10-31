@@ -307,7 +307,7 @@ public abstract class EnemyController : MonoBehaviour
     }
 
     private Coroutine knocked; //knockback coroutine
-    public void Knockback(float knockback, Transform knockback_location)
+    public virtual void Knockback(float knockback, Transform knockback_location)
     {
         receivingKnockback = true;
         float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy

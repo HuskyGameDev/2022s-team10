@@ -7,12 +7,12 @@ public class EnemyProjController : MonoBehaviour
     private Vector3 movePos;
     public float speed;
     [SerializeField]
-    private float lifespan, knockback;
+    protected float lifespan, knockback;
     [System.NonSerialized]
     public float damage;
     private bool moveTowardsPoint = true;
 
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
