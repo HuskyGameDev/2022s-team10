@@ -70,6 +70,7 @@ public class PauseMenu : MonoBehaviour
                             isSelected = false;
                         }
                         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)){
+                            Time.timeScale = 1;
                             SceneManager.LoadScene("MainMenu");
                         }
 
