@@ -401,7 +401,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &138584883
 RectTransform:
@@ -476,12 +476,13 @@ GameObject:
   - component: {fileID: 507639865}
   - component: {fileID: 507639864}
   - component: {fileID: 507639863}
+  - component: {fileID: 507639867}
   m_Layer: 5
   m_Name: OptionExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &507639863
 MonoBehaviour:
@@ -585,6 +586,18 @@ RectTransform:
   m_AnchoredPosition: {x: -512, y: 191}
   m_SizeDelta: {x: 343.99, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &507639867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507639862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64a5ed6d9b3f4e4cbe50cab3a15e17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &520519491
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +613,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!212 &520519492
 SpriteRenderer:
@@ -684,7 +697,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &577594115
 MonoBehaviour:
@@ -715,11 +728,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1540, y: 866}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -738,7 +751,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 889205678}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -855,7 +868,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 0
 --- !u!224 &763428585
 RectTransform:
@@ -895,7 +908,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &845976422
 RectTransform:
@@ -1091,7 +1104,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &929983946
 RectTransform:
@@ -1170,7 +1183,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &962336883
 RectTransform:
@@ -1249,7 +1262,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1073247918
 MonoBehaviour:
@@ -1266,17 +1279,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_PointAction: {fileID: -5084680979986770990, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_MoveAction: {fileID: 6447643781399520367, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_SubmitAction: {fileID: 6409796141859261137, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_CancelAction: {fileID: -3663933707259454121, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_LeftClickAction: {fileID: -4669947244112808500, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_MiddleClickAction: {fileID: -8969902141147633106, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_RightClickAction: {fileID: 4867348920817486346, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_ScrollWheelAction: {fileID: -1254425107139334003, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_TrackedDevicePositionAction: {fileID: -9063453234275807717, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: -1636503754430222151, guid: 41eb96c4ca2486b4d885dfd74a8e8b0c, type: 3}
   m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
 --- !u!114 &1073247919
@@ -1320,12 +1333,13 @@ GameObject:
   - component: {fileID: 1095405859}
   - component: {fileID: 1095405858}
   - component: {fileID: 1095405857}
+  - component: {fileID: 1095405860}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1095405856
 RectTransform:
@@ -1441,6 +1455,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1095405855}
   m_CullTransparentMesh: 1
+--- !u!114 &1095405860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095405855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64a5ed6d9b3f4e4cbe50cab3a15e17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1112823069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,12 +1479,13 @@ GameObject:
   - component: {fileID: 1112823073}
   - component: {fileID: 1112823072}
   - component: {fileID: 1112823071}
+  - component: {fileID: 1112823074}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1112823070
 RectTransform:
@@ -1598,6 +1625,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112823069}
   m_CullTransparentMesh: 1
+--- !u!114 &1112823074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112823069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64a5ed6d9b3f4e4cbe50cab3a15e17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1176642015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,7 +1735,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1226634484
 RectTransform:
@@ -1815,12 +1854,13 @@ GameObject:
   - component: {fileID: 1464191225}
   - component: {fileID: 1464191224}
   - component: {fileID: 1464191223}
+  - component: {fileID: 1464191226}
   m_Layer: 5
   m_Name: OptionsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1464191222
 RectTransform:
@@ -1960,6 +2000,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464191221}
   m_CullTransparentMesh: 1
+--- !u!114 &1464191226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464191221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64a5ed6d9b3f4e4cbe50cab3a15e17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1624630286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,7 +2027,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1624630287
 RectTransform:
@@ -2025,12 +2077,13 @@ GameObject:
   - component: {fileID: 1736451785}
   - component: {fileID: 1736451784}
   - component: {fileID: 1736451783}
+  - component: {fileID: 1736451786}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1736451782
 RectTransform:
@@ -2146,6 +2199,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736451781}
   m_CullTransparentMesh: 1
+--- !u!114 &1736451786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736451781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64a5ed6d9b3f4e4cbe50cab3a15e17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2048670821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,7 +2227,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &2048670822
 RectTransform:
@@ -2241,7 +2306,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &2065347590
 RectTransform:
