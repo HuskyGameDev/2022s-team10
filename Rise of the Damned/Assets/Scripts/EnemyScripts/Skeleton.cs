@@ -6,7 +6,6 @@ public class Skeleton : EnemyController
 {
 
     private Coroutine stateUpdate; //calls the coroutine for the state of the enemy
-    [SerializeField]
     bool isIdle = false;
     bool isAttacking = true;
     bool isSwinging = false;

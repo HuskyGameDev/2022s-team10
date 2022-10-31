@@ -5,7 +5,6 @@ using UnityEngine;
 public class BigImp : EnemyController
 {
     private Coroutine stateUpdate; //calls the coroutine for the state of the enemy
-    [SerializeField]
     bool isIdle = false;
     bool isAttacking = true;
     bool isSwinging = false;
@@ -77,18 +76,6 @@ public class BigImp : EnemyController
         }
 
     }
-    /*
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (PlayerController.TakeDamage(damage))
-            {
-                PlayerController.controller.Knockback(knockback, gameObject.transform);
-            }
-        }
-    }
-    */
     IEnumerator Idle()
     {
         animator.SetBool("isAttacking", false); // ends swinging animation
