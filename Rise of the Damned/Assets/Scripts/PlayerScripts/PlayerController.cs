@@ -153,18 +153,19 @@ public class PlayerController : MonoBehaviour
             facingLeft = true;
             facingRight = false;
             gameObject.transform.localScale = new Vector2(-1, 1);
-            //GetComponent<SpriteRenderer>().flipX = true;
-        } else if (Input.GetKey(KeyCode.D)) {
+        } 
+        else if (Input.GetKey(KeyCode.D)) {
             direction.x = 1;
             facingLeft = false;
             facingRight = true;
             gameObject.transform.localScale = new Vector2(1, 1);
-            //GetComponent<SpriteRenderer>().flipX = true;
-        } else if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.D)) {
+        } 
+        else if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.D)) {
             direction.x = 0;
-            if (isGrounded) {    //creates dust on hard turn
-                CreateDust();
-            }
+        }
+        if (isGrounded && Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+        {
+            CreateDust();
         }
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) {
             isJumping = true;
