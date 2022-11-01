@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
-{
+{ 
+    private PlayerInput playerInput;
+    private InputAction moveAction, jumpAction, pauseAction;
+
     public GameObject roomController;
     public static GameObject player;    //static variables to be easily referenced elsewhere
     public static float health, maxHealth, meleeDamage, rangedDamage, armor, x;
@@ -109,6 +113,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.actions["Move"];
+        jumpAction = playerInput.actions["Jump"];
+        pauseAction = playerInput.actions["Pause"];
+
         player = gameObject;
         controller = this;
         //default player stats
@@ -123,6 +132,7 @@ public class PlayerController : MonoBehaviour
         thisCollider = GetComponent<Collider2D>();
         gravityStore = rb.gravityScale;
      
+
     }
 
     // Update is called once per frame
@@ -131,7 +141,7 @@ public class PlayerController : MonoBehaviour
         roomNum = (int)((transform.position.y + 12)/18);
         //Debug.Log(roomNum); it spamming it bruh 
         if (!isPaused){
-            InputController();
+            MoveInput();
             Move();
             Jump();
             CheckIfGrounded();
@@ -142,37 +152,26 @@ public class PlayerController : MonoBehaviour
             GameOver();
         }
         Pause();
-
-        
-
     }
 
-    private void InputController() {
-        if (Input.GetKey(KeyCode.A)) {
-            direction.x = -1;
+    public void MoveInput(){
+        direction = moveAction.ReadValue<Vector2>();
+
+        if (direction.x == 1){
+            facingRight = true;
+            facingLeft = false;
+            gameObject.transform.localScale = new Vector2(1, 1);
+        } else if (direction.x == -1) {
             facingLeft = true;
             facingRight = false;
             gameObject.transform.localScale = new Vector2(-1, 1);
-        } 
-        else if (Input.GetKey(KeyCode.D)) {
-            direction.x = 1;
-            facingLeft = false;
-            facingRight = true;
-            gameObject.transform.localScale = new Vector2(1, 1);
-        } 
-        else if (!Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.D)) {
-            direction.x = 0;
         }
-        if (isGrounded && Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-        {
+        if (direction.x != 0 && isGrounded){
             CreateDust();
         }
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) {
+        if (jumpAction.triggered){
             isJumping = true;
-            //Debug.Log("Jump");
         }
-
-
     }
 
     private void Move() {
@@ -264,7 +263,7 @@ public class PlayerController : MonoBehaviour
         if (collider2 != null) { 
             nearAWall = true; 
 
-            if( Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) ){
+            if( moveAction.ReadValue<Vector2>().x != 0 ){
                 rb.gravityScale = gravityChangeNearWall; 
                 wallSliding = true;
             }
@@ -301,9 +300,7 @@ public class PlayerController : MonoBehaviour
 
     void BetterJump()
     {
-        bool jumpButton = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W);
-
-        if (nearAWall && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)))
+        if (nearAWall && (moveAction.ReadValue<Vector2>().x != 0))
         { // when near a wall dont screw with the jump
             return;
         }
@@ -312,7 +309,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !jumpButton)
+        else if (rb.velocity.y > 0 && !(jumpAction.ReadValue<float>() != 0))
         {
             rb.velocity += (lowJumpMultiplier - 1) * Time.deltaTime * Physics2D.gravity * Vector2.up;
         }
@@ -375,10 +372,10 @@ public class PlayerController : MonoBehaviour
 
     void Pause()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused){
+        if (pauseAction.triggered && !isPaused){
             isPaused = true;
             Time.timeScale = 0;
-        } else if (Input.GetKeyDown(KeyCode.Escape) && isPaused){
+        } else if (pauseAction.triggered && isPaused){
             isPaused = false;
             Time.timeScale = 1;
         }
