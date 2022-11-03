@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AttackController : MonoBehaviour
 {
@@ -18,19 +19,28 @@ public class AttackController : MonoBehaviour
     private PlayerController pcontroller;
     private Collider2D thisCollider;
 
+    private PlayerInput playerInput;
+    private InputAction swapAction, attackAction, pickupAction;
+    private bool usingRanged = false; // 1 or 0, checks if bow is "equipped", currently only toggles between using ranged or melee
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         pcontroller = GetComponent<PlayerController>();
         thisCollider = GetComponent<Collider2D>();
+
+        playerInput = GetComponent<PlayerInput>();
+        pickupAction = playerInput.actions["Pickup"];
+        swapAction = playerInput.actions["Swap"];
+        attackAction = playerInput.actions["Attack"];
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!PlayerController.isPaused){
-            if(Input.GetKeyDown(KeyCode.F) && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null)
+            if(attackAction.triggered && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null && !usingRanged)
             {
                 GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
                 SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
@@ -41,22 +51,23 @@ public class AttackController : MonoBehaviour
                 }
                 swipe.GetComponent<WeaponController>().rotSpeed = equippedWeapon.GetComponent<ItemController>().meleeSpeed;
             }
-            if(Input.GetKeyDown(KeyCode.E) && equippedBow != null)
+            if(attackAction.triggered && equippedBow != null && usingRanged)
             {
+                Vector2 dir = attackAction.ReadValue<Vector2>();
                 GameObject shoot = Instantiate(equippedBow.GetComponent<ItemController>().arrow, transform.position, Quaternion.identity);
                 int shootAngle = 90;
                 int diff = 80;
-                if (Input.GetKey(KeyCode.UpArrow))
+                if (dir.y == 1)
                     diff = 45;
-                else if (Input.GetKey(KeyCode.DownArrow))
+                else if (dir.y == -1)
                 {
                     shootAngle = 270;
                     diff = -45;
                 }
 
-                if (Input.GetKey(KeyCode.RightArrow))
+                if (dir.x == 1)
                     shootAngle -= diff;
-                if (Input.GetKey(KeyCode.LeftArrow))
+                if (dir.x == -1)
                     shootAngle += diff;
 
                 if (shootAngle == 90 && diff == 80)
@@ -67,9 +78,12 @@ public class AttackController : MonoBehaviour
                 shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
                 shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
             }
-            if (Input.GetKeyDown(KeyCode.R))
+            if (pickupAction.triggered)
             {
                 PickupItem();
+            }
+            if (swapAction.triggered){
+                usingRanged = !usingRanged;
             }
         }
     }
