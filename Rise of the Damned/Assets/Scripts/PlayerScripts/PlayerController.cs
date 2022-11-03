@@ -109,6 +109,8 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine knockback_r;
 
+    public GameObject pauseMenu;
+    public GameObject optionsMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -373,12 +375,29 @@ public class PlayerController : MonoBehaviour
     void Pause()
     {
         if (pauseAction.triggered && !isPaused){
-            isPaused = true;
-            Time.timeScale = 0;
-        } else if (pauseAction.triggered && isPaused){
-            isPaused = false;
-            Time.timeScale = 1;
+            Paused();
+        } 
+        else if (pauseAction.triggered && isPaused){
+            Resumed();
         }
+    }
+
+    void Paused(){
+        isPaused = true;
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+        optionsMenu.SetActive(false);
+    }
+
+    public void Resumed(){
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        isPaused = false;
+        Time.timeScale = 1;
+    }
+
+    public void Quit(){
+        SceneManager.LoadScene("MainMenu");
     }
 
     void GameOver()
