@@ -5,6 +5,7 @@ using UnityEngine;
 public class NewRoomGovernor : MonoBehaviour
 {
     public RoomSet[] roomSets;  //holds each set of rooms to be generated in the current level
+    public GameObject bossRoom; //hold the boss room to be put at the end of the level generation
 
     [System.Serializable]
     /*
@@ -46,6 +47,8 @@ public class NewRoomGovernor : MonoBehaviour
                 offset.y += roomHeight;
             }
         }
+
+        Instantiate(bossRoom, offset, Quaternion.identity); //Instantiate the bossroom at the top
     }
 
     // Update is called once per frame

@@ -170,7 +170,7 @@ MonoBehaviour:
   - {x: 0.5, y: -2.5, z: 0}
   m_ShapePathHash: -187565331
   m_Mesh: {fileID: 0}
-  m_InstanceId: 379344
+  m_InstanceId: 141290
 --- !u!1 &4410478999998893867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,7 +1504,7 @@ GameObject:
   - component: {fileID: 2448516136256350089}
   m_Layer: 6
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
