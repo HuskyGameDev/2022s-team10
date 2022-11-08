@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Lava : MonoBehaviour
 {
-    [Header("Default: 10dmg, 14kb")]
-    public float damage;
-    public float knockback;
+    public float damage = 10f;
+    public float knockback = 12f;
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.CompareTag("Player")) { //if player collides with lava
             PlayerController.TakeDamage(damage);
             //knockback
-            collision.rigidbody.velocity += new Vector2(0, knockback);
+            PlayerController.controller.SpikeKnockback(knockback, new Vector2(0, 1));
             PlayerController.controller.CreateDust();
         }
     }

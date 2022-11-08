@@ -160,16 +160,21 @@ public class PlayerController : MonoBehaviour
         direction = moveAction.ReadValue<Vector2>();
 
         if (direction.x == 1){
+            if(facingLeft && isGrounded)
+            {
+                CreateDust();
+            }
             facingRight = true;
             facingLeft = false;
             gameObject.transform.localScale = new Vector2(1, 1);
         } else if (direction.x == -1) {
+            if (facingRight && isGrounded)
+            {
+                CreateDust();
+            }
             facingLeft = true;
             facingRight = false;
             gameObject.transform.localScale = new Vector2(-1, 1);
-        }
-        if (direction.x != 0 && isGrounded){
-            CreateDust();
         }
         if (jumpAction.triggered){
             isJumping = true;
@@ -420,6 +425,16 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(new Vector2(knockback * -horizontal_enemy_direction, knockback * -vertical_enemy_direction * (float).75), ForceMode2D.Impulse);
         Invoke("SetReceivingKnockback", knockback_time);
     }
+
+    public void SpikeKnockback(float knockback, Vector2 knockbackdir)
+    {
+        receivingKnockback = true;
+        
+
+        rb.AddForce(new Vector2(knockback * knockbackdir.x, knockback * knockbackdir.y), ForceMode2D.Impulse);
+        Invoke("SetReceivingKnockback", knockback_time);
+    }
+
     private void SetReceivingKnockback()
     {
         receivingKnockback = false;

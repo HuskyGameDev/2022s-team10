@@ -5,17 +5,18 @@ using UnityEngine;
 public class Spikes : MonoBehaviour
 {
     [Header("Default: 10dmg, 3kb")]
-    //public float offsetX, offsetY;
-    public float damage;
-    public float knockback;
+    public float damage = 10f;
+    public float knockback = 8f;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.tag.Equals("Player")) { //if player collides with spikes
             PlayerController.TakeDamage(damage);
 
 
+            
 
 
+            /*
             //knockback
             //if (!name.ToLower().Contains("wall"))
                 collision.attachedRigidbody.velocity = new Vector2(
