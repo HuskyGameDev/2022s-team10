@@ -2634,6 +2634,7 @@ Transform:
   m_Children:
   - {fileID: 1642752362323197729}
   - {fileID: 1642752361328873338}
+  - {fileID: 5872542650484372306}
   m_Father: {fileID: 1642752361953901813}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2902,6 +2903,7 @@ GameObject:
   - component: {fileID: 1642752361280041069}
   - component: {fileID: 1642752361280041066}
   - component: {fileID: 1642752361280041067}
+  - component: {fileID: 5982549122935241933}
   m_Layer: 10
   m_Name: Lucifer
   m_TagString: Enemy
@@ -3046,6 +3048,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!114 &5982549122935241933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642752361280041065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e5b7a6388a9d5244a46593a1341a9b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spikeWavePrefab: {fileID: 4010762365942662653, guid: e23936ffbbf6a3f4a9dc8bc6e70a7ec0, type: 3}
+  moveRange: {x: 1.3, y: 3.5}
 --- !u!1 &1642752361320392015
 GameObject:
   m_ObjectHideFlags: 0
@@ -8834,7 +8850,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 000000001f101e6b
   m_LightCookieSprite: {fileID: 0}
@@ -9364,6 +9380,7 @@ GameObject:
   - component: {fileID: 1642752362706595328}
   - component: {fileID: 1642752362706595329}
   - component: {fileID: 1642752362706595342}
+  - component: {fileID: 4920458207825559768}
   m_Layer: 14
   m_Name: StartBossTrigger
   m_TagString: PlayerTrigger
@@ -9480,8 +9497,40 @@ MonoBehaviour:
   moveSpeed: 1
   entranceBlocker: {fileID: 1642752362512450812}
   transLight: {fileID: 1642752361328873339}
+  rlight: {fileID: 1642752362323197742}
+  elight: {fileID: 8946953190125413588}
   ewalls: {fileID: 2262540010544594342}
   cameraShakeMagnitude: 3
+--- !u!114 &4920458207825559768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642752362706595340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: efbc870a18b385149b82ff66e7b1a408, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1642752362766246776
 GameObject:
   m_ObjectHideFlags: 0
@@ -11704,3 +11753,75 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8946953190125413588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5872542650484372306}
+  - component: {fileID: 98505554748783932}
+  m_Layer: 0
+  m_Name: Exterior Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5872542650484372306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8946953190125413588}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.041996, y: -1.9033546, z: 78.7113}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1642752361062396637}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &98505554748783932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8946953190125413588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.6
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 000000001f101e6b
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -18, y: -10, z: 0}
+  - {x: 18, y: -10, z: 0}
+  - {x: 18, y: 11, z: 0}
+  - {x: -18, y: 11, z: 0}

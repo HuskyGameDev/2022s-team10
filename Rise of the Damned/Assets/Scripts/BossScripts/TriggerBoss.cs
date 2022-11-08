@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 public class TriggerBoss : MonoBehaviour
 {
@@ -16,15 +17,21 @@ public class TriggerBoss : MonoBehaviour
 
     public GameObject entranceBlocker;
     public GameObject transLight;
+    public GameObject rlight;
+    public GameObject elight;
     public GameObject ewalls;
     [SerializeField]
     private float cameraShakeMagnitude;
 
     private Vector3 blockerToPoint;
     private Light2D lightSource;
+    private Light2D elightSource;
+    private Light2D rlightSource;
 
     private float timeStart = 4;
     private float timeLeft;
+
+    private PlayerInput playerInput;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +41,8 @@ public class TriggerBoss : MonoBehaviour
         bossToPoint = boss.transform.position;
         bossToPoint.y += 7;
         lightSource = transLight.GetComponent<Light2D>();
+        elightSource = elight.GetComponent<Light2D>();
+        rlightSource = rlight.GetComponent<Light2D>();
 
         boss.GetComponent<Rigidbody2D>().sleepMode = RigidbodySleepMode2D.StartAsleep;
         boss.GetComponent<Rigidbody2D>().Sleep();
@@ -41,8 +50,11 @@ public class TriggerBoss : MonoBehaviour
         boss.SetActive(false);
 
         ewalls.SetActive(false);
+        elight.SetActive(false);
 
         timeLeft = timeStart;
+
+        playerInput = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
@@ -62,11 +74,13 @@ public class TriggerBoss : MonoBehaviour
                 isActive = true;
 
                 ewalls.SetActive(true);
+                elight.SetActive(true);
+                rlight.SetActive(false);
 
                 cameraShake init = FindObjectOfType<cameraShake>();
                 init.shakeCamera(cameraShakeMagnitude, timeLeft);
 
-                Debug.Log("active");
+                //Debug.Log("active");
 
                 boss.SetActive(true);
 
@@ -83,6 +97,8 @@ public class TriggerBoss : MonoBehaviour
             boss.transform.position = Vector3.MoveTowards(boss.transform.position, bossToPoint, Time.deltaTime * (7f / timeStart));
 
             lightSource.intensity = (timeLeft / timeStart) * 10;
+            elightSource.intensity = 0.6f + (1 - (timeLeft / timeStart)) * .25f;
+            //Debug.Log("elight intensity:" + elightSource.intensity);
 
             if (timeLeft <= 0)
             {
@@ -93,11 +109,15 @@ public class TriggerBoss : MonoBehaviour
 
                 boss.GetComponent<Rigidbody2D>().WakeUp();
                 boss.GetComponent<Collider2D>().enabled = true;
-                Debug.Log("starting");
+                //Debug.Log("starting");
+                Lucifer.StartBoss();
 
                 Destroy(gameObject);
             }
         }
+
+        if(playerInput.actions["Boss"].triggered)
+            PlayerController.player.transform.position = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -111,6 +131,6 @@ public class TriggerBoss : MonoBehaviour
 
         isTriggered = true;
 
-        Debug.Log("triggered");
+        //Debug.Log("triggered");
     }
 }
