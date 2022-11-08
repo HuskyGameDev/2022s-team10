@@ -23,6 +23,18 @@ public class AttackController : MonoBehaviour
     private InputAction swapAction, attackAction, pickupAction;
     private bool usingRanged = false; // 1 or 0, checks if bow is "equipped", currently only toggles between using ranged or melee
 
+    private bool wasHoldingAttack = false;
+    private int shootAngle;
+    private int diff;
+
+    public float bowHoldTime;
+    public float bowChargeTime;
+    private float currBowHoldTime = 0;
+
+    public float rememberDiagFor;
+    private Vector2 rememberDiagTime = Vector2.zero;
+    private Vector2 diagMemory = Vector2.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,32 +63,62 @@ public class AttackController : MonoBehaviour
                 }
                 swipe.GetComponent<WeaponController>().rotSpeed = equippedWeapon.GetComponent<ItemController>().meleeSpeed;
             }
-            if(attackAction.triggered && equippedBow != null && usingRanged)
+
+            if(IsHoldingAttack())
             {
+                rememberDiagTime += Vector2.one * Time.deltaTime;
+                if (rememberDiagTime.x >= rememberDiagFor)
+                    diagMemory.x = 0;
+                if (rememberDiagTime.y >= rememberDiagFor)
+                    diagMemory.y = 0;
+
                 Vector2 dir = attackAction.ReadValue<Vector2>();
-                GameObject shoot = Instantiate(equippedBow.GetComponent<ItemController>().arrow, transform.position, Quaternion.identity);
-                int shootAngle = 90;
-                int diff = 80;
-                if (dir.y == 1)
+                if (dir.x != 0)
+                {
+                    diagMemory.x = dir.x;
+                    rememberDiagTime.x = 0;
+                }
+                if (dir.y != 0)
+                {
+                    diagMemory.y = dir.y;
+                    rememberDiagTime.y = 0;
+                }
+
+
+                shootAngle = 90;
+                diff = 80;
+                if (diagMemory.y > 0 )
                     diff = 45;
-                else if (dir.y == -1)
+                else if (diagMemory.y < 0)
                 {
                     shootAngle = 270;
                     diff = -45;
                 }
 
-                if (dir.x == 1)
+                if (diagMemory.x > 0)
                     shootAngle -= diff;
-                if (dir.x == -1)
+                if (diagMemory.x < 0)
                     shootAngle += diff;
 
                 if (shootAngle == 90 && diff == 80)
                     shootAngle = pcontroller.facingRight ? 10 : 170;
-                
-                float projSpeed = shoot.GetComponent<ProjController>().projSpeed;
 
-                shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
-                shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
+                currBowHoldTime += Time.deltaTime;
+            }
+            else if(wasHoldingAttack)
+            {
+                if (currBowHoldTime >= bowHoldTime && equippedBow != null && usingRanged)
+                {
+                    GameObject shoot = Instantiate(equippedBow.GetComponent<ItemController>().arrow, transform.position, Quaternion.identity);
+
+                    float projSpeed = shoot.GetComponent<ProjController>().projSpeed * Mathf.Min(currBowHoldTime / bowChargeTime, 1);
+
+                    shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
+                    shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
+
+                    Debug.Log("Memory: " + diagMemory + "\t Time: " + rememberDiagTime);
+                }
+                currBowHoldTime = 0;
             }
             if (pickupAction.triggered)
             {
@@ -85,6 +127,8 @@ public class AttackController : MonoBehaviour
             if (swapAction.triggered){
                 usingRanged = !usingRanged;
             }
+
+            wasHoldingAttack = IsHoldingAttack();
         }
     }
 
@@ -153,5 +197,12 @@ public class AttackController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool IsHoldingAttack()
+    {
+        if (attackAction.ReadValue<Vector2>().x != 0)
+            return true;
+        return attackAction.ReadValue<Vector2>().y != 0;
     }
 }
