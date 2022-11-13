@@ -11,6 +11,8 @@ public class Lucifer : MonoBehaviour
     public GameObject spikeWavePrefab;
     private GameObject spikeWave;
 
+    public GameObject throwBlock;
+
     private float moveTimer;
     public Vector2 moveRange;
     
@@ -30,7 +32,7 @@ public class Lucifer : MonoBehaviour
             
             if(moveTimer <= 0)
             {
-                DoMove(Random.Range(0, 1));
+                DoMove(Random.Range(0, 2));
                 moveTimer = Random.Range(moveRange.x, moveRange.y);
             }
         }
@@ -56,6 +58,16 @@ public class Lucifer : MonoBehaviour
                 spikeWave.GetComponent<SpikeWave>().Run();
                 //Debug.Log("Doing Move 0");
                 //do animation here
+                break;
+            case 1: //block throw
+                GameObject block = Instantiate(throwBlock, transform.position, Quaternion.identity);
+                float diffX = PlayerController.player.transform.position.x - transform.position.x;
+                block.GetComponent<Rigidbody2D>().velocity = new Vector2(diffX * 1.5f, 0);
+                block.GetComponent<Rigidbody2D>().angularVelocity = diffX * -15;
+                Debug.Log("DiffX: " + diffX);
+                break;
+            case 2:
+
                 break;
         }
     }
