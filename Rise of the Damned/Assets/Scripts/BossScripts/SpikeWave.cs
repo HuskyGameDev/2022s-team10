@@ -9,11 +9,14 @@ public class SpikeWave : MonoBehaviour
     public float timePerSpike;
     public float multiplier;
     private List<float> waves = new List<float>();
+    private bool isGoingLeft = true;
+    private int numSpikes;
 
     // Start is called before the first frame update
     void Start()
     {
-       // time = -3 * timePerSpike;
+        // time = -3 * timePerSpike;
+        numSpikes = transform.childCount;
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class SpikeWave : MonoBehaviour
         {
            
             for(int i = 0; i < waves.Count; i++)
-                waves[i] += Time.deltaTime;
+                waves[i] += Time.deltaTime * (isGoingLeft ? 1: -1);
 
             foreach (Transform spike in transform)
             {
@@ -40,7 +43,7 @@ public class SpikeWave : MonoBehaviour
 
             for (int i = waves.Count - 1; i >= 0; i--)
             {
-                if (waves[i] / timePerSpike >= (transform.childCount) * timePerSpike && (transform.childCount - (waves[i] / timePerSpike)) * multiplier <= -3)
+                if (waves[i] < -3 * timePerSpike || (waves[i] / timePerSpike >= numSpikes * timePerSpike && (numSpikes - (waves[i] / timePerSpike)) * multiplier <= -3))
                 {
                     //isActive = false;
                     //Debug.Log("Time: " + waves[i] + "\tSpikes: " + transform.childCount + "\tRatio: " + (waves[i] / timePerSpike));
@@ -56,8 +59,13 @@ public class SpikeWave : MonoBehaviour
     public void Run()
     {
         isActive = true;
-        waves.Add(-3 * timePerSpike);
-        //Debug.Log("Running Spike Wave");
+        waves.Add(isGoingLeft ? -3 * timePerSpike : (3 + numSpikes) * timePerSpike);
+    }
+
+    public void ChangeDir(bool dir)
+    {
+        isGoingLeft = dir;
+        
     }
 
     private float GetSpikeY(int index, float time)
