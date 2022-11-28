@@ -96,7 +96,6 @@ public class Imp : EnemyController
     }
 
     IEnumerator Idle() {
-        direction.x = 1;
         while (true)
         {
             bool hitEdge = false;

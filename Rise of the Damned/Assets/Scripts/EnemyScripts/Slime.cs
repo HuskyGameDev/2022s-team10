@@ -70,7 +70,7 @@ public class Slime : EnemyController
 
         if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking)
         { //if slime is too far from the player then idle
-            state = defaultState;
+            state = State.Wander;
         }
     }
 
@@ -99,23 +99,25 @@ public class Slime : EnemyController
     IEnumerator Idle()
     {
         //int direction = 1;
+        /*
+                while (true)
+                {
+                    //beginning animation
 
-        while (true)
-        {
-            //beginning animation
+                    yield return new WaitForSeconds(2);
 
-            yield return new WaitForSeconds(2);
-
-            //move
-            rb.velocity = (new Vector2(max_speed * direction.x, 0));
-            //change direction
-            //direction *= -1;
-            //wait
-            while(!isGrounded) {
-                yield return new WaitForSeconds(1);
-            }
-            rb.velocity = (new Vector2(-rb.velocity.x, -rb.velocity.y));
-            yield return new WaitForSeconds(1);
-        }
+                    //move
+                    rb.velocity = (new Vector2(max_speed * direction.x, 0));
+                    //change direction
+                    //direction *= -1;
+                    //wait
+                    while(!isGrounded) {
+                        yield return new WaitForSeconds(1);
+                    }
+                    rb.velocity = (new Vector2(-rb.velocity.x, -rb.velocity.y));
+                    yield return new WaitForSeconds(1);
+                }
+        */
+        yield return new WaitForSeconds(0);
     }
 }

@@ -301,11 +301,12 @@ MonoBehaviour:
   damage: 10
   health: 10
   knockback: 10
-  max_speed: 3
+  knockback_resistance: 1
+  max_speed: 1
   defaultState: 0
   aggroDist: 6
   flying: 0
-  max_acceleration: 30
+  max_acceleration: 3
   max_speed_change: 0
   knockback_time: 1
   drops: []
