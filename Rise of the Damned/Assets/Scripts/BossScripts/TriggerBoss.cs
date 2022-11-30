@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class TriggerBoss : MonoBehaviour
 {
     public GameObject boss;
     private Vector3 bossToPoint;
+
+    enum State {idle, triggered, active, done, dead, won}
+
+    private State state = State.idle;
     [System.NonSerialized]
     public bool isTriggered = false;
     [System.NonSerialized]
     public bool isActive = false;
+    [System.NonSerialized]
+    public bool isDead = false;
     public Transform toPoint;
     public float moveSpeed;
 
@@ -32,6 +39,8 @@ public class TriggerBoss : MonoBehaviour
     private float timeLeft;
 
     private PlayerInput playerInput;
+
+    public GameObject winText;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +69,7 @@ public class TriggerBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isTriggered)
+        if (state == State.triggered)
         {
             if (Mathf.Abs(PlayerController.player.GetComponent<Rigidbody2D>().velocity.y) < .01)
                 toPoint.position = new Vector3(toPoint.position.x, PlayerController.player.transform.position.y, 0);
@@ -70,8 +79,7 @@ public class TriggerBoss : MonoBehaviour
 
             if (Vector3.Distance(toPoint.position, PlayerController.player.transform.position) < 0.01)
             {
-                isTriggered = false;
-                isActive = true;
+                state = State.active;
 
                 ewalls.SetActive(true);
                 elight.SetActive(true);
@@ -87,22 +95,20 @@ public class TriggerBoss : MonoBehaviour
                 PlayerController.controller.enabled = true;
             }
         }
-        else if(isActive)
+        else if (state == State.active)
         {
             timeLeft -= Time.deltaTime;
 
-            PlayerController.controller.enabled = true;
-
-            entranceBlocker.transform.position = Vector3.MoveTowards(entranceBlocker.transform.position, blockerToPoint, Time.deltaTime * (2f/timeStart));
+            entranceBlocker.transform.position = Vector3.MoveTowards(entranceBlocker.transform.position, blockerToPoint, Time.deltaTime * (2f / timeStart));
             boss.transform.position = Vector3.MoveTowards(boss.transform.position, bossToPoint, Time.deltaTime * (7f / timeStart));
 
             lightSource.intensity = (timeLeft / timeStart) * 10;
-            elightSource.intensity = 0.6f + (1 - (timeLeft / timeStart)) * .25f;
+            elightSource.intensity = 0.6f + (1 - (timeLeft / timeStart)) * .30f;
             //Debug.Log("elight intensity:" + elightSource.intensity);
 
             if (timeLeft <= 0)
             {
-                isActive = false;
+                state = State.done;
 
                 PlayerController.controller.enabled = true;
                 PlayerController.player.GetComponent<AttackController>().enabled = true;
@@ -112,25 +118,91 @@ public class TriggerBoss : MonoBehaviour
                 //Debug.Log("starting");
                 Lucifer.StartBoss();
 
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
+        else if (state == State.dead)
+        {
+            if (timeLeft > 0)
+            {
+                //Debug.Log("test");
+                timeLeft -= Time.deltaTime;
 
-        if(playerInput.actions["Boss"].triggered)
-            PlayerController.player.transform.position = transform.position;
+                entranceBlocker.transform.position = Vector3.MoveTowards(entranceBlocker.transform.position, blockerToPoint, Time.deltaTime * (2f / timeStart));
+                boss.transform.position = Vector3.MoveTowards(boss.transform.position, bossToPoint, Time.deltaTime * (7f / timeStart));
+
+                lightSource.intensity = ((timeStart - timeLeft) / timeStart) * 10;
+                elightSource.intensity = 0.6f + (1 - ((timeStart - timeLeft) / timeStart)) * .30f;
+
+            }
+
+            if (PlayerController.player.transform.position.y > transform.position.y + 8)
+            {
+                state = State.won;
+                PlayerController.controller.enabled = false;
+
+                Destroy(PlayerController.controller.rb);
+
+                GameObject.Find("HUD").SetActive(false);
+
+                Debug.Log("Won");
+            }
+        }
+        else if (state == State.won)
+        {
+
+            if (elightSource.intensity >= 100)
+            {
+                //SceneManager.LoadScene("GameWin");
+                winText.SetActive(true);
+
+                Time.timeScale = 0;
+            }
+            else
+                elightSource.intensity += Time.deltaTime * Mathf.Max(elightSource.intensity, 3);
+        }
+        else if (state == State.idle)
+        {
+
+            if (playerInput.actions["Boss"].triggered)
+                PlayerController.player.transform.position = transform.position + Vector3.down * 3;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //disable player controls
-        PlayerController.controller.enabled = false;
-        PlayerController.player.GetComponent<AttackController>().enabled = false;
+        if (state == State.idle)
+        {
+            //disable player controls
+            PlayerController.controller.enabled = false;
+            PlayerController.player.GetComponent<AttackController>().enabled = false;
 
-        //turn off normal music here
+            //turn off normal music here
 
+            NewRoomGovernor.killRooms();
 
-        isTriggered = true;
+            state = State.triggered;
 
         //Debug.Log("triggered");
+        }
+    }
+
+    public void killBoss()
+    {
+        Destroy(boss.GetComponent<Rigidbody2D>());
+        //boss.GetComponent<Collider2D>().enabled = false;
+
+        cameraShake init = FindObjectOfType<cameraShake>();
+
+        timeLeft = timeStart;
+
+        init.shakeCamera(cameraShakeMagnitude, timeStart);
+
+        blockerToPoint.x -= 2;
+
+        bossToPoint = boss.transform.position;
+        bossToPoint.y -= 5.635f;
+
+        state = State.dead;
     }
 }

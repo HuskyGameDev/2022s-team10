@@ -6,6 +6,9 @@ public class NewRoomGovernor : MonoBehaviour
 {
     public RoomSet[] roomSets;  //holds each set of rooms to be generated in the current level
     public GameObject bossRoom; //hold the boss room to be put at the end of the level generation
+    public GameObject spawnRoom;
+    public static List<GameObject> spawnedRooms;
+    private static GameObject spawn;
 
     [System.Serializable]
     /*
@@ -22,6 +25,9 @@ public class NewRoomGovernor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawnedRooms = new List<GameObject>();
+        spawn = spawnRoom;
+        
         Vector3 offset = transform.position;
         offset.x -= 0.0129f;
         offset.y += roomHeight - 3.15f; //spawn room location is at (15, 6). I hate all of you people. If you're reading this I hate you too.
@@ -39,7 +45,7 @@ public class NewRoomGovernor : MonoBehaviour
                 offset.x -= set.rooms[rand].GetComponent<Room>().floorShift;
 
                 //instantiate the room
-                Instantiate(set.rooms[rand], offset, Quaternion.identity);
+                spawnedRooms.Add(Instantiate(set.rooms[rand], offset, Quaternion.identity));
                 usedRooms.Add(rand);
 
                 //adjust offset to the roof of the current room and the height of the next room
@@ -55,5 +61,12 @@ public class NewRoomGovernor : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public static void killRooms()
+    {
+        foreach(GameObject room in spawnedRooms)
+            Destroy(room);
+        Destroy(spawn);
     }
 }

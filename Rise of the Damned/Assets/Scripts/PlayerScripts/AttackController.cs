@@ -10,9 +10,9 @@ public class AttackController : MonoBehaviour
     public float knockback, bowKnockback;
 
     public GameObject weaponAttack;
-
-    private GameObject equippedWeapon = null;
-    private GameObject equippedBow = null;
+     
+    public GameObject equippedWeapon = null;
+    public GameObject equippedBow = null;
     private GameObject equippedArmor = null;
 
     private Rigidbody2D rb;
@@ -46,6 +46,8 @@ public class AttackController : MonoBehaviour
         pickupAction = playerInput.actions["Pickup"];
         swapAction = playerInput.actions["Swap"];
         attackAction = playerInput.actions["Attack"];
+
+        PlayerController.attackController = this;
     }
 
     // Update is called once per frame

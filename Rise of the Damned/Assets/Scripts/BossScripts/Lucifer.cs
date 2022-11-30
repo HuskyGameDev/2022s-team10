@@ -8,6 +8,8 @@ public class Lucifer : MonoBehaviour
     public static GameObject boss;
     public static Lucifer script;
 
+    public GameObject trigger;
+
     public GameObject spikeWavePrefab;
     private GameObject spikeWave;
     private SpikeWave SW_scr;
@@ -22,6 +24,9 @@ public class Lucifer : MonoBehaviour
     public float speed;
 
     private SpriteRenderer sr;
+
+    public float health;
+    private float redTime = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -37,30 +42,47 @@ public class Lucifer : MonoBehaviour
     {
         if (isActive)
         {
-            moveTimer -= Time.deltaTime;
-
-            if (moveTimer <= 0)
+            if (health <= 0)
             {
-                float r = Random.Range(0, 100.0f);
-                float sum = 0;
-                for (int i = 0; i < moveChance.Length; i++)
-                {
-                    if (moveChance[i] + sum >= r)
-                    {
-                        DoMove(i);
-                        break;
-                    }
-                    sum += moveChance[i];
-                }
+                trigger.GetComponent<TriggerBoss>().killBoss();
+                isActive = false;
             }
-            Vector3 pos = new Vector3(transform.parent.position.x, transform.position.y, transform.position.z);
-            pos.x += isRightSide ? 9 : -9;
-            transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+            else
+            {
 
-            if (pos.x == transform.position.x && sr.flipX != isRightSide)
-            { 
-                sr.flipX = isRightSide;
-                SW_scr.ChangeDir(isRightSide);
+                moveTimer -= Time.deltaTime;
+
+                if (moveTimer <= 0)
+                {
+                    float r = Random.Range(0, 100.0f);
+                    float sum = 0;
+                    for (int i = 0; i < moveChance.Length; i++)
+                    {
+                        if (moveChance[i] + sum >= r)
+                        {
+                            DoMove(i);
+                            break;
+                        }
+                        sum += moveChance[i];
+                    }
+                }
+                Vector3 pos = new Vector3(transform.parent.position.x, transform.position.y, transform.position.z);
+                pos.x += isRightSide ? 9 : -9;
+                transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+
+                if (pos.x == transform.position.x && sr.flipX != isRightSide)
+                {
+                    sr.flipX = isRightSide;
+                    SW_scr.ChangeDir(isRightSide);
+                }
+
+                if (redTime > 0)
+                {
+                    sr.color = Color.red;
+                    redTime -= Time.deltaTime;
+                }
+                else
+                    sr.color = Color.white;
             }
         }
 
@@ -100,5 +122,11 @@ public class Lucifer : MonoBehaviour
                 isRightSide = !isRightSide;
                 break;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        redTime += .2f;
+        health -= damage;
     }
 }

@@ -26,6 +26,7 @@ public class WeaponController : MonoBehaviour
         player = PlayerController.player;
         pcontroller = player.GetComponent<PlayerController>();
         acontroller = player.GetComponent<AttackController>();
+
     }
 
     // Update is called once per frame
@@ -45,9 +46,19 @@ public class WeaponController : MonoBehaviour
     {
         if(collision.CompareTag("Enemy") && !hit.Contains(collision))
         {
-            collision.GetComponent<EnemyController>().TakeDamage(PlayerController.meleeDamage);
-            collision.GetComponent<EnemyController>().Knockback(6, gameObject.transform);
+            EnemyController script = collision.GetComponent<EnemyController>();
+            if (script == null)
+            {
+                collision.GetComponent<Lucifer>().TakeDamage(PlayerController.meleeDamage);
+            }
+            else
+            {
+                script.Knockback(6, gameObject.transform);
+                script.TakeDamage(PlayerController.meleeDamage);
+            }
+            
             // ^ currently cant figure out how to access the itemcontroller script so can't set a weapon specific knockback
+            // ^ here u go: PlayerController.attackController.equippedWeapon.GetComponent<ItemController>();
             hit.Add(collision);
         }
         

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public static GameObject player;    //static variables to be easily referenced elsewhere
     public static float health, maxHealth, meleeDamage, rangedDamage, armor, x;
     public static PlayerController controller;
+    public static AttackController attackController;
 
     [System.NonSerialized]
     public float invuln = 0;
