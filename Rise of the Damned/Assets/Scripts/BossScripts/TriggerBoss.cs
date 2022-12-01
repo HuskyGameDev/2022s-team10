@@ -155,6 +155,7 @@ public class TriggerBoss : MonoBehaviour
             {
                 //SceneManager.LoadScene("GameWin");
                 winText.SetActive(true);
+                winText.GetComponentInParent<Canvas>().worldCamera = Camera.main;
 
                 Time.timeScale = 0;
             }
@@ -199,7 +200,7 @@ public class TriggerBoss : MonoBehaviour
         blockerToPoint.x -= 2;
 
         bossToPoint.x = boss.transform.position.x;
-        bossToPoint.y -= 5.635f;
+        bossToPoint.y -= 5.625f;
 
         state = State.dead;
     }

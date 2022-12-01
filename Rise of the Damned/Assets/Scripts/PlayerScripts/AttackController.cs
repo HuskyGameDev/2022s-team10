@@ -15,6 +15,8 @@ public class AttackController : MonoBehaviour
     public GameObject equippedBow = null;
     private GameObject equippedArmor = null;
 
+    private Transform EW_Parent, EB_Parent, EA_Parent;
+
     private Rigidbody2D rb;
     private PlayerController pcontroller;
     private Collider2D thisCollider;
@@ -55,6 +57,8 @@ public class AttackController : MonoBehaviour
         pickupAction = playerInput.actions["Pickup"];
         swapAction = playerInput.actions["Swap"];
         attackAction = playerInput.actions["Attack"];
+
+        //Debug.Log("Weapon: " + equippedWeapon);
         if (!PlayerController.isPaused && PlayerController.isActive){
             if(attackAction.triggered && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null && !usingRanged)
             {
@@ -154,9 +158,14 @@ public class AttackController : MonoBehaviour
                         {
                             equippedWeapon.SetActive(true);
                             equippedWeapon.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                            equippedWeapon.transform.SetParent(EW_Parent);
                         }
 
                         equippedWeapon = collision.gameObject;  //equip new weapon
+
+                        EW_Parent = equippedWeapon.transform.parent;
+                        equippedWeapon.transform.SetParent(null);
+
                         PlayerController.meleeDamage = item.meleeDamage;
                         equippedWeapon.SetActive(false);
                         SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
@@ -167,13 +176,18 @@ public class AttackController : MonoBehaviour
                         }
                         break;
                     case ItemController.ItemType.Bow:
-                        if (equippedBow != null) //reactivate old weapon
+                        if (equippedBow != null) //reactivate old bow
                         {
                             equippedBow.SetActive(true);
                             equippedBow.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                            equippedBow.transform.SetParent(EB_Parent);
                         }
 
-                        equippedBow = collision.gameObject;  //equip new weapon
+                        equippedBow = collision.gameObject;  //equip new bow
+
+                        EB_Parent = equippedBow.transform.parent;
+                        equippedBow.transform.SetParent(null);
+
                         PlayerController.rangedDamage = item.rangedDamage;
                         equippedBow.SetActive(false);
                         SpriteRenderer[] children2 = equippedBow.GetComponentsInChildren<SpriteRenderer>();
@@ -184,13 +198,18 @@ public class AttackController : MonoBehaviour
                         }
                         break;
                     case ItemController.ItemType.Armor:
-                        if (equippedArmor != null) //reactivate old weapon
+                        if (equippedArmor != null) //reactivate old armor
                         {
                             equippedArmor.SetActive(true);
                             equippedArmor.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                            equippedArmor.transform.SetParent(EA_Parent);
                         }
 
-                        equippedArmor = collision.gameObject;  //equip new weapon
+                        equippedArmor = collision.gameObject;  //equip new armor
+
+                        EA_Parent = equippedArmor.transform.parent;
+                        equippedArmor.transform.SetParent(null);
+
                         PlayerController.armor = item.armor;
                         equippedArmor.SetActive(false);
                         SpriteRenderer[] children3 = equippedArmor.GetComponentsInChildren<SpriteRenderer>();

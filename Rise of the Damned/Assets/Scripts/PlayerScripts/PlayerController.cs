@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
             GameOver();
         }
         Pause();
-        Debug.Log(GetComponent<AttackController>().enabled);
+        //Debug.Log(GetComponent<AttackController>().enabled);
     }
 
     public void MoveInput(){

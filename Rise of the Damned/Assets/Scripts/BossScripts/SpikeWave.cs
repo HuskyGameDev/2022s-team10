@@ -51,8 +51,11 @@ public class SpikeWave : MonoBehaviour
                 }
             }
 
-            if(waves.Count == 0)
-                isActive = false;
+            if (waves.Count == 0)
+            {
+                
+                    isActive = false;
+            }
         }
     }
 
@@ -65,6 +68,12 @@ public class SpikeWave : MonoBehaviour
     public void Stop()
     {
         waves.Clear();
+
+        foreach (Transform spike in transform)
+        {
+            spike.localPosition = Vector3.zero;
+        }
+
         Destroy(this);
     }
 

@@ -139,7 +139,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 1738332971
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &6510340419186875229
 MonoBehaviour:
@@ -3436,6 +3436,8 @@ MonoBehaviour:
   bowHoldTime: 0
   bowChargeTime: 0
   rememberDiagFor: 0
+  SelectedMelee: {fileID: 0}
+  SelectedRanged: {fileID: 0}
 --- !u!50 &1642752361647826295
 Rigidbody2D:
   serializedVersion: 4
