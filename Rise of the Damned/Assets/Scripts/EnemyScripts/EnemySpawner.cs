@@ -14,11 +14,12 @@ public class EnemySpawner : MonoBehaviour
         EnemyController spawnControl = spawn.GetComponent<EnemyController>();
         spawnControl.damage *= PlayerController.roomNum + 1;
         spawnControl.health *= PlayerController.roomNum * .5f + 1;
+        spawn.transform.SetParent(gameObject.transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject);
+       // Destroy(gameObject);
     }
 }

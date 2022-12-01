@@ -39,8 +39,18 @@ public class ProjController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") && rb != null)
         {
-            collision.GetComponent<EnemyController>().TakeDamage(PlayerController.rangedDamage);
-            collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.bowKnockback, aController.bowKnockback / 2);
+            EnemyController script = collision.GetComponent<EnemyController>();
+            if (script == null)
+            {
+                collision.GetComponent<Lucifer>().TakeDamage(PlayerController.rangedDamage);
+            }
+            else
+            {
+                //script.Knockback(6, gameObject.transform);
+                script.TakeDamage(PlayerController.rangedDamage);
+                collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.bowKnockback, aController.bowKnockback / 2);
+            }
+            
             Destroy(gameObject);
         }
         else if(collision.CompareTag("Ground") || collision.CompareTag("Walls"))

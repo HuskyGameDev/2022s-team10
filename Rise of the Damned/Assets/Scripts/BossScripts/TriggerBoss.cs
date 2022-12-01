@@ -92,7 +92,8 @@ public class TriggerBoss : MonoBehaviour
 
                 boss.SetActive(true);
 
-                PlayerController.controller.enabled = true;
+                //PlayerController.isActive = true;
+                //PlayerController.player.GetComponent<AttackController>().enabled = true;
             }
         }
         else if (state == State.active)
@@ -110,8 +111,7 @@ public class TriggerBoss : MonoBehaviour
             {
                 state = State.done;
 
-                PlayerController.controller.enabled = true;
-                PlayerController.player.GetComponent<AttackController>().enabled = true;
+                PlayerController.isActive = true;
 
                 boss.GetComponent<Rigidbody2D>().WakeUp();
                 boss.GetComponent<Collider2D>().enabled = true;
@@ -139,7 +139,7 @@ public class TriggerBoss : MonoBehaviour
             if (PlayerController.player.transform.position.y > transform.position.y + 8)
             {
                 state = State.won;
-                PlayerController.controller.enabled = false;
+                PlayerController.isActive = false;
 
                 Destroy(PlayerController.controller.rb);
 
@@ -163,9 +163,8 @@ public class TriggerBoss : MonoBehaviour
         }
         else if (state == State.idle)
         {
-
             if (playerInput.actions["Boss"].triggered)
-                PlayerController.player.transform.position = transform.position + Vector3.down * 3;
+                PlayerController.player.transform.position = transform.position + Vector3.down * 6;
         }
     }
 
@@ -174,8 +173,7 @@ public class TriggerBoss : MonoBehaviour
         if (state == State.idle)
         {
             //disable player controls
-            PlayerController.controller.enabled = false;
-            PlayerController.player.GetComponent<AttackController>().enabled = false;
+            PlayerController.isActive = false;
 
             //turn off normal music here
 
@@ -200,7 +198,7 @@ public class TriggerBoss : MonoBehaviour
 
         blockerToPoint.x -= 2;
 
-        bossToPoint = boss.transform.position;
+        bossToPoint.x = boss.transform.position.x;
         bossToPoint.y -= 5.635f;
 
         state = State.dead;

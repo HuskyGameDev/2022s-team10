@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 [SelectionBase]
 public class PlayerController : MonoBehaviour
 { 
-    public bool isActive = true;
+    public static bool isActive = true;
 
     private PlayerInput playerInput;
     private InputAction moveAction, jumpAction, pauseAction;
@@ -155,6 +155,7 @@ public class PlayerController : MonoBehaviour
             GameOver();
         }
         Pause();
+        Debug.Log(GetComponent<AttackController>().enabled);
     }
 
     public void MoveInput(){

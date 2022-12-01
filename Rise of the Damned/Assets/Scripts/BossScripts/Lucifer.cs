@@ -45,6 +45,7 @@ public class Lucifer : MonoBehaviour
             if (health <= 0)
             {
                 trigger.GetComponent<TriggerBoss>().killBoss();
+                SW_scr.Stop();
                 isActive = false;
             }
             else
@@ -102,7 +103,7 @@ public class Lucifer : MonoBehaviour
     //tells lucifer to do the specified move
     void DoMove(int moveNum)
     {
-        Debug.Log("Doing Move " + moveNum);
+        //Debug.Log("Doing Move " + moveNum);
         moveTimer = Random.Range(moveRange.x, moveRange.y);
         switch (moveNum)
         {

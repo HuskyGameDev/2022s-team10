@@ -68,5 +68,6 @@ public class NewRoomGovernor : MonoBehaviour
         foreach(GameObject room in spawnedRooms)
             Destroy(room);
         Destroy(spawn);
+        Destroy(GameObject.Find("Templates"));
     }
 }
