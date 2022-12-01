@@ -62,6 +62,12 @@ public class SpikeWave : MonoBehaviour
         waves.Add(isGoingLeft ? -3 * timePerSpike : (3 + numSpikes) * timePerSpike);
     }
 
+    public void Stop()
+    {
+        waves.Clear();
+        Destroy(this);
+    }
+
     public void ChangeDir(bool dir)
     {
         isGoingLeft = dir;

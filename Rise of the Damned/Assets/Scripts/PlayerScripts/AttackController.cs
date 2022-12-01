@@ -55,7 +55,7 @@ public class AttackController : MonoBehaviour
         pickupAction = playerInput.actions["Pickup"];
         swapAction = playerInput.actions["Swap"];
         attackAction = playerInput.actions["Attack"];
-        if (!PlayerController.isPaused){
+        if (!PlayerController.isPaused && PlayerController.isActive){
             if(attackAction.triggered && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null && !usingRanged)
             {
                 GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
