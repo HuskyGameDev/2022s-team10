@@ -35,6 +35,9 @@ public class AttackController : MonoBehaviour
     private Vector2 rememberDiagTime = Vector2.zero;
     private Vector2 diagMemory = Vector2.zero;
 
+    public GameObject SelectedMelee;
+    public GameObject SelectedRanged;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,17 +45,16 @@ public class AttackController : MonoBehaviour
         pcontroller = GetComponent<PlayerController>();
         thisCollider = GetComponent<Collider2D>();
 
-        playerInput = GetComponent<PlayerInput>();
-        pickupAction = playerInput.actions["Pickup"];
-        swapAction = playerInput.actions["Swap"];
-        attackAction = playerInput.actions["Attack"];
-
         PlayerController.attackController = this;
+        playerInput = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        pickupAction = playerInput.actions["Pickup"];
+        swapAction = playerInput.actions["Swap"];
+        attackAction = playerInput.actions["Attack"];
         if (!PlayerController.isPaused){
             if(attackAction.triggered && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null && !usingRanged)
             {
@@ -127,6 +129,8 @@ public class AttackController : MonoBehaviour
                 PickupItem();
             }
             if (swapAction.triggered){
+                SelectedMelee.SetActive(!SelectedMelee.activeSelf);
+                SelectedRanged.SetActive(!SelectedRanged.activeSelf);
                 usingRanged = !usingRanged;
             }
 

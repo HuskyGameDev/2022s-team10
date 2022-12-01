@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 [SelectionBase]
 public class PlayerController : MonoBehaviour
 { 
+    public bool isActive = true;
+
     private PlayerInput playerInput;
     private InputAction moveAction, jumpAction, pauseAction;
 
@@ -112,15 +114,9 @@ public class PlayerController : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject optionsMenu;
-
     // Start is called before the first frame update
     void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions["Move"];
-        jumpAction = playerInput.actions["Jump"];
-        pauseAction = playerInput.actions["Pause"];
-
         player = gameObject;
         controller = this;
         //default player stats
@@ -135,15 +131,19 @@ public class PlayerController : MonoBehaviour
         thisCollider = GetComponent<Collider2D>();
         gravityStore = rb.gravityScale;
      
-
+        playerInput = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        moveAction = playerInput.actions["Move"];
+        jumpAction = playerInput.actions["Jump"];
+        pauseAction = playerInput.actions["Pause"];
+
         roomNum = (int)((transform.position.y + 12)/18);
         //Debug.Log(roomNum); it spamming it bruh 
-        if (!isPaused){
+        if (!isPaused && isActive){
             MoveInput();
             Move();
             Jump();
@@ -403,6 +403,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Quit(){
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 
