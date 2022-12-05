@@ -317,20 +317,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3cd1301ecae774396fe2cdbcba7c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 8
   health: 10
   knockback: 8
   knockback_resistance: 1
-  max_speed: 2
+  max_speed: 3
   defaultState: 0
   aggroDist: 5
   flying: 0
-  max_acceleration: 80
+  max_acceleration: 120
   max_speed_change: 0
   knockback_time: 1
-  drops: []
-  dropChance: []
-  heartDropChance: 75
+  drops:
+  - {fileID: 1741407108113468068, guid: c92765cf5eec8c34f8681f2a2bc7bf5d, type: 3}
+  dropChance:
+  - 5
+  heartDropChance: 10
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.1
   groundChecker1: {fileID: 6518784837139274906}

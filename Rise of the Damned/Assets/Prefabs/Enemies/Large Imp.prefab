@@ -101,6 +101,7 @@ MonoBehaviour:
   damage: 6
   health: 30
   knockback: 12
+  knockback_resistance: 1
   max_speed: 3
   defaultState: 2
   aggroDist: 5
@@ -116,7 +117,7 @@ MonoBehaviour:
   - 5
   - 5
   - 50
-  heartDropChance: 55
+  heartDropChance: 30
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 8319916287527283170}

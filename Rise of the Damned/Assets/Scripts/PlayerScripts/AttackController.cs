@@ -15,8 +15,6 @@ public class AttackController : MonoBehaviour
     public GameObject equippedBow = null;
     private GameObject equippedArmor = null;
 
-    private Transform EW_Parent, EB_Parent, EA_Parent;
-
     private Rigidbody2D rb;
     private PlayerController pcontroller;
     private Collider2D thisCollider;
@@ -118,13 +116,18 @@ public class AttackController : MonoBehaviour
                 if (currBowHoldTime >= bowHoldTime && equippedBow != null && usingRanged)
                 {
                     GameObject shoot = Instantiate(equippedBow.GetComponent<ItemController>().arrow, transform.position, Quaternion.identity);
+                    ProjController scr = shoot.GetComponent<ProjController>();
+                    Rigidbody2D srb = shoot.GetComponent<Rigidbody2D>();
 
-                    float projSpeed = shoot.GetComponent<ProjController>().projSpeed * Mathf.Min(currBowHoldTime / bowChargeTime, 1);
+                    float chargeRate = Mathf.Min(currBowHoldTime / bowChargeTime, 1);
+                    float projSpeed = scr.projSpeed * chargeRate;
 
-                    shoot.GetComponent<Rigidbody2D>().rotation = shootAngle;
-                    shoot.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
+                    scr.damage = (Mathf.Round(1000 / (.9972472f + Mathf.Pow(4, (chargeRate-.5f) * -8.5f))) / 1000f) * PlayerController.rangedDamage;
+                    srb.rotation = shootAngle;
+                    srb.velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
 
-                    Debug.Log("Memory: " + diagMemory + "\t Time: " + rememberDiagTime);
+                    //Debug.Log("Memory: " + diagMemory + "\t Time: " + rememberDiagTime);
+                    Debug.Log("Damage %: " + scr.damage / PlayerController.rangedDamage);
                 }
                 currBowHoldTime = 0;
             }
@@ -157,13 +160,13 @@ public class AttackController : MonoBehaviour
                         if (equippedWeapon != null) //reactivate old weapon
                         {
                             equippedWeapon.SetActive(true);
-                            equippedWeapon.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
-                            equippedWeapon.transform.SetParent(EW_Parent);
+                            //equippedBow.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                            equippedWeapon.transform.position = transform.position;
+                            equippedWeapon.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
+                            equippedWeapon.transform.SetParent(collision.transform.parent);
                         }
 
                         equippedWeapon = collision.gameObject;  //equip new weapon
-
-                        EW_Parent = equippedWeapon.transform.parent;
                         equippedWeapon.transform.SetParent(null);
 
                         PlayerController.meleeDamage = item.meleeDamage;
@@ -179,13 +182,13 @@ public class AttackController : MonoBehaviour
                         if (equippedBow != null) //reactivate old bow
                         {
                             equippedBow.SetActive(true);
-                            equippedBow.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
-                            equippedBow.transform.SetParent(EB_Parent);
+                            //equippedBow.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                            equippedBow.transform.position = transform.position;
+                            equippedBow.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
+                            equippedBow.transform.SetParent(collision.transform.parent);
                         }
 
                         equippedBow = collision.gameObject;  //equip new bow
-
-                        EB_Parent = equippedBow.transform.parent;
                         equippedBow.transform.SetParent(null);
 
                         PlayerController.rangedDamage = item.rangedDamage;
@@ -201,13 +204,13 @@ public class AttackController : MonoBehaviour
                         if (equippedArmor != null) //reactivate old armor
                         {
                             equippedArmor.SetActive(true);
-                            equippedArmor.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
-                            equippedArmor.transform.SetParent(EA_Parent);
+                            //equippedArmor.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                            equippedArmor.transform.position = transform.position;
+                            equippedArmor.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
+                            equippedArmor.transform.SetParent(collision.transform.parent);
                         }
 
                         equippedArmor = collision.gameObject;  //equip new armor
-
-                        EA_Parent = equippedArmor.transform.parent;
                         equippedArmor.transform.SetParent(null);
 
                         PlayerController.armor = item.armor;

@@ -239,9 +239,15 @@ MonoBehaviour:
   max_acceleration: 30
   max_speed_change: 0
   knockback_time: 0.5
-  drops: []
-  dropChance: []
-  heartDropChance: 74
+  drops:
+  - {fileID: 5366049279497736705, guid: 909d15fa8ed7a5745b51c63bdf8ceef7, type: 3}
+  - {fileID: 5839799160562247257, guid: 4150c754f08b6a646b1f9aa0f6a7719c, type: 3}
+  - {fileID: 8414979577380145389, guid: 467afe7dfabf5564d82f7fbe8ae0b57f, type: 3}
+  dropChance:
+  - 5
+  - 5
+  - 5
+  heartDropChance: 15
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.1
   groundChecker1: {fileID: 1721856143846688912}
@@ -255,7 +261,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   collisionPoint: {fileID: 1721856144113069946}
-  isIdle: 0
   swingDistance: 1.6
   attackCooldown: 0.4
   animator: {fileID: 1721856142825553607}

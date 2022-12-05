@@ -219,8 +219,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  health: 20
+  health: 30
   knockback: 6
+  knockback_resistance: 1
   max_speed: 3
   defaultState: 2
   aggroDist: 4

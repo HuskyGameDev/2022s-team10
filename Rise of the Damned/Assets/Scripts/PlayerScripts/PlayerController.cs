@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     [System.NonSerialized]
     public Rigidbody2D rb; //unity physics engine
     private SpriteRenderer sr;
-    private Collider2D thisCollider;
+    [System.NonSerialized]
+    public Collider2D thisCollider;
 
     [Header("Sprites")]
     public Sprite wallSlide;
@@ -405,6 +406,7 @@ public class PlayerController : MonoBehaviour
 
     public void Quit(){
         Time.timeScale = 1;
+        isActive = true;
         SceneManager.LoadScene("MainMenu");
     }
 

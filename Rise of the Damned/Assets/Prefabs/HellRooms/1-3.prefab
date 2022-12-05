@@ -837,7 +837,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -11, y: -7, z: 0}
@@ -1348,6 +1348,7 @@ GameObject:
   - component: {fileID: 6982690715232865496}
   - component: {fileID: 6982690715232865497}
   - component: {fileID: 6982690715232865502}
+  - component: {fileID: 6545739297461196393}
   m_Layer: 15
   m_Name: Platforms
   m_TagString: Ground
@@ -1547,6 +1548,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &6545739297461196393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982690715232865500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade805e77ca62da4fa2fa722ee9d0558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6982690715613630913
 GameObject:
   m_ObjectHideFlags: 0

@@ -206,7 +206,7 @@ MonoBehaviour:
   - {x: 2.8286626, y: 8.484323, z: 0}
   m_ShapePathHash: 1675246078
   m_Mesh: {fileID: 0}
-  m_InstanceId: 157956
+  m_InstanceId: 177938
 --- !u!1 &1752477505710147192
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +613,8 @@ GameObject:
   - component: {fileID: 1752477506061911524}
   - component: {fileID: 1752477506061911531}
   - component: {fileID: 1752477506061911530}
-  m_Layer: 6
+  - component: {fileID: 2970616927939037897}
+  m_Layer: 15
   m_Name: Platforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -952,6 +953,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &2970616927939037897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752477506061911528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade805e77ca62da4fa2fa722ee9d0558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1752477506358614790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,9 +1144,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1797132319
+  m_SortingLayer: -1
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -4659,7 +4672,7 @@ MonoBehaviour:
   - {x: -1.4294652, y: 9.9028845, z: 0}
   m_ShapePathHash: 89274381
   m_Mesh: {fileID: 0}
-  m_InstanceId: 158058
+  m_InstanceId: 178040
 --- !u!1 &1752477506981139906
 GameObject:
   m_ObjectHideFlags: 0

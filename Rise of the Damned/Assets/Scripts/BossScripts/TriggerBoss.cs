@@ -23,6 +23,7 @@ public class TriggerBoss : MonoBehaviour
     public float moveSpeed;
 
     public GameObject entranceBlocker;
+    public GameObject rightSpikes;
     public GameObject transLight;
     public GameObject rlight;
     public GameObject elight;
@@ -31,6 +32,7 @@ public class TriggerBoss : MonoBehaviour
     private float cameraShakeMagnitude;
 
     private Vector3 blockerToPoint;
+    private Vector3 spikeToPoint;
     private Light2D lightSource;
     private Light2D elightSource;
     private Light2D rlightSource;
@@ -47,6 +49,8 @@ public class TriggerBoss : MonoBehaviour
     {
         blockerToPoint = entranceBlocker.transform.position;
         blockerToPoint.x += 2;
+        spikeToPoint = rightSpikes.transform.position;
+        spikeToPoint.x -= 2;
         bossToPoint = boss.transform.position;
         bossToPoint.y += 7;
         lightSource = transLight.GetComponent<Light2D>();
@@ -92,7 +96,7 @@ public class TriggerBoss : MonoBehaviour
 
                 boss.SetActive(true);
 
-                //PlayerController.isActive = true;
+                PlayerController.isActive = true;
                 //PlayerController.player.GetComponent<AttackController>().enabled = true;
             }
         }
@@ -100,7 +104,10 @@ public class TriggerBoss : MonoBehaviour
         {
             timeLeft -= Time.deltaTime;
 
+            PlayerController.isActive = false;
+
             entranceBlocker.transform.position = Vector3.MoveTowards(entranceBlocker.transform.position, blockerToPoint, Time.deltaTime * (2f / timeStart));
+            rightSpikes.transform.position = Vector3.MoveTowards(rightSpikes.transform.position, spikeToPoint, Time.deltaTime * (2f / timeStart));
             boss.transform.position = Vector3.MoveTowards(boss.transform.position, bossToPoint, Time.deltaTime * (7f / timeStart));
 
             lightSource.intensity = (timeLeft / timeStart) * 10;
@@ -129,6 +136,7 @@ public class TriggerBoss : MonoBehaviour
                 timeLeft -= Time.deltaTime;
 
                 entranceBlocker.transform.position = Vector3.MoveTowards(entranceBlocker.transform.position, blockerToPoint, Time.deltaTime * (2f / timeStart));
+                rightSpikes.transform.position = Vector3.MoveTowards(rightSpikes.transform.position, spikeToPoint, Time.deltaTime * (2f / timeStart));
                 boss.transform.position = Vector3.MoveTowards(boss.transform.position, bossToPoint, Time.deltaTime * (7f / timeStart));
 
                 lightSource.intensity = ((timeStart - timeLeft) / timeStart) * 10;
@@ -198,9 +206,10 @@ public class TriggerBoss : MonoBehaviour
         init.shakeCamera(cameraShakeMagnitude, timeStart);
 
         blockerToPoint.x -= 2;
+        spikeToPoint.x += 2;
 
         bossToPoint.x = boss.transform.position.x;
-        bossToPoint.y -= 5.625f;
+        bossToPoint.y -= 5.62f;
 
         state = State.dead;
     }

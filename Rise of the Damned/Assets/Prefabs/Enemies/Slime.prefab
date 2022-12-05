@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  health: 10
+  health: 20
   knockback: 10
   knockback_resistance: 1
   max_speed: 1
@@ -311,7 +311,7 @@ MonoBehaviour:
   knockback_time: 1
   drops: []
   dropChance: []
-  heartDropChance: 75
+  heartDropChance: 30
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 4024210757587770771}

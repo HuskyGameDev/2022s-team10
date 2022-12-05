@@ -17,6 +17,7 @@ TagManager:
   - HealthDrop
   - Boss
   - PlayerTrigger
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
@@ -33,8 +34,8 @@ TagManager:
   - Eprojectiles
   - Barrier
   - PlayerCollision
-  - platform
-  - 
+  - Platform
+  - EnemyBarrier
   - 
   - 
   - 

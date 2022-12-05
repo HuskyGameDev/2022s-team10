@@ -9,6 +9,9 @@ public class ProjController : MonoBehaviour
     public int rotSpeed;
     public float projSpeed, lifespan;
 
+    [System.NonSerialized]
+    public float damage;
+
     private AttackController aController;
 
     // Start is called before the first frame update
@@ -42,15 +45,20 @@ public class ProjController : MonoBehaviour
             EnemyController script = collision.GetComponent<EnemyController>();
             if (script == null)
             {
-                collision.GetComponent<Lucifer>().TakeDamage(PlayerController.rangedDamage);
+                collision.GetComponent<Lucifer>().TakeDamage(damage);
             }
             else
             {
                 //script.Knockback(6, gameObject.transform);
-                script.TakeDamage(PlayerController.rangedDamage);
+                script.TakeDamage(damage);
                 collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.bowKnockback, aController.bowKnockback / 2);
             }
             
+            Destroy(gameObject);
+        }
+        else if(collision.CompareTag("EnemyProjectile"))
+        {
+            Destroy(collision.gameObject);
             Destroy(gameObject);
         }
         else if(collision.CompareTag("Ground") || collision.CompareTag("Walls"))
