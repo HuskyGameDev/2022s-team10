@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
     public void Play(){
         Time.timeScale = 1;
         PlayerController.isPaused = false;
