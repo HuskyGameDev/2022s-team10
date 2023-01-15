@@ -17,7 +17,6 @@ public class Sound
 
     public bool loop;
 
-    [HideInInspector]
     public bool music;
 
     [HideInInspector]

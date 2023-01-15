@@ -19749,14 +19749,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: MainTheme
-    clip: {fileID: 8300000, guid: a6027e1748531724aae6fe1e4cd1b9a4, type: 3}
+    clip: {fileID: 8300000, guid: 7209d2624952fec48ab7e296d87adcbd, type: 3}
     volume: 0.5
     pitch: 1
     loop: 1
     music: 1
     source: {fileID: 0}
   - name: HellTheme
-    clip: {fileID: 8300000, guid: c8bcd9c62fddf5e4d8357f1390e08b5c, type: 3}
+    clip: {fileID: 8300000, guid: 0e5a5681bf5c6274c90926cf8aaca0ec, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    music: 1
+    source: {fileID: 0}
+  - name: CaveTheme
+    clip: {fileID: 8300000, guid: b0bf5bdc54117d94594a2cfc15a667bc, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    music: 1
+    source: {fileID: 0}
+  - name: PurgatoryTheme
+    clip: {fileID: 8300000, guid: d1f8779809c19a14d94201c218b89ca3, type: 3}
     volume: 0.5
     pitch: 1
     loop: 1

@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
+    [HideInInspector]
     public String CurrentSong; // holds the name of the song that is currently playing
 
     void Awake()
