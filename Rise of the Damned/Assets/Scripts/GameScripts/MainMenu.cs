@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1;
         PlayerController.isPaused = false;
         SceneManager.LoadScene("LevelOne");
+        // play the in game music
+        FindObjectOfType<AudioManager>().Play("HellTheme");
     }
 
     public void Quit(){

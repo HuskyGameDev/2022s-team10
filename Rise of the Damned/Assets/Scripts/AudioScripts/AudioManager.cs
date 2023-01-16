@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [HideInInspector]
-    public String CurrentSong; // holds the name of the song that is currently playing
+    public String CurrentSong = ""; // holds the name of the song that is currently playing
 
     void Awake()
     {
@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
             s.source = gameObject.AddComponent<AudioSource>();
 
             s.source.clip = s.clip;
+            s.source.outputAudioMixerGroup = s.output;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
@@ -42,6 +43,7 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
+
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         if (s == null)
@@ -50,9 +52,12 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if( s.music ) // if trying to play music stop the already playing music
+        if (s.music) // if trying to play music stop the already playing music
         {
-            StopPlaying(s.name);
+            if(CurrentSong != "") // if a song is playing
+            {
+                StopPlaying(CurrentSong);
+            }
             CurrentSong = s.name;
         }
 
@@ -75,7 +80,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        Play("MainTheme");
+        Play("HellTheme");
     }
 
     // to play a sound from anywhere, call "FindObjectOfType<AudioManager>().Play(name);"

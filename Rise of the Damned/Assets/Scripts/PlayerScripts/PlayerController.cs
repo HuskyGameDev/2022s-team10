@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -109,12 +110,17 @@ public class PlayerController : MonoBehaviour
     [Header("Game Pause")]
     public static bool isPaused = false;
 
-    public static int roomNum;
+    public static int roomNum; // current room the player is in, starts at 0
 
     private Coroutine knockback_r;
 
     public GameObject pauseMenu;
     public GameObject optionsMenu;
+
+    //Sound
+    [SerializeField] AudioMixer mixer;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -280,7 +286,7 @@ public class PlayerController : MonoBehaviour
 
             else{ wallSliding = false;}
 
-        } 
+        }
 
         else {
             if(nearAWall) { // just left the wall and hit it, grab time
@@ -395,6 +401,8 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
         optionsMenu.SetActive(false);
+        // put low pass on music
+        mixer.SetFloat("MusicLowpassFilter", 1500);
     }
 
     public void Resumed(){
@@ -402,12 +410,17 @@ public class PlayerController : MonoBehaviour
         optionsMenu.SetActive(false);
         isPaused = false;
         Time.timeScale = 1;
+        // remove low pass from music
+        mixer.SetFloat("MusicLowpassFilter", 22000);
     }
 
     public void Quit(){
         Time.timeScale = 1;
         isActive = true;
         SceneManager.LoadScene("MainMenu");
+        // play main menu music
+        mixer.SetFloat("MusicLowpassFilter", 22000);
+        FindObjectOfType<AudioManager>().Play("MainTheme");
     }
 
     void GameOver()
