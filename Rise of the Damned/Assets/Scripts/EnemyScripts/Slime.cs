@@ -13,8 +13,8 @@ public class Slime : EnemyController
     bool isAttacking = true;
     [SerializeField]
     bool isJumping = false;
-    [SerializeField]
-    bool isGrounded = false;
+    //[SerializeField]
+    //bool isGrounded = false;
 
     [Header("Animations")]
     public Animator animator;
@@ -28,13 +28,13 @@ public class Slime : EnemyController
             {
                 rb.velocity = (new Vector2(0, 0));
             }
-            isGrounded = true;
+            //isGrounded = true;
             isJumping = false;
             animator.SetBool("isJumping", false);
         }
         else //if slime is in the air
         {
-            isGrounded = false;
+            //isGrounded = false;
             isJumping = true;
             animator.SetBool("isPrejumping", false);
             animator.SetBool("isJumping", true);
