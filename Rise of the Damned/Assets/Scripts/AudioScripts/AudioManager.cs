@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        Play("HellTheme");
+        //Play("HellTheme");
     }
 
     // to play a sound from anywhere, call "FindObjectOfType<AudioManager>().Play(name);"

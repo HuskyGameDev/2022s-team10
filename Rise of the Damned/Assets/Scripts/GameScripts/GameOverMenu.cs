@@ -38,6 +38,8 @@ public class GameOverMenu : MonoBehaviour
                 PlayerController.isPaused = false;
                 SceneManager.LoadScene("LevelOne");
             } else {
+                // play main menu music
+                FindObjectOfType<AudioManager>().Play("MainTheme");
                 SceneManager.LoadScene("MainMenu");
             }
         }
