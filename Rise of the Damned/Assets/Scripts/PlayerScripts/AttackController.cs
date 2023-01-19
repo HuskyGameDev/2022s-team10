@@ -17,10 +17,13 @@ public class AttackController : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerController pcontroller;
+    private WeaponController wcontroller;
     private Collider2D thisCollider;
 
     private PlayerInput playerInput;
     private InputAction swapAction, attackAction, pickupAction;
+    private Vector2 attackDir;
+
     private bool usingRanged = false; // 1 or 0, checks if bow is "equipped", currently only toggles between using ranged or melee
 
     private bool wasHoldingAttack = false;
@@ -47,6 +50,7 @@ public class AttackController : MonoBehaviour
 
         PlayerController.attackController = this;
         playerInput = GetComponent<PlayerInput>();
+
     }
 
     // Update is called once per frame
@@ -60,6 +64,19 @@ public class AttackController : MonoBehaviour
         if (!PlayerController.isPaused && PlayerController.isActive){
             if(attackAction.triggered && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null && !usingRanged)
             {
+                attackDir = attackAction.ReadValue<Vector2>();
+                if (attackDir.y == 1){
+                    Debug.Log("up");
+                    WeaponController.attackDir = 0; // Up
+                } else if (attackDir.y == -1){
+                    WeaponController.attackDir = 1; // Down
+                } else if (attackDir.x == 1){
+                    WeaponController.attackDir = 2; // Right
+                } else if (attackDir.x == -1){
+                    WeaponController.attackDir = 3; // Left
+                }
+                //Debug.Log("attack dir: " + wcontroller.attackDir);
+
                 GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
                 SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
                 foreach (SpriteRenderer child in children){
