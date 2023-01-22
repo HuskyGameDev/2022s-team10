@@ -65,6 +65,7 @@ public class NewRoomGovernor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Controls the music changes for each section
         roomNum = (int)((PlayerController.controller.rb.position.y + 12) / 18);
         if (roomNum < roomSets[0].totalRooms + 1)
         {
@@ -91,7 +92,7 @@ public class NewRoomGovernor : MonoBehaviour
             }
             section = 2;
         }
-        Debug.Log(section);
+        //Debug.Log(section);
     }
 
     public static void killRooms()

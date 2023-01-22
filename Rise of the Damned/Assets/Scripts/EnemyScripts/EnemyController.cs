@@ -307,13 +307,20 @@ public abstract class EnemyController : MonoBehaviour
     }
 
     private Coroutine knocked; //knockback coroutine
-    public virtual void Knockback(float knockback, Transform knockback_location)
+    public virtual void Knockback(float knockback, Transform knockback_location) //knockback location is where the knockback is coming from
     {
         receivingKnockback = true;
         float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
         float vertical_enemy_direction = (knockback_location.position.y - rb.position.y) / Mathf.Abs(knockback_location.position.y - rb.position.y);
 
         rb.AddForce(new Vector2((knockback) * -horizontal_enemy_direction, (knockback) * 1 * (float).55), ForceMode2D.Impulse);
+        knocked = StartCoroutine(KnockbackSequence());
+    }
+    public virtual void SpikeKnockback(float knockback, Vector2 knockbackdir) //knockback direction is the direction the entity will be knocked back
+    {
+        receivingKnockback = true;
+
+        rb.AddForce(new Vector2(knockback * knockbackdir.x, knockback * knockbackdir.y), ForceMode2D.Impulse);
         knocked = StartCoroutine(KnockbackSequence());
     }
     IEnumerator KnockbackSequence()

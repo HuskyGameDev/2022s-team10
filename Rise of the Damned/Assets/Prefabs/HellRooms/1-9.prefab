@@ -412,8 +412,8 @@ GameObject:
   - component: {fileID: 2167774345477031933}
   - component: {fileID: 1840893951646188693}
   - component: {fileID: 2050164533055335259}
-  - component: {fileID: 3130164573043048463}
   - component: {fileID: 5287939833002780614}
+  - component: {fileID: 856743238101502542}
   m_Layer: 4
   m_Name: Lava
   m_TagString: Spike
@@ -709,20 +709,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &3130164573043048463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2761576948705061302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99b11f5389b7ab740addadb7e6d20a5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 14
-  knockback: 14
 --- !u!19719996 &5287939833002780614
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -739,6 +725,20 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &856743238101502542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2761576948705061302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962fea7dbebbbbe45b106d3900fd17c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  knockback: 12
 --- !u!1 &3310734056780729339
 GameObject:
   m_ObjectHideFlags: 0

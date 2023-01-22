@@ -28,9 +28,6 @@ public class Spikes : MonoBehaviour
             collision.attachedRigidbody.velocity += knockDir.normalized * knockback;
             Debug.Log(knockDir);*/
 
-            if (name.Contains("Lava"))
-                PlayerController.controller.CreateDust();
-
 
         }
     }

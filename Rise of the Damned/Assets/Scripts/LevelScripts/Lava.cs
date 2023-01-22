@@ -11,8 +11,17 @@ public class Lava : MonoBehaviour
         if(collision.gameObject.CompareTag("Player")) { //if player collides with lava
             PlayerController.TakeDamage(damage);
             //knockback
+            collision.attachedRigidbody.velocity = new Vector2(0, 0); // stops player velocity so all knockback is the same
+                                                                      // and not affected by the speed the player hits it
+                                                                      //collision.attachedRigidbody.AddForce(new Vector2(0, knockback), ForceMode2D.Impulse);
             PlayerController.controller.SpikeKnockback(knockback, new Vector2(0, 1));
             PlayerController.controller.CreateDust();
+        } else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy hit lava");
+            EnemyController script = collision.GetComponent<EnemyController>();
+            script.SpikeKnockback(knockback, new Vector2(0, 1));
+            script.TakeDamage(damage);
         }
     }
 
