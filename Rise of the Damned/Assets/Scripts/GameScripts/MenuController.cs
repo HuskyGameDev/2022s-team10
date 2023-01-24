@@ -15,7 +15,7 @@ public class MenuController : MonoBehaviour
         Time.timeScale = 1;
         PlayerController.isPaused = false;
         // Done broken vv
-        //FindObjectOfType<AudioManager>().Play("MainTheme");
+        FindObjectOfType<AudioManager>().Play("MainTheme");
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -23,11 +23,10 @@ public class MenuController : MonoBehaviour
         Time.timeScale = 1;
         PlayerController.isPaused = false;
         SceneManager.LoadScene("LevelOne");
-        // play the in game music
-        //FindObjectOfType<AudioManager>().Play("HellTheme");
     }
 
     public void MainMenuQuit(){
         Application.Quit();
     }
+
 }
