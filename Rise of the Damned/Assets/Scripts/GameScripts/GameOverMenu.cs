@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+// OLD SCRIPT. Replaced by MenuController.cs
 public class GameOverMenu : MonoBehaviour
 {
     public static GameObject buttonClick;
