@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using System;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -226,7 +227,10 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             if ((nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump)
             { // Wall Jumps
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                if(facingLeft)
+                    rb.velocity = new Vector2(jumpForce, jumpForce * 1.25f);
+                else if(facingRight)
+                    rb.velocity = new Vector2(-jumpForce, jumpForce * 1.25f);
 
                 hasWallJump = false;
                 Invoke("SetHasWallJumpToTrue", wallJumpCoolDown); // delay that you set
