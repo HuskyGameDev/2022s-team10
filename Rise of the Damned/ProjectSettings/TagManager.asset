@@ -18,6 +18,7 @@ TagManager:
   - Boss
   - PlayerTrigger
   - EnemyProjectile
+  - Slider
   layers:
   - Default
   - TransparentFX

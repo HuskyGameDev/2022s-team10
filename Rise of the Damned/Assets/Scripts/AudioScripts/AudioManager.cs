@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.Audio;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class AudioManager : MonoBehaviour
@@ -19,15 +20,28 @@ public class AudioManager : MonoBehaviour
 
     private Coroutine switchMusic;
 
+    public Slider VolumeSlider;
+    private float toVolume;
+
     void Awake()
     {
+        // Work in Progress Volume Slider functionality
+        toVolume = 1;
+        if (VolumeSlider != null){
+            toVolume = VolumeSlider.value;
+            Debug.Log("volume: " + toVolume);
+        }
+        mixer.SetFloat("MusicVolume", Mathf.Log10(toVolume)*20);
+
         //if an audio manager already exists then get rid of the new one
         if (instance == null)
         {
             instance = this;
         } else
         {
-            Destroy(gameObject);
+            if (gameObject.tag != "Slider"){
+                Destroy(gameObject);
+            }
             return;
         }
         //audio manager persists between scenes
@@ -121,6 +135,14 @@ public class AudioManager : MonoBehaviour
         Play("MainTheme");
     }
 
-    // to play a sound from anywhere, call "FindObjectOfType<AudioManager>().Play(name);"
+    // This part of the Volume Slider functionality currently sorta works.
+    // Volume will update when slider value changes but not when scene is loaded.
+    // i.e. If you load scene with volume slider at 10%, music still plays at 100% until you change slider value.
+    // Code at the start of Awake() is trying to account for this :)
+    // - Tyler
+    public void SetVolume(float sliderValue){
+        mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue)*20);
+    }
 
+    // to play a sound from anywhere, call "FindObjectOfType<AudioManager>().Play(name);"
 }
