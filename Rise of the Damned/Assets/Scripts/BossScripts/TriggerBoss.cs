@@ -149,11 +149,13 @@ public class TriggerBoss : MonoBehaviour
                 state = State.won;
                 PlayerController.isActive = false;
 
-                Destroy(PlayerController.controller.rb);
+                //Destroy(PlayerController.controller.rb);
 
-                GameObject.Find("HUD").SetActive(false);
+                //GameObject.Find("HUD").SetActive(false);
 
-                Debug.Log("Won");
+                SceneManager.LoadScene("LevelTwo");
+
+                //Debug.Log("Won");
             }
         }
         else if (state == State.won)

@@ -90,7 +90,7 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
   sounds:
   - name: MainTheme
-    clip: {fileID: 8300000, guid: 7209d2624952fec48ab7e296d87adcbd, type: 3}
+    clip: {fileID: 8300000, guid: 618098d1dc2f6ec42a642646b42036d7, type: 3}
     output: {fileID: 1873503749718454956, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
     volume: 0.5
     pitch: 1
@@ -98,7 +98,7 @@ MonoBehaviour:
     music: 1
     source: {fileID: 0}
   - name: HellTheme
-    clip: {fileID: 8300000, guid: 0e5a5681bf5c6274c90926cf8aaca0ec, type: 3}
+    clip: {fileID: 8300000, guid: 5a1dbd41179f5f349a43f4364da8b2f8, type: 3}
     output: {fileID: 1873503749718454956, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
     volume: 0.5
     pitch: 1
@@ -106,7 +106,7 @@ MonoBehaviour:
     music: 1
     source: {fileID: 0}
   - name: CaveTheme
-    clip: {fileID: 8300000, guid: b0bf5bdc54117d94594a2cfc15a667bc, type: 3}
+    clip: {fileID: 8300000, guid: 7b0c1278a46a94941a82b7fb51a7551a, type: 3}
     output: {fileID: 1873503749718454956, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
     volume: 0.5
     pitch: 1
@@ -114,7 +114,7 @@ MonoBehaviour:
     music: 1
     source: {fileID: 0}
   - name: PurgatoryTheme
-    clip: {fileID: 8300000, guid: d1f8779809c19a14d94201c218b89ca3, type: 3}
+    clip: {fileID: 8300000, guid: f2ef5636407f1a5429785b8beffcc5e5, type: 3}
     output: {fileID: 1873503749718454956, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
     volume: 0.5
     pitch: 1
@@ -122,3 +122,4 @@ MonoBehaviour:
     music: 1
     source: {fileID: 0}
   CurrentSong: 
+  VolumeSlider: {fileID: 0}
