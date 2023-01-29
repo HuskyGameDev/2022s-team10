@@ -1867,7 +1867,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 707507099}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Slider, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
         m_Arguments:
@@ -1887,13 +1887,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 707507096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b5df30cf20707b448c77e5ec3b6eed7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1674b84baa6fb334aa863cb248d44d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
-  sounds: []
-  CurrentSong: 
-  VolumeSlider: {fileID: 707507098}
 --- !u!1 &763428584
 GameObject:
   m_ObjectHideFlags: 0

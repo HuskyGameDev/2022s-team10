@@ -20,28 +20,22 @@ public class AudioManager : MonoBehaviour
 
     private Coroutine switchMusic;
 
-    public Slider VolumeSlider;
-    private float toVolume;
+    private float volumeFactor;
+
+    void Update(){
+        Debug.Log(volumeFactor);
+        mixer.SetFloat("MusicVolume", volumeFactor);
+    }
 
     void Awake()
     {
-        // Work in Progress Volume Slider functionality
-        toVolume = 1;
-        if (VolumeSlider != null){
-            toVolume = VolumeSlider.value;
-            Debug.Log("volume: " + toVolume);
-        }
-        mixer.SetFloat("MusicVolume", Mathf.Log10(toVolume)*20);
-
         //if an audio manager already exists then get rid of the new one
         if (instance == null)
         {
             instance = this;
         } else
         {
-            if (gameObject.tag != "Slider"){
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
             return;
         }
         //audio manager persists between scenes
@@ -101,8 +95,8 @@ public class AudioManager : MonoBehaviour
         //Fade out the current song
         float currentTime = 0;
         float currentVol;
-        mixer.GetFloat(exposedParam, out currentVol);
-        currentVol = Mathf.Pow(10, currentVol / 20);
+        //mixer.GetFloat(exposedParam, out currentVol);
+        currentVol = Mathf.Pow(10, volumeFactor / 20);
 
         float targetValue2 = currentVol; //target for the fade in
 
@@ -130,18 +124,20 @@ public class AudioManager : MonoBehaviour
         yield break;
     }
 
-        void Start()
+    void Start()
     {
         Play("MainTheme");
     }
+
 
     // This part of the Volume Slider functionality currently sorta works.
     // Volume will update when slider value changes but not when scene is loaded.
     // i.e. If you load scene with volume slider at 10%, music still plays at 100% until you change slider value.
     // Code at the start of Awake() is trying to account for this :)
     // - Tyler
-    public void SetVolume(float sliderValue){
-        mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue)*20);
+    public void ChangeVolume(float volumeVal){
+        Debug.Log("changing " + volumeVal);
+        volumeFactor = Mathf.Log10(volumeVal)*20;
     }
 
     // to play a sound from anywhere, call "FindObjectOfType<AudioManager>().Play(name);"
