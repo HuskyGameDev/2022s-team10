@@ -11,9 +11,9 @@ public class AttackController : MonoBehaviour
 
     public GameObject weaponAttack;
      
-    public GameObject equippedWeapon = null;
-    public GameObject equippedBow = null;
-    private GameObject equippedArmor = null;
+    public GameObject equippedWeapon;
+    public GameObject equippedBow;
+    private GameObject equippedArmor;
 
     private Rigidbody2D rb;
     private PlayerController pcontroller;
@@ -41,6 +41,9 @@ public class AttackController : MonoBehaviour
     public GameObject SelectedMelee;
     public GameObject SelectedRanged;
 
+    [SerializeField]
+    private PlayerSO PlayerData; //stored player data to persist between scenes
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,20 @@ public class AttackController : MonoBehaviour
 
         PlayerController.attackController = this;
         playerInput = GetComponent<PlayerInput>();
+
+        if(PlayerData.EquippedWeapon != null)
+        {
+            Debug.Log("Equipping: " + PlayerData.EquippedWeapon.name);
+            EquipItem(PlayerData.EquippedWeapon.GetComponent<ItemController>());
+        } else
+        {
+            Debug.Log("Weapon not found");
+        }
+
+        if (PlayerData.EquippedBow != null)
+            EquipItem(PlayerData.EquippedBow.GetComponent<ItemController>());
+        if (PlayerData.EquippedArmor != null)
+            EquipItem(PlayerData.EquippedArmor.GetComponent<ItemController>());
 
     }
 
@@ -171,76 +188,91 @@ public class AttackController : MonoBehaviour
             if (collision.gameObject.tag == "ItemDrop")
             {
                 ItemController item = collision.GetComponent<ItemController>();
-                switch (item.type)
-                {
-                    case ItemController.ItemType.Sword:
-                        if (equippedWeapon != null) //reactivate old weapon
-                        {
-                            equippedWeapon.SetActive(true);
-                            //equippedBow.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
-                            equippedWeapon.transform.position = transform.position;
-                            equippedWeapon.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
-                            equippedWeapon.transform.SetParent(collision.transform.parent);
-                        }
-
-                        equippedWeapon = collision.gameObject;  //equip new weapon
-                        equippedWeapon.transform.SetParent(null);
-
-                        PlayerController.meleeDamage = item.meleeDamage;
-                        equippedWeapon.SetActive(false);
-                        SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
-                        foreach (SpriteRenderer child in children){
-                            if (child.name.Equals("ItemTexture")){
-                                GameObject.Find("HUD Weapon").GetComponent<SpriteRenderer>().sprite = child.sprite;
-                            }
-                        }
-                        break;
-                    case ItemController.ItemType.Bow:
-                        if (equippedBow != null) //reactivate old bow
-                        {
-                            equippedBow.SetActive(true);
-                            //equippedBow.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
-                            equippedBow.transform.position = transform.position;
-                            equippedBow.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
-                            equippedBow.transform.SetParent(collision.transform.parent);
-                        }
-
-                        equippedBow = collision.gameObject;  //equip new bow
-                        equippedBow.transform.SetParent(null);
-
-                        PlayerController.rangedDamage = item.rangedDamage;
-                        equippedBow.SetActive(false);
-                        SpriteRenderer[] children2 = equippedBow.GetComponentsInChildren<SpriteRenderer>();
-                        foreach (SpriteRenderer child in children2){
-                            if (child.name.Equals("ItemTexture")){
-                                GameObject.Find("HUD Bow").GetComponent<SpriteRenderer>().sprite = child.sprite;        
-                            }
-                        }
-                        break;
-                    case ItemController.ItemType.Armor:
-                        if (equippedArmor != null) //reactivate old armor
-                        {
-                            equippedArmor.SetActive(true);
-                            //equippedArmor.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
-                            equippedArmor.transform.position = transform.position;
-                            equippedArmor.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
-                            equippedArmor.transform.SetParent(collision.transform.parent);
-                        }
-
-                        equippedArmor = collision.gameObject;  //equip new armor
-                        equippedArmor.transform.SetParent(null);
-
-                        PlayerController.armor = item.armor;
-                        equippedArmor.SetActive(false);
-                        SpriteRenderer[] children3 = equippedArmor.GetComponentsInChildren<SpriteRenderer>();
-                        foreach (SpriteRenderer child in children3){
-                            if (child.name.Equals("ItemTexture")){
-                                GameObject.Find("HUD Armor").GetComponent<SpriteRenderer>().sprite = child.sprite;        
-                            }
-                        }
-                        break;
-                }
+                EquipItem(item);
             }
+        }
+    }
+
+
+    void EquipItem(ItemController item)
+    {
+        switch (item.type)
+        {
+            case ItemController.ItemType.Sword:
+                if (equippedWeapon != null) //reactivate old weapon
+                {
+                    equippedWeapon.SetActive(true);
+                    //equippedBow.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                    equippedWeapon.transform.position = transform.position;
+                    equippedWeapon.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
+                    equippedWeapon.transform.SetParent(item.transform.parent);
+                }
+
+                equippedWeapon = item.gameObject;  //equip new weapon
+                PlayerData.EquippedWeapon = equippedWeapon; //store in playerdata
+                equippedWeapon.transform.SetParent(null);
+
+                PlayerController.meleeDamage = item.meleeDamage;
+                equippedWeapon.SetActive(false);
+                SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer child in children)
+                {
+                    if (child.name.Equals("ItemTexture"))
+                    {
+                        GameObject.Find("HUD Weapon").GetComponent<SpriteRenderer>().sprite = child.sprite;
+                    }
+                }
+                break;
+            case ItemController.ItemType.Bow:
+                if (equippedBow != null) //reactivate old bow
+                {
+                    equippedBow.SetActive(true);
+                    //equippedBow.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                    equippedBow.transform.position = transform.position;
+                    equippedBow.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
+                    equippedBow.transform.SetParent(item.transform.parent);
+                }
+
+                equippedBow = item.gameObject;  //equip new bow
+                PlayerData.EquippedBow = equippedBow; //store in playerdata
+                equippedBow.transform.SetParent(null);
+
+                PlayerController.rangedDamage = item.rangedDamage;
+                equippedBow.SetActive(false);
+                SpriteRenderer[] children2 = equippedBow.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer child in children2)
+                {
+                    if (child.name.Equals("ItemTexture"))
+                    {
+                        GameObject.Find("HUD Bow").GetComponent<SpriteRenderer>().sprite = child.sprite;
+                    }
+                }
+                break;
+            case ItemController.ItemType.Armor:
+                if (equippedArmor != null) //reactivate old armor
+                {
+                    equippedArmor.SetActive(true);
+                    //equippedArmor.GetComponent<Rigidbody2D>().position = collision.attachedRigidbody.position;
+                    equippedArmor.transform.position = transform.position;
+                    equippedArmor.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
+                    equippedArmor.transform.SetParent(item.transform.parent);
+                }
+
+                equippedArmor = item.gameObject;  //equip new armor
+                PlayerData.EquippedArmor = equippedArmor; //store in playerdata
+                equippedArmor.transform.SetParent(null);
+
+                PlayerController.armor = item.armor;
+                equippedArmor.SetActive(false);
+                SpriteRenderer[] children3 = equippedArmor.GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer child in children3)
+                {
+                    if (child.name.Equals("ItemTexture"))
+                    {
+                        GameObject.Find("HUD Armor").GetComponent<SpriteRenderer>().sprite = child.sprite;
+                    }
+                }
+                break;
         }
     }
 

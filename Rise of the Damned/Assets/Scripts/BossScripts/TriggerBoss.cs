@@ -147,7 +147,7 @@ public class TriggerBoss : MonoBehaviour
             if (PlayerController.player.transform.position.y > transform.position.y + 8)
             {
                 state = State.won;
-                PlayerController.isActive = false;
+                //PlayerController.isActive = false;
 
                 //Destroy(PlayerController.controller.rb);
 

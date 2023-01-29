@@ -121,6 +121,9 @@ public class PlayerController : MonoBehaviour
     //Sound
     [SerializeField] AudioMixer mixer;
 
+    [SerializeField]
+    private PlayerSO PlayerData; //stored player data to persist between scenes
+
 
     // Start is called before the first frame update
     void Start()
@@ -128,7 +131,7 @@ public class PlayerController : MonoBehaviour
         player = gameObject;
         controller = this;
         //default player stats
-        health = 100;
+        health = PlayerData.Health;
         maxHealth = 100;
         meleeDamage = 0;
         rangedDamage = 0;
