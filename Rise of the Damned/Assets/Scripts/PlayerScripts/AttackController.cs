@@ -56,11 +56,11 @@ public class AttackController : MonoBehaviour
 
         if(PlayerData.EquippedWeapon != null)
         {
-            Debug.Log("Equipping: " + PlayerData.EquippedWeapon.name);
+            //Debug.Log("Equipping: " + PlayerData.EquippedWeapon.name);
             EquipItem(PlayerData.EquippedWeapon.GetComponent<ItemController>());
         } else
         {
-            Debug.Log("Weapon not found");
+            //Debug.Log("Weapon not found");
         }
 
         if (PlayerData.EquippedBow != null)

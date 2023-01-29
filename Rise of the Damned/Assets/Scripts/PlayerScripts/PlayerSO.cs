@@ -11,7 +11,7 @@ public class PlayerSO : ScriptableObject
     [SerializeField]
     private float _health = 100;
     [SerializeField]
-    private GameObject _equippedWeapon = null, _equippedBow = null, _equippedArmor = null;
+    private GameObject _equippedWeapon, _equippedBow, _equippedArmor;
 
     public float Health {
         get { return _health; }
@@ -21,11 +21,11 @@ public class PlayerSO : ScriptableObject
     public GameObject EquippedWeapon
     {
         get {
-            Debug.Log("Returned weapon");
+            //Debug.Log("Returned weapon");
             return _equippedWeapon;
         }
         set { _equippedWeapon = value;
-            Debug.Log("Stored: " + value.name);
+            //Debug.Log("Stored: " + value.name);
         }
     }
 

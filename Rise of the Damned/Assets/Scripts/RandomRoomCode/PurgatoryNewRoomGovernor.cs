@@ -59,7 +59,7 @@ public class PurgatoryNewRoomGovernor : MonoBehaviour
             }
         }
 
-        Instantiate(bossRoom, offset, Quaternion.identity); //Instantiate the bossroom at the top
+        //Instantiate(bossRoom, offset, Quaternion.identity); //Instantiate the bossroom at the top
     }
 
     // Update is called once per frame
