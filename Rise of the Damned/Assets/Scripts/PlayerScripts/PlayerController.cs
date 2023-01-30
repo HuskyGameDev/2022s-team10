@@ -66,7 +66,9 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("For Walls")]
-    public Transform isNearAWallChecker; 
+    public Transform WallChecker1;
+    public Transform WallChecker2;
+    public int WallDirection; // -1 is no wall, 0 is left, 1 is right
     public LayerMask wallLayer;
     public float checkWallRadius; 
     public float rememberwalledFor; 
@@ -230,10 +232,10 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             if ((nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump)
             { // Wall Jumps
-                if(facingLeft)
-                    rb.velocity = new Vector2(jumpForce, jumpForce * 1.25f);
-                else if(facingRight)
-                    rb.velocity = new Vector2(-jumpForce, jumpForce * 1.25f);
+                if(WallDirection == 0)
+                    rb.velocity = new Vector2(jumpForce, jumpForce * 1.2f);
+                else if(WallDirection == 1)
+                    rb.velocity = new Vector2(-jumpForce, jumpForce * 1.2f);
 
                 hasWallJump = false;
                 Invoke("SetHasWallJumpToTrue", wallJumpCoolDown); // delay that you set
@@ -281,10 +283,18 @@ public class PlayerController : MonoBehaviour
     }
 
     void CheckIfNearAWall(){ // can change gravity scale when near a wall here
-        Collider2D collider2 = Physics2D.OverlapCircle(isNearAWallChecker.position, checkWallRadius, wallLayer);
+        Collider2D collider1 = Physics2D.OverlapCircle(WallChecker1.position, checkWallRadius, wallLayer);
 
-        if (collider2 != null) { 
-            nearAWall = true; 
+        Collider2D collider2 = Physics2D.OverlapCircle(WallChecker2.position, checkWallRadius, wallLayer);
+
+        if (collider1 != null) { 
+            nearAWall = true;
+            WallDirection = 1;
+            if (facingLeft) 
+            {
+                WallDirection -= 1;
+            }
+            
 
             if( moveAction.ReadValue<Vector2>().x != 0 ){
                 rb.gravityScale = gravityChangeNearWall; 
@@ -294,8 +304,22 @@ public class PlayerController : MonoBehaviour
             else{ wallSliding = false;}
 
         }
+        else if (collider2 != null)
+        {
+            nearAWall = true;
+            WallDirection = 0;
+            if(facingLeft)
+            {
+                WallDirection += 1;
+            }
 
-        else {
+            if (moveAction.ReadValue<Vector2>().x != 0)
+            {
+                rb.gravityScale = gravityChangeNearWall;
+                wallSliding = true;
+            } else { wallSliding = false; }
+
+        } else {
             if(nearAWall) { // just left the wall and hit it, grab time
                 lastTimewalled = Time.time;
             }

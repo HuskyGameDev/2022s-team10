@@ -72,7 +72,7 @@ public class PurgatoryNewRoomGovernor : MonoBehaviour
             if (section == -1)
             {
                 //play section 1 music
-                FindObjectOfType<AudioManager>().Play("HellTheme");
+                FindObjectOfType<AudioManager>().Play("PurgatoryTheme");
             }
             section = 0;
         } else if (roomNum < roomSets[0].totalRooms + roomSets[1].totalRooms + 1)
@@ -80,7 +80,7 @@ public class PurgatoryNewRoomGovernor : MonoBehaviour
             if (section == 0)
             {
                 //play section 2 music
-                FindObjectOfType<AudioManager>().Play("CaveTheme");
+                //FindObjectOfType<AudioManager>().Play("CaveTheme");
             }
             section = 1;
         } else if (roomNum < roomSets[0].totalRooms + roomSets[1].totalRooms + 1 + 1)
@@ -88,7 +88,7 @@ public class PurgatoryNewRoomGovernor : MonoBehaviour
             if (section == 1)
             {
                 //play section 3 music
-                FindObjectOfType<AudioManager>().Play("PurgatoryTheme");
+                //FindObjectOfType<AudioManager>().Play("PurgatoryTheme");
             }
             section = 2;
         }
