@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float max_wall_acceleration = 80f;
     [SerializeField]
-    private float knockback_time = 1; //time in seconds knockback is in effect 
+    private float knockback_time = .3f; //time in seconds knockback is in effect 
 
 
     [Header("For Ground")]
@@ -478,13 +478,12 @@ public class PlayerController : MonoBehaviour
     public void SpikeKnockback(float knockback, Vector2 knockbackdir)
     {
         receivingKnockback = true;
-        
 
         rb.AddForce(new Vector2(knockback * knockbackdir.x, knockback * knockbackdir.y), ForceMode2D.Impulse);
         Invoke("SetReceivingKnockback", knockback_time);
     }
 
-    private void SetReceivingKnockback()
+    private void SetReceivingKnockback() //called when knockback is over
     {
         receivingKnockback = false;
     }

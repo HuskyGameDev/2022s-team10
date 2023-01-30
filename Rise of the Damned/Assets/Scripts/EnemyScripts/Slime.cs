@@ -13,6 +13,8 @@ public class Slime : EnemyController
     bool isAttacking = true;
     [SerializeField]
     bool isJumping = false;
+    [SerializeField]
+    bool isPrejumping = false;
     //[SerializeField]
     //bool isGrounded = false;
 
@@ -22,20 +24,17 @@ public class Slime : EnemyController
     // Update2 is called once per frame
     public override void Update2()
     {
-        if (CheckGround()) //if slime is on the ground
+        if (CheckGround() && !isPrejumping && isJumping) //if slime is landing on the ground
         {
-            if (isJumping) //if slime is ready to land
-            {
-                rb.velocity = (new Vector2(0, 0));
-            }
+            rb.velocity = (new Vector2(0, 0));
             //isGrounded = true;
             isJumping = false;
             animator.SetBool("isJumping", false);
         }
-        else //if slime is in the air
+        else if(!CheckGround() && !isPrejumping && isJumping) //if slime is jumping into the air
         {
             //isGrounded = false;
-            isJumping = true;
+            
             animator.SetBool("isPrejumping", false);
             animator.SetBool("isJumping", true);
         }
@@ -67,8 +66,7 @@ public class Slime : EnemyController
             if (slimeUpdate != null) { StopCoroutine(slimeUpdate); }
             slimeUpdate = StartCoroutine(Agro());
         }
-
-        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking)
+        if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) > aggroDist * 1.5 && isAttacking && !isPrejumping && !isJumping)
         { //if slime is too far from the player then idle
             state = State.Wander;
         }
@@ -80,11 +78,13 @@ public class Slime : EnemyController
         {
             //start animation
             animator.SetBool("isPrejumping", true);
-
+            isJumping = true;
+            isPrejumping = true;
             yield return new WaitForSeconds(1);
 
             //start jumping part of animation
-
+            isPrejumping = false;
+            
 
             //1 if player is to the right, -1 if player is to the left
             FacePlayer();

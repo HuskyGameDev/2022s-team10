@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  knockback: 10
+  knockback: 12
 --- !u!1 &3597563105583855580
 GameObject:
   m_ObjectHideFlags: 0
@@ -5916,7 +5916,7 @@ MonoBehaviour:
   - {x: 0.5, y: -3.5, z: 0}
   m_ShapePathHash: 1460057349
   m_Mesh: {fileID: 0}
-  m_InstanceId: 165206
+  m_InstanceId: 135668
 --- !u!1 &5756194018143038508
 GameObject:
   m_ObjectHideFlags: 0
@@ -6142,7 +6142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  knockback: 10
+  knockback: 12
 --- !u!1 &6335243220117066779
 GameObject:
   m_ObjectHideFlags: 0
@@ -6388,7 +6388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  knockback: 8
+  knockback: 12
 --- !u!1001 &510749622090604033
 PrefabInstance:
   m_ObjectHideFlags: 0

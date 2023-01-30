@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  knockback: 8
+  knockback: 12
 --- !u!1 &1148212653068071271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  knockback: 10
+  knockback: 12
 --- !u!1 &5182903730524973746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,7 +2169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  knockback: 10
+  knockback: 12
 --- !u!1 &7101968830559511527
 GameObject:
   m_ObjectHideFlags: 0

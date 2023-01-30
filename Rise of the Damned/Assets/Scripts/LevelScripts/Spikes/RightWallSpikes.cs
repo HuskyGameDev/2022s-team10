@@ -6,7 +6,7 @@ public class RightWallSpikes : MonoBehaviour
 {
 
     public float damage = 10f;
-    public float knockback = 10f;
+    public float knockback = 12f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

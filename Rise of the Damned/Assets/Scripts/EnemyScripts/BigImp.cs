@@ -11,7 +11,7 @@ public class BigImp : EnemyController
     bool lockSwing = false; //locks the state to swinging to prevent half swings
 
     [SerializeField]
-    float swingDistance = 1f;
+    float swingDistance = 2f;
     [SerializeField]
     float attackCooldown = 1f;
 

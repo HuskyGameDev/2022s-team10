@@ -6,7 +6,7 @@ public class Spikes : MonoBehaviour
 {
     [Header("Default: 10dmg, 3kb")]
     public float damage = 10f;
-    public float knockback = 8f;
+    public float knockback = 12f;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.tag.Equals("Player")) { //if player collides with spikes
