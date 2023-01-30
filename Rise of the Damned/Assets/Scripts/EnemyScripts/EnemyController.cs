@@ -34,7 +34,9 @@ public abstract class EnemyController : MonoBehaviour
     [SerializeField]
     protected float max_speed_change;
     [SerializeField]
-    protected float knockback_time = 1; //time in seconds knockback is in effect 
+    protected float knockback_time = 1.5f; //time in seconds knockback is in effect 
+    [SerializeField]
+    protected float knockback_drag = 3f;
     protected bool receivingKnockback = false;
 
     [Header("Item Drops")]
@@ -98,6 +100,8 @@ public abstract class EnemyController : MonoBehaviour
 
 
         IFrames();
+
+        KnockbackDrag();
 
         this.Update2();
     }
@@ -313,7 +317,7 @@ public abstract class EnemyController : MonoBehaviour
         float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
         float vertical_enemy_direction = (knockback_location.position.y - rb.position.y) / Mathf.Abs(knockback_location.position.y - rb.position.y);
 
-        rb.AddForce(new Vector2((knockback) * -horizontal_enemy_direction, (knockback) * 1 * (float).55), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2((knockback / knockback_resistance) * -horizontal_enemy_direction, (knockback / knockback_resistance) * 1 * (float).45), ForceMode2D.Impulse);
         knocked = StartCoroutine(KnockbackSequence());
     }
     public virtual void SpikeKnockback(float knockback, Vector2 knockbackdir) //knockback direction is the direction the entity will be knocked back
@@ -328,5 +332,16 @@ public abstract class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(knockback_time);
         receivingKnockback = false;
         yield return new WaitForSeconds(0);
+    }
+
+    public virtual void KnockbackDrag()
+    {
+        if(receivingKnockback)
+        {
+            rb.drag = knockback_drag;
+        } else
+        {
+            rb.drag = 0;
+        }
     }
 }

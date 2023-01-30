@@ -9,12 +9,17 @@ public class Skeleton : EnemyController
     bool isIdle = false;
     bool isAttacking = true;
     bool isSwinging = false;
+    bool isSwinging2 = false; //second half of animation for knockback cancel
     bool lockSwing = false; //locks the state to swinging to prevent half swings
 
     [SerializeField]
     float swingDistance = 1f;
     [SerializeField]
     float attackCooldown = 1f;
+    [SerializeField]
+    float ground_drag;
+    [SerializeField]
+    float air_drag;
 
     [Header("Animations")]
     public Animator animator;
@@ -34,6 +39,22 @@ public class Skeleton : EnemyController
         else if (Vector2.Distance(rb.position, PlayerController.controller.rb.position) < swingDistance)
         {
             state = State.Swing;
+        }
+
+        if (receivingKnockback && isSwinging2)
+        { //if in the second half of the swing and on the ground, don't receive knockback
+            ground_drag = 50f;
+        } else
+        {
+            ground_drag = 2.5f;
+        }
+
+        if (!CheckGround())
+        {
+            knockback_drag = air_drag;
+        } else
+        {
+            knockback_drag = ground_drag;
         }
 
     }
@@ -64,7 +85,7 @@ public class Skeleton : EnemyController
 
     public override void Swinging()
     {
-        if(!isSwinging)
+        if(!isSwinging && !receivingKnockback)
         {
             isSwinging = true;
             isIdle = false;
@@ -131,7 +152,7 @@ public class Skeleton : EnemyController
     IEnumerator Agro()
     {
         animator.SetBool("isAttacking", false); // ends swinging animation
-        while (true)
+        while (!receivingKnockback)
         {
             FacePlayer();
             bool hitEdge = false;
@@ -151,8 +172,7 @@ public class Skeleton : EnemyController
                 {
                     animator.SetBool("isRunning", false);
                     desired_velocity = new Vector2(0f, 0f); //stops moving
-                }
-                else
+                } else
                 {
                     animator.SetBool("isRunning", true);
                     desired_velocity = new Vector2(direction.x, 0f) * Mathf.Max(max_speed, 0f);
@@ -177,8 +197,8 @@ public class Skeleton : EnemyController
 
                 yield return new WaitForEndOfFrame();
             }
+            yield return new WaitForEndOfFrame();
         }
-
     }
 
 
@@ -195,13 +215,15 @@ public class Skeleton : EnemyController
             animator.SetBool("isAttacking", true); // starts swinging animation
             lockSwing = true;
 
-            yield return new WaitForSeconds((float) 5 / 6); //waits 50 seconds (exact animation time)
+            yield return new WaitForSeconds((float)2 / 6); //first half of animation
+            isSwinging2 = true;
+            yield return new WaitForSeconds((float) 3 / 6); //waits  a total of 50 seconds (exact animation time)
 
             animator.SetBool("isAttacking", false); // ends swinging animation
             lockSwing = false;
+            isSwinging2 = false;
 
             yield return new WaitForSeconds(attackCooldown); // wait for attack cooldown 
         }
     }
-
 }

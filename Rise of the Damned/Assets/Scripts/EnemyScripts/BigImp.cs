@@ -193,4 +193,17 @@ public class BigImp : EnemyController
         }
     }
 
+    public override void KnockbackDrag()
+    {
+        if (receivingKnockback && isSwinging)
+        {
+            rb.drag = 50;
+        } else if (receivingKnockback)
+        {
+            rb.drag = knockback_drag;
+        } else
+        {
+            rb.drag = 0;
+        }
+    }
 }

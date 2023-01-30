@@ -66,6 +66,8 @@ AudioMixerController:
     name: MusicVolume
   - guid: eccb971df7ea2444bbbf5e5ef5fbd6a2
     name: MusicLowpassFilter
+  - guid: 953630e6e41e52341beab04afcd528aa
+    name: SFXVolume
   m_AudioMixerGroupViews:
   - guids:
     - a19b928252a1fdc46a925ebf510e2c49

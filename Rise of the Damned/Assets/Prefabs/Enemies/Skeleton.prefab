@@ -229,16 +229,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  health: 25
+  health: 45
   knockback: 10
-  knockback_resistance: 2
+  knockback_resistance: 0.9
   max_speed: 3
   defaultState: 0
   aggroDist: 5
   flying: 0
   max_acceleration: 30
   max_speed_change: 0
-  knockback_time: 0.5
+  knockback_time: 0.6
+  knockback_drag: 0.5
   drops:
   - {fileID: 5366049279497736705, guid: 909d15fa8ed7a5745b51c63bdf8ceef7, type: 3}
   - {fileID: 5839799160562247257, guid: 4150c754f08b6a646b1f9aa0f6a7719c, type: 3}
@@ -261,8 +262,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   collisionPoint: {fileID: 1721856144113069946}
-  swingDistance: 1.6
-  attackCooldown: 0.4
+  swingDistance: 1.5
+  attackCooldown: 0.5
+  ground_drag: 2.5
+  air_drag: 0.5
   animator: {fileID: 1721856142825553607}
 --- !u!1 &1721856143625109401
 GameObject:

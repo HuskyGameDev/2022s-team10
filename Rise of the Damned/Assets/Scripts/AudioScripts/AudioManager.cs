@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
     private float volumeFactor;
 
     void Update(){
-        Debug.Log(volumeFactor);
+        //Debug.Log(volumeFactor);
         mixer.SetFloat("MusicVolume", volumeFactor);
     }
 
@@ -74,6 +74,9 @@ public class AudioManager : MonoBehaviour
                 s.source.Play();
                 CurrentSong = s.name;
             }
+        } else //if playing a sound effect
+        {
+            s.source.Play();
         }
     }
 

@@ -149,16 +149,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 8
-  health: 16
+  health: 35
   knockback: 10
-  knockback_resistance: 1
+  knockback_resistance: 0.8
   max_speed: 3
   defaultState: 0
   aggroDist: 6
   flying: 0
   max_acceleration: 80
   max_speed_change: 0
-  knockback_time: 1
+  knockback_time: 0.6
+  knockback_drag: 1
   drops:
   - {fileID: 5471605987740711241, guid: 72296b986ce3d5040a8dc89d3251bb08, type: 3}
   - {fileID: 9053927616272895567, guid: 436c5932c8b07c74c8d710e7f4296591, type: 3}
@@ -179,8 +180,8 @@ MonoBehaviour:
     m_Bits: 64
   wallLayer:
     serializedVersion: 2
-    m_Bits: 128
-  collisionPoint: {fileID: 0}
+    m_Bits: 64
+  collisionPoint: {fileID: 282064083782574820}
   isAttacking: 1
   animator: {fileID: 8252564883687448274}
 --- !u!61 &8252564883687448110
@@ -254,7 +255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8252564883710334182}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39999998, y: 0.39999962, z: 0}
+  m_LocalPosition: {x: 0.45, y: 0.39999962, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8252564884098146794}
@@ -284,7 +285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8252564883832520613}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26999998, y: 0.39999962, z: 0}
+  m_LocalPosition: {x: -0.3, y: 0.39999962, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8252564884098146794}

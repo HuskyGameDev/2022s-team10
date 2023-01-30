@@ -9803,7 +9803,7 @@ PrefabInstance:
     - target: {fileID: 8613743298121077674, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 4510071438848990326, guid: 41683f00e89042442b4f7d91ee367a7f, type: 3}
+      objectReference: {fileID: 1721856142825553610, guid: 010598f2922cc4d498e2a04ca13ac377, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
 --- !u!1 &1190456941
@@ -11016,7 +11016,7 @@ MonoBehaviour:
   max_speed_change: 0
   max_air_acceleration: 80
   max_wall_acceleration: 80
-  knockback_time: 1
+  knockback_time: 0.8
   rememberGroundedFor: 0.08
   checkGroundRadius: 0.2
   isGroundedChecker: {fileID: 1331459566}

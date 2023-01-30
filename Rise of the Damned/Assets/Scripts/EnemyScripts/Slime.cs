@@ -15,29 +15,63 @@ public class Slime : EnemyController
     bool isJumping = false;
     [SerializeField]
     bool isPrejumping = false;
-    //[SerializeField]
-    //bool isGrounded = false;
+    [SerializeField]
+    bool inAir = false;
+
+    bool k = false; //trigger var
+    [SerializeField]
+    float ground_drag;
 
     [Header("Animations")]
     public Animator animator;
+
+
+    // ------ DO NOT CHANGE ANY OF THIS CODE OR SO HELP ME GOD
+    // If I have to fix this fucking slime one more time there will be riots
+
 
     // Update2 is called once per frame
     public override void Update2()
     {
         if (CheckGround() && !isPrejumping && isJumping) //if slime is landing on the ground
         {
-            rb.velocity = (new Vector2(0, 0));
-            //isGrounded = true;
-            isJumping = false;
-            animator.SetBool("isJumping", false);
+            if(inAir)
+            {
+                rb.velocity = (new Vector2(0, 0));
+                isJumping = false;
+                inAir = false;
+                animator.SetBool("isJumping", false);
+            }
         }
-        else if(!CheckGround() && !isPrejumping && isJumping) //if slime is jumping into the air
+
+        
+        if(k && !receivingKnockback) //triggers on the frame where knockback ends
         {
-            //isGrounded = false;
-            
-            animator.SetBool("isPrejumping", false);
-            animator.SetBool("isJumping", true);
+            rb.velocity = (new Vector2(0, velocity.y));
         }
+        if(!k && receivingKnockback) //triggers on the frame where knockback starts
+        {
+            animator.SetBool("isJumping", false);
+            
+        }
+
+        if(receivingKnockback) //sets up trigger
+        {
+            k = true;
+        } else
+        {
+            k = false;
+        }
+
+
+        if(!CheckGround())
+        {
+            knockback_drag = .8f;
+        } else
+        {
+            knockback_drag = ground_drag;
+        }
+
     }
 
     public override void Wander()
@@ -88,36 +122,20 @@ public class Slime : EnemyController
 
             //1 if player is to the right, -1 if player is to the left
             FacePlayer();
+
             //Jump towards player
             rb.velocity = (new Vector2(agroSpeed * direction.x, jumpSpeed));
-
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(.03f);
+            animator.SetBool("isPrejumping", false);
+            animator.SetBool("isJumping", true);
+            inAir = true;
+            yield return new WaitForSeconds(1.97f);
         }
 
     }
 
     IEnumerator Idle()
     {
-        //int direction = 1;
-        /*
-                while (true)
-                {
-                    //beginning animation
-
-                    yield return new WaitForSeconds(2);
-
-                    //move
-                    rb.velocity = (new Vector2(max_speed * direction.x, 0));
-                    //change direction
-                    //direction *= -1;
-                    //wait
-                    while(!isGrounded) {
-                        yield return new WaitForSeconds(1);
-                    }
-                    rb.velocity = (new Vector2(-rb.velocity.x, -rb.velocity.y));
-                    yield return new WaitForSeconds(1);
-                }
-        */
         yield return new WaitForSeconds(0);
     }
 }
