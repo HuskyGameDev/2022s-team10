@@ -57,6 +57,8 @@ public class ItemController : MonoBehaviour
                     PlayerController.health = PlayerController.maxHealth;
                 }
                 Destroy(gameObject);
+                //Play HeartPickup sound
+                FindObjectOfType<AudioManager>().Play("HeartPickup");
             }
             else if (CompareTag("ItemDrop")) {
                 Color color = sr.color;

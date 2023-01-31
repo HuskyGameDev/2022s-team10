@@ -317,6 +317,7 @@ public abstract class EnemyController : MonoBehaviour
         float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
         float vertical_enemy_direction = (knockback_location.position.y - rb.position.y) / Mathf.Abs(knockback_location.position.y - rb.position.y);
 
+        rb.velocity = new Vector2(0, 0); //stops all enemy movement right before knockback so that knockback is more consistent
         rb.AddForce(new Vector2((knockback / knockback_resistance) * -horizontal_enemy_direction, (knockback / knockback_resistance) * 1 * (float).45), ForceMode2D.Impulse);
         knocked = StartCoroutine(KnockbackSequence());
     }

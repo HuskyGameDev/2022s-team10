@@ -166,9 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  health: 56
+  health: 65
   knockback: 15
-  knockback_resistance: 3
+  knockback_resistance: 1
   max_speed: 2
   defaultState: 0
   aggroDist: 5
@@ -176,7 +176,7 @@ MonoBehaviour:
   max_acceleration: 30
   max_speed_change: 0
   knockback_time: 0.6
-  knockback_drag: 3
+  knockback_drag: 2.5
   drops:
   - {fileID: 5471605987740711241, guid: 72296b986ce3d5040a8dc89d3251bb08, type: 3}
   - {fileID: 5358577377626049225, guid: 52f8545f3e4a9194ebefb617f12a766e, type: 3}

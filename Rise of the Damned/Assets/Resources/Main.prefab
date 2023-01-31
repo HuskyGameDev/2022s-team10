@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerData: {fileID: 11400000, guid: 0091e72bbcd228f49a038870ada09718, type: 2}
-  none: {fileID: 0}
 --- !u!1 &5048000839153829991
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,5 +122,156 @@ MonoBehaviour:
     loop: 1
     music: 1
     source: {fileID: 0}
+  - name: ArrowHitGround
+    clip: {fileID: 8300000, guid: 16bd4b78eeb90f1448482d444fbc575f, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: BowDrawback
+    clip: {fileID: 8300000, guid: 833e6a21afa10d54395aa0a0933539b8, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: BowRelease
+    clip: {fileID: 8300000, guid: 795067edcea134b4d9e395d37b82414a, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: FireGuppyShootFireball
+    clip: {fileID: 8300000, guid: a517a38085e87be479e729f7f713de83, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: HardLanding
+    clip: {fileID: 8300000, guid: f2d50f4e5f371734a85c7beab06e486f, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: HeartPickup
+    clip: {fileID: 8300000, guid: 940791fb73c1061419332cbc51dfe437, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: d1720508eb32048489d54d9947f9ec6d, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: Landing
+    clip: {fileID: 8300000, guid: 15ea77541c3f2834493881b4c2ac7936, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: MenuButtonPress
+    clip: {fileID: 8300000, guid: a1fb73866f8f1f9429ade4d5f2348f2c, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: MenuOpen
+    clip: {fileID: 8300000, guid: a1fa87e8435e65146ace900b20028101, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: Pickup
+    clip: {fileID: 8300000, guid: 16db947fea936684d81c0a03f4c30d15, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: SwordSwing1
+    clip: {fileID: 8300000, guid: bbc67770eb05fd7489e8d92072f6f794, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: SwordSwing2
+    clip: {fileID: 8300000, guid: 93ebb43437726b14398fa0ee7cada52e, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: SwordSwing3
+    clip: {fileID: 8300000, guid: e069415c1bff1ea46b367f99ccf5908c, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: Step1
+    clip: {fileID: 8300000, guid: 1546baee890eb7b488df9c858242acc4, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: Step2
+    clip: {fileID: 8300000, guid: 088fadc054c493d4ba9c9b672cd36e0c, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: Step3
+    clip: {fileID: 8300000, guid: 6e8ce80cbfc667e46ad9b6f1724be7fe, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: Step4
+    clip: {fileID: 8300000, guid: 261fdabee939bca4289c83cf37532d01, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
+  - name: Step5
+    clip: {fileID: 8300000, guid: 0cc47e5495239fe46bd7d3567d6dc3ba, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
   CurrentSong: 
-  VolumeSlider: {fileID: 0}

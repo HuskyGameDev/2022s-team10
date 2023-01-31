@@ -26,6 +26,7 @@ public class AttackController : MonoBehaviour
 
     private bool usingRanged = false; // 1 or 0, checks if bow is "equipped", currently only toggles between using ranged or melee
 
+    [SerializeField]
     private bool wasHoldingAttack = false;
     private int shootAngle;
     private int diff;
@@ -102,10 +103,20 @@ public class AttackController : MonoBehaviour
                     }
                 }
                 swipe.GetComponent<WeaponController>().rotSpeed = equippedWeapon.GetComponent<ItemController>().meleeSpeed;
+
+                //Play sword swing
+                int n = (int) Random.Range(1f, 3f);
+                FindObjectOfType<AudioManager>().Play("SwordSwing" + n);
             }
 
-            if(IsHoldingAttack())
+            if(IsHoldingAttack() && usingRanged && equippedBow != null)
             {
+                //Play BowDrawback sound
+                if(!wasHoldingAttack)
+                {
+                    FindObjectOfType<AudioManager>().Play("BowDrawback");
+                }
+
                 rememberDiagTime += Vector2.one * Time.deltaTime;
                 if (rememberDiagTime.x >= rememberDiagFor)
                     diagMemory.x = 0;
@@ -147,6 +158,7 @@ public class AttackController : MonoBehaviour
             }
             else if(wasHoldingAttack)
             {
+
                 if (currBowHoldTime >= bowHoldTime && equippedBow != null && usingRanged)
                 {
                     GameObject shoot = Instantiate(equippedBow.GetComponent<ItemController>().arrow, transform.position, Quaternion.identity);
@@ -160,8 +172,11 @@ public class AttackController : MonoBehaviour
                     srb.rotation = shootAngle;
                     srb.velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
 
+                    //To do: Find where the bow is at max charge and put BowReadyToFire sound there
+                    //FindObjectOfType<AudioManager>().Play("BowReadyToFire");
+
                     //Debug.Log("Memory: " + diagMemory + "\t Time: " + rememberDiagTime);
-                    Debug.Log("Damage %: " + scr.damage / PlayerController.rangedDamage);
+                    //Debug.Log("Damage %: " + scr.damage / PlayerController.rangedDamage);
                 }
                 currBowHoldTime = 0;
             }
@@ -174,6 +189,14 @@ public class AttackController : MonoBehaviour
                 SelectedRanged.SetActive(!SelectedRanged.activeSelf);
                 usingRanged = !usingRanged;
             }
+
+            if(equippedBow != null && usingRanged && wasHoldingAttack && !IsHoldingAttack())
+            {
+                //stop BowDrawback sound
+                FindObjectOfType<AudioManager>().StopPlaying("BowDrawback");
+                //play BowRelease sound
+                FindObjectOfType<AudioManager>().Play("BowRelease");
+            } 
 
             wasHoldingAttack = IsHoldingAttack();
         }
@@ -189,6 +212,9 @@ public class AttackController : MonoBehaviour
             {
                 ItemController item = collision.GetComponent<ItemController>();
                 EquipItem(item);
+
+                //Play pickup sound
+                FindObjectOfType<AudioManager>().Play("Pickup");
             }
         }
     }

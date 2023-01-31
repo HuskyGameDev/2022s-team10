@@ -89,6 +89,9 @@ public class FireGuppy : EnemyController
             spit.GetComponent<BouncyFireBall>().direction = (int) direction.x;
             spit.GetComponent<BouncyFireBall>().bounceLimit = bounceLimit;
 
+            //Play FireGuppyShootFireball sound (WIP this one sounds like shit rn)
+            //FindObjectOfType<AudioManager>().Play("FireGuppyShootFireball");
+
             yield return new WaitForSeconds(attackCooldown); // wait for attack cooldown
         }
     }

@@ -210,7 +210,7 @@ public class Skeleton : EnemyController
 
             animator.SetBool("isRunning", false); //stops running -> to idle animation
 
-            rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
+            rb.velocity = (new Vector2(0, 0)); //stops moving
 
             animator.SetBool("isAttacking", true); // starts swinging animation
             lockSwing = true;

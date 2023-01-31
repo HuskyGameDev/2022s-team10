@@ -8,6 +8,7 @@ public class BigImp : EnemyController
     bool isIdle = false;
     bool isAttacking = true;
     bool isSwinging = false;
+    bool isSwinging2 = false; //second half of animation for knockback cancel
     bool lockSwing = false; //locks the state to swinging to prevent half swings
 
     [SerializeField]
@@ -35,7 +36,7 @@ public class BigImp : EnemyController
         {
             state = State.Swing;
         }
-
+        Debug.Log(state);
     }
 
     public override void Wander()
@@ -84,7 +85,7 @@ public class BigImp : EnemyController
             bool hitEdge = false;
             //beginning animation
             animator.SetBool("isRunning", false); //idle for 6 seconds
-            rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
+            rb.velocity = (new Vector2(0, 0)); //stops moving
             yield return new WaitForSeconds(Random.Range(2, 5));
 
             //move
@@ -103,7 +104,7 @@ public class BigImp : EnemyController
                     if (!CheckEdge() || CheckWall())
                     {
                         hitEdge = true;
-                        velocity = (new Vector2(0, rb.velocity.y)); //stops moving
+                        velocity = (new Vector2(0, 0)); //stops moving
                         animator.SetBool("isRunning", false);
                         TurnAround();
                     }
@@ -122,51 +123,54 @@ public class BigImp : EnemyController
         animator.SetBool("isAttacking", false); // ends swinging animation
         while (true)
         {
-            FacePlayer();
-            bool hitEdge = false;
-            if (!CheckEdge() || CheckWall()) //checks for edge before moving towards the player
-            {
-                hitEdge = true;
-            } else
-            {
-                hitEdge = false;
-            }
-            yield return new WaitForSeconds(1/4);
-
-            while (!hitEdge) // loop until hit a wall or edge
+            if (!receivingKnockback)
             {
                 FacePlayer();
-                if (Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) < .5) //if under or over player, stop moving
+                bool hitEdge = false;
+                if (!CheckEdge() || CheckWall()) //checks for edge before moving towards the player
                 {
-                    animator.SetBool("isRunning", false);
-                    desired_velocity = new Vector2(0f, 0f); //stops moving
+                    hitEdge = true;
+                } else
+                {
+                    hitEdge = false;
                 }
-                else
+                yield return new WaitForSeconds(1 / 4);
+
+                while (!hitEdge) // loop until hit a wall or edge
                 {
-                    animator.SetBool("isRunning", true);
-                    desired_velocity = new Vector2(direction.x, 0f) * Mathf.Max(max_speed, 0f);
-                    velocity = rb.velocity;
-                    acceleration = max_acceleration;
-                    max_speed_change = acceleration * Time.deltaTime;
-                }
-
-                if (!receivingKnockback && !isSwinging)
-                {
-                    velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
-
-
-                    if (!CheckEdge() || CheckWall())
+                    FacePlayer();
+                    if (Mathf.Abs(rb.position.x - PlayerController.controller.rb.position.x) < .5) //if under or over player, stop moving
                     {
-                        hitEdge = true;
-                        velocity = (new Vector2(0, rb.velocity.y)); // stops moving
                         animator.SetBool("isRunning", false);
+                        desired_velocity = new Vector2(0f, 0f); //stops moving
+                    } else
+                    {
+                        animator.SetBool("isRunning", true);
+                        desired_velocity = new Vector2(direction.x, 0f) * Mathf.Max(max_speed, 0f);
+                        velocity = rb.velocity;
+                        acceleration = max_acceleration;
+                        max_speed_change = acceleration * Time.deltaTime;
                     }
+
+                    if (!receivingKnockback && !isSwinging)
+                    {
+                        velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
+
+
+                        if (!CheckEdge() || CheckWall())
+                        {
+                            hitEdge = true;
+                            velocity = (new Vector2(0, 0)); // stops moving
+                            animator.SetBool("isRunning", false);
+                        }
+                    }
+
+                    rb.velocity = velocity;
+
+                    yield return new WaitForEndOfFrame();
                 }
-
-                rb.velocity = velocity;
-
-                yield return new WaitForEndOfFrame();
             }
+            yield return new WaitForEndOfFrame();
         }
 
     }
@@ -175,27 +179,36 @@ public class BigImp : EnemyController
     {
         while (true)
         {
-            FacePlayer();
+            if(!receivingKnockback)
+            {
+                FacePlayer();
 
-            animator.SetBool("isRunning", false); //stops running -> to idle animation
+                animator.SetBool("isRunning", false); //stops running -> to idle animation
 
-            rb.velocity = (new Vector2(0, rb.velocity.y)); //stops moving
+                rb.velocity = (new Vector2(0, 0)); //stops moving
 
-            animator.SetBool("isAttacking", true); // starts swinging animation
-            lockSwing = true;
+                animator.SetBool("isAttacking", true); // starts swinging animation
+                lockSwing = true;
 
-            yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(.3f);
 
-            animator.SetBool("isAttacking", false); // starts swinging animation
-            lockSwing = false;
+                isSwinging2 = true;
 
-            yield return new WaitForSeconds(attackCooldown); // wait for attack cooldown 
+                yield return new WaitForSeconds(.7f);
+
+                animator.SetBool("isAttacking", false); // stops swinging animation
+                lockSwing = false;
+                isSwinging2 = false;
+
+                yield return new WaitForSeconds(attackCooldown); // wait for attack cooldown 
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
 
     public override void KnockbackDrag()
     {
-        if (receivingKnockback && isSwinging)
+        if (receivingKnockback && isSwinging2 && CheckGround())
         {
             rb.drag = 50;
         } else if (receivingKnockback)

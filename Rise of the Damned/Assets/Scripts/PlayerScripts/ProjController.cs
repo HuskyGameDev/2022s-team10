@@ -63,6 +63,8 @@ public class ProjController : MonoBehaviour
         }
         else if(collision.CompareTag("Ground") || collision.CompareTag("Walls"))
         {
+            //Play ArrowHitGround sound
+            FindObjectOfType<AudioManager>().Play("ArrowHitGround");
             Destroy(rb);
             lifespan = 5f;
         }

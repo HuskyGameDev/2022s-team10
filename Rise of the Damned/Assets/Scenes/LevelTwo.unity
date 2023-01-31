@@ -9803,7 +9803,7 @@ PrefabInstance:
     - target: {fileID: 8613743298121077674, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1721856142825553610, guid: 010598f2922cc4d498e2a04ca13ac377, type: 3}
+      objectReference: {fileID: 4510071438848990326, guid: 41683f00e89042442b4f7d91ee367a7f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
 --- !u!1 &1190456941
@@ -10986,6 +10986,7 @@ MonoBehaviour:
   weaponAttack: {fileID: 4915093518464885104, guid: 2f025ca2548a9ef46a2cd2d582a4951b, type: 3}
   equippedWeapon: {fileID: 0}
   equippedBow: {fileID: 0}
+  wasHoldingAttack: 0
   bowHoldTime: 0.15
   bowChargeTime: 0.8
   rememberDiagFor: 0.12
@@ -11041,6 +11042,7 @@ MonoBehaviour:
   hasWallJump: 1
   wallJumping: 0
   wallSliding: 0
+  falling: 0
   fastFalling: 0
   fallMultiplier: 2.5
   lowJumpMultiplier: 2

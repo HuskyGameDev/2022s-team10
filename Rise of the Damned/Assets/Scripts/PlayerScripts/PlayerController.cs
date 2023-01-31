@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using System;
+using Random = UnityEngine.Random;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -87,7 +88,9 @@ public class PlayerController : MonoBehaviour
     public bool hasWallJump = true; // must start true
     public bool wallJumping;
     public bool wallSliding;
+    public bool falling;
     public bool fastFalling;
+    public bool walking;
     private bool isJumping = false; // is true when player is trying to jump
     private bool receivingKnockback = false;
     
@@ -115,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
     public static int roomNum; // current room the player is in, starts at 0
 
-    private Coroutine knockback_r;
+    private Coroutine walk;
 
     public GameObject pauseMenu;
     public GameObject optionsMenu;
@@ -222,6 +225,32 @@ public class PlayerController : MonoBehaviour
         rb.velocity = velocity;
 
         animator.SetFloat("Speed", Mathf.Abs(desired_velocity.x)); //tells animator if player is moving
+
+        if((desired_velocity.x > .01f || desired_velocity.x < -.01f) && isGrounded)
+        {
+            if(!walking)
+            {
+                if (walk != null) { StopCoroutine(walk); }
+                walk = StartCoroutine(Walk());
+            }
+            walking = true;
+        } else
+        {
+            if (walk != null) { StopCoroutine(walk); }
+            walking = false;
+        }
+    }
+
+    IEnumerator Walk()
+    {
+        while(true)
+        {
+            //Play player step
+            int n = (int) Random.Range(1f, 5f);
+            FindObjectOfType<AudioManager>().Play("Step" + n);
+
+            yield return new WaitForSeconds(.2f);
+        }
     }
 
     void Jump() {
@@ -244,11 +273,17 @@ public class PlayerController : MonoBehaviour
                 Invoke("SetWallJumpingToFalse", timeItTakesToWallJump); // could vary
 
                 CreateDust();
+
+                //Play jump sound
+                FindObjectOfType<AudioManager>().Play("Jump");
             }
             else if (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor)
             { // Ground Jumps. checks if player is grounded or they just moved past a groud object
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 isGrounded = false;
+
+                //Play jump sound
+                FindObjectOfType<AudioManager>().Play("Jump");
             }
             else
             {
@@ -263,21 +298,29 @@ public class PlayerController : MonoBehaviour
         { // fall like a sack of potatoes if you're already falling for a while
             rb.drag = (float)(Mathf.Pow(dragPower, dragCoefficient) / (double)(rb.velocity.y * -1 + Mathf.Pow(dragPower, dragCoefficient - 1) + dragPower));
             //Debug.Log("potatoes activated " + rb.velocity.y );
-        }
-        else {
+            
+        } else
+        {
             rb.drag = 3;
         }
 
         //camera shake 
         cameraShake init = FindObjectOfType<cameraShake>();
         
-        if(!isGrounded && rb.velocity.y <= cameraShakeBarrier){ 
+        if(!isGrounded && rb.velocity.y <= cameraShakeBarrier)
+        { 
             fastFalling = true;
+        } else if(!isGrounded && rb.velocity.y < -5)
+        {
+            falling = true;
         }
 
         if(fastFalling && isGrounded){
-                init.shakeCamera(cameraShakeMagnitude, .3f);
-                fastFalling = false;
+            init.shakeCamera(cameraShakeMagnitude, .3f);
+            fastFalling = false;
+        } else if (falling && isGrounded)
+        {
+            falling = false;
         }
         
     }
@@ -333,7 +376,20 @@ public class PlayerController : MonoBehaviour
     void CheckIfGrounded() { 
         Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer); 
 
-        if ( collider != null ) { 
+        if ( collider != null ) {
+            if (!isGrounded)
+            {
+                //Play Landing sound
+                if (fastFalling)
+                {
+                    //Hard landing
+                    FindObjectOfType<AudioManager>().Play("HardLanding");
+                } else if (falling)
+                {
+                    //Soft landing
+                    //FindObjectOfType<AudioManager>().Play("Landing");
+                }
+            }
             isGrounded = true;
         } 
         else {
