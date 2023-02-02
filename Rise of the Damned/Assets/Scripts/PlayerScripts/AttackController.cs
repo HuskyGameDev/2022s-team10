@@ -35,6 +35,8 @@ public class AttackController : MonoBehaviour
     public float bowChargeTime;
     private float currBowHoldTime = 0;
 
+    private bool readyToFire = false;
+
     public float rememberDiagFor;
     private Vector2 rememberDiagTime = Vector2.zero;
     private Vector2 diagMemory = Vector2.zero;
@@ -116,6 +118,15 @@ public class AttackController : MonoBehaviour
                 {
                     FindObjectOfType<AudioManager>().Play("BowDrawback");
                 }
+                //Play BowReadyToFire sound
+                if (!readyToFire && currBowHoldTime - bowChargeTime > 0)
+                {
+                    //stop BowDrawback sound
+                    FindObjectOfType<AudioManager>().StopPlaying("BowDrawback");
+                    //Play BowReadyToFire sound
+                    FindObjectOfType<AudioManager>().Play("BowReadyToFire");
+                    readyToFire = true;
+                }
 
                 rememberDiagTime += Vector2.one * Time.deltaTime;
                 if (rememberDiagTime.x >= rememberDiagFor)
@@ -172,9 +183,6 @@ public class AttackController : MonoBehaviour
                     srb.rotation = shootAngle;
                     srb.velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
 
-                    //To do: Find where the bow is at max charge and put BowReadyToFire sound there
-                    //FindObjectOfType<AudioManager>().Play("BowReadyToFire");
-
                     //Debug.Log("Memory: " + diagMemory + "\t Time: " + rememberDiagTime);
                     //Debug.Log("Damage %: " + scr.damage / PlayerController.rangedDamage);
                 }
@@ -194,8 +202,13 @@ public class AttackController : MonoBehaviour
             {
                 //stop BowDrawback sound
                 FindObjectOfType<AudioManager>().StopPlaying("BowDrawback");
-                //play BowRelease sound
-                FindObjectOfType<AudioManager>().Play("BowRelease");
+                if(currBowHoldTime > bowHoldTime)
+                {
+                    //play BowRelease sound
+                    FindObjectOfType<AudioManager>().Play("BowRelease");
+                }
+
+                readyToFire = false;
             } 
 
             wasHoldingAttack = IsHoldingAttack();

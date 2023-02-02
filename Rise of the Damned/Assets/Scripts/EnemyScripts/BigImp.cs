@@ -36,7 +36,7 @@ public class BigImp : EnemyController
         {
             state = State.Swing;
         }
-        Debug.Log(state);
+        //Debug.Log(state);
     }
 
     public override void Wander()

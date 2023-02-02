@@ -384,6 +384,7 @@ public class PlayerController : MonoBehaviour
                 {
                     //Hard landing
                     FindObjectOfType<AudioManager>().Play("HardLanding");
+                    transform.localScale = new Vector2(1, .7f);
                 } else if (falling)
                 {
                     //Soft landing

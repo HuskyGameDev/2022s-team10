@@ -274,4 +274,12 @@ MonoBehaviour:
     loop: 0
     music: 0
     source: {fileID: 0}
+  - name: BowReadyToFire
+    clip: {fileID: 8300000, guid: fc5fc006c47802943931b57fd955e515, type: 3}
+    output: {fileID: 2509854080436369804, guid: 08193c89142af7b42bf9e64adcaebc9e, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    music: 0
+    source: {fileID: 0}
   CurrentSong: 
