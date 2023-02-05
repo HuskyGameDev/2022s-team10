@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 651677706673727114}
   m_Layer: 4
   m_Name: Lava
-  m_TagString: Spike
+  m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +216,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 5, y: -8, z: 0}
@@ -5087,7 +5087,7 @@ GameObject:
   - component: {fileID: 2553666625705638612}
   - component: {fileID: 3953269582184685557}
   - component: {fileID: 6202530085265496694}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Left Wall Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -223,6 +223,23 @@ public abstract class EnemyController : MonoBehaviour
             if (PlayerController.TakeDamage(damage))
                 PlayerController.controller.Knockback(knockback, collisionPoint);
         }
+        if (collision.gameObject.CompareTag("Spike")) //spike knockback
+        {
+            if(collision.GetComponent<GroundSpikes>() != null)
+            {
+                TakeDamage(collision.GetComponent<GroundSpikes>().damage / 3);
+                rb.velocity = new Vector2(0, 0);
+                SpikeKnockback(collision.GetComponent<GroundSpikes>().knockback / 2, new Vector2(0, 1));
+            }
+        }
+        if (collision.gameObject.CompareTag("Lava")) //lava knockback
+        {
+            if (collision.GetComponent<Lava>() != null)
+            {
+                TakeDamage(collision.GetComponent<Lava>().damage / 3);
+                rb.velocity = new Vector2(0, 0);
+                SpikeKnockback(collision.GetComponent<Lava>().knockback / 4, new Vector2(0, 1));            }
+        }
     }
 
     public virtual void Wander()
@@ -313,13 +330,16 @@ public abstract class EnemyController : MonoBehaviour
     private Coroutine knocked; //knockback coroutine
     public virtual void Knockback(float knockback, Transform knockback_location) //knockback location is where the knockback is coming from
     {
-        receivingKnockback = true;
-        float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
-        float vertical_enemy_direction = (knockback_location.position.y - rb.position.y) / Mathf.Abs(knockback_location.position.y - rb.position.y);
+        if(!receivingKnockback) //only receive knockback if not already receiving knockback
+        {
+            receivingKnockback = true;
+            float horizontal_enemy_direction = (knockback_location.position.x - rb.position.x) / Mathf.Abs(knockback_location.position.x - rb.position.x); // horizontal vector distance from player to enemy
+            float vertical_enemy_direction = (knockback_location.position.y - rb.position.y) / Mathf.Abs(knockback_location.position.y - rb.position.y);
 
-        rb.velocity = new Vector2(0, 0); //stops all enemy movement right before knockback so that knockback is more consistent
-        rb.AddForce(new Vector2((knockback / knockback_resistance) * -horizontal_enemy_direction, (knockback / knockback_resistance) * 1 * (float).45), ForceMode2D.Impulse);
-        knocked = StartCoroutine(KnockbackSequence());
+            rb.velocity = new Vector2(0, 0); //stops all enemy movement right before knockback so that knockback is more consistent
+            rb.AddForce(new Vector2((knockback / knockback_resistance) * -horizontal_enemy_direction, (knockback / knockback_resistance) * 1 * (float).45), ForceMode2D.Impulse);
+            knocked = StartCoroutine(KnockbackSequence());
+        }
     }
     public virtual void SpikeKnockback(float knockback, Vector2 knockbackdir) //knockback direction is the direction the entity will be knocked back
     {

@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 4480381208426374889}
   - component: {fileID: 1595726832566620621}
   - component: {fileID: 5734470409793554731}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Ceiling Spikes
   m_TagString: Spike
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 5695939118796658172}
   - component: {fileID: 772534363342915874}
   - component: {fileID: 2321383007032905478}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Ground Spikes
   m_TagString: Spike
   m_Icon: {fileID: 0}
@@ -4526,7 +4526,7 @@ GameObject:
   - component: {fileID: 3879966902144096109}
   - component: {fileID: 6432302890463211935}
   - component: {fileID: 716685953649420570}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Left Wall Spikes
   m_TagString: Spike
   m_Icon: {fileID: 0}
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 2141462111773769580}
   - component: {fileID: 8829632691847934766}
   - component: {fileID: 9155812985842653156}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Right Wall Spikes
   m_TagString: Spike
   m_Icon: {fileID: 0}
@@ -5471,7 +5471,7 @@ GameObject:
   - component: {fileID: 7030037231708198693}
   m_Layer: 4
   m_Name: Lava
-  m_TagString: Untagged
+  m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5697,7 +5697,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 7, y: -8, z: 0}

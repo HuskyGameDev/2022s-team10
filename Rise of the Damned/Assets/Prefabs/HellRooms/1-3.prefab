@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 8659037883544341359}
   - component: {fileID: 1465503384505014789}
   - component: {fileID: 7796035753879595217}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Ground Spikes
   m_TagString: Spike
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 5955082386725282832}
   - component: {fileID: 922828574268495293}
   - component: {fileID: 8329102257959757356}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Ceiling Spikes
   m_TagString: Spike
   m_Icon: {fileID: 0}
@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 5221871016563709273}
   m_Layer: 4
   m_Name: Lava
-  m_TagString: Untagged
+  m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962fea7dbebbbbe45b106d3900fd17c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 14
   knockback: 14
 --- !u!1 &5357549004787296194
 GameObject:
@@ -5937,7 +5937,7 @@ GameObject:
   - component: {fileID: 6867059647396226925}
   - component: {fileID: 5672922833856501413}
   - component: {fileID: 1121503517393972818}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Left Wall Spikes
   m_TagString: Spike
   m_Icon: {fileID: 0}
@@ -6163,7 +6163,7 @@ GameObject:
   - component: {fileID: 3034319487424332707}
   - component: {fileID: 3185802727804587506}
   - component: {fileID: 8927375047848591540}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Right Wall Spikes
   m_TagString: Spike
   m_Icon: {fileID: 0}

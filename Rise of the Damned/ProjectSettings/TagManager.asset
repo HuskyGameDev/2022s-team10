@@ -19,6 +19,7 @@ TagManager:
   - PlayerTrigger
   - EnemyProjectile
   - Slider
+  - Lava
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - PlayerCollision
   - Platform
   - EnemyBarrier
-  - 
+  - Spikes
   - 
   - 
   - 

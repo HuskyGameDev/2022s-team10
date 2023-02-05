@@ -930,7 +930,7 @@ GameObject:
   - component: {fileID: 2675833831272178740}
   - component: {fileID: 4096679400728992171}
   - component: {fileID: 3586927095241979520}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Left Wall Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4859,7 +4859,7 @@ GameObject:
   - component: {fileID: 7258515712069880453}
   - component: {fileID: 5286508825120648371}
   - component: {fileID: 8076292749285463725}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Right Wall Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5133,7 +5133,7 @@ GameObject:
   - component: {fileID: 387094242515655505}
   - component: {fileID: 1740764088489015733}
   - component: {fileID: 4372597484188345163}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Ceiling Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5547,7 +5547,7 @@ GameObject:
   - component: {fileID: 3994266030284525946}
   - component: {fileID: 3568313647775882961}
   - component: {fileID: 4869426456142507537}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Ground Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}

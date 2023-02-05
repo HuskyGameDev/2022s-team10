@@ -96,17 +96,6 @@ public class Skeleton : EnemyController
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (PlayerController.TakeDamage(damage))
-            {
-                PlayerController.controller.Knockback(knockback, gameObject.transform);
-            }
-        }
-    }
-
     IEnumerator Idle()
     {
         animator.SetBool("isAttacking", false); // ends swinging animation

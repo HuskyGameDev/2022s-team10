@@ -206,7 +206,7 @@ MonoBehaviour:
   - {x: 2.8286626, y: 8.484323, z: 0}
   m_ShapePathHash: 1675246078
   m_Mesh: {fileID: 0}
-  m_InstanceId: 139422
+  m_InstanceId: 219586
 --- !u!1 &1752477505710147192
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,7 +4672,7 @@ MonoBehaviour:
   - {x: -1.4294652, y: 9.9028845, z: 0}
   m_ShapePathHash: 89274381
   m_Mesh: {fileID: 0}
-  m_InstanceId: 139524
+  m_InstanceId: 219688
 --- !u!1 &1752477506981139906
 GameObject:
   m_ObjectHideFlags: 0
@@ -4688,7 +4688,7 @@ GameObject:
   - component: {fileID: 1687910551688683552}
   m_Layer: 4
   m_Name: Lava
-  m_TagString: Spike
+  m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5104,7 +5104,7 @@ GameObject:
   - component: {fileID: 4664650397194881554}
   - component: {fileID: 5790441085722911311}
   - component: {fileID: 7238166206880963459}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Left Wall Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
