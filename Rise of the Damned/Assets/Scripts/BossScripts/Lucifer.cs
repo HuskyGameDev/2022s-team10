@@ -19,11 +19,15 @@ public class Lucifer : MonoBehaviour
     private float moveTimer;
     public Vector2 moveRange;
     public float[] moveChance;
+    public bool isDoingMove = false;
 
     private bool isRightSide = true;
     public float speed;
 
     private SpriteRenderer sr;
+
+    private Coroutine stateUpdate;
+    private Animator animator;
 
     public float health;
     private float redTime = 0;
@@ -35,6 +39,7 @@ public class Lucifer : MonoBehaviour
         script = this;
 
         sr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,8 +55,8 @@ public class Lucifer : MonoBehaviour
             }
             else
             {
-
-                moveTimer -= Time.deltaTime;
+                if(!isDoingMove)
+                    moveTimer -= Time.deltaTime;
 
                 if (moveTimer <= 0)
                 {
@@ -75,6 +80,7 @@ public class Lucifer : MonoBehaviour
                 {
                     sr.flipX = isRightSide;
                     SW_scr.ChangeDir(isRightSide);
+                    isDoingMove = false;
                 }
 
                 if (redTime > 0)
@@ -105,29 +111,51 @@ public class Lucifer : MonoBehaviour
     {
         //Debug.Log("Doing Move " + moveNum);
         moveTimer = Random.Range(moveRange.x, moveRange.y);
+        isDoingMove = true;
         switch (moveNum)
         {
             case 0: //spike wave
                 SW_scr.Run();
                 //do animation here
+                isDoingMove = false;
                 break;
             case 1: //block throw
-                GameObject block = Instantiate(throwBlock, transform.position, Quaternion.identity);
-                float diffX = PlayerController.player.transform.position.x - transform.position.x;
-                block.GetComponent<Rigidbody2D>().velocity = new Vector2(diffX * 1.5f, 0);
-                block.GetComponent<Rigidbody2D>().angularVelocity = diffX * -15;
                 //Debug.Log("DiffX: " + diffX);
+                Debug.Log("Start Throw Block");
+                animator.SetTrigger("Do_Throwblock");
+                Invoke("TriggerThrowBlock", 1.75f);
+
                 break;
             case 2: //swap side of the room
-                moveTimer += 4;
+                //moveTimer += 4;
                 isRightSide = !isRightSide;
                 break;
         }
+        
     }
 
     public void TakeDamage(float damage)
     {
         redTime += .2f;
         health -= damage;
+    }
+
+    void TriggerThrowBlock()
+    {
+        GameObject block = Instantiate(throwBlock, transform.position + Vector3.up, Quaternion.identity);
+        float diffX = PlayerController.player.transform.position.x - transform.position.x;
+        block.GetComponent<Rigidbody2D>().velocity = new Vector2(diffX * 1.5f, 0);
+        block.GetComponent<Rigidbody2D>().angularVelocity = diffX * -15;
+
+        //animator.SetTrigger("Do_Throwblock");
+        Invoke("GoToIdle", .5f);
+        //isDoingMove = false;
+        Debug.Log("Throwing Block");
+    }
+
+    void GoToIdle()
+    {
+        animator.SetTrigger("Is_Idle");
+        isDoingMove = false;
     }
 }

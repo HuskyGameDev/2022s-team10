@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2096109586876711133}
   - component: {fileID: 2096109586876711132}
   - component: {fileID: 6403154102472477818}
+  - component: {fileID: 9026827961002516284}
   m_Layer: 10
   m_Name: Lucifer
   m_TagString: Enemy
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 48d5baba26d258543b983f7df0151925, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 286dc35fa91a4434989d5cf5bd9873fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -174,8 +175,28 @@ MonoBehaviour:
   throwBlock: {fileID: 3059587351883275636, guid: fb8784776697f02439518e4f6ac9f5a6, type: 3}
   moveRange: {x: 1.1, y: 2.7}
   moveChance:
-  - 50
+  - 45
   - 40
-  - 10
+  - 15
+  isDoingMove: 0
   speed: 5
   health: 500
+--- !u!95 &9026827961002516284
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096109586876711134}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04326ebdd8908664c84413d431883b49, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
