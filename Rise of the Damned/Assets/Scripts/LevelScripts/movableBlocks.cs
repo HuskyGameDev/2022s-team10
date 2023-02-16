@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class movableBlocks : MonoBehaviour
 {
+    private Collider2D coll;
+    private List<Collider2D> colliders = new List<Collider2D>();
+    
     // animate the game object from min to max and back along y and x axis
     [Header("Movement toggle")]
     public bool yAxis = true; 
@@ -34,6 +37,8 @@ public class movableBlocks : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       coll = GetComponent<Collider2D>();
+        
         addLocalPosition = transform.localPosition;
 
         if(yAxis && xAxis){
@@ -63,6 +68,19 @@ public class movableBlocks : MonoBehaviour
 
         else if (xAxis){
             transform.localPosition = new Vector3(Mathf.Lerp(minX, maxX, tX), 0, 0) + addLocalPosition; // local position 
+        }
+
+        //move the player with the platform (doesn't work)
+        //colliders = new List<Collider2D>();
+        //coll.OverlapCollider(new ContactFilter2D().NoFilter(), colliders);
+        foreach(Collider2D collision in colliders)
+        {
+            float moveAmount = Time.deltaTime * changeSpeed;
+            float moveX = (maxX - minX) * moveAmount;
+            float moveY = (maxY - minY) * moveAmount;
+            Vector3 vec = new Vector3(moveX * (xAxis ? 1 : 0), moveY * (yAxis ? 1 : 0), 0);
+            collision.transform.position += vec;
+            //Debug.Log(moveX + ", " + moveY);
         }
 
         // .. and increase the t interpolater
@@ -101,5 +119,14 @@ public class movableBlocks : MonoBehaviour
 
     }
 
+    //move the player with the platform (works maybe)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        colliders.Add(collision.collider);
+    }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        colliders.Remove(collision.collider);
+    }
 }

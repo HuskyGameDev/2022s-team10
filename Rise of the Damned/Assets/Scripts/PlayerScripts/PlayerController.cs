@@ -384,6 +384,7 @@ public class PlayerController : MonoBehaviour
                 {
                     //Hard landing
                     FindObjectOfType<AudioManager>().Play("HardLanding");
+                    transform.localScale = new Vector2(1, .7f);
                 } else if (falling)
                 {
                     //Soft landing
@@ -514,13 +515,11 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
+            transform.localScale = new Vector3(transform.localScale.x, 1, 0);
             SceneManager.LoadScene("GameOver");
             // redo rooms on death
             //roomController.GetComponent<MainRoomGovernor>().redoRooms();
         }
-
-
-        transform.localScale = new Vector3(transform.localScale.x, .8f,0);
     }
 
 

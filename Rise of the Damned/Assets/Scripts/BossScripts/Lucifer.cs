@@ -20,6 +20,7 @@ public class Lucifer : MonoBehaviour
     public Vector2 moveRange;
     public float[] moveChance;
     public bool isDoingMove = false;
+    private int prevMove = -1;
 
     private bool isRightSide = true;
     public float speed;
@@ -51,6 +52,7 @@ public class Lucifer : MonoBehaviour
             {
                 trigger.GetComponent<TriggerBoss>().killBoss();
                 SW_scr.Stop();
+                sr.color = Color.white;
                 isActive = false;
             }
             else
@@ -62,23 +64,27 @@ public class Lucifer : MonoBehaviour
                 {
                     float r = Random.Range(0, 100.0f);
                     float sum = 0;
-                    for (int i = 0; i < moveChance.Length; i++)
-                    {
-                        if (moveChance[i] + sum >= r)
+                    int move = prevMove;
+                    while(move == prevMove)
+                        for (int i = 0; i < moveChance.Length; i++)
                         {
-                            DoMove(i);
-                            break;
+                            if (moveChance[i] + sum >= r)
+                            {
+                                move = i;
+                                break;
+                            }
+                            sum += moveChance[i];
                         }
-                        sum += moveChance[i];
-                    }
+                    DoMove(move);
                 }
                 Vector3 pos = new Vector3(transform.parent.position.x, transform.position.y, transform.position.z);
                 pos.x += isRightSide ? 9 : -9;
                 transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
 
-                if (pos.x == transform.position.x && sr.flipX != isRightSide)
+                if (pos.x == transform.position.x && ((Mathf.Sign(transform.localScale.x) >= 0) != isRightSide))
                 {
-                    sr.flipX = isRightSide;
+                    //sr.flipX = isRightSide;
+                    transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
                     SW_scr.ChangeDir(isRightSide);
                     isDoingMove = false;
                 }
@@ -121,7 +127,7 @@ public class Lucifer : MonoBehaviour
                 break;
             case 1: //block throw
                 //Debug.Log("DiffX: " + diffX);
-                Debug.Log("Start Throw Block");
+                //Debug.Log("Start Throw Block");
                 animator.SetTrigger("Do_Throwblock");
                 Invoke("TriggerThrowBlock", 1.75f);
 
@@ -142,7 +148,7 @@ public class Lucifer : MonoBehaviour
 
     void TriggerThrowBlock()
     {
-        GameObject block = Instantiate(throwBlock, transform.position + Vector3.up, Quaternion.identity);
+        GameObject block = Instantiate(throwBlock, transform.position + Vector3.up * 4.5f, Quaternion.identity);
         float diffX = PlayerController.player.transform.position.x - transform.position.x;
         block.GetComponent<Rigidbody2D>().velocity = new Vector2(diffX * 1.5f, 0);
         block.GetComponent<Rigidbody2D>().angularVelocity = diffX * -15;
@@ -150,7 +156,7 @@ public class Lucifer : MonoBehaviour
         //animator.SetTrigger("Do_Throwblock");
         Invoke("GoToIdle", .5f);
         //isDoingMove = false;
-        Debug.Log("Throwing Block");
+        //Debug.Log("Throwing Block");
     }
 
     void GoToIdle()

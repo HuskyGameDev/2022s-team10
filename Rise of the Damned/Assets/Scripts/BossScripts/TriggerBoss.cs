@@ -211,7 +211,7 @@ public class TriggerBoss : MonoBehaviour
         spikeToPoint.x += 2;
 
         bossToPoint.x = boss.transform.position.x;
-        bossToPoint.y -= 5.62f;
+        bossToPoint.y -= 5.56f;
 
         state = State.dead;
     }

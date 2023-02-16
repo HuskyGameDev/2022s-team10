@@ -3587,11 +3587,13 @@ MonoBehaviour:
   weaponAttack: {fileID: 4915093518464885104, guid: 2f025ca2548a9ef46a2cd2d582a4951b, type: 3}
   equippedWeapon: {fileID: 0}
   equippedBow: {fileID: 0}
+  wasHoldingAttack: 0
   bowHoldTime: 0
   bowChargeTime: 0
   rememberDiagFor: 0
   SelectedMelee: {fileID: 0}
   SelectedRanged: {fileID: 0}
+  PlayerData: {fileID: 0}
 --- !u!50 &1642752361647826295
 Rigidbody2D:
   serializedVersion: 4
@@ -12325,7 +12327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2096109586876711135, guid: 29a9b448bdf35ca41904d944e83d5eb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 2096109586876711135, guid: 29a9b448bdf35ca41904d944e83d5eb0, type: 3}
       propertyPath: m_LocalPosition.z
