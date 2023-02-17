@@ -7,7 +7,8 @@ public class AttackController : MonoBehaviour
 {
 
     //public float bowStrength;
-    public float knockback, bowKnockback;
+    [System.NonSerialized]
+    public float meleeKnockback, rangedKnockback;
 
     public GameObject weaponAttack;
      
@@ -26,18 +27,24 @@ public class AttackController : MonoBehaviour
 
     private bool usingRanged = false; // 1 or 0, checks if bow is "equipped", currently only toggles between using ranged or melee
 
-    [SerializeField]
+    public GameObject swipe;
+
     private bool wasHoldingAttack = false;
     private int shootAngle;
     private int diff;
 
-    public float bowHoldTime;
-    public float bowChargeTime;
-    private float currBowHoldTime = 0;
+    private float timeSinceLastSwing = 0;
+    private float meleeCooldown;
+
+    [Tooltip("Minimum time to be able to shoot")]
+    public float bowHoldTime;       //minimum time to hold the bow and still be able to shoot in seconds
+    private float bowChargeTime;    //minimum time to fully charge the bow in seconds
+    private float currBowHoldTime = 0;  //time the bow has currently been held in seconds
 
     private bool readyToFire = false;
 
-    public float rememberDiagFor;
+    [Tooltip("Time to remember that a diagonal direction was held")]
+    public float rememberDiagFor;   //time to remember that a diagonal direction was held after one of the keys was released
     private Vector2 rememberDiagTime = Vector2.zero;
     private Vector2 diagMemory = Vector2.zero;
 
@@ -71,6 +78,8 @@ public class AttackController : MonoBehaviour
         if (PlayerData.EquippedArmor != null)
             EquipItem(PlayerData.EquippedArmor.GetComponent<ItemController>());
 
+        swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
+        swipe.SetActive(false);
     }
 
     // Update is called once per frame
@@ -81,36 +90,52 @@ public class AttackController : MonoBehaviour
         attackAction = playerInput.actions["Attack"];
 
         //Debug.Log("Weapon: " + equippedWeapon);
-        if (!PlayerController.isPaused && PlayerController.isActive){
-            if(attackAction.triggered && equippedWeapon != null && GameObject.Find("SwordSwipe(Clone)") == null && !usingRanged)
+        if (!PlayerController.isPaused && PlayerController.isActive)
+        {
+            if (GameObject.Find("SwordSwipe(Clone)") == null)
             {
-                attackDir = attackAction.ReadValue<Vector2>();
-                if (attackDir.y == 1){
-                    Debug.Log("up");
-                    WeaponController.attackDir = 0; // Up
-                } else if (attackDir.y == -1){
-                    WeaponController.attackDir = 1; // Down
-                } else if (attackDir.x == 1){
-                    WeaponController.attackDir = 2; // Right
-                } else if (attackDir.x == -1){
-                    WeaponController.attackDir = 3; // Left
-                }
-                //Debug.Log("attack dir: " + wcontroller.attackDir);
-
-                GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
-                SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
-                foreach (SpriteRenderer child in children){
-                    if (child.name.Equals("ItemTexture")){
-                        swipe.GetComponent<SpriteRenderer>().sprite = child.sprite;
+                timeSinceLastSwing += Time.deltaTime;
+                //swing sword
+                if (attackAction.triggered && equippedWeapon != null && !usingRanged && timeSinceLastSwing >= meleeCooldown)
+                {
+                    timeSinceLastSwing = 0;
+                    attackDir = attackAction.ReadValue<Vector2>();
+                    if (attackDir.y == 1)
+                    {
+                        //Debug.Log("up");
+                        WeaponController.attackDir = 0; // Up
                     }
+                    else if (attackDir.y == -1)
+                    {
+                        WeaponController.attackDir = 1; // Down
+                    }
+                    else if (attackDir.x == 1)
+                    {
+                        WeaponController.attackDir = 2; // Right
+                    }
+                    else if (attackDir.x == -1)
+                    {
+                        WeaponController.attackDir = 3; // Left
+                    }
+                    //Debug.Log("attack dir: " + wcontroller.attackDir);
+
+                    //GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
+                    swipe.SetActive(true);
+                    SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
+                    foreach (SpriteRenderer child in children)
+                    {
+                        if (child.name.Equals("ItemTexture"))
+                        {
+                            swipe.GetComponent<SpriteRenderer>().sprite = child.sprite;
+                        }
+                    }
+                    swipe.GetComponent<WeaponController>().rotSpeed = equippedWeapon.GetComponent<ItemController>().meleeSpeed;
+
+                    //Play sword swing
+                    int n = (int)Random.Range(1f, 3f);
+                    FindObjectOfType<AudioManager>().Play("SwordSwing" + n);
                 }
-                swipe.GetComponent<WeaponController>().rotSpeed = equippedWeapon.GetComponent<ItemController>().meleeSpeed;
-
-                //Play sword swing
-                int n = (int) Random.Range(1f, 3f);
-                FindObjectOfType<AudioManager>().Play("SwordSwing" + n);
             }
-
             if(IsHoldingAttack() && usingRanged && equippedBow != null)
             {
                 //Play BowDrawback sound
@@ -128,12 +153,14 @@ public class AttackController : MonoBehaviour
                     readyToFire = true;
                 }
 
+                //reset diagonal memory if necessary
                 rememberDiagTime += Vector2.one * Time.deltaTime;
                 if (rememberDiagTime.x >= rememberDiagFor)
                     diagMemory.x = 0;
                 if (rememberDiagTime.y >= rememberDiagFor)
                     diagMemory.y = 0;
 
+                //calculate the direction to fire the bow based on which key(s) were held
                 Vector2 dir = attackAction.ReadValue<Vector2>();
                 if (dir.x != 0)
                 {
@@ -169,17 +196,19 @@ public class AttackController : MonoBehaviour
             }
             else if(wasHoldingAttack)
             {
-
+                //fire the bow
                 if (currBowHoldTime >= bowHoldTime && equippedBow != null && usingRanged)
                 {
-                    GameObject shoot = Instantiate(equippedBow.GetComponent<ItemController>().arrow, transform.position, Quaternion.identity);
+                    ItemController bow = equippedBow.GetComponent<ItemController>();
+                    GameObject shoot = Instantiate(bow.arrow, transform.position, Quaternion.identity);
                     ProjController scr = shoot.GetComponent<ProjController>();
                     Rigidbody2D srb = shoot.GetComponent<Rigidbody2D>();
 
                     float chargeRate = Mathf.Min(currBowHoldTime / bowChargeTime, 1);
-                    float projSpeed = scr.projSpeed * chargeRate;
+                    float projSpeed = bow.projVelocity * chargeRate;
 
                     scr.damage = (Mathf.Round(1000 / (.9972472f + Mathf.Pow(4, (chargeRate-.5f) * -8.5f))) / 1000f) * PlayerController.rangedDamage;
+                    scr.projSpeed = bow.projVelocity;
                     srb.rotation = shootAngle;
                     srb.velocity = new Vector2(Mathf.Cos(shootAngle * Mathf.Deg2Rad) * projSpeed, Mathf.Sin(shootAngle * Mathf.Deg2Rad) * projSpeed);
 
@@ -237,7 +266,7 @@ public class AttackController : MonoBehaviour
     {
         switch (item.type)
         {
-            case ItemController.ItemType.Sword:
+            case ItemController.ItemType.Melee:
                 if (equippedWeapon != null) //reactivate old weapon
                 {
                     equippedWeapon.SetActive(true);
@@ -252,6 +281,8 @@ public class AttackController : MonoBehaviour
                 equippedWeapon.transform.SetParent(null);
 
                 PlayerController.meleeDamage = item.meleeDamage;
+                meleeKnockback = item.meleeKnockback;
+                meleeCooldown = item.meleeCooldown;
                 equippedWeapon.SetActive(false);
                 SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
                 foreach (SpriteRenderer child in children)
@@ -262,7 +293,7 @@ public class AttackController : MonoBehaviour
                     }
                 }
                 break;
-            case ItemController.ItemType.Bow:
+            case ItemController.ItemType.Ranged:
                 if (equippedBow != null) //reactivate old bow
                 {
                     equippedBow.SetActive(true);
@@ -277,6 +308,8 @@ public class AttackController : MonoBehaviour
                 equippedBow.transform.SetParent(null);
 
                 PlayerController.rangedDamage = item.rangedDamage;
+                bowChargeTime = item.drawbackTime;
+                rangedKnockback = item.rangedKnockback;
                 equippedBow.SetActive(false);
                 SpriteRenderer[] children2 = equippedBow.GetComponentsInChildren<SpriteRenderer>();
                 foreach (SpriteRenderer child in children2)

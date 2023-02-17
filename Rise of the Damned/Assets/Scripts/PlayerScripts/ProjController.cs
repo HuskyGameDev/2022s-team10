@@ -6,11 +6,12 @@ public class ProjController : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    public int rotSpeed;
-    public float projSpeed, lifespan;
+    private float rotSpeed;
+    //public float projSpeed;
+    public float lifespan;
 
     [System.NonSerialized]
-    public float damage;
+    public float damage, projSpeed;
 
     private AttackController aController;
 
@@ -19,6 +20,8 @@ public class ProjController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         aController = PlayerController.player.GetComponent<AttackController>();
+
+        rotSpeed = 30 * (10f / projSpeed);
     }
 
     // Update is called once per frame
@@ -49,9 +52,9 @@ public class ProjController : MonoBehaviour
             }
             else
             {
-                //script.Knockback(6, gameObject.transform);
+                script.Knockback(aController.rangedKnockback, gameObject.transform);
                 script.TakeDamage(damage);
-                collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.bowKnockback, aController.bowKnockback / 2);
+                //collision.attachedRigidbody.velocity += new Vector2(Mathf.Sign(collision.transform.position.x - PlayerController.player.transform.position.x) * aController.bowKnockback, aController.bowKnockback / 2);
             }
             
             Destroy(gameObject);

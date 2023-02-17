@@ -5,12 +5,34 @@ using UnityEngine;
 [SelectionBase]
 public class ItemController : MonoBehaviour
 {
-    public enum ItemType {Sword, Bow, Armor, Health}
+    public enum ItemType {Melee, Ranged, Armor, Health}
     public ItemType type;
-    public float meleeDamage, rangedDamage, armor;
-    public int meleeSpeed;
-    public float knockback;
+    [Header("Melee")]
+    public float meleeDamage;
+    [Tooltip("How often you can swing the sword AFTER the previous swing ends")]
+    public float meleeCooldown;
+    [Tooltip("Rotation Speed of the Sword (How fast it swings)")]
+    public float meleeSpeed;
+    [Tooltip("How much knockback it gives enemies")]
+    public float meleeKnockback;
+    [Header("Ranged")]
+    public float rangedDamage;
+    [Tooltip("How fast & far the projectile goes")]
+    public float projVelocity;
+    [Tooltip("Time in seconds until maximum drawback")]
+    public float drawbackTime;
+    [Tooltip("How much knockback it gives enemies")]
+    public float rangedKnockback;
     public GameObject arrow;
+    [Header("Armor")]
+    [Tooltip("Static Damage Reduction (ex. -5dmg)")]
+    public float constantArmor;
+    [Tooltip("Relative Damage Reduction (ex. -5% dmg)")]
+    public float linearArmor;
+    [System.NonSerialized]
+    public float armor;
+
+    [Header("Sprites")]
     public Sprite[] spriteArray;
     private SpriteRenderer sr;
     private SpriteRenderer[] children;
@@ -27,6 +49,9 @@ public class ItemController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         children = GetComponentsInChildren<SpriteRenderer>();
         transformChildren = GetComponentsInChildren<Transform>();
+
+        //like uhh... some bullshit. @Tyler This will need to be changed when equipment gui gets reworked
+        armor = constantArmor + linearArmor;
     }
 
     void Update()
@@ -162,6 +187,8 @@ public class ItemController : MonoBehaviour
                     }
 
                     // Armor Numbers
+
+                    
 
                     // One digit armor
                     if (armor < 10 && armor > 0) {
