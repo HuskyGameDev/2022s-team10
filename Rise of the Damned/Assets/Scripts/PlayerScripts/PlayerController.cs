@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public static float health, maxHealth, meleeDamage, rangedDamage, armor, x;
     public static PlayerController controller;
     public static AttackController attackController;
+    public LevelChanger lc;
 
     [System.NonSerialized]
     public float invuln = 0;
@@ -503,7 +504,13 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Quit(){
+        armor = 999;
         Time.timeScale = 1;
+        lc.FadeToLevel();
+        Invoke("OnQuit", 1.0f);
+    }
+
+    public void OnQuit(){
         isActive = true;
         SceneManager.LoadScene("MainMenu");
         // play main menu music

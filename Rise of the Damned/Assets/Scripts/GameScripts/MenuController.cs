@@ -10,6 +10,8 @@ public class MenuController : MonoBehaviour
     Resolution[] resolutions;
     public Dropdown resolutionDropdown;
 
+    public LevelChanger lc;
+
     void Start(){
         resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height}).Distinct().ToArray();
         resolutionDropdown.ClearOptions();
@@ -55,6 +57,11 @@ public class MenuController : MonoBehaviour
     public void MainMenuPlay(){
         Time.timeScale = 1;
         PlayerController.isPaused = false;
+        lc.FadeToLevel();
+        Invoke("LoadMain", 1.0f);
+    }
+
+    public void LoadMain(){
         SceneManager.LoadScene("LevelOne");
     }
 
