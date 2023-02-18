@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2851825532337283862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.374, y: -0.94, z: 0}
+  m_LocalPosition: {x: -0.6, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3872277547199987201}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2903482432069792650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.374, y: -0.932, z: 0}
+  m_LocalPosition: {x: 0.6, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3872277547199987201}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4431772859188815955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.687, y: -0.374, z: 0}
+  m_LocalPosition: {x: 0.8, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3872277547199987201}
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4743758897963384169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.685, y: -0.375, z: 0}
+  m_LocalPosition: {x: 0.8, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3872277547199987201}
@@ -130,9 +130,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6625459942058431765}
   - component: {fileID: 8886900064797557101}
-  - component: {fileID: 3442334755911799501}
   - component: {fileID: 8163140460596747767}
   - component: {fileID: 7281963920174816169}
+  - component: {fileID: 6256003074246684080}
   m_Layer: 10
   m_Name: Reaper
   m_TagString: Enemy
@@ -206,47 +206,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3442334755911799501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6225401122885816733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a019f06ab16b7564bbd512c42c1fca49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 15
-  health: 30
-  knockback: 6
-  knockback_resistance: 1
-  max_speed: 3
-  defaultState: 2
-  aggroDist: 4
-  flying: 1
-  max_acceleration: 80
-  max_speed_change: 0
-  knockback_time: 1
-  drops:
-  - {fileID: 8414979577380145389, guid: 467afe7dfabf5564d82f7fbe8ae0b57f, type: 3}
-  dropChance:
-  - 50
-  heartDropChance: 15
-  heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
-  checkGroundRadius: 0.05
-  groundChecker1: {fileID: 2720140398648336981}
-  groundChecker2: {fileID: 8054914899067379311}
-  wallChecker1: {fileID: 3892352181254052163}
-  wallChecker2: {fileID: 5932413794806414343}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  collisionPoint: {fileID: 2562207942550579197}
 --- !u!50 &8163140460596747767
 Rigidbody2D:
   serializedVersion: 4
@@ -294,6 +253,48 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.375, y: 1.875}
   m_EdgeRadius: 0
+--- !u!114 &6256003074246684080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225401122885816733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64afb2a6d32b0f44817e5dcdfdf01c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  health: 50
+  knockback: 3
+  knockback_resistance: 1
+  max_speed: 2.25
+  defaultState: 0
+  aggroDist: 7
+  flying: 1
+  max_acceleration: 30
+  max_speed_change: 0
+  knockback_time: 1.5
+  knockback_drag: 3
+  drops: []
+  dropChance: []
+  heartDropChance: 0
+  heartDrop: {fileID: 0}
+  checkGroundRadius: 0.03
+  groundChecker1: {fileID: 2720140398648336981}
+  groundChecker2: {fileID: 8054914899067379311}
+  wallChecker1: {fileID: 3892352181254052163}
+  wallChecker2: {fileID: 5932413794806414343}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8256
+  collisionPoint: {fileID: 2562207942550579197}
+  isAttacking: 1
+  animator: {fileID: 0}
 --- !u!1 &7535169097177460091
 GameObject:
   m_ObjectHideFlags: 0

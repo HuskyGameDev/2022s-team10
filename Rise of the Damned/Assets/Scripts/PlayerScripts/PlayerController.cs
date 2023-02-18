@@ -79,7 +79,9 @@ public class PlayerController : MonoBehaviour
     private float gravityStore; // set gravity scale in rigid body 2D
     public float timeItTakesToWallJump; // how long until a wall jump is finished jumping, you set it
     public float wallJumpCoolDown; // how often you can wall jump, prevents spamming
-   
+
+
+    public float gravityChangeWhileGliding;
 
     [Header("Bools")]
     public bool facingLeft; 
@@ -94,8 +96,8 @@ public class PlayerController : MonoBehaviour
     public bool walking;
     private bool isJumping = false; // is true when player is trying to jump
     private bool receivingKnockback = false;
-    
-
+    public bool jumpPressed = false;
+    public bool isGliding = false;
 
     [Header("Better Jump")]
     public float fallMultiplier;  
@@ -164,6 +166,7 @@ public class PlayerController : MonoBehaviour
             MoveInput();
             Move();
             Jump();
+            Glide();
             CheckIfGrounded();
             CheckIfNearAWall();
             BetterJump();
@@ -257,7 +260,7 @@ public class PlayerController : MonoBehaviour
     void Jump() {
         //bool jumpButton = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W);
 
-        if(isJumping)
+        if (isJumping)
         {
             isJumping = false;
             if ((nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump)
@@ -290,6 +293,8 @@ public class PlayerController : MonoBehaviour
             {
                 //float timeFactor = Mathf.Max(0, (lastTimeGrounded - Time.time + jumpTime) / jumpTime);
                 //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpForce * timeFactor);
+
+                
             }
 
 
@@ -324,6 +329,49 @@ public class PlayerController : MonoBehaviour
             falling = false;
         }
         
+    }
+
+    void Glide()
+    {
+
+        if (!jumpPressed && jumpAction.ReadValue<float>() == 1.0f)
+        {
+
+            jumpPressed = true;
+
+            if (!isGliding && !isGrounded && !nearAWall)
+            {
+                //Debug.Log("Jump Pressed" + rb.transform.position.x);
+                //pull out glider
+                //animator.SetBool("IsGliding", true);
+                isGliding = true;
+            }
+
+
+        } else if (jumpPressed && jumpAction.ReadValue<float>() == 0.0f)
+        {
+
+            jumpPressed = false;
+            //put away glider
+            if (isGliding)
+            {
+                //Debug.Log("Jump Released" + rb.transform.position.x);
+                //animator.SetBool("IsGliding", false);
+                isGliding = false;
+            }
+
+        }
+
+        if (isGliding)
+        {
+            animator.SetBool("IsGliding", true);
+            //rb.velocity += Vector2.up * Physics2D.gravity * (4 - 1) * Time.deltaTime; //reverse gliding hehe
+            rb.velocity += Vector2.up * Physics2D.gravity * (gravityChangeWhileGliding - 1) * Time.deltaTime;
+        } else
+        {
+            animator.SetBool("IsGliding", false);
+
+        }
     }
 
     void CheckIfNearAWall(){ // can change gravity scale when near a wall here
@@ -369,7 +417,10 @@ public class PlayerController : MonoBehaviour
             }
             nearAWall = false;
             wallSliding = false;
-            rb.gravityScale = gravityStore;
+            if(!isGliding)
+            {
+                rb.gravityScale = gravityStore;
+            }
         }
          
     }
@@ -391,6 +442,8 @@ public class PlayerController : MonoBehaviour
                     //Soft landing
                     //FindObjectOfType<AudioManager>().Play("Landing");
                 }
+                //animator.SetBool("IsGliding", false);
+                isGliding = false;
             }
             isGrounded = true;
         } 

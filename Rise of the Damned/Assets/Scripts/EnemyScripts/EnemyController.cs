@@ -284,10 +284,11 @@ public abstract class EnemyController : MonoBehaviour
         velocity.x = 0;
     }
 
-    public void FacePlayer()
+    public virtual void FacePlayer()
     {
         Vector3 rotation = transform.eulerAngles;
         direction.x = (int)Mathf.Sign(PlayerController.player.transform.position.x - transform.position.x);
+
         if (direction.x == -1)
         {
             rotation.y = 180f;
@@ -306,7 +307,7 @@ public abstract class EnemyController : MonoBehaviour
         else
             return Physics2D.OverlapCircle(groundChecker2.position, checkGroundRadius, groundLayer) != null;
     }
-    public bool CheckWall() // returns true if there is a wall, false if there is no wall
+    public virtual bool CheckWall() // returns true if there is a wall, false if there is no wall
     {
         //return Physics2D.OverlapCircle(direction.x == -1 ? wallChecker1.position : wallChecker2.position, checkGroundRadius, wallLayer) != null;
         return Physics2D.OverlapCircle(wallChecker2.position, checkGroundRadius, wallLayer) != null;
