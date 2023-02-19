@@ -5256,7 +5256,7 @@ GameObject:
   - component: {fileID: 1395123637260093635}
   - component: {fileID: 1395123637260093636}
   - component: {fileID: 1395123637260093637}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Lava
   m_TagString: Spike
   m_Icon: {fileID: 0}

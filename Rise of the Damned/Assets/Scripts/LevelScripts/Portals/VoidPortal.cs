@@ -7,7 +7,7 @@ public class VoidPortal : MonoBehaviour
 
     public bool bottom; // to distinguish between portals at the bottom of the level and top of the level
 
-    private void Awake()
+    private void Start()
     {
         if(bottom)
         {
@@ -34,7 +34,7 @@ public class VoidPortal : MonoBehaviour
 
                 foreach (PortalManager.Portal topPortal in PortalManager.portals.topportals) // iterates through top portals
                 {
-                    Debug.Log(topPortal.yvalue);
+                    //Debug.Log(topPortal.yvalue);
                     if (topPortal.yvalue < transform.position.y && (transform.position.y - topPortal.yvalue) + Mathf.Abs(transform.position.x - topPortal.xvalue) < closestDistance)
                     { //if top portal is below the current portals position and is the closest so far to the current portal
                         closestTopPortal = topPortal;

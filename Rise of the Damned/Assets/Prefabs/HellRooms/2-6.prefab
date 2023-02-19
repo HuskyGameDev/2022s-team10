@@ -4548,7 +4548,7 @@ GameObject:
   - component: {fileID: 3100859720518992161}
   - component: {fileID: 82944250385386866}
   - component: {fileID: 6645887076155928250}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Lava
   m_TagString: Lava
   m_Icon: {fileID: 0}
@@ -4746,7 +4746,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 3, y: -8, z: 0}

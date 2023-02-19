@@ -206,7 +206,7 @@ MonoBehaviour:
   - {x: 2.8286626, y: 8.484323, z: 0}
   m_ShapePathHash: 1675246078
   m_Mesh: {fileID: 0}
-  m_InstanceId: 219586
+  m_InstanceId: 87238
 --- !u!1 &1752477505710147192
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,7 +4672,7 @@ MonoBehaviour:
   - {x: -1.4294652, y: 9.9028845, z: 0}
   m_ShapePathHash: 89274381
   m_Mesh: {fileID: 0}
-  m_InstanceId: 219688
+  m_InstanceId: 87340
 --- !u!1 &1752477506981139906
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,7 +4686,7 @@ GameObject:
   - component: {fileID: 1752477506981139934}
   - component: {fileID: 1752477506981139932}
   - component: {fileID: 1687910551688683552}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Lava
   m_TagString: Lava
   m_Icon: {fileID: 0}
@@ -4784,7 +4784,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -13, y: 0, z: 0}

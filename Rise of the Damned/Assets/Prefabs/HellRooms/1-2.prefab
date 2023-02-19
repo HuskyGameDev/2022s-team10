@@ -1430,7 +1430,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 6
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1640,7 +1640,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 5
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1695,12 +1695,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 3
     m_Data: {fileID: 21300000, guid: acb0eda351dfb5f49a4f5ddf20fafaea, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: be7e6c33ceabbe34e948e552fc6c39f8, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 45c22a531b53384449d6866dcb2d89fa, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 26
     m_Data:
@@ -2053,7 +2053,7 @@ GameObject:
   - component: {fileID: 4586947420309446086}
   - component: {fileID: 4586947420309446087}
   - component: {fileID: 4586947420309446084}
-  m_Layer: 4
+  m_Layer: 17
   m_Name: Lava
   m_TagString: Lava
   m_Icon: {fileID: 0}
@@ -2179,7 +2179,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -11, y: -8, z: 0}
@@ -2209,7 +2209,7 @@ Tilemap:
       - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
       - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
       - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -5897,7 +5897,7 @@ MonoBehaviour:
   - {x: 0.5, y: -3.5, z: 0}
   m_ShapePathHash: 1460057349
   m_Mesh: {fileID: 0}
-  m_InstanceId: 72554
+  m_InstanceId: 85840
 --- !u!1 &5756194018143038508
 GameObject:
   m_ObjectHideFlags: 0
