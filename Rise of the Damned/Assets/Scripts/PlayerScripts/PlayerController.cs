@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
     public bool jumpPressed = false;
     public bool isGliding = false;
     public bool canGlide;
+    private bool isDead = false;
 
     [Header("Better Jump")]
     public float fallMultiplier;  
@@ -575,13 +576,30 @@ public class PlayerController : MonoBehaviour
 
     void GameOver()
     {
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
-            transform.localScale = new Vector3(transform.localScale.x, 1, 0);
-            SceneManager.LoadScene("GameOver");
+            isDead = true;
+            player.transform.eulerAngles = new Vector3(
+                player.transform.eulerAngles.x,
+                player.transform.eulerAngles.y,
+                player.transform.eulerAngles.z + 90
+            );
+            StartCoroutine(waitOnDeath());
+
             // redo rooms on death
             //roomController.GetComponent<MainRoomGovernor>().redoRooms();
         }
+    }
+
+    IEnumerator waitOnDeath(){
+        yield return new WaitForSeconds(1);
+
+        lc.FadeToLevel();
+
+        yield return new WaitForSeconds(1.5f);
+
+        transform.localScale = new Vector3(transform.localScale.x, 1, 0);
+        SceneManager.LoadScene("GameOver");
     }
 
 
