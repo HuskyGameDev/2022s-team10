@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
     private bool receivingKnockback = false;
     public bool jumpPressed = false;
     public bool isGliding = false;
+    public bool canGlide;
 
     [Header("Better Jump")]
     public float fallMultiplier;  
@@ -166,13 +167,14 @@ public class PlayerController : MonoBehaviour
             MoveInput();
             Move();
             Jump();
-            Glide();
             CheckIfGrounded();
             CheckIfNearAWall();
             BetterJump();
             Animations();
             iFrames();
             GameOver();
+
+            if(canGlide) { Glide(); }
         }
         Pause();
         //Debug.Log(GetComponent<AttackController>().enabled);

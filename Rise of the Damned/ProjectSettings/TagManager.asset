@@ -20,6 +20,7 @@ TagManager:
   - EnemyProjectile
   - Slider
   - Lava
+  - Portal
   layers:
   - Default
   - TransparentFX
