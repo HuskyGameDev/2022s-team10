@@ -11962,7 +11962,6 @@ MonoBehaviour:
   weaponAttack: {fileID: 4915093518464885104, guid: 2f025ca2548a9ef46a2cd2d582a4951b, type: 3}
   equippedWeapon: {fileID: 0}
   equippedBow: {fileID: 0}
-  swipe: {fileID: 0}
   bowHoldTime: 0.15
   rememberDiagFor: 0.12
   SelectedMelee: {fileID: 1382011746}
@@ -12571,13 +12570,17 @@ CompositeCollider2D:
         Y: -80000000
       - X: 40000000
         Y: -70000000
-      - X: 0
+      - X: 100
         Y: -70000000
-      - X: 0
-        Y: -80000000
-      - X: -20000000
-        Y: -80000000
-      - X: -20000000
+      - X: 100
+        Y: -69999959
+      - X: 41
+        Y: -69999900
+      - X: -20000041
+        Y: -69999900
+      - X: -20000100
+        Y: -69999959
+      - X: -20000100
         Y: -70000000
       - X: -160000000
         Y: -70000000
@@ -12599,10 +12602,6 @@ CompositeCollider2D:
       - {x: 5.9999704, y: -8}
       - {x: 4, y: -7.9999704}
       - {x: 3.999971, y: -7}
-      - {x: 0, y: -7.0000296}
-      - {x: -0.0000294, y: -8}
-      - {x: -2, y: -7.9999704}
-      - {x: -2.0000293, y: -7}
       - {x: -16, y: -7.0000296}
       - {x: -15.999971, y: -9}
     - - {x: 11.99997, y: 8}
@@ -13165,6 +13164,26 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -2, y: -8, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -1, y: -8, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 0, y: -8, z: 0}
     second:
       serializedVersion: 2
@@ -13619,7 +13638,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 16
     m_Data: {fileID: 11400000, guid: 044d6c503faa41c4caf70846e6a67988, type: 2}
-  - m_RefCount: 22
+  - m_RefCount: 24
     m_Data: {fileID: 11400000, guid: 0c3b26a26643e41429f5d7719f036b4e, type: 2}
   - m_RefCount: 51
     m_Data: {fileID: 11400000, guid: 2df92a85e6925294baccb6667b1c6985, type: 2}
@@ -13638,7 +13657,7 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 16
     m_Data: {fileID: 21300000, guid: 739d3f9889706ec47adcc959ac8d2d02, type: 3}
-  - m_RefCount: 22
+  - m_RefCount: 24
     m_Data: {fileID: 21300000, guid: 74e90f4e6e6faf24e8ecd8ca31ea053e, type: 3}
   - m_RefCount: 51
     m_Data: {fileID: 21300000, guid: b465cf54732c16241911bddd89f1df9a, type: 3}
@@ -13655,7 +13674,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 7e4d3d05e164c0846858d79874623bbe, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 91
+  - m_RefCount: 93
     m_Data:
       e00: 1
       e01: 0
@@ -13674,7 +13693,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 91
+  - m_RefCount: 93
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -13883,11 +13902,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3420660568592262550, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.88
+      value: -4.55
       objectReference: {fileID: 0}
     - target: {fileID: 3420660568592262550, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.11
+      value: -7.83
       objectReference: {fileID: 0}
     - target: {fileID: 3420660568592262550, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13932,7 +13951,7 @@ PrefabInstance:
     - target: {fileID: 8613743298121077674, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 9101377098143819999, guid: e3b78a83a7df018449ffdc9b1f663f00, type: 3}
+      objectReference: {fileID: 1171963103161986075, guid: de6f63d6a063bad4ea790356663a4d02, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
 --- !u!1 &1516279379

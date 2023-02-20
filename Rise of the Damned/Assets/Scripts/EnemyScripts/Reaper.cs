@@ -239,4 +239,18 @@ public class Reaper : EnemyController
         return Physics2D.OverlapCircle(wallChecker2.position, checkGroundRadius, wallLayer) != null || Physics2D.OverlapCircle(wallChecker1.position, checkGroundRadius, wallLayer) != null;
     }
 
+    public override void KnockbackDrag()
+    {
+        if (receivingKnockback && isSwinging2)
+        {
+            rb.drag = 50;
+        } else if (receivingKnockback)
+        {
+            rb.drag = knockback_drag;
+        } else
+        {
+            rb.drag = 0;
+        }
+    }
+
 }
