@@ -85,8 +85,8 @@ public class WeaponController : MonoBehaviour
                                       player.transform.position.y + Mathf.Sin(Mathf.Deg2Rad * (rot - 90)) * -1 * displacement);
 
             if (Mathf.Abs(rot) > initialRot + 60 || Mathf.Abs(rot) < initialRot - 60)
-                //Destroy(gameObject);
-                gameObject.SetActive(false);
+                Destroy(gameObject);
+                //gameObject.SetActive(false);
         }
     }
 
@@ -150,7 +150,7 @@ public class WeaponController : MonoBehaviour
 
     private void OnDisable()
     {
-        sr.enabled = false;
+        //sr.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

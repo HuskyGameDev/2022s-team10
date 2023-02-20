@@ -27,7 +27,7 @@ public class AttackController : MonoBehaviour
 
     private bool usingRanged = false; // 1 or 0, checks if bow is "equipped", currently only toggles between using ranged or melee
 
-    public GameObject swipe;
+    //public GameObject swipe;
 
     private bool wasHoldingAttack = false;
     private int shootAngle;
@@ -78,8 +78,8 @@ public class AttackController : MonoBehaviour
         if (PlayerData.EquippedArmor != null)
             EquipItem(PlayerData.EquippedArmor.GetComponent<ItemController>());
 
-        swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
-        swipe.SetActive(false);
+        //swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
+        //swipe.SetActive(false);
     }
 
     // Update is called once per frame
@@ -100,27 +100,42 @@ public class AttackController : MonoBehaviour
                 {
                     timeSinceLastSwing = 0;
                     attackDir = attackAction.ReadValue<Vector2>();
+                    int facingRight = pcontroller.facingRight ? 1 : -1;
+                    int initRot = 0;
+                    float displacement = .8f;
+                    int rotOffset = 45;
                     if (attackDir.y == 1)
                     {
                         //Debug.Log("up");
                         WeaponController.attackDir = 0; // Up
+                        if (facingRight == 1)
+                            initRot = 405;
+                        else
+                            initRot = 315;
                     }
                     else if (attackDir.y == -1)
                     {
                         WeaponController.attackDir = 1; // Down
+                        if (facingRight == 1)
+                            initRot = 225;
+                        else
+                            initRot = 135;
                     }
                     else if (attackDir.x == 1)
                     {
                         WeaponController.attackDir = 2; // Right
+                        initRot = 315;
                     }
                     else if (attackDir.x == -1)
                     {
                         WeaponController.attackDir = 3; // Left
+                        initRot = 45;
                     }
                     //Debug.Log("attack dir: " + wcontroller.attackDir);
-
-                    //GameObject swipe = Instantiate(weaponAttack, transform.position, Quaternion.identity);
-                    swipe.SetActive(true);
+                    Vector3 swipePos = new Vector3(PlayerController.player.transform.position.x + Mathf.Cos(Mathf.Deg2Rad * (initRot - 90)) * -1 * displacement,
+                                                   PlayerController.player.transform.position.y + Mathf.Sin(Mathf.Deg2Rad * (initRot - 90)) * -1 * displacement, 0);
+                    GameObject swipe = Instantiate(weaponAttack, swipePos, Quaternion.Euler(0,0,initRot + rotOffset));
+                    //swipe.SetActive(true);
                     SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
                     foreach (SpriteRenderer child in children)
                     {
