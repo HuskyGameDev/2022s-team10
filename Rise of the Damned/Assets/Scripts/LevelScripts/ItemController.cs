@@ -76,6 +76,7 @@ public class ItemController : MonoBehaviour
         if (other.gameObject.name.Equals("Player"))
         { 
             if (CompareTag("HealthDrop")) {
+                GameObject.Find("HUD").GetComponent<HUDController>().OnAction();
                 if (PlayerController.health < PlayerController.maxHealth - 9) {
                     PlayerController.health += 10;
                 } else {

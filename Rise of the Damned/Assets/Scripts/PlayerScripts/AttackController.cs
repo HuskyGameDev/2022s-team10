@@ -237,6 +237,7 @@ public class AttackController : MonoBehaviour
                 PickupItem();
             }
             if (swapAction.triggered){
+                GameObject.Find("HUD").GetComponent<HUDController>().OnAction();
                 SelectedMelee.SetActive(!SelectedMelee.activeSelf);
                 SelectedRanged.SetActive(!SelectedRanged.activeSelf);
                 usingRanged = !usingRanged;
@@ -267,6 +268,7 @@ public class AttackController : MonoBehaviour
         {
             if (collision.gameObject.tag == "ItemDrop")
             {
+                GameObject.Find("HUD").GetComponent<HUDController>().OnAction();
                 ItemController item = collision.GetComponent<ItemController>();
                 EquipItem(item);
 

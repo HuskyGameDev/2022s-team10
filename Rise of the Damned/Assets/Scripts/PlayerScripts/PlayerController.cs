@@ -507,6 +507,7 @@ public class PlayerController : MonoBehaviour
     }
     public static bool TakeDamage(float damage)
     {
+        GameObject.Find("HUD").GetComponent<HUDController>().OnAction();
         if (PlayerController.controller.invuln > 0 || damage <= 0)
             return false;
         PlayerController.health -= Mathf.Max(damage - PlayerController.armor, 0);
@@ -579,11 +580,7 @@ public class PlayerController : MonoBehaviour
         if (health <= 0 && !isDead)
         {
             isDead = true;
-            player.transform.eulerAngles = new Vector3(
-                player.transform.eulerAngles.x,
-                player.transform.eulerAngles.y,
-                player.transform.eulerAngles.z + 90
-            );
+            player.transform.Rotate(0, 0, 90, Space.Self);
             StartCoroutine(waitOnDeath());
 
             // redo rooms on death
