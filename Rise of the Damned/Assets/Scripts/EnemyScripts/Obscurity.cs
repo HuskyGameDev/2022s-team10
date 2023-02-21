@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Reaper : EnemyController
+public class Obscurity : EnemyController
 {
-
     private Coroutine stateUpdate; //calls the coroutine for the state of the enemy
     [SerializeField]
     bool isAttacking = true;
     bool isIdle = false;
     bool isSwinging = false;
-    bool isSwinging2 = false; //second half of animation for knockback cancel
     bool lockSwing = false; //locks the state to swinging to prevent half swings
 
     [SerializeField]
@@ -78,18 +76,15 @@ public class Reaper : EnemyController
         while (true)
         {
             bool hitWall = false;
-            //beginning animation
-            animator.SetBool("isMoving", false); //idle for 6 seconds
             rb.velocity = (new Vector2(0, 0)); //stops moving
             yield return new WaitForSeconds(Random.Range(2, 5));
 
-            if(CheckWall()) //if started idle while next to a wall
+            if (CheckWall()) //if started idle while next to a wall
             {
                 TurnAround();
             }
 
             //move
-            animator.SetBool("isMoving", true); //running for 1 second
 
             while (!hitWall) // loop until hit a wall or edge
             {
@@ -105,7 +100,7 @@ public class Reaper : EnemyController
 
                 rb.velocity = velocity;
 
-                if (CheckWall()) 
+                if (CheckWall())
                 {
                     TurnAround();
                     hitWall = true;
@@ -120,10 +115,6 @@ public class Reaper : EnemyController
     {
         while (true)
         {
-            //start animation
-            animator.SetBool("isMoving", true);
-
-            //start jumping part of animation
 
             //1 if player is to the right, -1 if player is to the left
             FacePlayer();
@@ -136,7 +127,7 @@ public class Reaper : EnemyController
 
             if (!receivingKnockback)
             {
-                if(!CheckWall()) //if is not running into a wall (so it doesn't get stuck on a wall
+                if (!CheckWall()) //if is not running into a wall (so it doesn't get stuck on a wall
                 {
                     velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
                 }
@@ -163,22 +154,16 @@ public class Reaper : EnemyController
             {
                 FacePlayer();
 
-                //animator.SetBool("isRunning", false); //stops running -> to idle animation
-
                 rb.velocity = (new Vector2(0, 0)); //stops moving
 
-                animator.SetBool("isAttacking", true); // starts swinging animation
+                animator.SetTrigger("isExploding"); // starts exploding animation
                 lockSwing = true;
 
-                yield return new WaitForSeconds(.36f);
+                yield return new WaitForSeconds(.56f);
 
-                isSwinging2 = true;
+                Die();
 
-                yield return new WaitForSeconds(.24f);
-
-                animator.SetBool("isAttacking", false); // stops swinging animation
                 lockSwing = false;
-                isSwinging2 = false;
 
                 yield return new WaitForSeconds(attackCooldown); // wait for attack cooldown 
             }
@@ -219,16 +204,11 @@ public class Reaper : EnemyController
 
     public override void KnockbackDrag()
     {
-        if (receivingKnockback && isSwinging2)
-        {
-            rb.drag = 50;
-        } else if (receivingKnockback)
-        {
-            rb.drag = knockback_drag;
-        } else
-        {
-            rb.drag = 0;
-        }
+        rb.drag = 0;
     }
 
+    public override void Knockback(float knockback, Transform knockback_location) //knockback location is where the knockback is coming from
+    {
+        // no knockback on the obscurity
+    }
 }

@@ -8,7 +8,6 @@ public class Morphling : EnemyController
     bool isIdle = false;
     bool isAttacking = true;
     bool isSwinging = false;
-    bool isSwinging2 = false; //second half of animation for knockback cancel
     bool lockSwing = false; //locks the state to swinging to prevent half swings
 
     [SerializeField]
@@ -108,7 +107,6 @@ public class Morphling : EnemyController
                     velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
                     if (!CheckEdge() || CheckWall())
                     {
-                        Debug.Log("Stopped");
                         hitEdge = true;
                         velocity = (new Vector2(0, 0)); //stops moving
                         animator.SetBool("isRunning", false);
@@ -198,15 +196,12 @@ public class Morphling : EnemyController
 
                 yield return new WaitForSeconds(.12f);
 
-                isSwinging2 = true;
-
                 yield return new WaitForSeconds(.18f);
 
                 animator.SetBool("isAttacking", false); // stops swinging animation
 
                 yield return new WaitForSeconds(attackCooldown); // wait for attack cooldown 
                 lockSwing = false;
-                isSwinging2 = false;
                 yield return new WaitForEndOfFrame();
             }
             yield return new WaitForEndOfFrame();
