@@ -9,10 +9,12 @@ public class NewRoomGovernor : MonoBehaviour
     public GameObject spawnRoom;
     public static List<GameObject> spawnedRooms;
     private static GameObject spawn;
+    private static GameObject spawnedBossRoom;
 
-    private static int roomNum; //current room the player is in starting at 0
+    public static int roomNum; //current room the player is in starting at 0
     public static int section; //holds the section that the player is currently in
                                //0 is hell, 1 is caves, 2 is the first boss, 3 is purgatory
+    public static GameObject currentRoom;
 
     [System.Serializable]
     /*
@@ -58,8 +60,7 @@ public class NewRoomGovernor : MonoBehaviour
                 offset.y += roomHeight;
             }
         }
-
-        Instantiate(bossRoom, offset, Quaternion.identity); //Instantiate the bossroom at the top
+        spawnedBossRoom = Instantiate(bossRoom, offset, Quaternion.identity); //Instantiate the bossroom at the top
     }
 
     // Update is called once per frame
@@ -93,6 +94,15 @@ public class NewRoomGovernor : MonoBehaviour
             section = 2;
         }
         //Debug.Log(section);
+
+        if (roomNum < 0)
+            currentRoom = null;
+        else if (roomNum == 0)
+            currentRoom = spawn;
+        else if (section == 2)
+            currentRoom = spawnedBossRoom;
+        else
+            currentRoom = spawnedRooms[roomNum - 1];
     }
 
     public static void killRooms()

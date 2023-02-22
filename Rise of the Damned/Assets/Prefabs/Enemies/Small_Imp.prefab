@@ -321,7 +321,7 @@ MonoBehaviour:
   health: 25
   knockback: 8
   knockback_resistance: 0.8
-  max_speed: 5
+  max_speed: 6
   defaultState: 0
   aggroDist: 5
   flying: 0

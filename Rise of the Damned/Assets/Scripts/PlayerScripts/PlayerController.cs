@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInput playerInput;
     private InputAction moveAction, jumpAction, pauseAction;
+    /*
+    private Vector2 moveAction;
+    private bool jumpAction;
+    private bool pauseAction;
+    */
 
     public GameObject roomController;
     public static GameObject player;    //static variables to be easily referenced elsewhere
@@ -134,6 +139,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerSO PlayerData; //stored player data to persist between scenes
 
+    private float localDeathPos;
+
 
     // Start is called before the first frame update
     void Start()
@@ -153,6 +160,8 @@ public class PlayerController : MonoBehaviour
         gravityStore = rb.gravityScale;
      
         playerInput = GetComponent<PlayerInput>();
+
+        isActive = true;
     }
 
     // Update is called once per frame
@@ -162,9 +171,22 @@ public class PlayerController : MonoBehaviour
         jumpAction = playerInput.actions["Jump"];
         pauseAction = playerInput.actions["Pause"];
 
+        if (isActive)
+        {
+            moveAction.Enable();
+            jumpAction.Enable();
+        }
+        else
+        {
+            moveAction.Disable();
+            jumpAction.Disable();
+        }
+
         roomNum = (int)((transform.position.y + 12)/18);
         //Debug.Log(roomNum); it spamming it bruh 
-        if (!isPaused && isActive){
+        //if (!isPaused && isActive){
+        if (!isPaused)
+        {
             MoveInput();
             Move();
             Jump();
@@ -182,7 +204,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void MoveInput(){
-        direction = moveAction.ReadValue<Vector2>();
+        direction = moveAction != null ? moveAction.ReadValue<Vector2>() : Vector2.zero;
 
         if (direction.x == 1){
             if(facingLeft && isGrounded)
@@ -324,7 +346,7 @@ public class PlayerController : MonoBehaviour
             falling = true;
         }
 
-        if(fastFalling && isGrounded){
+        if(fastFalling && isGrounded && !isDead){
             init.shakeCamera(cameraShakeMagnitude, .3f);
             fastFalling = false;
         } else if (falling && isGrounded)
@@ -579,6 +601,7 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0 && !isDead)
         {
+            isActive = false;
             isDead = true;
             player.transform.Rotate(0, 0, 90, Space.Self);
             StartCoroutine(waitOnDeath());
@@ -586,6 +609,17 @@ public class PlayerController : MonoBehaviour
             // redo rooms on death
             //roomController.GetComponent<MainRoomGovernor>().redoRooms();
         }
+        /*
+        if(isDead)
+        {
+            if(transform.position.y < -12)
+                StartCoroutine(waitOnDeath());
+            else if (NewRoomGovernor.currentRoom != null)
+            {
+                transform.position = new Vector3(localDeathPos + NewRoomGovernor.currentRoom.transform.position.x, transform.position.y, transform.position.z);
+            }
+        }
+        */
     }
 
     IEnumerator waitOnDeath(){
