@@ -20,6 +20,7 @@ public class movableBlocks : MonoBehaviour
     public float minY = -1.0f;
     public float maxY = 1.0f;
     public float changeSpeed = 0.5f;
+    public bool flipStart = false;
 
     [Header("rotation")]
     public bool debug = false;
@@ -45,10 +46,17 @@ public class movableBlocks : MonoBehaviour
             xAndYAxis = true;
         }
 
+        if(flipStart){ 
+            tY = 2;
+            tX = 2;
+        }
+
+
         if(debug){
             Debug.Log("local position " + transform.localPosition);
             Debug.Log("position " + transform.position);
         }
+
     }
 
     // Update is called once per frame
@@ -112,10 +120,6 @@ public class movableBlocks : MonoBehaviour
 
             angleToRotateTo += rotationSpeed * Time.deltaTime;
         }
-
-        
-        
-
 
     }
 
