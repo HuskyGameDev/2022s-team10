@@ -5,24 +5,32 @@ using UnityEngine.UI;
 
 public class VolumeSlider : MonoBehaviour
 {
-    public Slider vSlider;
+    public Slider musicSlider;
+    public Slider sfxSlider;
+    public Slider masterSlider;
 
-    void Start(){
-        //am = GetComponent<AudioManager>();
-        vSlider.value = PlayerPrefs.GetFloat("volume", 0.3f);
+    void Awake(){
+        Debug.Log("started?");
+        musicSlider.value = PlayerPrefs.GetFloat("musicVol", 1.0f);
+        sfxSlider.value = PlayerPrefs.GetFloat("sfxVol", 1.0f);
+        masterSlider.value = PlayerPrefs.GetFloat("masterVol", 1.0f);
     }
 
-    public void SetVolume(float sliderValue){
-        //PlayerPrefs.SetFloat("MusicVolume", sliderValue);
-        FindObjectOfType<AudioManager>().ChangeVolume(sliderValue);
-        PlayerPrefs.SetFloat("volume", sliderValue);
-        Debug.Log("set to " + PlayerPrefs.GetFloat("volume"));
-        //am.ChangeVolume(sliderValue);
+    public void SetMusic(float sliderValue){
+        FindObjectOfType<AudioManager>().ChangeMusicVol(sliderValue);
+        PlayerPrefs.SetFloat("musicVol", sliderValue);
+        //Debug.Log("set to " + PlayerPrefs.GetFloat("musicVol"));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetSFX(float sliderValue){
+        FindObjectOfType<AudioManager>().ChangeSFXVol(sliderValue);
+        PlayerPrefs.SetFloat("sfxVol", sliderValue);
+        //Debug.Log("set to " + PlayerPrefs.GetFloat("sfxVol"));
+    }
+
+    public void SetMaster(float sliderValue){
+        FindObjectOfType<AudioManager>().ChangeMasterVol(sliderValue);
+        PlayerPrefs.SetFloat("masterVol", sliderValue);
+        //Debug.Log("set to " + PlayerPrefs.GetFloat("masterVol"));
     }
 }

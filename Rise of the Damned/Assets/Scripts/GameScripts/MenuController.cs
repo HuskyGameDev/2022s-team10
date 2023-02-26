@@ -13,6 +13,10 @@ public class MenuController : MonoBehaviour
     public LevelChanger lc;
 
     void Start(){
+        InitializeResolutions();
+    }
+
+    public void InitializeResolutions(){
         resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height}).Distinct().ToArray();
         resolutionDropdown.ClearOptions();
         int currentResolutionIndex = 0;
@@ -26,7 +30,6 @@ public class MenuController : MonoBehaviour
             }
         }
         resolutionDropdown.AddOptions(options);
-
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }
@@ -68,5 +71,4 @@ public class MenuController : MonoBehaviour
     public void MainMenuQuit(){
         Application.Quit();
     }
-
 }

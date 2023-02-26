@@ -20,11 +20,16 @@ public class AudioManager : MonoBehaviour
 
     private Coroutine switchMusic;
 
-    private float volumeFactor;
+    private float musicFactor;
+    private float sfxFactor;
+    private float masterFactor;
 
     void Update(){
         //Debug.Log(volumeFactor);
-        mixer.SetFloat("MusicVolume", volumeFactor);
+        // Instead of calling every frame, only call when changing scene and ???
+        mixer.SetFloat("MusicVolume", musicFactor);
+        mixer.SetFloat("SFXVolume", sfxFactor);
+        mixer.SetFloat("MasterVolume", masterFactor);
     }
 
     void Awake()
@@ -99,7 +104,7 @@ public class AudioManager : MonoBehaviour
         float currentTime = 0;
         float currentVol;
         //mixer.GetFloat(exposedParam, out currentVol);
-        currentVol = Mathf.Pow(10, volumeFactor / 20);
+        currentVol = Mathf.Pow(10, musicFactor / 20);
 
         float targetValue2 = currentVol; //target for the fade in
 
@@ -129,6 +134,9 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+        mixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("musicVol", 1.0f)*20));
+        mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("sfxVol", 1.0f)*20));
+        mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("masterVol", 1.0f)*20));
         Play("MainTheme");
     }
 
@@ -138,9 +146,19 @@ public class AudioManager : MonoBehaviour
     // i.e. If you load scene with volume slider at 10%, music still plays at 100% until you change slider value.
     // Code at the start of Awake() is trying to account for this :)
     // - Tyler
-    public void ChangeVolume(float volumeVal){
-        Debug.Log("changing " + volumeVal);
-        volumeFactor = Mathf.Log10(volumeVal)*20;
+    public void ChangeMusicVol(float volumeVal){
+        //Debug.Log("changing " + volumeVal);
+        musicFactor = Mathf.Log10(volumeVal)*20;
+    }
+
+    public void ChangeSFXVol(float volumeVal){
+        //Debug.Log("changing " + volumeVal);
+        sfxFactor = Mathf.Log10(volumeVal)*20;
+    }
+
+    public void ChangeMasterVol(float volumeVal){
+        //Debug.Log("changing " + volumeVal);
+        masterFactor = Mathf.Log10(volumeVal)*20;
     }
 
     // to play a sound from anywhere, call "FindObjectOfType<AudioManager>().Play(name);"
