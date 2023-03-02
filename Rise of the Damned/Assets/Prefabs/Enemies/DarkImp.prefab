@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903124813204776415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: -1.3, z: 0}
+  m_LocalPosition: {x: 0.6, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 903124814778462721}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903124813229018559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -1.6, z: 0}
+  m_LocalPosition: {x: -0.5, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 903124814778462721}
@@ -212,7 +212,7 @@ Transform:
   m_GameObject: {fileID: 903124814884126933}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.012329, y: -5.4212127, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children:
   - {fileID: 903124814778462721}
   m_Father: {fileID: 0}
@@ -301,7 +301,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000023841858, y: -0.8771174}
+  m_Offset: {x: -0.00000023841858, y: -0.8753008}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -312,7 +312,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5673528, y: 1.2457652}
+  m_Size: {x: 0.5673528, y: 1.2421321}
   m_EdgeRadius: 0
 --- !u!50 &903124814884126939
 Rigidbody2D:
@@ -353,7 +353,7 @@ MonoBehaviour:
   knockback_resistance: 1
   max_speed: 3
   defaultState: 0
-  aggroDist: 6
+  aggroDist: 12
   flying: 0
   max_acceleration: 30
   max_speed_change: 0
@@ -370,14 +370,17 @@ MonoBehaviour:
   wallChecker2: {fileID: 903124814261882707}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 32832
+    m_Bits: 64
   wallLayer:
     serializedVersion: 2
     m_Bits: 8256
   collisionPoint: {fileID: 903124814549815334}
-  swingDistance: 2
+  isIdle: 0
+  isAttacking: 1
+  isSwinging: 0
+  swingDistance: 6
   attackCooldown: 1
-  animator: {fileID: 0}
+  animator: {fileID: 903124814884126937}
 --- !u!1 &903124814938358937
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903124814938358937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -1.6, z: 0}
+  m_LocalPosition: {x: 0.5, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 903124814778462721}

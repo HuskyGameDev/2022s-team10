@@ -77,7 +77,7 @@ public class Obscurity : EnemyController
         {
             bool hitWall = false;
             rb.velocity = (new Vector2(0, 0)); //stops moving
-            yield return new WaitForSeconds(Random.Range(2, 5));
+            yield return new WaitForSeconds(Random.Range(4, 7));
 
             if (CheckWall()) //if started idle while next to a wall
             {
@@ -96,6 +96,7 @@ public class Obscurity : EnemyController
                 if (!receivingKnockback)
                 {
                     velocity.x = Mathf.MoveTowards(velocity.x, desired_velocity.x, max_speed_change);
+
                 }
 
                 rb.velocity = velocity;

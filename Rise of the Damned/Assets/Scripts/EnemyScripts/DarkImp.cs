@@ -5,9 +5,9 @@ using UnityEngine;
 public class DarkImp : EnemyController
 {
     private Coroutine stateUpdate; //calls the coroutine for the state of the enemy
-    bool isIdle = false;
-    bool isAttacking = true;
-    bool isSwinging = false;
+    public bool isIdle = false;
+    public bool isAttacking = true;
+    public bool isSwinging = false;
     bool isSwinging2 = false; //second half of animation for knockback cancel
     bool lockSwing = false; //locks the state to swinging to prevent half swings
 
@@ -188,11 +188,11 @@ public class DarkImp : EnemyController
                 animator.SetBool("isAttacking", true); // starts swinging animation
                 lockSwing = true;
 
-                yield return new WaitForSeconds(.3f);
+                yield return new WaitForSeconds(.02f);
 
                 isSwinging2 = true;
 
-                yield return new WaitForSeconds(.7f);
+                yield return new WaitForSeconds(2.8f);
 
                 animator.SetBool("isAttacking", false); // stops swinging animation
                 lockSwing = false;
@@ -208,7 +208,7 @@ public class DarkImp : EnemyController
     {
         if (receivingKnockback && isSwinging2 && CheckGround())
         {
-            rb.drag = 50;
+            rb.drag = 5000;
         } else if (receivingKnockback)
         {
             rb.drag = knockback_drag;

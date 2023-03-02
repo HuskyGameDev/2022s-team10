@@ -7712,7 +7712,7 @@ PrefabInstance:
     - target: {fileID: 8613743298121077674, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 6225401122885816733, guid: 504e2c75571d14548bbcf7dd39f90d46, type: 3}
+      objectReference: {fileID: 903124814884126933, guid: 57daa4078a9a845468c4114955b37913, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6f8b118997da1043a62e29b8a1bd44c, type: 3}
 --- !u!1001 &540471384
@@ -9203,27 +9203,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741824
-  m_AnimatedTiles:
-  - first: {x: 4, y: -8, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300000, guid: 088effdb697f6854cb0b7619acc28ac1, type: 3}
-      - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
-      - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
-      - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: 5, y: -8, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300000, guid: 088effdb697f6854cb0b7619acc28ac1, type: 3}
-      - {fileID: 21300000, guid: 9ec74d9340465644fa462cd0dc6aadb2, type: 3}
-      - {fileID: 21300000, guid: 9c9eff0106f0f5346912e14e7b58e968, type: 3}
-      - {fileID: 21300000, guid: 70ee291a517a55144b5e07bd7f2e0b96, type: 3}
-      m_AnimationSpeed: 3.0000002
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
+  m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -9304,6 +9284,7 @@ MonoBehaviour:
   minY: -5
   maxY: 1
   changeSpeed: 0.25
+  flipStart: 0
   debug: 0
   enableRotation: 0
   rotationSpeed: 5
