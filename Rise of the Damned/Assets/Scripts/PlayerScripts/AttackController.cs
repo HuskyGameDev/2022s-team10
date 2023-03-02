@@ -30,6 +30,7 @@ public class AttackController : MonoBehaviour
     //public GameObject swipe;
 
     private bool wasHoldingAttack = false;
+    private bool swordMemory = false;
     private int shootAngle;
     private int diff;
 
@@ -95,8 +96,10 @@ public class AttackController : MonoBehaviour
             if (GameObject.Find("SwordSwipe(Clone)") == null)
             {
                 timeSinceLastSwing += Time.deltaTime;
+                if(attackAction.triggered)
+                    swordMemory = true;
                 //swing sword
-                if (attackAction.triggered && equippedWeapon != null && !usingRanged && timeSinceLastSwing >= meleeCooldown)
+                if (swordMemory && equippedWeapon != null && !usingRanged && timeSinceLastSwing >= meleeCooldown)
                 {
                     timeSinceLastSwing = 0;
                     attackDir = attackAction.ReadValue<Vector2>();
@@ -149,6 +152,8 @@ public class AttackController : MonoBehaviour
                     //Play sword swing
                     int n = (int)Random.Range(1f, 3f);
                     FindObjectOfType<AudioManager>().Play("SwordSwing" + n);
+
+                    swordMemory = false;
                 }
             }
             if(IsHoldingAttack() && usingRanged && equippedBow != null)
