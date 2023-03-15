@@ -57,15 +57,34 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    /*
     public void MainMenuPlay(){
         Time.timeScale = 1;
         PlayerController.isPaused = false;
         lc.FadeToLevel();
         Invoke("LoadMain", 1.0f);
+    }*/
+
+    public void MainMenuLevelOne(){
+        Time.timeScale = 1;
+        PlayerController.isPaused = false;
+        lc.FadeToLevel();
+        Invoke("LoadOne", 1.0f);
     }
 
-    public void LoadMain(){
+    public void MainMenuLevelTwo(){
+        Time.timeScale = 1;
+        PlayerController.isPaused = false;
+        lc.FadeToLevel();
+        Invoke("LoadTwo", 1.0f);
+    }
+
+    public void LoadOne(){
         SceneManager.LoadScene("LevelOne");
+    }
+
+    public void LoadTwo(){
+        SceneManager.LoadScene("LevelTwo");
     }
 
     public void MainMenuQuit(){
