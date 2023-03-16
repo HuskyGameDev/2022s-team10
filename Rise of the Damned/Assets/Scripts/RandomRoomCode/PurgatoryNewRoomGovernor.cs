@@ -37,6 +37,8 @@ public class PurgatoryNewRoomGovernor : MonoBehaviour
         offset.y = roomHeight;
         offset.x = 26;
 
+        int curRoom = 0;    //room number of the room being insantiated
+
         foreach (RoomSet set in roomSets)
         {
             List<int> usedRooms = new List<int>(); //list of used room indices
@@ -50,12 +52,21 @@ public class PurgatoryNewRoomGovernor : MonoBehaviour
                 offset.x -= set.rooms[rand].GetComponent<Room>().floorShift;
 
                 //instantiate the room
-                spawnedRooms.Add(Instantiate(set.rooms[rand], offset, Quaternion.identity));
+                curRoom++;
+                GameObject room = Instantiate(set.rooms[rand], offset, Quaternion.identity);
+                spawnedRooms.Add(room);
                 usedRooms.Add(rand);
 
                 //adjust offset to the roof of the current room and the height of the next room
                 offset.x += set.rooms[rand].GetComponent<Room>().roofShift;
                 offset.y += roomHeight;
+
+                //scaling difficulty
+                foreach (EnemyController e in room.GetComponentsInChildren<EnemyController>())
+                {
+                    e.damage *= 1 + (curRoom * 0.05f);
+                    e.health *= 1 + (curRoom * 0.10f);
+                }
             }
         }
 

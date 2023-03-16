@@ -101,7 +101,7 @@ public class NewRoomGovernor : MonoBehaviour
             if (section == 1)
             {
                 //play section 3 music
-                FindObjectOfType<AudioManager>().Play("PurgatoryTheme");
+                FindObjectOfType<AudioManager>().Play("HellTheme");
             }
             section = 2;
         }

@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
         if (isJumping)
         {
             isJumping = false;
-            if ((nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump)
+            if ((nearAWall || Time.time - lastTimewalled <= rememberwalledFor) && hasWallJump && !isGrounded)
             { // Wall Jumps
                 if(WallDirection == 0)
                     rb.velocity = new Vector2(jumpForce, jumpForce * 1.2f);

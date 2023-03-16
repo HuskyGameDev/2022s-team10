@@ -114,6 +114,7 @@ public class Imp : EnemyController
 
                 if (!CheckEdge() || CheckWall())
                 {
+                    animator.SetBool("isRunning", false);
                     TurnAround();
                     hitEdge = true;
                 }

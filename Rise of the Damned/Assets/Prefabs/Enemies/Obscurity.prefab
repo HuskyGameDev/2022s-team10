@@ -221,7 +221,7 @@ MonoBehaviour:
   knockback_resistance: 1
   max_speed: 3
   defaultState: 0
-  aggroDist: 5
+  aggroDist: 7
   flying: 0
   max_acceleration: 30
   max_speed_change: 0
