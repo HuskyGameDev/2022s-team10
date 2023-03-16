@@ -320,7 +320,7 @@ MonoBehaviour:
   damage: 8
   health: 25
   knockback: 8
-  knockback_resistance: 0.8
+  knockback_resistance: 0.5
   max_speed: 6
   defaultState: 0
   aggroDist: 5
@@ -331,8 +331,10 @@ MonoBehaviour:
   knockback_drag: 0.5
   drops:
   - {fileID: 1741407108113468068, guid: c92765cf5eec8c34f8681f2a2bc7bf5d, type: 3}
+  - {fileID: 1646168493891488988, guid: 12deb90f6f33fdf4e88e871578315fad, type: 3}
   dropChance:
-  - 5
+  - 2.5
+  - 2.5
   heartDropChance: 10
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.1

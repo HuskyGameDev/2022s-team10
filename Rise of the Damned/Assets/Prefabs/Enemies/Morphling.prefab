@@ -271,8 +271,8 @@ MonoBehaviour:
   knockback_drag: 50
   drops: []
   dropChance: []
-  heartDropChance: 0
-  heartDrop: {fileID: 0}
+  heartDropChance: 35
+  heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.03
   groundChecker1: {fileID: 1171963103008221363}
   groundChecker2: {fileID: 1171963104516593923}

@@ -622,14 +622,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   meleeDamage: 0
+  meleeCooldown: 0
   meleeSpeed: 0
-  knockback: 0
+  meleeKnockback: 0
   rangedDamage: 0
   projVelocity: 0
   drawbackTime: 0
+  rangedKnockback: 0
   arrow: {fileID: 0}
-  constantArmor: 10
-  linearArmor: 0
+  constantArmor: 0
+  linearArmor: 20
   spriteArray:
   - {fileID: 21300000, guid: 381f2955099dd6c46bc6aa3128ea28ce, type: 3}
   - {fileID: 21300000, guid: 8f2acbd47cbc274488def22770b7b5c5, type: 3}

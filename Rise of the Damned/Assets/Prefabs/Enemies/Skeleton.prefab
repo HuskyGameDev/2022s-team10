@@ -228,8 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b479ae66d0cce409af3ebe53e877a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  health: 45
+  damage: 15
+  health: 55
   knockback: 10
   knockback_resistance: 0.9
   max_speed: 3
@@ -243,11 +243,11 @@ MonoBehaviour:
   drops:
   - {fileID: 5366049279497736705, guid: 909d15fa8ed7a5745b51c63bdf8ceef7, type: 3}
   - {fileID: 5839799160562247257, guid: 4150c754f08b6a646b1f9aa0f6a7719c, type: 3}
-  - {fileID: 8414979577380145389, guid: 467afe7dfabf5564d82f7fbe8ae0b57f, type: 3}
+  - {fileID: 5358577377626049225, guid: 52f8545f3e4a9194ebefb617f12a766e, type: 3}
   dropChance:
-  - 5
-  - 5
-  - 5
+  - 15
+  - 3
+  - 8
   heartDropChance: 15
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.1

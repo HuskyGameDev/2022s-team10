@@ -137,16 +137,18 @@ public abstract class EnemyController : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
-
+        //Debug.Log("Drop Stuff");
         float diceRoll = (float)Random.Range(1, 10001) / 100f;   //1-100 dice roll with 2 point precision
         float chanceTotal = 0;  //sum of drop chances prior to the current drop
 
         for (int i = 0; i < drops.Length; i++)
         {
+            //Debug.Log("Checking drop " + i);
             if (chanceTotal + dropChance[i] >= diceRoll)    //if the dice roll is in the current range 
             {
-                Instantiate(drops[i], transform.position, Quaternion.identity);
+                GameObject drop = Instantiate(drops[i], transform.parent.parent);
+                drop.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+                //Debug.Log("Dropping " + i);
                 break;
             }
             chanceTotal += dropChance[i];
@@ -169,6 +171,7 @@ public abstract class EnemyController : MonoBehaviour
             Instantiate(itemThree, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
         }*/
 
+        Destroy(gameObject);
     }
 
 

@@ -353,12 +353,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   meleeDamage: 0
+  meleeCooldown: 0
   meleeSpeed: 0
   meleeKnockback: 0
   rangedDamage: 10
   projVelocity: 8
   drawbackTime: 0.7
-  rangedKnockback: 2
+  rangedKnockback: 1.5
   arrow: {fileID: 188537100976444489, guid: e57bd4a1058ae384ca73f9581a23047f, type: 3}
   constantArmor: 0
   linearArmor: 0

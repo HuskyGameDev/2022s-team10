@@ -8,7 +8,7 @@ public class NewRoomGovernor : MonoBehaviour
     public GameObject bossRoom; //hold the boss room to be put at the end of the level generation
     public GameObject spawnRoom;
     public static List<GameObject> spawnedRooms;
-    private static GameObject spawn;
+    public static GameObject spawn;
     private static GameObject spawnedBossRoom;
 
     public static int roomNum; //current room the player is in starting at 0
@@ -39,6 +39,8 @@ public class NewRoomGovernor : MonoBehaviour
         offset.x -= 0.0129f;
         offset.y += roomHeight - 3.15f; //spawn room location is at (15, 6). I hate all of you people. If you're reading this I hate you too.
 
+        int curRoom = 0;    //room number of the room being insantiated
+
         foreach(RoomSet set in roomSets)
         {
             List<int> usedRooms = new List<int>(); //list of used room indices
@@ -52,12 +54,22 @@ public class NewRoomGovernor : MonoBehaviour
                 offset.x -= set.rooms[rand].GetComponent<Room>().floorShift;
 
                 //instantiate the room
-                spawnedRooms.Add(Instantiate(set.rooms[rand], offset, Quaternion.identity));
+                curRoom++;
+                GameObject room = Instantiate(set.rooms[rand], offset, Quaternion.identity);
+                spawnedRooms.Add(room);
                 usedRooms.Add(rand);
 
                 //adjust offset to the roof of the current room and the height of the next room
                 offset.x += set.rooms[rand].GetComponent<Room>().roofShift;
                 offset.y += roomHeight;
+
+                //scaling difficulty
+                foreach(EnemyController e in room.GetComponentsInChildren<EnemyController>())
+                {
+                    e.damage *= 1 + (curRoom * 0.05f);
+                    e.health *= 1 + (curRoom * 0.10f);
+                }
+
             }
         }
         spawnedBossRoom = Instantiate(bossRoom, offset, Quaternion.identity); //Instantiate the bossroom at the top
