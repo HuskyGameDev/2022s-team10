@@ -9138,7 +9138,7 @@ MonoBehaviour:
     - {fileID: 1291111574519597055, guid: 166f77765c230de4f9103987bfa05b64, type: 3}
     - {fileID: 8721427143322903657, guid: b71b0be99dcea6747ab340ca7281d16c, type: 3}
     - {fileID: 6477755119240922889, guid: 1fc5303d1629b2a45a37467d1e4191eb, type: 3}
-    - {fileID: 1316492231737038161, guid: 325536bd84c82a44691026de2f403517, type: 3}
+    - {fileID: 1303082008030242322, guid: 002e05b577aa79147be63ebba19df07b, type: 3}
     totalRooms: 7
   bossRoom: {fileID: 0}
   spawnRoom: {fileID: 466008156}
