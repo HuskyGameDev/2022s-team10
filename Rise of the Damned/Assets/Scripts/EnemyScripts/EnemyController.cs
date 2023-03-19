@@ -54,8 +54,10 @@ public abstract class EnemyController : MonoBehaviour
 
     public Transform collisionPoint; // point at the center bottom of the sprite to send to knockback function
 
-
     private float redTime = 0;  //the time that the enemy is red
+
+    [Header("Damage Numbers")]
+    public GameObject DamagePopup;
 
     void Start()
     {
@@ -323,6 +325,8 @@ public abstract class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        GameObject dmgPopup = Instantiate(DamagePopup, transform.position, Quaternion.identity);
+        Destroy(dmgPopup, 1f);
         if (damage > 0)
         {
             health -= damage;
