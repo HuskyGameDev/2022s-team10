@@ -29,7 +29,7 @@ public class fireTrap : MonoBehaviour
         spriteRend = GetComponent<SpriteRenderer>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision){ //even better than onTriggerEnter2D! buy now! 
+    private void OnTriggerEnter2D(Collider2D collision){  
         
         if (collision.tag == "Player")
         { 
