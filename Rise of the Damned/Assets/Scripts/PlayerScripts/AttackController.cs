@@ -242,10 +242,7 @@ public class AttackController : MonoBehaviour
                 PickupItem();
             }
             if (swapAction.triggered){
-                GameObject.Find("HUD").GetComponent<HUDController>().OnAction();
-                SelectedMelee.SetActive(!SelectedMelee.activeSelf);
-                SelectedRanged.SetActive(!SelectedRanged.activeSelf);
-                usingRanged = !usingRanged;
+                swapWeapon(usingRanged);
             }
 
             if(equippedBow != null && usingRanged && wasHoldingAttack && !IsHoldingAttack())
@@ -289,6 +286,7 @@ public class AttackController : MonoBehaviour
         switch (item.type)
         {
             case ItemController.ItemType.Melee:
+                swapWeapon(true);
                 if (equippedWeapon != null) //reactivate old weapon
                 {
                     equippedWeapon.SetActive(true);
@@ -316,6 +314,7 @@ public class AttackController : MonoBehaviour
                 }
                 break;
             case ItemController.ItemType.Ranged:
+                swapWeapon(false);
                 if (equippedBow != null) //reactivate old bow
                 {
                     equippedBow.SetActive(true);
@@ -375,5 +374,15 @@ public class AttackController : MonoBehaviour
         if (attackAction.ReadValue<Vector2>().x != 0)
             return true;
         return attackAction.ReadValue<Vector2>().y != 0;
+    }
+
+    public void swapWeapon(bool toMelee)
+    {
+        GameObject.Find("HUD").GetComponent<HUDController>().OnAction();
+        SelectedMelee.SetActive(toMelee);
+        SelectedRanged.SetActive(!toMelee);
+        usingRanged = !toMelee;
+
+        WeaponSwapper.SwapWeapon(toMelee);
     }
 }

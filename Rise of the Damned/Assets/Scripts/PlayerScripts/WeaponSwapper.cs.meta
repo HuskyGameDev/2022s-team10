@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 2c09974b423fbbb4cadf415b1425fdda
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - meleeSprite: {fileID: 21300000, guid: 80cafd4cf7c3fc94f8f6b38a7e029f2f, type: 3}
+  - rangedSprite: {fileID: 21300000, guid: 22d04a6f51eae714ab6eec2b32b2b72f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
