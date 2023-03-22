@@ -377,6 +377,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8256
   collisionPoint: {fileID: 903124814549815334}
+  DamagePopup: {fileID: 1973518972432216568, guid: f5411f20409835547881327ddebf2a00, type: 3}
   isIdle: 0
   isAttacking: 1
   isSwinging: 0

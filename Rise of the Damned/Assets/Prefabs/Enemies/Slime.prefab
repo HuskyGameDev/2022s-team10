@@ -334,6 +334,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   collisionPoint: {fileID: 3473797895478215083}
+  DamagePopup: {fileID: 1973518972432216568, guid: f5411f20409835547881327ddebf2a00, type: 3}
   jumpSpeed: 5
   agroSpeed: 3
   isAttacking: 0

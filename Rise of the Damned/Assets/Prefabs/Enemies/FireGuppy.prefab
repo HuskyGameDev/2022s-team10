@@ -464,6 +464,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   collisionPoint: {fileID: 9101377098560758816}
+  DamagePopup: {fileID: 1973518972432216568, guid: f5411f20409835547881327ddebf2a00, type: 3}
   attackCooldown: 2
   fireball: {fileID: 6131175400171677632, guid: 9baa314cab3fb2942b3d0b38f52b1a7c, type: 3}
   FireballSpawnPos: {fileID: 1621497619063144200}

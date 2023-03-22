@@ -197,6 +197,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   collisionPoint: {fileID: 4510071440078131297}
+  DamagePopup: {fileID: 1973518972432216568, guid: f5411f20409835547881327ddebf2a00, type: 3}
   swingDistance: 1.5
   attackCooldown: 1
   animator: {fileID: 4510071438848990329}
