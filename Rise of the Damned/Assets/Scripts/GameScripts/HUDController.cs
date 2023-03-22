@@ -73,12 +73,18 @@ public class HUDController : MonoBehaviour
 
     public void OnAction(){
         if (!inProgress){
+            animator.ResetTrigger("ShowHUD");
+            animator.ResetTrigger("HideHUD");
             inProgress=true;
             StartCoroutine(hudStartAction());
         } else if (inMiddleAction){
+            animator.ResetTrigger("ShowHUD");
+            animator.ResetTrigger("HideHUD");
             StopCoroutine(co);
             co = StartCoroutine(hudContinueAction());
         } else if (inEndAction){
+            animator.ResetTrigger("ShowHUD");
+            animator.ResetTrigger("HideHUD");
             endActionTrigger = true;
             StopCoroutine(co2);
             StartCoroutine(hudStartAction());
