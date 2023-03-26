@@ -24,14 +24,6 @@ public class AudioManager : MonoBehaviour
     private float sfxFactor;
     private float masterFactor;
 
-    void Update(){
-        //Debug.Log(volumeFactor);
-        // Instead of calling every frame, only call when changing scene and ???
-        mixer.SetFloat("MusicVolume", musicFactor);
-        mixer.SetFloat("SFXVolume", sfxFactor);
-        mixer.SetFloat("MasterVolume", masterFactor);
-    }
-
     void Awake()
     {
         //if an audio manager already exists then get rid of the new one
@@ -134,12 +126,17 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        mixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("musicVol", 1.0f)*20));
-        mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("sfxVol", 1.0f)*20));
-        mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("masterVol", 1.0f)*20));
+        mixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("musicVol"))*20);
+        mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("sfxVol"))*20);
+        mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("masterVol"))*20);
         Play("MainTheme");
     }
 
+    public void VolumeTrigger(){
+        mixer.SetFloat("MusicVolume", musicFactor);
+        mixer.SetFloat("SFXVolume", sfxFactor);
+        mixer.SetFloat("MasterVolume", masterFactor);
+    }
 
     // This part of the Volume Slider functionality currently sorta works.
     // Volume will update when slider value changes but not when scene is loaded.
@@ -147,18 +144,18 @@ public class AudioManager : MonoBehaviour
     // Code at the start of Awake() is trying to account for this :)
     // - Tyler
     public void ChangeMusicVol(float volumeVal){
-        //Debug.Log("changing " + volumeVal);
         musicFactor = Mathf.Log10(volumeVal)*20;
+        VolumeTrigger();
     }
 
     public void ChangeSFXVol(float volumeVal){
-        //Debug.Log("changing " + volumeVal);
         sfxFactor = Mathf.Log10(volumeVal)*20;
+        VolumeTrigger();
     }
 
     public void ChangeMasterVol(float volumeVal){
-        //Debug.Log("changing " + volumeVal);
         masterFactor = Mathf.Log10(volumeVal)*20;
+        VolumeTrigger();
     }
 
     // to play a sound from anywhere, call "FindObjectOfType<AudioManager>().Play(name);"
