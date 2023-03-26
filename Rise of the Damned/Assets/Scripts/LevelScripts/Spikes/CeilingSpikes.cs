@@ -12,7 +12,7 @@ public class CeilingSpikes : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         { //if player collides with spikes
-            PlayerController.TakeDamage(damage);
+            PlayerController.TakeDamage(damage, false);
 
             collision.attachedRigidbody.velocity = new Vector2(0, 0); // stops player velocity so all spike knockback is the same
                                                                       // and not affected by the speed the player hits it

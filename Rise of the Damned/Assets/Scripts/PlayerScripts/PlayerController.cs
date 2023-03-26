@@ -539,6 +539,18 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
+    public static bool TakeDamage(float damage, bool usesArmor)
+    {
+        GameObject.Find("HUD").GetComponent<HUDController>().OnAction();
+        if (PlayerController.controller.invuln > 0 || damage <= 0)
+            return false;
+        PlayerController.health -= Mathf.Max(damage - (usesArmor ? PlayerController.armor : 0), 0);
+        PlayerController.controller.invuln = PlayerController.controller.invulnTime;
+        PlayerController.controller.redTime = .2f;
+        PlayerController.controller.sr.color = Color.red;
+        return true;
+    }
+
     void Animations() 
     {
         if (!isGrounded) {
