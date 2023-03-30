@@ -67,6 +67,12 @@ public class ItemController : MonoBehaviour
                     tempPos.y += Mathf.Sin (Time.fixedTime * Mathf.PI * frequency) * amplitude;
                     t.position = tempPos;
                     t.Rotate(new Vector3(0, Time.deltaTime * 100, 0), Space.Self);
+                    Transform tchild = t.GetChild(0);
+                    if (t.eulerAngles.y % 360 > 90 && t.eulerAngles.y % 360 < 270)
+                        tchild.localPosition = new Vector3(Mathf.Abs(tchild.localPosition.x) * -1, tchild.localPosition.y, 0);
+                    else
+                        tchild.localPosition = new Vector3(Mathf.Abs(tchild.localPosition.x), tchild.localPosition.y, 0);
+                    //Debug.Log("Rotation: " + (t.eulerAngles) + "\tLocal Rotation: " + t.localEulerAngles + "\tChild: " + t.GetChild(0).name + "\tFlip: " + t.GetChild(0).GetComponent<SpriteRenderer>().flipX);
                 }
             }
         }
