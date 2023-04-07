@@ -35,7 +35,7 @@ public class WeaponSwapper : MonoBehaviour
     {
         weaponSwapper.sr.enabled = true;
         weaponSwapper.sr.sprite = toMelee ? weaponSwapper.meleeSprite : weaponSwapper.rangedSprite;
-        Debug.Log("Swapping to " + (toMelee ? "Melee" : "Ranged"));
+        //Debug.Log("Swapping to " + (toMelee ? "Melee" : "Ranged"));
         weaponSwapper.disableTime = 1f;
     }
 }

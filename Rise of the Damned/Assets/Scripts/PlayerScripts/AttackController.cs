@@ -107,37 +107,52 @@ public class AttackController : MonoBehaviour
                     int initRot = 0;
                     float displacement = .8f;
                     int rotOffset = 45;
+                    int counterClock = 0;
                     if (attackDir.y == 1)
                     {
                         //Debug.Log("up");
                         WeaponController.attackDir = 0; // Up
                         if (facingRight == 1)
+                        {
                             initRot = 405;
+                            counterClock = -1;
+                        }
                         else
+                        {
                             initRot = 315;
+                            counterClock = 1;
+                        }
                     }
                     else if (attackDir.y == -1)
                     {
                         WeaponController.attackDir = 1; // Down
                         if (facingRight == 1)
+                        {
                             initRot = 225;
+                            counterClock = -1;
+                        }
                         else
+                        {
                             initRot = 135;
+                            counterClock = 1;
+                        }
                     }
                     else if (attackDir.x == 1)
                     {
                         WeaponController.attackDir = 2; // Right
                         initRot = 315;
+                        counterClock = -1;
                     }
                     else if (attackDir.x == -1)
                     {
                         WeaponController.attackDir = 3; // Left
                         initRot = 45;
+                        counterClock = 1;
                     }
                     //Debug.Log("attack dir: " + wcontroller.attackDir);
                     Vector3 swipePos = new Vector3(PlayerController.player.transform.position.x + Mathf.Cos(Mathf.Deg2Rad * (initRot - 90)) * -1 * displacement,
                                                    PlayerController.player.transform.position.y + Mathf.Sin(Mathf.Deg2Rad * (initRot - 90)) * -1 * displacement, 0);
-                    GameObject swipe = Instantiate(weaponAttack, swipePos, Quaternion.Euler(0,0,initRot + rotOffset));
+                    GameObject swipe = Instantiate(weaponAttack, swipePos, Quaternion.Euler(0,0,initRot + rotOffset * counterClock * -1));
                     //swipe.SetActive(true);
                     SpriteRenderer[] children = equippedWeapon.GetComponentsInChildren<SpriteRenderer>();
                     foreach (SpriteRenderer child in children)

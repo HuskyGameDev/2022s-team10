@@ -27,11 +27,13 @@ public class WeaponController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         player = PlayerController.player;
         pcontroller = player.GetComponent<PlayerController>();
         acontroller = player.GetComponent<AttackController>();
+        */
         /*
         int facingRight = pcontroller.facingRight ? 1 : -1;
         switch (attackDir){
@@ -68,6 +70,7 @@ public class WeaponController : MonoBehaviour
                 counterClock = 1;
             break;
         } */
+        
     }
 
     // Update is called once per frame
@@ -83,15 +86,22 @@ public class WeaponController : MonoBehaviour
             rb.rotation = Mathf.RoundToInt(rot) + rotOffset;
             rb.position = new Vector2(player.transform.position.x + Mathf.Cos(Mathf.Deg2Rad * (rot - 90)) * -1 * displacement,
                                       player.transform.position.y + Mathf.Sin(Mathf.Deg2Rad * (rot - 90)) * -1 * displacement);
-
+            Destroy(gameObject, 2f);
             if (Mathf.Abs(rot) > initialRot + 60 || Mathf.Abs(rot) < initialRot - 60)
                 Destroy(gameObject);
                 //gameObject.SetActive(false);
+
+
         }
     }
 
-    public void OnEnable()
+    public void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        player = PlayerController.player;
+        pcontroller = player.GetComponent<PlayerController>();
+        acontroller = player.GetComponent<AttackController>();
         //gameObject.SetActive(true);
         if (rb == null)
             Start();
@@ -102,13 +112,11 @@ public class WeaponController : MonoBehaviour
             case 0:
                 if (facingRight == 1)
                 {
-                    //rot = 405;
                     initialRot = 405;
                     counterClock = -1;
                 }
                 else
                 {
-                    //rot = 315;
                     initialRot = 315;
                     counterClock = 1;
                 }
@@ -116,36 +124,32 @@ public class WeaponController : MonoBehaviour
             case 1:
                 if (facingRight == 1)
                 {
-                    //rot = 225;
                     initialRot = 225;
                     counterClock = -1;
                 }
                 else
                 {
-                    //rot = 135;
                     initialRot = 135;
                     counterClock = 1;
                 }
                 break;
             case 2:
-                //rot = 315;
                 initialRot = 315;
                 counterClock = -1;
                 break;
             case 3:
-                //rot = 45;
                 initialRot = 45;
                 counterClock = 1;
                 break;
         }
         rot = initialRot;
-
+        rotOffset *= (counterClock * -1);
         rb.rotation = initialRot + rotOffset;
         rb.position = new Vector2(player.transform.position.x + Mathf.Cos(Mathf.Deg2Rad * (initialRot - 90)) * -1 * displacement,
                                   player.transform.position.y + Mathf.Sin(Mathf.Deg2Rad * (initialRot - 90)) * -1 * displacement);
 
         hit = new List<Collider2D>();
-
+        sr.flipX = (counterClock == 1);
     }
 
     private void OnDisable()
