@@ -38,6 +38,8 @@ public class ItemController : MonoBehaviour
     private Transform itemDrop;
     private TextMesh[] textChildren;
 
+    private PlayerController pcontroller;
+
     // Floating item variables
     private static float amplitude = 0.1f;
     private static float frequency = 1f;
@@ -48,6 +50,7 @@ public class ItemController : MonoBehaviour
     void Start(){
         transformChildren = GetComponentsInChildren<Transform>();
         textChildren = GetComponentsInChildren<TextMesh>();
+        pcontroller = GameObject.Find("Player").GetComponent<PlayerController>();
 
         //like uhh... some bullshit. @Tyler This will need to be changed when equipment gui gets reworked
         armor = constantArmor + linearArmor;
@@ -79,7 +82,7 @@ public class ItemController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.name.Equals("Player"))
-        { 
+        {
             if (CompareTag("HealthDrop")) {
                 GameObject.Find("HUD").GetComponent<HUDController>().OnAction();
                 if (PlayerController.health < PlayerController.maxHealth - 9) {
@@ -92,6 +95,10 @@ public class ItemController : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("HeartPickup");
             }
             else if (CompareTag("ItemDrop")) {
+                if (pcontroller.touchingItem){
+                    return;
+                }  
+                pcontroller.touchingItem = true;
                 foreach (Transform child in transformChildren){
                     if (child.tag == "ItemInfo"){
                         child.localScale = new Vector3(1,1,1);
@@ -105,6 +112,21 @@ public class ItemController : MonoBehaviour
                         case "SwordSPDText":
                             child.text = "SPD: " + ((int)(meleeSpeed/100.0)).ToString();
                             break;
+                        case "BowATKText":
+                            child.text = "ATK: " + rangedDamage.ToString();
+                            break;
+                        case "BowSPDText":
+                            child.text = "SPD: " + (drawbackTime*10).ToString();
+                            break;
+                        case "ArrowSPDText":
+                            child.text = "SPD: " + projVelocity.ToString();
+                            break;
+                        case "ArmorDEFText":
+                            child.text = "DEF: " + linearArmor.ToString();
+                            break;
+                        case "ArmorRESText":
+                            child.text = "RES: " + constantArmor.ToString();
+                            break;
                     }
                 }
             }
@@ -113,6 +135,7 @@ public class ItemController : MonoBehaviour
     void OnTriggerExit2D(Collider2D other){
         if (other.CompareTag("Player") && CompareTag("ItemDrop"))
         {
+            pcontroller.touchingItem = false;
             foreach (Transform child in transformChildren){
                 if (child.tag == "ItemInfo"){
                     child.localScale = new Vector3(0,0,0);

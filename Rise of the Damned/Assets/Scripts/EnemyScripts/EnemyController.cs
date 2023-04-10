@@ -58,11 +58,13 @@ public abstract class EnemyController : MonoBehaviour
 
     [Header("Damage Numbers")]
     public GameObject DamagePopup;
+    private Transform PopupEmpty;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        PopupEmpty = GameObject.Find("DamagePopups").GetComponent<Transform>();
 
         state = defaultState;
 
@@ -326,7 +328,12 @@ public abstract class EnemyController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (DamagePopup != null){
-            GameObject dmgPopup = Instantiate(DamagePopup, transform.position, Quaternion.identity);
+            GameObject dmgPopup;
+            if (PopupEmpty != null){
+                dmgPopup = Instantiate(DamagePopup, transform.position, Quaternion.identity, PopupEmpty);
+            } else {
+                dmgPopup = Instantiate(DamagePopup, transform.position, Quaternion.identity);
+            }
             dmgPopup.transform.position+=Vector3.up*1;
             dmgPopup.transform.position+=Vector3.back*3;
             dmgPopup.GetComponentInChildren<TextMesh>().text = Mathf.Round(damage).ToString();

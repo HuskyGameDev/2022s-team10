@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
     public bool isGliding = false;
     public bool canGlide;
     private bool isDead = false;
+    public bool touchingItem = false;
 
     [Header("Better Jump")]
     public float fallMultiplier;  
@@ -667,6 +668,18 @@ public class PlayerController : MonoBehaviour
     private void SetReceivingKnockback() //called when knockback is over
     {
         receivingKnockback = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
+        if (other.gameObject.tag.Equals("ItemDrop")){
+            touchingItem = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other){
+        if (other.gameObject.tag.Equals("ItemDrop")){
+            touchingItem = false;
+        }
     }
 
 }
