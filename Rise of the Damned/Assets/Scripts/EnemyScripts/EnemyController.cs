@@ -325,11 +325,14 @@ public abstract class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        GameObject dmgPopup = Instantiate(DamagePopup, transform.position, Quaternion.identity);
-        dmgPopup.transform.position+=Vector3.up*1;
-        dmgPopup.transform.position+=Vector3.back*3;
-        dmgPopup.GetComponentInChildren<TextMesh>().text = Mathf.Round(damage).ToString();
-        Destroy(dmgPopup, 1.5f);
+        if (DamagePopup != null){
+            GameObject dmgPopup = Instantiate(DamagePopup, transform.position, Quaternion.identity);
+            dmgPopup.transform.position+=Vector3.up*1;
+            dmgPopup.transform.position+=Vector3.back*3;
+            dmgPopup.GetComponentInChildren<TextMesh>().text = Mathf.Round(damage).ToString();
+            Destroy(dmgPopup, 1.5f);
+        }
+        
         if (damage > 0)
         {
             health -= damage;
