@@ -96,7 +96,7 @@ public class AttackController : MonoBehaviour
             if (GameObject.Find("SwordSwipe(Clone)") == null)
             {
                 timeSinceLastSwing += Time.deltaTime;
-                if(attackAction.triggered)
+                if(attackAction.triggered && !usingRanged)
                     swordMemory = true;
                 //swing sword
                 if (swordMemory && equippedWeapon != null && !usingRanged && timeSinceLastSwing >= meleeCooldown)
@@ -301,7 +301,6 @@ public class AttackController : MonoBehaviour
         switch (item.type)
         {
             case ItemController.ItemType.Melee:
-                swapWeapon(true);
                 if (equippedWeapon != null) //reactivate old weapon
                 {
                     equippedWeapon.SetActive(true);
@@ -310,6 +309,8 @@ public class AttackController : MonoBehaviour
                     equippedWeapon.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
                     equippedWeapon.transform.SetParent(item.transform.parent);
                 }
+                else
+                    swapWeapon(true);
 
                 equippedWeapon = item.gameObject;  //equip new weapon
                 PlayerData.EquippedWeapon = equippedWeapon; //store in playerdata
@@ -329,7 +330,6 @@ public class AttackController : MonoBehaviour
                 }
                 break;
             case ItemController.ItemType.Ranged:
-                swapWeapon(false);
                 if (equippedBow != null) //reactivate old bow
                 {
                     equippedBow.SetActive(true);
@@ -338,6 +338,8 @@ public class AttackController : MonoBehaviour
                     equippedBow.GetComponentInChildren<Transform>().rotation = Quaternion.identity;
                     equippedBow.transform.SetParent(item.transform.parent);
                 }
+                else
+                    swapWeapon(false);
 
                 equippedBow = item.gameObject;  //equip new bow
                 PlayerData.EquippedBow = equippedBow; //store in playerdata
@@ -397,6 +399,7 @@ public class AttackController : MonoBehaviour
         SelectedMelee.SetActive(toMelee);
         SelectedRanged.SetActive(!toMelee);
         usingRanged = !toMelee;
+        swordMemory = false;
 
         WeaponSwapper.SwapWeapon(toMelee);
     }

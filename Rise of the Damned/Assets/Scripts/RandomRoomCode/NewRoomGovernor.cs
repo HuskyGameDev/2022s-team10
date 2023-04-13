@@ -29,50 +29,9 @@ public class NewRoomGovernor : MonoBehaviour
     public float roomHeight = 18;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        spawnedRooms = new List<GameObject>();
-        spawn = spawnRoom;
-        section = -1;
-        
-        Vector3 offset = transform.position;
-        offset.x -= 0.0129f;
-        offset.y += roomHeight - 3.15f; //spawn room location is at (15, 6). I hate all of you people. If you're reading this I hate you too.
-
-        int curRoom = 0;    //room number of the room being insantiated
-
-        foreach(RoomSet set in roomSets)
-        {
-            List<int> usedRooms = new List<int>(); //list of used room indices
-            for(int i = 0; i < Mathf.Min(set.totalRooms, set.rooms.Length); i++)
-            {
-                //get a room index not yet used
-                int rand = Random.Range(0, set.rooms.Length);
-                while(usedRooms.Contains(rand)) { rand = Random.Range(0, set.rooms.Length); }
-
-                //adjust offset for room floor
-                offset.x -= set.rooms[rand].GetComponent<Room>().floorShift;
-
-                //instantiate the room
-                curRoom++;
-                GameObject room = Instantiate(set.rooms[rand], offset, Quaternion.identity);
-                spawnedRooms.Add(room);
-                usedRooms.Add(rand);
-
-                //adjust offset to the roof of the current room and the height of the next room
-                offset.x += set.rooms[rand].GetComponent<Room>().roofShift;
-                offset.y += roomHeight;
-
-                //scaling difficulty
-                foreach(EnemyController e in room.GetComponentsInChildren<EnemyController>())
-                {
-                    e.damage *= 1 + (curRoom * 0.05f);
-                    e.health *= 1 + (curRoom * 0.10f);
-                }
-
-            }
-        }
-        spawnedBossRoom = Instantiate(bossRoom, offset, Quaternion.identity); //Instantiate the bossroom at the top
+        SpawnRooms();
     }
 
     // Update is called once per frame
@@ -115,6 +74,52 @@ public class NewRoomGovernor : MonoBehaviour
             currentRoom = spawnedBossRoom;
         else
             currentRoom = spawnedRooms[roomNum - 1];
+    }
+
+    private void SpawnRooms()
+    {
+        spawnedRooms = new List<GameObject>();
+        spawn = spawnRoom;
+        section = -1;
+
+        Vector3 offset = transform.position;
+        offset.x -= 0.0129f;
+        offset.y += roomHeight - 3.15f; //spawn room location is at (15, 6). I hate all of you people. If you're reading this I hate you too.
+
+        int curRoom = 0;    //room number of the room being insantiated
+
+        foreach (RoomSet set in roomSets)
+        {
+            List<int> usedRooms = new List<int>(); //list of used room indices
+            for (int i = 0; i < Mathf.Min(set.totalRooms, set.rooms.Length); i++)
+            {
+                //get a room index not yet used
+                int rand = Random.Range(0, set.rooms.Length);
+                while (usedRooms.Contains(rand)) { rand = Random.Range(0, set.rooms.Length); }
+
+                //adjust offset for room floor
+                offset.x -= set.rooms[rand].GetComponent<Room>().floorShift;
+
+                //instantiate the room
+                curRoom++;
+                GameObject room = Instantiate(set.rooms[rand], offset, Quaternion.identity);
+                spawnedRooms.Add(room);
+                usedRooms.Add(rand);
+
+                //adjust offset to the roof of the current room and the height of the next room
+                offset.x += set.rooms[rand].GetComponent<Room>().roofShift;
+                offset.y += roomHeight;
+
+                //scaling difficulty
+                foreach (EnemyController e in room.GetComponentsInChildren<EnemyController>())
+                {
+                    e.damage *= 1 + (curRoom * 0.05f);
+                    e.health *= 1 + (curRoom * 0.10f);
+                }
+
+            }
+        }
+        spawnedBossRoom = Instantiate(bossRoom, offset, Quaternion.identity); //Instantiate the bossroom at the top
     }
 
     public static void killRooms()

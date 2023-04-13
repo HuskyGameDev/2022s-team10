@@ -45,7 +45,7 @@ public class TriggerBoss : MonoBehaviour
     public GameObject winText;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         blockerToPoint = entranceBlocker.transform.position;
         blockerToPoint.x += 2;

@@ -241,13 +241,23 @@ MonoBehaviour:
   knockback_time: 0.6
   knockback_drag: 0.5
   drops:
+  - {fileID: 3606885378608128658, guid: d21d6dad0d8be83468ceeb11151f54c1, type: 3}
   - {fileID: 5366049279497736705, guid: 909d15fa8ed7a5745b51c63bdf8ceef7, type: 3}
-  - {fileID: 5839799160562247257, guid: 4150c754f08b6a646b1f9aa0f6a7719c, type: 3}
-  - {fileID: 5358577377626049225, guid: 52f8545f3e4a9194ebefb617f12a766e, type: 3}
+  - {fileID: 8602276678840970846, guid: 410a2d43e720d7e45996f623cf0fd4d2, type: 3}
+  - {fileID: 5379805925992959368, guid: 3a1f67f70c5b81446affb2962ea11c2e, type: 3}
+  - {fileID: 8471236732540826454, guid: 80cafa4faffb68243b1b3f1fc4de1fe7, type: 3}
+  - {fileID: 9053927616272895567, guid: 436c5932c8b07c74c8d710e7f4296591, type: 3}
+  - {fileID: 373626564230286296, guid: b65183c16fcb40746b0597d7a66a2910, type: 3}
+  - {fileID: 5241663454498332114, guid: 5c79eced3bec36b49a40979fae416d72, type: 3}
   dropChance:
   - 15
-  - 3
+  - 10
   - 8
+  - 5
+  - 2
+  - 4
+  - 3
+  - 2
   heartDropChance: 15
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.1

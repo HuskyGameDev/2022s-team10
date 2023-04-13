@@ -318,9 +318,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 8
-  health: 25
+  health: 10
   knockback: 8
-  knockback_resistance: 0.5
+  knockback_resistance: 0.6
   max_speed: 6
   defaultState: 0
   aggroDist: 5
@@ -330,11 +330,23 @@ MonoBehaviour:
   knockback_time: 0.7
   knockback_drag: 0.5
   drops:
+  - {fileID: 5471605987740711241, guid: 72296b986ce3d5040a8dc89d3251bb08, type: 3}
+  - {fileID: 5358577377626049225, guid: 52f8545f3e4a9194ebefb617f12a766e, type: 3}
+  - {fileID: 1193771756979358525, guid: 302544e0d98ea364b9b10f766f06fd03, type: 3}
   - {fileID: 1741407108113468068, guid: c92765cf5eec8c34f8681f2a2bc7bf5d, type: 3}
+  - {fileID: 1878168717089405247, guid: d6e0a5c8ce71beb4da646aac4aea620b, type: 3}
   - {fileID: 1646168493891488988, guid: 12deb90f6f33fdf4e88e871578315fad, type: 3}
+  - {fileID: 1693072485760554001, guid: 169c74be9e51ed64c97ac5603858f0e7, type: 3}
+  - {fileID: 7115192639973222801, guid: b307dcf489f3e9a46a35603e6d411af6, type: 3}
   dropChance:
-  - 2.5
-  - 2.5
+  - 2
+  - 1
+  - 2
+  - 1
+  - 2
+  - 1
+  - 4
+  - 3
   heartDropChance: 10
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.1

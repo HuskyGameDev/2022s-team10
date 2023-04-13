@@ -179,7 +179,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 523853917
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e4d9e392f21fc6641b33a789330b2625, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -267,7 +267,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 523853917
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -293,10 +293,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  meleeDamage: 32
-  meleeCooldown: 0.5
-  meleeSpeed: 200
-  meleeKnockback: 8
+  meleeDamage: 34
+  meleeCooldown: 0.6
+  meleeSpeed: 100
+  meleeKnockback: 4
   rangedDamage: 0
   projVelocity: 0
   drawbackTime: 0

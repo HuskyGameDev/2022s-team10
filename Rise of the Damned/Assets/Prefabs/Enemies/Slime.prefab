@@ -310,17 +310,9 @@ MonoBehaviour:
   max_speed_change: 0
   knockback_time: 2
   knockback_drag: 0.8
-  drops:
-  - {fileID: 5471605987740711241, guid: 72296b986ce3d5040a8dc89d3251bb08, type: 3}
-  - {fileID: 5358577377626049225, guid: 52f8545f3e4a9194ebefb617f12a766e, type: 3}
-  - {fileID: 1193771756979358525, guid: 302544e0d98ea364b9b10f766f06fd03, type: 3}
-  - {fileID: 1741407108113468068, guid: c92765cf5eec8c34f8681f2a2bc7bf5d, type: 3}
-  dropChance:
-  - 20
-  - 10
-  - 30
-  - 20
-  heartDropChance: 25
+  drops: []
+  dropChance: []
+  heartDropChance: 50
   heartDrop: {fileID: 5550881974039905714, guid: 36da2958e9fbae44da76d5d0cfeba09b, type: 3}
   checkGroundRadius: 0.05
   groundChecker1: {fileID: 4024210757587770771}
